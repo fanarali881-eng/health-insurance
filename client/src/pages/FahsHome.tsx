@@ -44,7 +44,7 @@ export default function FahsHome() {
               <img 
                 src="/images/logo.svg" 
                 alt="مركز سلامة المركبات" 
-                className="h-16"
+                className="h-10"
                 onError={(e) => {
                   e.currentTarget.src = "/images/login-logo.png";
                 }}
@@ -94,7 +94,7 @@ export default function FahsHome() {
             {/* Hero Image - Left Side */}
             <div className="w-full lg:w-1/2">
               <img 
-                src="/images/intro-ar.png" 
+                src="/images/hero-inspection.png" 
                 alt="الفحص الفني الدوري" 
                 className="w-full max-w-lg mx-auto"
               />

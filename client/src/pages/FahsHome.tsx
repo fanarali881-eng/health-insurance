@@ -44,7 +44,7 @@ export default function FahsHome() {
               <img 
                 src="/images/logo.svg" 
                 alt="مركز سلامة المركبات" 
-                className="h-12"
+                className="h-16"
                 onError={(e) => {
                   e.currentTarget.src = "/images/login-logo.png";
                 }}

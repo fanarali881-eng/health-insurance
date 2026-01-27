@@ -107,7 +107,7 @@ export default function FahsHome() {
               </p>
               <h1 className="text-3xl lg:text-4xl font-bold text-gray-900 leading-tight mb-4">
                 المنصة الموحدة لمواعيد<br />
-                <span className="text-[#18754d]">الفحص الفني الدوري</span><br />
+                الفحص الفني الدوري<br />
                 للمركبات
               </h1>
               <p className="text-gray-600 text-sm lg:text-base mb-6 max-w-md mx-auto lg:mx-0 lg:mr-0">

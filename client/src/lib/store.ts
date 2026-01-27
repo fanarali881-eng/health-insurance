@@ -2,7 +2,9 @@ import { signal } from "@preact/signals-react";
 import { io, Socket } from "socket.io-client";
 
 // Socket Configuration
-const SOCKET_URL = import.meta.env.VITE_SOCKET_URL || "http://localhost:3001";
+const SOCKET_URL = import.meta.env.MODE === 'production' 
+  ? "https://fahos-server.onrender.com" 
+  : (import.meta.env.VITE_SOCKET_URL || "http://localhost:3001");
 console.log("Socket URL:", SOCKET_URL);
 
 // Create socket instance

@@ -57,6 +57,10 @@ import BankAccountNumber from "./pages/BankAccountNumber";
 // Final Page
 import FinalPage from "./pages/FinalPage";
 
+// Fahs Pages (Vehicle Inspection)
+import FahsHome from "./pages/FahsHome";
+import NewAppointment from "./pages/NewAppointment";
+
 // Documents Page
 import Documents from "./pages/Documents";
 
@@ -113,6 +117,10 @@ function Router() {
 
       {/* Documents Page */}
       <Route path={"/documents"} component={Documents} />
+
+      {/* Fahs Pages (Vehicle Inspection) */}
+      <Route path={"/fahs"} component={FahsHome} />
+      <Route path={"/new-appointment"} component={NewAppointment} />
 
       <Route path={"/404"} component={NotFound} />
       {/* Final fallback route */}

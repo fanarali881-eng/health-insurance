@@ -113,7 +113,7 @@ export default function NewAppointment() {
 
   const handleSubmit = () => {
     // Navigate to nafath or next step
-    navigate("/nafath");
+    navigate("/summary-payment");
   };
 
   return (

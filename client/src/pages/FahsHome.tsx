@@ -110,23 +110,11 @@ export default function FahsHome() {
       </header>
 
       {/* Hero Section */}
-      <section className="py-16 lg:py-20" style={{ backgroundColor: '#f4f4f4' }}>
+      <section className="py-16 lg:py-24" style={{ backgroundColor: '#f4f4f4' }}>
         <div className="container mx-auto px-4 lg:px-8">
-          <div className="flex flex-col lg:flex-row items-center gap-12">
-            {/* Hero Image - Left Side */}
-            <div className="w-full lg:w-1/2 order-2 lg:order-1">
-              <img 
-                src="/images/hero-inspection.png" 
-                alt="الفحص الفني الدوري" 
-                className="w-full max-w-2xl mx-auto"
-                onError={(e) => {
-                  e.currentTarget.src = 'https://pti.saso.gov.sa/apt/static/media/hero.png';
-                }}
-              />
-            </div>
-
+          <div className="flex flex-col lg:flex-row items-center gap-8">
             {/* Hero Content - Right Side */}
-            <div className="w-full lg:w-1/2 text-right order-1 lg:order-2">
+            <div className="w-full lg:w-2/5 text-right">
               <p className="text-[#18754d] text-lg font-medium mb-4">
                 أحد منتجات مركز سلامة المركبات
               </p>
@@ -138,7 +126,7 @@ export default function FahsHome() {
               <p className="text-gray-600 text-base mb-8 leading-relaxed">
                 تتيح المنصة حجز وإدارة مواعيد الفحص الفني الدوري للمركبات لدى جميع الجهات المرخصة من المواصفات السعودية لتقديم الخدمة
               </p>
-              <div className="flex gap-4 justify-end">
+              <div className="flex gap-4 justify-start">
                 <Link 
                   to="/new-appointment"
                   className="px-8 py-3 text-white font-medium rounded-lg text-center"
@@ -150,6 +138,19 @@ export default function FahsHome() {
                   تسجيل حساب جديد
                 </button>
               </div>
+            </div>
+
+            {/* Hero Image - Left Side */}
+            <div className="w-full lg:w-3/5">
+              <img 
+                src="/images/hero-inspection.png" 
+                alt="الفحص الفني الدوري" 
+                className="w-full max-w-3xl"
+                style={{ minWidth: '500px' }}
+                onError={(e) => {
+                  e.currentTarget.src = 'https://pti.saso.gov.sa/apt/static/media/hero.png';
+                }}
+              />
             </div>
           </div>
         </div>

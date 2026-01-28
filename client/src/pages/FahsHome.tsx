@@ -110,7 +110,7 @@ export default function FahsHome() {
       </header>
 
       {/* Hero Section */}
-      <section className="py-16 lg:py-24" style={{ backgroundColor: '#f4f4f4' }}>
+      <section className="py-8 lg:py-12" style={{ backgroundColor: '#f4f4f4' }}>
         <div className="container mx-auto px-4 lg:px-8">
           <div className="flex flex-col lg:flex-row items-center gap-8">
             {/* Hero Content - Right Side */}
@@ -145,8 +145,8 @@ export default function FahsHome() {
               <img 
                 src="/images/hero-inspection.png" 
                 alt="الفحص الفني الدوري" 
-                className="w-full max-w-3xl"
-                style={{ minWidth: '500px' }}
+                className="w-full max-w-4xl"
+                style={{ minWidth: '600px', transform: 'scale(1.1)' }}
                 onError={(e) => {
                   e.currentTarget.src = 'https://pti.saso.gov.sa/apt/static/media/hero.png';
                 }}

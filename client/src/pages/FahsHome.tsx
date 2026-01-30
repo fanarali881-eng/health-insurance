@@ -61,17 +61,14 @@ export default function FahsHome() {
           <div className="flex items-center justify-between h-16">
             {/* Logo */}
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 flex items-center justify-center">
-                <svg viewBox="0 0 40 40" className="w-10 h-10">
-                  <polygon points="20,2 38,35 2,35" fill="#18754d" stroke="#18754d" strokeWidth="1"/>
-                  <path d="M12,28 L20,12 L28,28 Z" fill="white" opacity="0.9"/>
-                  <circle cx="20" cy="22" r="3" fill="#18754d"/>
-                </svg>
-              </div>
-              <div className="text-right">
-                <div className="text-sm font-bold text-gray-800">مركز سلامة المركبات</div>
-                <div className="text-xs text-gray-500">Vehicles Safety Center</div>
-              </div>
+              <img 
+                src="/images/vsc-logo.png" 
+                alt="مركز سلامة المركبات" 
+                className="h-12"
+                onError={(e) => {
+                  e.currentTarget.src = 'https://pti.saso.gov.sa/apt/static/media/logo.png';
+                }}
+              />
             </div>
 
             {/* Navigation */}

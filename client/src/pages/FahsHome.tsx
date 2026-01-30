@@ -118,10 +118,10 @@ export default function FahsHome() {
               <p className="text-xl lg:text-2xl font-semibold mb-4" style={{ color: '#1a8754' }}>
                 أحد منتجات مركز سلامة المركبات
               </p>
-              <h1 className="text-4xl lg:text-5xl font-bold text-gray-900 leading-tight mb-6">
-                <span className="block">المنصة الموحدة لمواعيد</span>
-                <span className="block">الفحص الفني الدوري</span>
-                <span className="block">للمركبات</span>
+              <h1 className="text-4xl lg:text-5xl font-bold text-gray-900 leading-tight mb-6" style={{ whiteSpace: 'nowrap' }}>
+                المنصة الموحدة لمواعيد<br />
+                الفحص الفني الدوري<br />
+                للمركبات
               </h1>
               <p className="text-gray-600 text-base mb-8 leading-relaxed">
                 تتيح المنصة حجز وإدارة مواعيد الفحص الفني الدوري للمركبات لدى جميع الجهات المرخصة من المواصفات السعودية لتقديم الخدمة

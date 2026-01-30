@@ -219,7 +219,7 @@ export default function FahsHome() {
       </section>
 
       {/* When to Inspect Section */}
-      <section className="py-16" style={{ backgroundColor: '#e8f5f0' }}>
+      <section className="py-16" style={{ backgroundColor: '#fcfcfc' }}>
         <div className="container mx-auto px-4 lg:px-8">
           <h2 className="text-3xl font-extrabold text-gray-900 text-right mb-12">
             متى يجب فحص المركبة

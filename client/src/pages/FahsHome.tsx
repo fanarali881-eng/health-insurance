@@ -227,39 +227,33 @@ export default function FahsHome() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {/* Card 1 */}
             <div className="text-center">
-              <div className="w-20 h-20 mx-auto mb-6 bg-[#18754d] rounded-full flex items-center justify-center">
-                <svg className="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                </svg>
+              <div className="w-20 h-20 mx-auto mb-6">
+                <img src="/images/icon-calendar.png" alt="بشكل دوري" className="w-full h-full object-contain" />
               </div>
-              <h3 className="font-bold text-gray-900 text-xl mb-3">بشكل دوري</h3>
-              <p className="text-gray-600 text-sm leading-relaxed">
+              <h3 className="font-bold text-gray-900 text-2xl mb-3">بشكل دوري</h3>
+              <p className="text-gray-600 text-base leading-relaxed">
                 يجب فحص المركبة بشكل دوري قبل انتهاء صلاحية الفحص
               </p>
             </div>
 
             {/* Card 2 */}
             <div className="text-center">
-              <div className="w-20 h-20 mx-auto mb-6 bg-[#18754d] rounded-full flex items-center justify-center">
-                <svg className="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
+              <div className="w-20 h-20 mx-auto mb-6">
+                <img src="/images/icon-transfer.png" alt="عند نقل ملكية المركبة" className="w-full h-full object-contain" />
               </div>
-              <h3 className="font-bold text-gray-900 text-xl mb-3">عند نقل ملكية المركبة</h3>
-              <p className="text-gray-600 text-sm leading-relaxed">
+              <h3 className="font-bold text-gray-900 text-2xl mb-3">عند نقل ملكية المركبة</h3>
+              <p className="text-gray-600 text-base leading-relaxed">
                 في حال عدم وجود فحص فني دوري ساري للمركبة
               </p>
             </div>
 
             {/* Card 3 */}
             <div className="text-center">
-              <div className="w-20 h-20 mx-auto mb-6 bg-[#18754d] rounded-full flex items-center justify-center">
-                <svg className="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                </svg>
+              <div className="w-20 h-20 mx-auto mb-6">
+                <img src="/images/icon-foreign.png" alt="المركبات الأجنبية" className="w-full h-full object-contain" />
               </div>
-              <h3 className="font-bold text-gray-900 text-xl mb-3">المركبات الأجنبية</h3>
-              <p className="text-gray-600 text-sm leading-relaxed">
+              <h3 className="font-bold text-gray-900 text-2xl mb-3">المركبات الأجنبية</h3>
+              <p className="text-gray-600 text-base leading-relaxed">
                 خلال 15 يوم من تاريخ دخولها إلى المملكة في حال عدم وجود فحص فني ساري من خارج المملكة
               </p>
             </div>

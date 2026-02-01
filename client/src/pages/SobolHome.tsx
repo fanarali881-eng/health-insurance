@@ -132,21 +132,11 @@ export default function SobolHome() {
           <div className="flex flex-col lg:flex-row-reverse items-center gap-8">
             {/* Right Side - Banner Image */}
             <div className="w-full lg:w-1/2">
-              <div className="relative rounded-2xl overflow-hidden" style={{ backgroundColor: '#40c4c4' }}>
-                <div className="p-8 text-white">
-                  <div className="text-center">
-                    <p className="text-lg mb-2">تبدأ إلزامية</p>
-                    <h3 className="text-2xl font-bold mb-2">العنوان الوطني</h3>
-                    <p className="text-lg">في 1 يناير 2026</p>
-                    <p className="text-sm mt-4">بادر بالتسجيل أو تحديث بياناتك في العنوان الوطني لضمان استمرارية خدماتك</p>
-                  </div>
-                </div>
-                <img 
-                  src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=600&h=400&fit=crop" 
-                  alt="مباني" 
-                  className="w-full h-64 object-cover opacity-50"
-                />
-              </div>
+              <img 
+                src="/images/na-banner-ar.jpeg" 
+                alt="العنوان الوطني" 
+                className="w-full rounded-2xl"
+              />
             </div>
 
             {/* Left Side - Content */}

@@ -163,9 +163,9 @@ export default function SobolHome() {
                     placeholder="e.g XHSNF74652HBD"
                     value={trackingNumber}
                     onChange={(e) => setTrackingNumber(e.target.value)}
-                    className="flex-1 px-4 py-3 border border-gray-300 rounded-lg text-right focus:outline-none focus:border-[#143c3c]"
+                    className="flex-1 px-4 py-3 border border-[#f4f4f4] rounded-lg text-right focus:outline-none focus:border-[#143c3c]"
                   />
-                  <button className="px-8 py-3 bg-[#f4f4f4] text-gray-800 font-medium rounded-lg hover:bg-[#e5e5e5] transition-colors">
+                  <button className="px-8 py-3 bg-[#4f4f4f] text-white font-medium rounded-lg hover:bg-[#3d9e9e] transition-colors">
                     تتبع
                   </button>
                 </div>
@@ -298,7 +298,7 @@ export default function SobolHome() {
               <p className="text-gray-600 text-lg mb-8 leading-relaxed">
                 تسوّق من علاماتك التجارية المفضلة حول العالم، واستلم مشترياتك على عنوانك الوطني أو أي عنوان آخر.
               </p>
-              <a href="#" className="inline-block px-8 py-3 bg-[#f4f4f4] text-gray-800 font-medium rounded-lg hover:bg-[#e5e5e5] transition-colors">
+              <a href="#" className="inline-block px-8 py-3 bg-[#4f4f4f] text-white font-medium rounded-lg hover:bg-[#3d9e9e] transition-colors">
                 ابدأ التسوّق
               </a>
             </div>
@@ -316,7 +316,7 @@ export default function SobolHome() {
               <p className="text-gray-600 mb-6">
                 يمكنك تسجيل عنوانك الوطني بالمجان وإدارته بكل يسر وسهولة.
               </p>
-              <a href="#" className="inline-block px-8 py-3 bg-[#f4f4f4] text-gray-800 font-medium rounded-lg hover:bg-[#e5e5e5] transition-colors">
+              <a href="#" className="inline-block px-8 py-3 bg-[#4f4f4f] text-white font-medium rounded-lg hover:bg-[#3d9e9e] transition-colors">
                 سجّل الآن
               </a>
             </div>
@@ -327,7 +327,7 @@ export default function SobolHome() {
               <p className="text-gray-600 mb-6">
                 يمكنك توفير مايقارب 50٪ من قيمة الشحن عند استخدامك منصة SMEs.
               </p>
-              <a href="#" className="inline-block px-8 py-3 bg-[#f4f4f4] text-gray-800 font-medium rounded-lg hover:bg-[#e5e5e5] transition-colors">
+              <a href="#" className="inline-block px-8 py-3 bg-[#4f4f4f] text-white font-medium rounded-lg hover:bg-[#3d9e9e] transition-colors">
                 اختر الباقة المناسبة
               </a>
             </div>

@@ -101,20 +101,20 @@ export default function AmerChat() {
     <>
       {/* Chat Button */}
       <div
-        className="fixed left-4 bottom-24 z-50 cursor-pointer"
+        className="fixed right-4 bottom-24 z-50 cursor-pointer"
         onClick={() => setIsOpen(true)}
       >
         {/* New Message Notification */}
         {hasNewAdminMessage && (
-          <div className="absolute -top-12 right-0 bg-red-500 text-white text-sm px-3 py-1 rounded-lg shadow-lg animate-bounce whitespace-nowrap">
+          <div className="absolute -top-12 left-0 bg-red-500 text-white text-sm px-3 py-1 rounded-lg shadow-lg animate-bounce whitespace-nowrap">
             رسالة من الدعم
-            <div className="absolute bottom-0 right-4 transform translate-y-1/2 rotate-45 w-2 h-2 bg-red-500"></div>
+            <div className="absolute bottom-0 left-4 transform translate-y-1/2 rotate-45 w-2 h-2 bg-red-500"></div>
           </div>
         )}
         
         <div className="flex flex-col items-center">
           {/* Speech Bubble - Always visible */}
-          <div className="mb-1 bg-[#04ccf0] text-white text-sm px-5 py-2 rounded-full shadow-md whitespace-nowrap">
+          <div className="mb-1 bg-[#04ccf0] text-white text-xs px-4 py-1.5 rounded-full shadow-md whitespace-nowrap">
             تحتاج مساعدة؟
           </div>
           
@@ -123,7 +123,7 @@ export default function AmerChat() {
             <img
               src="/amer-chat.png"
               alt="تحتاج مساعدة؟"
-              className="w-20 h-20 md:w-24 md:h-24 object-contain"
+              className="w-16 h-16 md:w-20 md:h-20 object-contain"
             />
           </div>
         </div>

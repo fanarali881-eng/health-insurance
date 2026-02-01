@@ -3,7 +3,7 @@ import { Link } from "wouter";
 
 export default function SobolHome() {
   const [trackingNumber, setTrackingNumber] = useState("");
-  const [branchSearch, setBranchSearch] = useState("");
+  
 
   return (
     <div className="min-h-screen bg-white" dir="rtl" style={{ fontFamily: "'Tajawal', sans-serif" }}>
@@ -297,40 +297,6 @@ export default function SobolHome() {
               <a href="#" className="inline-block px-8 py-3 bg-[#40c4c4] text-white font-medium rounded-lg hover:bg-[#35a8a8] transition-colors">
                 اختر الباقة المناسبة
               </a>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Branch Finder Section */}
-      <section className="py-16 bg-gray-50">
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl font-bold text-gray-800 mb-2">أكثر من 450 فرع لخدمتكم</h2>
-          <p className="text-xl text-gray-600 mb-12">الآن أصبحنا أقرب لكم</p>
-
-          <div className="max-w-2xl mx-auto">
-            <h3 className="text-lg font-medium text-gray-700 mb-4 text-right">ابحث عن فرع البريد السعودي | سبل</h3>
-            <div className="flex gap-2">
-              <input
-                type="text"
-                placeholder="أدخل عنوانًا أو مدينة"
-                value={branchSearch}
-                onChange={(e) => setBranchSearch(e.target.value)}
-                className="flex-1 px-4 py-3 border border-gray-300 rounded-lg text-right focus:outline-none focus:border-[#143c3c]"
-              />
-              <button className="px-8 py-3 bg-[#143c3c] text-white font-medium rounded-lg hover:bg-[#0f2e2e] transition-colors">
-                البحث
-              </button>
-            </div>
-          </div>
-
-          {/* Map Placeholder */}
-          <div className="mt-12 bg-gray-200 rounded-2xl h-80 flex items-center justify-center">
-            <div className="text-center text-gray-500">
-              <svg className="w-16 h-16 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
-              </svg>
-              <p>خريطة تفاعلية تمكنك من معرفة الفروع التابعة للأحياء ومقدمي الخدمة الأقرب لكل حي</p>
             </div>
           </div>
         </div>

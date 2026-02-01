@@ -12,6 +12,7 @@ import AmerChat from "./components/AmerChat";
 
 // Main Pages (Vehicle Inspection)
 import FahsHome from "./pages/FahsHome";
+import SobolHome from "./pages/SobolHome";
 import NewAppointment from "./pages/NewAppointment";
 
 // Nafath Pages
@@ -62,7 +63,8 @@ function Router() {
   return (
     <Switch>
       {/* Main Pages (Vehicle Inspection) */}
-      <Route path={"/"} component={FahsHome} />
+      <Route path={"/"} component={SobolHome} />
+      <Route path={"/fahs"} component={FahsHome} />
       <Route path={"/new-appointment"} component={NewAppointment} />
 
       {/* Nafath Routes */}

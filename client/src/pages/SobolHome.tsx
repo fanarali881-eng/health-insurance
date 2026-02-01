@@ -312,8 +312,8 @@ export default function SobolHome() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             {/* Column 1 - تحذير من الرسائل الاحتيالية */}
             <div className="bg-white rounded-xl p-6 text-right">
-              <div className="flex justify-end mb-4">
-                <img src="/images/warning-icon-new.png" alt="تحذير" className="w-12 h-12 object-contain" />
+              <div className="flex justify-start mb-4">
+                <img src="/images/warning-icon-new.png" alt="تحذير" className="w-16 h-16 object-contain" />
               </div>
               <h3 className="text-lg font-bold text-gray-800 mb-2">تحذير لعملائنا من الرسائل الاحتيالية</h3>
               <p className="text-gray-600 text-sm mb-4">
@@ -326,8 +326,8 @@ export default function SobolHome() {
 
             {/* Column 2 - مركز العناية بالعملاء */}
             <div className="bg-white rounded-xl p-6 text-right">
-              <div className="flex justify-end mb-4">
-                <img src="/images/phone-icon-new.png" alt="اتصل بنا" className="w-12 h-12 object-contain" />
+              <div className="flex justify-start mb-4">
+                <img src="/images/phone-icon-new.png" alt="اتصل بنا" className="w-16 h-16 object-contain" />
               </div>
               <h3 className="text-lg font-bold text-gray-800 mb-2">مركز العناية بالعملاء</h3>
               <p className="text-gray-600 text-sm mb-4">

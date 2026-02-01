@@ -306,8 +306,17 @@ export default function SobolHome() {
       <section className="py-16 bg-white">
         <div className="container mx-auto px-4">
           <div className="flex flex-col lg:flex-row items-center gap-12">
+            {/* Right Side - Phone Image */}
+            <div className="w-full lg:w-1/2 flex justify-center order-2 lg:order-1">
+              <img 
+                src="/images/spl-app-new.png" 
+                alt="تطبيق سبل" 
+                className="max-w-xs"
+              />
+            </div>
+
             {/* Left Side - Content */}
-            <div className="w-full lg:w-1/2 text-right">
+            <div className="w-full lg:w-1/2 text-right order-1 lg:order-2">
               <div className="w-16 h-16 bg-[#40c4c4] rounded-2xl flex items-center justify-center mb-6">
                 <span className="text-white text-2xl font-bold">سبل</span>
               </div>
@@ -336,15 +345,6 @@ export default function SobolHome() {
                   </svg>
                 </a>
               </div>
-            </div>
-
-            {/* Right Side - Phone Image */}
-            <div className="w-full lg:w-1/2 flex justify-center">
-              <img 
-                src="/images/spl-app-new.png" 
-                alt="تطبيق سبل" 
-                className="max-w-xs"
-              />
             </div>
           </div>
         </div>

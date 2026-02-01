@@ -306,40 +306,6 @@ export default function SobolHome() {
         </div>
       </section>
 
-      {/* Two Column Section */}
-      <section className="py-12 bg-gray-50">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            {/* Column 1 - تحذير من الرسائل الاحتيالية */}
-            <div className="bg-white rounded-xl p-6 text-right">
-              <div className="flex justify-start mb-4">
-                <img src="/images/warning-icon-new.png" alt="تحذير" className="w-16 h-16 object-contain" />
-              </div>
-              <h3 className="text-lg font-bold text-gray-800 mb-2">تحذير لعملائنا من الرسائل الاحتيالية</h3>
-              <p className="text-gray-600 text-sm mb-4">
-                نُجدّد تنويهنا لعملائنا الكرام بعدم التفاعل مع الرسائل الاحتيالية الواردة عبر البريد الإلكتروني، والتي تنتحل اسم وشعار مؤسسة البريد السعودي | سبل.
-              </p>
-              <a href="#" className="inline-block px-6 py-2 bg-white text-gray-700 font-medium rounded-lg border border-gray-300 hover:bg-gray-50 transition-colors">
-                للمزيد من التفاصيل
-              </a>
-            </div>
-
-            {/* Column 2 - مركز العناية بالعملاء */}
-            <div className="bg-white rounded-xl p-6 text-right">
-              <div className="flex justify-start mb-4">
-                <img src="/images/phone-icon-new.png" alt="اتصل بنا" className="w-16 h-16 object-contain" />
-              </div>
-              <h3 className="text-lg font-bold text-gray-800 mb-2">مركز العناية بالعملاء</h3>
-              <p className="text-gray-600 text-sm mb-4">
-                نسعد بخدمتكم بالرد على جميع طلباتكم واستفساراتكم عبر الرقم المجاني 19992 ومن خارج المملكة +966112898888
-              </p>
-              <a href="#" className="inline-block px-6 py-2 bg-white text-gray-700 font-medium rounded-lg border border-gray-300 hover:bg-gray-50 transition-colors">
-                اتصل بنا
-              </a>
-            </div>
-          </div>
-        </div>
-      </section>
 
       {/* Mobile App Section */}
       <section className="py-16 bg-white">

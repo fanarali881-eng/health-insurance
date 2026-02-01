@@ -250,8 +250,17 @@ export default function SobolHome() {
       <section className="py-16 bg-gray-50">
         <div className="container mx-auto px-4">
           <div className="flex flex-col lg:flex-row items-center gap-12">
+            {/* Right Side - Image */}
+            <div className="w-full lg:w-1/2 order-2 lg:order-1">
+              <img 
+                src="/images/global-banner-ar.jpeg" 
+                alt="عالمي" 
+                className="w-full rounded-2xl shadow-lg"
+              />
+            </div>
+
             {/* Left Side - Content */}
-            <div className="w-full lg:w-1/2 text-right">
+            <div className="w-full lg:w-1/2 text-right order-1 lg:order-2">
               <h2 className="text-4xl font-bold text-gray-800 mb-6">عالمي</h2>
               <p className="text-gray-600 text-lg mb-8 leading-relaxed">
                 تسوّق من علاماتك التجارية المفضلة حول العالم، واستلم مشترياتك على عنوانك الوطني أو أي عنوان آخر.
@@ -259,15 +268,6 @@ export default function SobolHome() {
               <a href="#" className="inline-block px-8 py-3 bg-[#f4f4f4] text-gray-800 font-medium rounded-lg hover:bg-[#e5e5e5] transition-colors">
                 ابدأ التسوّق
               </a>
-            </div>
-
-            {/* Right Side - Image */}
-            <div className="w-full lg:w-1/2">
-              <img 
-                src="/images/global-banner-ar.jpeg" 
-                alt="عالمي" 
-                className="w-full rounded-2xl shadow-lg"
-              />
             </div>
           </div>
         </div>

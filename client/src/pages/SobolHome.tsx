@@ -359,7 +359,7 @@ export default function SobolHome() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {/* Warning Box */}
             <div className="bg-white rounded-xl p-8 border border-gray-200 text-right">
-              <div className="flex justify-end mb-4">
+              <div className="flex justify-start mb-4">
                 <img src="/images/warning-icon-new.png" alt="تحذير" className="w-16 h-16 object-contain" />
               </div>
               <h3 className="text-xl font-bold text-gray-800 mb-4">تحذير لعملائنا من الرسائل الاحتيالية</h3>
@@ -373,7 +373,7 @@ export default function SobolHome() {
 
             {/* Customer Care Box */}
             <div className="bg-white rounded-xl p-8 border border-gray-200 text-right">
-              <div className="flex justify-end mb-4">
+              <div className="flex justify-start mb-4">
                 <img src="/images/phone-icon-new.png" alt="اتصل بنا" className="w-16 h-16 object-contain" />
               </div>
               <h3 className="text-xl font-bold text-gray-800 mb-4">مركز العناية بالعملاء</h3>

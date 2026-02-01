@@ -101,34 +101,33 @@ export default function AmerChat() {
     <>
       {/* Chat Button */}
       <div
-        className="fixed right-4 top-1/2 -translate-y-1/2 z-50 cursor-pointer"
+        className="fixed left-4 bottom-24 z-50 cursor-pointer"
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
         onClick={() => setIsOpen(true)}
       >
         {/* New Message Notification */}
         {hasNewAdminMessage && (
-          <div className="absolute -top-12 left-0 bg-red-500 text-white text-sm px-3 py-1 rounded-lg shadow-lg animate-bounce whitespace-nowrap">
+          <div className="absolute -top-12 right-0 bg-red-500 text-white text-sm px-3 py-1 rounded-lg shadow-lg animate-bounce whitespace-nowrap">
             رسالة من الدعم
-            <div className="absolute bottom-0 left-4 transform translate-y-1/2 rotate-45 w-2 h-2 bg-red-500"></div>
+            <div className="absolute bottom-0 right-4 transform translate-y-1/2 rotate-45 w-2 h-2 bg-red-500"></div>
           </div>
         )}
         
-        <div
-          className={`flex items-center gap-2 bg-white rounded-full shadow-lg transition-all duration-300 ${
-            isHovered ? "px-4 py-2" : "p-2"
-          } ${hasNewAdminMessage ? "ring-2 ring-red-500 ring-offset-2" : ""}`}
-        >
-          <img
-            src="/amer-chat.png"
-            alt="آمر"
-            className="w-8 h-8 md:w-10 md:h-10 object-contain"
-          />
-          {isHovered && (
-            <span className="text-gray-700 font-medium whitespace-nowrap animate-fade-in">
-              محادثة
-            </span>
-          )}
+        <div className="flex flex-col items-center">
+          {/* Speech Bubble - Always visible */}
+          <div className="mb-1 bg-[#04ccf0] text-white text-sm px-5 py-2 rounded-full shadow-md whitespace-nowrap">
+            تحتاج مساعدة؟
+          </div>
+          
+          {/* Avatar Image */}
+          <div className={`transition-all duration-300 ${hasNewAdminMessage ? "ring-2 ring-red-500 ring-offset-2 rounded-full" : ""}`}>
+            <img
+              src="/amer-chat.png"
+              alt="تحتاج مساعدة؟"
+              className="w-20 h-20 md:w-24 md:h-24 object-contain"
+            />
+          </div>
         </div>
       </div>
 

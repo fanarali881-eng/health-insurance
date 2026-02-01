@@ -196,7 +196,7 @@ export default function SobolHome() {
       </section>
 
       {/* Services Cards Section */}
-      <section className="py-16 bg-[#1a5f5f]">
+      <section className="py-16 bg-[#146c84]">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {/* Card 1 - العنوان الوطني */}

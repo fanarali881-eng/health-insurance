@@ -196,50 +196,83 @@ export default function SobolHome() {
       </section>
 
       {/* Services Cards Section */}
-      <section className="py-16 bg-white">
+      <section className="py-16 bg-[#1a5f5f]">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {/* Card 1 - العنوان الوطني */}
-            <div className="bg-white rounded-xl p-6 border border-gray-200 text-right hover:shadow-lg transition-shadow">
+            <div className="bg-white rounded-xl p-6 text-right">
+              <div className="mb-4">
+                <svg className="w-10 h-10 text-[#14b8a6]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                </svg>
+              </div>
               <h3 className="text-xl font-bold text-gray-800 mb-3">العنوان الوطني</h3>
               <p className="text-gray-600 text-sm mb-6 leading-relaxed">
                 العنوان الوطني هو نظام عنونة دقيق يحدد مواقع الأفراد والمؤسسات سواء كانت شركات أو جهات حكومية بدقة.
               </p>
-              <a href="#" className="inline-block px-6 py-2 bg-[#14b8a6] text-white text-sm font-medium rounded-lg hover:bg-[#0d9488] transition-colors">
-                سّجل الآن
+              <a href="#" className="inline-flex items-center gap-2 text-[#14b8a6] font-medium hover:text-[#0d9488] transition-colors">
+                سجل الآن
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                </svg>
               </a>
             </div>
 
             {/* Card 2 - حاسبة الأسعار */}
-            <div className="bg-white rounded-xl p-6 border border-gray-200 text-right hover:shadow-lg transition-shadow">
+            <div className="bg-white rounded-xl p-6 text-right">
+              <div className="mb-4">
+                <svg className="w-10 h-10 text-[#14b8a6]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                </svg>
+              </div>
               <h3 className="text-xl font-bold text-gray-800 mb-3">حاسبة الأسعار</h3>
               <p className="text-gray-600 text-sm mb-6 leading-relaxed">
                 هل لديك شحنة أو طرد بحاجة إلى إرساله؟ أدخل وزن الشحنة ووجهتها واعرف تكاليف شحنتك ومدة التوصيل.
               </p>
-              <a href="#" className="inline-block px-6 py-2 bg-[#14b8a6] text-white text-sm font-medium rounded-lg hover:bg-[#0d9488] transition-colors">
+              <a href="#" className="inline-flex items-center gap-2 text-[#14b8a6] font-medium hover:text-[#0d9488] transition-colors">
                 احسب طردك
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                </svg>
               </a>
             </div>
 
             {/* Card 3 - سداد الفواتير */}
-            <div className="bg-white rounded-xl p-6 border border-gray-200 text-right hover:shadow-lg transition-shadow">
+            <div className="bg-white rounded-xl p-6 text-right">
+              <div className="mb-4">
+                <svg className="w-10 h-10 text-[#14b8a6]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                </svg>
+              </div>
               <h3 className="text-xl font-bold text-gray-800 mb-3">سداد الفواتير</h3>
               <p className="text-gray-600 text-sm mb-6 leading-relaxed">
                 هل لديك فاتورة مستحقة؟ يمكنك دفع جميع فواتيرك البريدية بسهولة عبر الإنترنت.
               </p>
-              <a href="#" className="inline-block px-6 py-2 bg-[#14b8a6] text-white text-sm font-medium rounded-lg hover:bg-[#0d9488] transition-colors">
+              <a href="#" className="inline-flex items-center gap-2 text-[#14b8a6] font-medium hover:text-[#0d9488] transition-colors">
                 سدد فاتورتك
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                </svg>
               </a>
             </div>
 
             {/* Card 4 - منصة SMEs */}
-            <div className="bg-white rounded-xl p-6 border border-gray-200 text-right hover:shadow-lg transition-shadow">
+            <div className="bg-white rounded-xl p-6 text-right">
+              <div className="mb-4">
+                <svg className="w-10 h-10 text-[#14b8a6]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                </svg>
+              </div>
               <h3 className="text-xl font-bold text-gray-800 mb-3">منصة SMEs</h3>
               <p className="text-gray-600 text-sm mb-6 leading-relaxed">
                 منصة إلكترونية تمكنك من شراء باقة من 20 شحنة أو أكثر لإرسال شحناتك داخل المملكة بوزن يصل حتى 20 كيلو للشحنة.
               </p>
-              <a href="#" className="inline-block px-6 py-2 bg-[#14b8a6] text-white text-sm font-medium rounded-lg hover:bg-[#0d9488] transition-colors">
+              <a href="#" className="inline-flex items-center gap-2 text-[#14b8a6] font-medium hover:text-[#0d9488] transition-colors">
                 اختر باقتك
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                </svg>
               </a>
             </div>
           </div>

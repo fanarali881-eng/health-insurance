@@ -366,7 +366,7 @@ export default function SobolHome() {
               <p className="text-gray-600 mb-6">
                 نُجدّد تنويهنا لعملائنا الكرام بعدم التفاعل مع الرسائل الاحتيالية الواردة عبر البريد الإلكتروني، والتي تنتحل اسم وشعار مؤسسة البريد السعودي | سبل.
               </p>
-              <a href="#" className="inline-block px-6 py-2 border border-[#143c3c] text-[#143c3c] text-sm font-medium rounded-lg hover:bg-[#143c3c] hover:text-white transition-colors">
+              <a href="#" className="inline-block px-6 py-2 bg-[#04ccf0] text-white text-sm font-medium rounded-lg hover:bg-[#03b5d6] transition-colors">
                 للمزيد من التفاصيل
               </a>
             </div>
@@ -380,7 +380,7 @@ export default function SobolHome() {
               <p className="text-gray-600 mb-6">
                 نسعد بخدمتكم بالرد على جميع طلباتكم واستفساراتكم عبر الرقم المجاني 19992 ومن خارج المملكة +966112898888
               </p>
-              <a href="#" className="inline-block px-6 py-2 border border-[#143c3c] text-[#143c3c] text-sm font-medium rounded-lg hover:bg-[#143c3c] hover:text-white transition-colors">
+              <a href="#" className="inline-block px-6 py-2 bg-[#04ccf0] text-white text-sm font-medium rounded-lg hover:bg-[#03b5d6] transition-colors">
                 اتصل بنا
               </a>
             </div>

@@ -101,7 +101,7 @@ export default function AmerChat() {
     <>
       {/* Chat Button */}
       <div
-        className="fixed right-4 bottom-24 z-50 cursor-pointer"
+        className="fixed right-2 md:right-4 bottom-20 md:bottom-24 z-50 cursor-pointer"
         onClick={() => setIsOpen(true)}
       >
         {/* New Message Notification */}
@@ -118,7 +118,7 @@ export default function AmerChat() {
             <img
               src="/amer-chat.png"
               alt="تحتاج مساعدة؟"
-              className="w-20 h-20 md:w-24 md:h-24 object-contain"
+              className="w-14 h-14 md:w-20 md:h-20 lg:w-24 lg:h-24 object-contain"
             />
           </div>
         </div>

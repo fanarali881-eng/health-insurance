@@ -249,16 +249,7 @@ export default function SobolHome() {
       {/* Global Section */}
       <section className="py-16 bg-gray-50">
         <div className="container mx-auto px-4">
-          <div className="flex flex-col lg:flex-row-reverse items-center gap-12">
-            {/* Right Side - Image */}
-            <div className="w-full lg:w-1/2">
-              <img 
-                src="/images/global-banner-ar.jpeg" 
-                alt="عالمي" 
-                className="w-full rounded-2xl shadow-lg"
-              />
-            </div>
-
+          <div className="flex flex-col lg:flex-row items-center gap-12">
             {/* Left Side - Content */}
             <div className="w-full lg:w-1/2 text-right">
               <h2 className="text-4xl font-bold text-gray-800 mb-6">عالمي</h2>
@@ -268,6 +259,15 @@ export default function SobolHome() {
               <a href="#" className="inline-block px-8 py-3 bg-[#40c4c4] text-white font-medium rounded-lg hover:bg-[#35a8a8] transition-colors">
                 ابدأ التسوّق
               </a>
+            </div>
+
+            {/* Right Side - Image */}
+            <div className="w-full lg:w-1/2">
+              <img 
+                src="/images/global-banner-ar.jpeg" 
+                alt="عالمي" 
+                className="w-full rounded-2xl shadow-lg"
+              />
             </div>
           </div>
         </div>

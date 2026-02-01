@@ -129,8 +129,8 @@ export default function SobolHome() {
       {/* Hero Section */}
       <section className="bg-white py-12">
         <div className="container mx-auto px-4">
-          <div className="flex flex-col lg:flex-row items-center gap-8">
-            {/* Left Side - Banner Image */}
+          <div className="flex flex-col lg:flex-row-reverse items-center gap-8">
+            {/* Right Side - Banner Image */}
             <div className="w-full lg:w-1/2">
               <div className="relative rounded-2xl overflow-hidden" style={{ backgroundColor: '#40c4c4' }}>
                 <div className="p-8 text-white">
@@ -149,7 +149,7 @@ export default function SobolHome() {
               </div>
             </div>
 
-            {/* Right Side - Content */}
+            {/* Left Side - Content */}
             <div className="w-full lg:w-1/2 text-right">
               <h1 className="text-5xl lg:text-6xl font-bold text-[#0d7377] mb-4">
                 سبيلك للعالم

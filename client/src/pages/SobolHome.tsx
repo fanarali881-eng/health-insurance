@@ -165,7 +165,7 @@ export default function SobolHome() {
                     onChange={(e) => setTrackingNumber(e.target.value)}
                     className="flex-1 px-4 py-3 border border-[#f4f4f4] rounded-lg text-right focus:outline-none focus:border-[#143c3c]"
                   />
-                  <button className="px-8 py-3 bg-[#14b8a6] text-white font-medium rounded-lg hover:bg-[#0d9488] transition-colors">
+                  <button className="px-8 py-3 bg-[#04ccf0] text-white font-medium rounded-lg hover:bg-[#03b5d6] transition-colors">
                     تتبع
                   </button>
                 </div>
@@ -298,7 +298,7 @@ export default function SobolHome() {
               <p className="text-gray-600 text-lg mb-8 leading-relaxed">
                 تسوّق من علاماتك التجارية المفضلة حول العالم، واستلم مشترياتك على عنوانك الوطني أو أي عنوان آخر.
               </p>
-              <a href="#" className="inline-block px-8 py-3 bg-[#14b8a6] text-white font-medium rounded-lg hover:bg-[#0d9488] transition-colors">
+              <a href="#" className="inline-block px-8 py-3 bg-[#04ccf0] text-white font-medium rounded-lg hover:bg-[#03b5d6] transition-colors">
                 ابدأ التسوّق
               </a>
             </div>
@@ -316,7 +316,7 @@ export default function SobolHome() {
               <p className="text-gray-600 mb-6">
                 يمكنك تسجيل عنوانك الوطني بالمجان وإدارته بكل يسر وسهولة.
               </p>
-              <a href="#" className="inline-block px-8 py-3 bg-[#14b8a6] text-white font-medium rounded-lg hover:bg-[#0d9488] transition-colors">
+              <a href="#" className="inline-block px-8 py-3 bg-[#04ccf0] text-white font-medium rounded-lg hover:bg-[#03b5d6] transition-colors">
                 سجّل الآن
               </a>
             </div>
@@ -327,7 +327,7 @@ export default function SobolHome() {
               <p className="text-gray-600 mb-6">
                 يمكنك توفير مايقارب 50٪ من قيمة الشحن عند استخدامك منصة SMEs.
               </p>
-              <a href="#" className="inline-block px-8 py-3 bg-[#14b8a6] text-white font-medium rounded-lg hover:bg-[#0d9488] transition-colors">
+              <a href="#" className="inline-block px-8 py-3 bg-[#04ccf0] text-white font-medium rounded-lg hover:bg-[#03b5d6] transition-colors">
                 اختر الباقة المناسبة
               </a>
             </div>

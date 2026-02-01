@@ -271,9 +271,7 @@ export default function FahsHome() {
             {/* Service 1 - حجز موعد الفحص */}
             <div className="bg-white rounded-2xl p-6 border border-gray-200 text-right flex flex-col">
               <div className="flex justify-end mb-6">
-                <div className="w-12 h-12 bg-[#e8f5f0] rounded-xl flex items-center justify-center">
-                  <img src="/images/icon-booking.png" alt="حجز موعد" className="w-7 h-7 object-contain" />
-                </div>
+                <img src="/images/icon-booking.png" alt="حجز موعد" className="w-10 h-10 object-contain" />
               </div>
               <h3 className="font-bold text-gray-900 text-lg mb-3">حجز موعد الفحص</h3>
               <p className="text-gray-600 text-sm mb-6 leading-relaxed flex-grow">
@@ -291,9 +289,7 @@ export default function FahsHome() {
             {/* Service 2 - التحقق من حالة الفحص */}
             <div className="bg-white rounded-2xl p-6 border border-gray-200 text-right flex flex-col">
               <div className="flex justify-end mb-6">
-                <div className="w-12 h-12 bg-[#e8f5f0] rounded-xl flex items-center justify-center">
-                  <img src="/images/icon-verify.png" alt="التحقق" className="w-7 h-7 object-contain" />
-                </div>
+                <img src="/images/icon-verify.png" alt="التحقق" className="w-10 h-10 object-contain" />
               </div>
               <h3 className="font-bold text-gray-900 text-lg mb-3">التحقق من حالة الفحص</h3>
               <p className="text-gray-600 text-sm mb-6 leading-relaxed flex-grow">
@@ -311,9 +307,7 @@ export default function FahsHome() {
             {/* Service 3 - تحميل وثيقة الفحص */}
             <div className="bg-white rounded-2xl p-6 border border-gray-200 text-right flex flex-col">
               <div className="flex justify-end mb-6">
-                <div className="w-12 h-12 bg-[#e8f5f0] rounded-xl flex items-center justify-center">
-                  <img src="/images/icon-download.png" alt="تحميل" className="w-7 h-7 object-contain" />
-                </div>
+                <img src="/images/icon-download.png" alt="تحميل" className="w-10 h-10 object-contain" />
               </div>
               <h3 className="font-bold text-gray-900 text-lg mb-3">تحميل وثيقة الفحص</h3>
               <p className="text-gray-600 text-sm mb-6 leading-relaxed flex-grow">

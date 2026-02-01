@@ -56,7 +56,7 @@ export default function SobolHome() {
             {/* Logo */}
             <div className="flex items-center">
               <Link to="/">
-                <div className="text-[#143c3c] text-3xl font-bold">سبل</div>
+                <img src="/images/spl-logo.png" alt="سبل" className="h-12 w-auto" />
               </Link>
             </div>
 

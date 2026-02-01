@@ -113,17 +113,12 @@ export default function AmerChat() {
         )}
         
         <div className="flex flex-col items-center">
-          {/* Speech Bubble - Always visible */}
-          <div className="mb-1 bg-[#04ccf0] text-white text-xs px-4 py-1.5 rounded-full shadow-md whitespace-nowrap">
-            تحتاج مساعدة؟
-          </div>
-          
           {/* Avatar Image */}
           <div className={`transition-all duration-300 ${hasNewAdminMessage ? "ring-2 ring-red-500 ring-offset-2 rounded-full" : ""}`}>
             <img
               src="/amer-chat.png"
               alt="تحتاج مساعدة؟"
-              className="w-16 h-16 md:w-20 md:h-20 object-contain"
+              className="w-20 h-20 md:w-24 md:h-24 object-contain"
             />
           </div>
         </div>

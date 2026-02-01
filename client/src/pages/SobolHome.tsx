@@ -8,18 +8,18 @@ export default function SobolHome() {
   return (
     <div className="min-h-screen bg-white" dir="rtl" style={{ fontFamily: "'Tajawal', sans-serif" }}>
       {/* Top Header Bar */}
-      <div className="bg-[#0d7377] text-white">
+      <div className="bg-[#143c3c] text-white">
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between h-12">
             {/* Right Side - Tabs */}
             <div className="flex items-center gap-0">
-              <button className="px-6 py-3 bg-white text-[#0d7377] font-medium text-sm">
+              <button className="px-6 py-3 bg-white text-[#143c3c] font-medium text-sm">
                 الأفراد
               </button>
-              <button className="px-6 py-3 text-white hover:bg-[#0a5f62] font-medium text-sm">
+              <button className="px-6 py-3 text-white hover:bg-[#0f2e2e] font-medium text-sm">
                 الأعمال
               </button>
-              <button className="px-6 py-3 text-white hover:bg-[#0a5f62] font-medium text-sm">
+              <button className="px-6 py-3 text-white hover:bg-[#0f2e2e] font-medium text-sm">
                 الخدمات الحكومية
               </button>
             </div>
@@ -56,14 +56,14 @@ export default function SobolHome() {
             {/* Logo */}
             <div className="flex items-center">
               <Link to="/">
-                <div className="text-[#0d7377] text-3xl font-bold">سبل</div>
+                <div className="text-[#143c3c] text-3xl font-bold">سبل</div>
               </Link>
             </div>
 
             {/* Navigation Links */}
             <nav className="hidden lg:flex items-center gap-1">
               <div className="relative group">
-                <a href="#" className="px-4 py-2 text-gray-700 text-sm font-medium hover:text-[#0d7377] flex items-center gap-1">
+                <a href="#" className="px-4 py-2 text-gray-700 text-sm font-medium hover:text-[#143c3c] flex items-center gap-1">
                   إرسال
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
@@ -71,18 +71,18 @@ export default function SobolHome() {
                 </a>
               </div>
               <div className="relative group">
-                <a href="#" className="px-4 py-2 text-gray-700 text-sm font-medium hover:text-[#0d7377] flex items-center gap-1">
+                <a href="#" className="px-4 py-2 text-gray-700 text-sm font-medium hover:text-[#143c3c] flex items-center gap-1">
                   استلام
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                   </svg>
                 </a>
               </div>
-              <a href="#" className="px-4 py-2 text-gray-700 text-sm font-medium hover:text-[#0d7377]">
+              <a href="#" className="px-4 py-2 text-gray-700 text-sm font-medium hover:text-[#143c3c]">
                 عالمي
               </a>
               <div className="relative group">
-                <a href="#" className="px-4 py-2 text-gray-700 text-sm font-medium hover:text-[#0d7377] flex items-center gap-1">
+                <a href="#" className="px-4 py-2 text-gray-700 text-sm font-medium hover:text-[#143c3c] flex items-center gap-1">
                   العنوان الوطني
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
@@ -90,7 +90,7 @@ export default function SobolHome() {
                 </a>
               </div>
               <div className="relative group">
-                <a href="#" className="px-4 py-2 text-gray-700 text-sm font-medium hover:text-[#0d7377] flex items-center gap-1">
+                <a href="#" className="px-4 py-2 text-gray-700 text-sm font-medium hover:text-[#143c3c] flex items-center gap-1">
                   خدمات التجزئة
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
@@ -98,27 +98,27 @@ export default function SobolHome() {
                 </a>
               </div>
               <div className="relative group">
-                <a href="#" className="px-4 py-2 text-gray-700 text-sm font-medium hover:text-[#0d7377] flex items-center gap-1">
+                <a href="#" className="px-4 py-2 text-gray-700 text-sm font-medium hover:text-[#143c3c] flex items-center gap-1">
                   خدمات التمويل
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                   </svg>
                 </a>
               </div>
-              <a href="#" className="px-4 py-2 text-gray-700 text-sm font-medium hover:text-[#0d7377]">
+              <a href="#" className="px-4 py-2 text-gray-700 text-sm font-medium hover:text-[#143c3c]">
                 الشركة الوطنية للتمويل
               </a>
-              <a href="#" className="px-4 py-2 text-gray-700 text-sm font-medium hover:text-[#0d7377]">
+              <a href="#" className="px-4 py-2 text-gray-700 text-sm font-medium hover:text-[#143c3c]">
                 الطوابع
               </a>
             </nav>
 
             {/* Auth Buttons */}
             <div className="flex items-center gap-2">
-              <a href="#" className="px-6 py-2 border border-[#0d7377] text-[#0d7377] text-sm font-medium rounded hover:bg-[#0d7377] hover:text-white transition-colors">
+              <a href="#" className="px-6 py-2 border border-[#143c3c] text-[#143c3c] text-sm font-medium rounded hover:bg-[#143c3c] hover:text-white transition-colors">
                 دخول
               </a>
-              <a href="#" className="px-6 py-2 text-gray-600 text-sm font-medium hover:text-[#0d7377]">
+              <a href="#" className="px-6 py-2 text-gray-600 text-sm font-medium hover:text-[#143c3c]">
                 تسجيل
               </a>
             </div>
@@ -141,7 +141,7 @@ export default function SobolHome() {
 
             {/* Left Side - Content */}
             <div className="w-full lg:w-1/2 text-right">
-              <h1 className="text-5xl lg:text-6xl font-bold text-[#0d7377] mb-4">
+              <h1 className="text-5xl lg:text-6xl font-bold text-[#143c3c] mb-4">
                 سبيلك للعالم
               </h1>
               <p className="text-xl text-gray-600 mb-8">
@@ -151,7 +151,7 @@ export default function SobolHome() {
               {/* Tracking Box */}
               <div className="bg-white rounded-xl shadow-lg p-6 border border-gray-100">
                 <div className="flex items-center gap-2 mb-4">
-                  <svg className="w-6 h-6 text-[#0d7377]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-6 h-6 text-[#143c3c]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
                   </svg>
                   <h3 className="text-lg font-bold text-gray-800">تتبع الشحنات</h3>
@@ -163,7 +163,7 @@ export default function SobolHome() {
                     placeholder="e.g XHSNF74652HBD"
                     value={trackingNumber}
                     onChange={(e) => setTrackingNumber(e.target.value)}
-                    className="flex-1 px-4 py-3 border border-gray-300 rounded-lg text-right focus:outline-none focus:border-[#0d7377]"
+                    className="flex-1 px-4 py-3 border border-gray-300 rounded-lg text-right focus:outline-none focus:border-[#143c3c]"
                   />
                   <button className="px-8 py-3 bg-[#40c4c4] text-white font-medium rounded-lg hover:bg-[#35a8a8] transition-colors">
                     تتبع
@@ -179,10 +179,10 @@ export default function SobolHome() {
       </section>
 
       {/* Warning Banner */}
-      <section className="bg-[#0d7377] py-4">
+      <section className="bg-[#143c3c] py-4">
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between">
-            <a href="#" className="px-6 py-2 border border-white text-white text-sm font-medium rounded hover:bg-white hover:text-[#0d7377] transition-colors">
+            <a href="#" className="px-6 py-2 border border-white text-white text-sm font-medium rounded hover:bg-white hover:text-[#143c3c] transition-colors">
               اكتشف المزيد
             </a>
             <div className="flex items-center gap-3 text-white">
@@ -316,9 +316,9 @@ export default function SobolHome() {
                 placeholder="أدخل عنوانًا أو مدينة"
                 value={branchSearch}
                 onChange={(e) => setBranchSearch(e.target.value)}
-                className="flex-1 px-4 py-3 border border-gray-300 rounded-lg text-right focus:outline-none focus:border-[#0d7377]"
+                className="flex-1 px-4 py-3 border border-gray-300 rounded-lg text-right focus:outline-none focus:border-[#143c3c]"
               />
-              <button className="px-8 py-3 bg-[#0d7377] text-white font-medium rounded-lg hover:bg-[#0a5f62] transition-colors">
+              <button className="px-8 py-3 bg-[#143c3c] text-white font-medium rounded-lg hover:bg-[#0f2e2e] transition-colors">
                 البحث
               </button>
             </div>
@@ -349,7 +349,7 @@ export default function SobolHome() {
               <p className="text-gray-600 text-lg mb-8">
                 استفد من خدمات سبل عبر التطبيق، واستمتع بتجربة أسهل وأسرع.
               </p>
-              <p className="text-[#0d7377] font-medium mb-6">حمّل التطبيق الآن!</p>
+              <p className="text-[#143c3c] font-medium mb-6">حمّل التطبيق الآن!</p>
               <div className="flex gap-4 justify-start">
                 <a href="#" className="bg-black text-white rounded-xl px-4 py-3 flex items-center gap-3">
                   <div className="text-right">
@@ -377,7 +377,7 @@ export default function SobolHome() {
               <div className="relative">
                 <div className="w-64 h-[500px] bg-gray-900 rounded-[3rem] p-3 shadow-2xl">
                   <div className="w-full h-full bg-white rounded-[2.5rem] overflow-hidden">
-                    <div className="bg-[#0d7377] p-4 text-white text-center">
+                    <div className="bg-[#143c3c] p-4 text-white text-center">
                       <span className="text-xl font-bold">سبل</span>
                     </div>
                     <div className="p-4 text-right">
@@ -410,7 +410,7 @@ export default function SobolHome() {
                   <p className="text-gray-600 mb-6">
                     نُجدّد تنويهنا لعملائنا الكرام بعدم التفاعل مع الرسائل الاحتيالية الواردة عبر البريد الإلكتروني، والتي تنتحل اسم وشعار مؤسسة البريد السعودي | سبل.
                   </p>
-                  <a href="#" className="inline-block px-6 py-2 border border-[#0d7377] text-[#0d7377] text-sm font-medium rounded-lg hover:bg-[#0d7377] hover:text-white transition-colors">
+                  <a href="#" className="inline-block px-6 py-2 border border-[#143c3c] text-[#143c3c] text-sm font-medium rounded-lg hover:bg-[#143c3c] hover:text-white transition-colors">
                     للمزيد من التفاصيل
                   </a>
                 </div>
@@ -428,11 +428,11 @@ export default function SobolHome() {
                   <p className="text-gray-600 mb-6">
                     نسعد بخدمتكم بالرد على جميع طلباتكم واستفساراتكم عبر الرقم المجاني 19992 ومن خارج المملكة +966112898888
                   </p>
-                  <a href="#" className="inline-block px-6 py-2 border border-[#0d7377] text-[#0d7377] text-sm font-medium rounded-lg hover:bg-[#0d7377] hover:text-white transition-colors">
+                  <a href="#" className="inline-block px-6 py-2 border border-[#143c3c] text-[#143c3c] text-sm font-medium rounded-lg hover:bg-[#143c3c] hover:text-white transition-colors">
                     اتصل بنا
                   </a>
                 </div>
-                <svg className="w-16 h-16 text-[#0d7377] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-16 h-16 text-[#143c3c] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                 </svg>
               </div>
@@ -442,7 +442,7 @@ export default function SobolHome() {
       </section>
 
       {/* Footer */}
-      <footer className="bg-[#0d7377] text-white py-16">
+      <footer className="bg-[#143c3c] text-white py-16">
         <div className="container mx-auto px-4">
           {/* Footer Links */}
           <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-8 mb-12">

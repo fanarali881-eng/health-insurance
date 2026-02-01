@@ -322,9 +322,7 @@ export default function SobolHome() {
 
             {/* Left Side - Content */}
             <div className="w-full lg:w-1/2 text-right order-1 lg:order-2">
-              <div className="w-16 h-16 bg-[#40c4c4] rounded-2xl flex items-center justify-center mb-6">
-                <span className="text-white text-2xl font-bold">سبل</span>
-              </div>
+              <img src="/images/spl-logo.png" alt="سبل" className="w-16 h-16 object-contain mb-6" />
               <h2 className="text-3xl font-bold text-gray-800 mb-4">تطبيق سبل أون لاين</h2>
               <p className="text-gray-600 text-lg mb-8">
                 استفد من خدمات سبل عبر التطبيق، واستمتع بتجربة أسهل وأسرع.

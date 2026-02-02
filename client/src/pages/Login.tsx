@@ -236,7 +236,21 @@ export default function Login() {
       {/* Footer */}
       <footer className="bg-[#143c3c] py-3">
         <div className="container mx-auto px-4">
-          <a href="#" className="text-white text-sm hover:text-gray-300">English</a>
+          <div className="flex flex-col md:flex-row items-center justify-between text-white text-sm">
+            {/* Right side - Copyright */}
+            <div className="flex items-center gap-1 mb-2 md:mb-0">
+              <span>©</span>
+              <span>2026 جميع الحقوق محفوظة لمؤسسة البريد السعودي - سُبل</span>
+            </div>
+            
+            {/* Left side - Terms and Privacy */}
+            <div className="flex items-center gap-1">
+              <span className="text-gray-300">عند استخدامك هذا الموقع، فإنك توافق على</span>
+              <a href="#" className="text-[#04ccf0] hover:underline">شروط الخدمة</a>
+              <span className="text-gray-300">و</span>
+              <a href="#" className="text-[#04ccf0] hover:underline">سياسة الخصوصية</a>
+            </div>
+          </div>
         </div>
       </footer>
 

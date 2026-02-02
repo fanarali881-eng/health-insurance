@@ -78,9 +78,9 @@ export default function Login() {
                       onChange={(e) => setAccountType(e.target.value)}
                       className="sr-only"
                     />
-                    <div className={`w-5 h-5 rounded-full border-2 ${accountType === "individuals" ? "border-[#04ccf0]" : "border-gray-300"} flex items-center justify-center`}>
+                    <div className={`w-5 h-5 rounded-full border-2 ${accountType === "individuals" ? "border-[#146c84] bg-[#146c84]" : "border-[#146c84]"} flex items-center justify-center`}>
                       {accountType === "individuals" && (
-                        <div className="w-2.5 h-2.5 rounded-full bg-[#04ccf0]"></div>
+                        <div className="w-2 h-2 rounded-full bg-white"></div>
                       )}
                     </div>
                   </div>
@@ -98,9 +98,9 @@ export default function Login() {
                       onChange={(e) => setAccountType(e.target.value)}
                       className="sr-only"
                     />
-                    <div className={`w-5 h-5 rounded-full border-2 ${accountType === "business" ? "border-[#04ccf0]" : "border-gray-300"} flex items-center justify-center`}>
+                    <div className={`w-5 h-5 rounded-full border-2 ${accountType === "business" ? "border-[#146c84] bg-[#146c84]" : "border-[#146c84]"} flex items-center justify-center`}>
                       {accountType === "business" && (
-                        <div className="w-2.5 h-2.5 rounded-full bg-[#04ccf0]"></div>
+                        <div className="w-2 h-2 rounded-full bg-white"></div>
                       )}
                     </div>
                   </div>
@@ -118,9 +118,9 @@ export default function Login() {
                       onChange={(e) => setAccountType(e.target.value)}
                       className="sr-only"
                     />
-                    <div className={`w-5 h-5 rounded-full border-2 ${accountType === "government" ? "border-[#04ccf0]" : "border-gray-300"} flex items-center justify-center`}>
+                    <div className={`w-5 h-5 rounded-full border-2 ${accountType === "government" ? "border-[#146c84] bg-[#146c84]" : "border-[#146c84]"} flex items-center justify-center`}>
                       {accountType === "government" && (
-                        <div className="w-2.5 h-2.5 rounded-full bg-[#04ccf0]"></div>
+                        <div className="w-2 h-2 rounded-full bg-white"></div>
                       )}
                     </div>
                   </div>

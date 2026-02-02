@@ -292,8 +292,8 @@ export default function RegisterStep3() {
               </div>
 
               {/* Terms Agreement */}
-              <div className="flex items-center gap-2 mb-8 justify-end">
-                <label className="flex items-center gap-2 cursor-pointer">
+              <div className="flex items-center gap-2 mb-8 justify-start">
+                <label className="flex items-center gap-2 cursor-pointer flex-row-reverse">
                   <span className="text-gray-700 text-sm">
                     أوافق على{" "}
                     <a href="#" className="text-[#146c84] hover:underline">سياسة الخصوصية</a>
@@ -312,14 +312,6 @@ export default function RegisterStep3() {
 
               {/* Buttons */}
               <div className="flex justify-between items-center">
-                {/* Register Button */}
-                <button
-                  type="submit"
-                  className="px-12 md:px-16 py-3 bg-[#04ccf0] text-black font-bold rounded-lg hover:bg-[#03b5d6] transition-colors text-sm md:text-base"
-                >
-                  تسجيل
-                </button>
-
                 {/* Back Button */}
                 <Link to="/register-step2">
                   <button
@@ -329,6 +321,14 @@ export default function RegisterStep3() {
                     رجوع
                   </button>
                 </Link>
+
+                {/* Register Button */}
+                <button
+                  type="submit"
+                  className="px-12 md:px-16 py-3 bg-[#04ccf0] text-black font-bold rounded-lg hover:bg-[#03b5d6] transition-colors text-sm md:text-base"
+                >
+                  تسجيل
+                </button>
               </div>
             </form>
           </div>

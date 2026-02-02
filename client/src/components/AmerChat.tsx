@@ -118,7 +118,7 @@ export default function AmerChat() {
             <img
               src="/amer-chat.png"
               alt="تحتاج مساعدة؟"
-              className="w-14 h-14 md:w-20 md:h-20 lg:w-24 lg:h-24 object-contain"
+              className="w-20 h-20 md:w-24 md:h-24 lg:w-28 lg:h-28 object-contain"
             />
           </div>
         </div>

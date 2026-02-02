@@ -238,7 +238,7 @@ export default function Login() {
       </main>
 
       {/* Footer */}
-      <footer className="bg-[#143c3c] py-3">
+      <footer className="bg-[#143c3c] py-5">
         <div className="container mx-auto px-4">
           <div className="flex flex-col md:flex-row items-center justify-between text-white text-sm">
             {/* Right side - Copyright */}

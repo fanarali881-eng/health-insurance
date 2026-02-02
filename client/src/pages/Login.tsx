@@ -206,14 +206,14 @@ export default function Login() {
               </div>
 
               {/* Forgot Links */}
-              <div className="flex flex-col md:flex-row items-center justify-end gap-4 md:gap-8 mt-6">
-                <a href="#" className="flex items-center gap-2 text-gray-800 hover:text-gray-600 text-sm md:text-base">
+              <div className="flex flex-col md:flex-row-reverse items-end md:items-center justify-end gap-4 md:gap-8 mt-6">
+                <a href="#" className="flex items-center gap-2 text-black hover:text-gray-700 text-sm md:text-base">
                   نسيت كلمة المرور
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
                   </svg>
                 </a>
-                <a href="#" className="flex items-center gap-2 text-gray-800 hover:text-gray-600 text-sm md:text-base">
+                <a href="#" className="flex items-center gap-2 text-black hover:text-gray-700 text-sm md:text-base">
                   نسيت اسم المستخدم
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />

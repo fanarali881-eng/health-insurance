@@ -4,6 +4,11 @@ import { Link, useLocation } from "wouter";
 export default function RegisterStep3() {
   const [, setLocation] = useLocation();
   
+  // Get account type from URL params
+  const searchParams = new URLSearchParams(window.location.search);
+  const accountType = searchParams.get('type') || 'individuals';
+  const accountTypeText = accountType === 'business' ? 'أعمال' : 'أفراد';
+  
   // Arabic Name fields
   const [firstNameAr, setFirstNameAr] = useState("");
   const [fatherNameAr, setFatherNameAr] = useState("");
@@ -151,7 +156,7 @@ export default function RegisterStep3() {
           <div className="bg-white rounded-lg shadow-lg p-6 md:p-10">
             {/* Title */}
             <h1 className="text-2xl md:text-3xl font-bold text-[#143c3c] text-center mb-6 md:mb-8">
-              إنشاء حساب أفراد في الخدمات الإلكترونية
+              إنشاء حساب {accountTypeText} في الخدمات الإلكترونية
             </h1>
 
             <form onSubmit={handleSubmit}>

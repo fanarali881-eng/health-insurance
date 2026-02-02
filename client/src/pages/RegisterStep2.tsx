@@ -9,10 +9,14 @@ export default function RegisterStep2() {
   const [month, setMonth] = useState("");
   const [year, setYear] = useState("");
 
+  // Get account type from URL params
+  const searchParams = new URLSearchParams(window.location.search);
+  const accountType = searchParams.get('type') || 'individuals';
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Navigate to step 3
-    setLocation('/register-step3');
+    // Navigate to step 3 with account type
+    setLocation(`/register-step3?type=${accountType}`);
   };
 
   // Generate days 1-31

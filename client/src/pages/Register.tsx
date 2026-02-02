@@ -8,8 +8,8 @@ export default function Register() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Navigate to step 2
-    setLocation('/register-step2');
+    // Navigate to step 2 with account type
+    setLocation(`/register-step2?type=${accountType}`);
   };
 
   return (

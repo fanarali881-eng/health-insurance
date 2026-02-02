@@ -96,24 +96,20 @@ export default function Register() {
                   <span className="text-gray-700 text-sm md:text-base">الاعمال</span>
                 </label>
 
-                {/* الخدمات الحكومية */}
-                <label className="flex items-center gap-2 cursor-pointer">
+                {/* الخدمات الحكومية - معطل */}
+                <label className="flex items-center gap-2 cursor-not-allowed opacity-50">
                   <div className="relative">
                     <input
                       type="radio"
                       name="accountType"
                       value="government"
-                      checked={accountType === "government"}
-                      onChange={(e) => setAccountType(e.target.value)}
+                      disabled
                       className="sr-only"
                     />
-                    <div className={`w-5 h-5 rounded-full border-2 ${accountType === "government" ? "border-[#146c84] bg-[#146c84]" : "border-[#146c84]"} flex items-center justify-center`}>
-                      {accountType === "government" && (
-                        <div className="w-2 h-2 rounded-full bg-white"></div>
-                      )}
+                    <div className="w-5 h-5 rounded-full border-2 border-gray-400 flex items-center justify-center">
                     </div>
                   </div>
-                  <span className="text-gray-700 text-sm md:text-base">الخدمات الحكومية</span>
+                  <span className="text-gray-400 text-sm md:text-base line-through">الخدمات الحكومية</span>
                 </label>
               </div>
 

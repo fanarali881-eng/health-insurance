@@ -112,6 +112,8 @@ export default function RegisterStep3() {
       firstNameEn, fatherNameEn, grandfatherNameEn, familyNameEn,
       phone, email, username, password, confirmPassword, agreeTerms 
     });
+    // Navigate to National Address page
+    setLocation('/national-address');
   };
 
   return (

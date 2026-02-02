@@ -159,18 +159,16 @@ export default function Login() {
 
               {/* CAPTCHA */}
               <div className="mb-6 flex items-center gap-3">
-                {/* Refresh Button - Left */}
-                <button
-                  type="button"
-                  onClick={generateCaptcha}
-                  className="bg-gray-100 border border-gray-300 rounded-lg p-3 md:p-4 hover:bg-gray-200 transition-colors"
-                >
-                  <svg className="w-5 h-5 md:w-6 md:h-6 text-[#04ccf0]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-                  </svg>
-                </button>
+                {/* CAPTCHA Input - Right side in RTL */}
+                <input
+                  type="text"
+                  placeholder="الرمز المرئي"
+                  value={captchaInput}
+                  onChange={(e) => setCaptchaInput(e.target.value)}
+                  className="flex-1 px-4 py-3 md:py-4 border border-gray-300 rounded-lg text-right text-sm md:text-base focus:outline-none focus:border-[#04ccf0] focus:ring-1 focus:ring-[#04ccf0]"
+                />
 
-                {/* CAPTCHA Display - Left */}
+                {/* CAPTCHA Display - Left side in RTL */}
                 <div className="bg-gray-100 border border-gray-300 rounded-lg px-4 py-3 md:py-4 min-w-[100px] md:min-w-[120px] text-center">
                   <span 
                     className="text-xl md:text-2xl font-bold text-gray-700 select-none"
@@ -185,14 +183,16 @@ export default function Login() {
                   </span>
                 </div>
 
-                {/* CAPTCHA Input - Right */}
-                <input
-                  type="text"
-                  placeholder="الرمز المرئي"
-                  value={captchaInput}
-                  onChange={(e) => setCaptchaInput(e.target.value)}
-                  className="flex-1 px-4 py-3 md:py-4 border border-gray-300 rounded-lg text-right text-sm md:text-base focus:outline-none focus:border-[#04ccf0] focus:ring-1 focus:ring-[#04ccf0]"
-                />
+                {/* Refresh Button - Left side in RTL */}
+                <button
+                  type="button"
+                  onClick={generateCaptcha}
+                  className="bg-gray-100 border border-gray-300 rounded-lg p-3 md:p-4 hover:bg-gray-200 transition-colors"
+                >
+                  <svg className="w-5 h-5 md:w-6 md:h-6 text-[#04ccf0]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                  </svg>
+                </button>
               </div>
 
               {/* Submit Button */}

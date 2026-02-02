@@ -141,9 +141,9 @@ export default function SobolHome() {
               <Link to="/login" className="px-4 md:px-6 py-1.5 md:py-2 border border-[#143c3c] text-[#143c3c] text-xs md:text-sm font-medium rounded hover:bg-[#143c3c] hover:text-white transition-colors">
                 دخول
               </Link>
-              <a href="#" className="hidden md:block px-6 py-2 text-gray-600 text-sm font-medium hover:text-[#143c3c]">
+              <Link to="/register" className="hidden md:block px-6 py-2 text-gray-600 text-sm font-medium hover:text-[#143c3c]">
                 تسجيل
-              </a>
+              </Link>
             </div>
           </div>
         </div>

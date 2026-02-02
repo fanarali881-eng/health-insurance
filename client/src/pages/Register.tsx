@@ -1,13 +1,15 @@
 import { useState } from "react";
-import { Link } from "wouter";
+import { Link, useLocation } from "wouter";
 
 export default function Register() {
   const [accountType, setAccountType] = useState("individuals");
 
+  const [, setLocation] = useLocation();
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle registration logic here
-    console.log({ accountType });
+    // Navigate to step 2
+    setLocation('/register-step2');
   };
 
   return (

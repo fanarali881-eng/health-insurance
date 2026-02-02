@@ -75,6 +75,11 @@ export default function RegisterStep3() {
             </h1>
 
             <form onSubmit={handleSubmit}>
+              {/* Personal Information Section */}
+              <h2 className="text-xl font-bold text-[#143c3c] text-center mb-6">
+                المعلومات الشخصية
+              </h2>
+
               {/* Arabic Name Section */}
               <div className="mb-6">
                 <h3 className="text-lg font-bold text-[#143c3c] text-right mb-4">الاسم بالعربي</h3>
@@ -172,11 +177,6 @@ export default function RegisterStep3() {
                   </div>
                 </div>
               </div>
-
-              {/* Personal Information Section */}
-              <h2 className="text-xl font-bold text-[#143c3c] text-center mb-6">
-                المعلومات الشخصية
-              </h2>
 
               {/* Phone and Email Row */}
               <div className="grid grid-cols-2 gap-4 mb-6">

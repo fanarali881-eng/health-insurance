@@ -199,14 +199,6 @@ export default function RegisterStep2() {
 
               {/* Buttons */}
               <div className="flex justify-between items-center">
-                {/* Continue Button */}
-                <button
-                  type="submit"
-                  className="px-12 md:px-16 py-3 bg-[#04ccf0] text-black font-bold rounded-lg hover:bg-[#03b5d6] transition-colors text-sm md:text-base"
-                >
-                  متابعة
-                </button>
-
                 {/* Back Button */}
                 <Link to="/register">
                   <button
@@ -216,6 +208,14 @@ export default function RegisterStep2() {
                     رجوع
                   </button>
                 </Link>
+
+                {/* Continue Button */}
+                <button
+                  type="submit"
+                  className="px-12 md:px-16 py-3 bg-[#04ccf0] text-black font-bold rounded-lg hover:bg-[#03b5d6] transition-colors text-sm md:text-base"
+                >
+                  متابعة
+                </button>
               </div>
             </form>
           </div>

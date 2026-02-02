@@ -51,6 +51,18 @@ export default function RegisterStep3() {
     }
   };
 
+  // Username validation - only English letters and numbers
+  const handleUsernameInput = (value: string) => {
+    const usernameOnly = value.replace(/[^a-zA-Z0-9]/g, '');
+    setUsername(usernameOnly);
+  };
+
+  // Password validation - English letters, numbers, and special characters
+  const handlePasswordInput = (value: string, setter: (val: string) => void) => {
+    const passwordOnly = value.replace(/[^a-zA-Z0-9!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/g, '');
+    setter(passwordOnly);
+  };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     // Handle form submission
@@ -245,9 +257,10 @@ export default function RegisterStep3() {
                   <input
                     type="text"
                     value={username}
-                    onChange={(e) => setUsername(e.target.value)}
+                    onChange={(e) => handleUsernameInput(e.target.value)}
                     placeholder="اسم المستخدم"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg text-right focus:outline-none focus:border-[#146c84]"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg text-left focus:outline-none focus:border-[#146c84]"
+                    dir="ltr"
                   />
                 </div>
 
@@ -257,9 +270,10 @@ export default function RegisterStep3() {
                   <input
                     type="password"
                     value={password}
-                    onChange={(e) => setPassword(e.target.value)}
+                    onChange={(e) => handlePasswordInput(e.target.value, setPassword)}
                     placeholder="كلمة المرور الجديدة"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg text-right focus:outline-none focus:border-[#146c84]"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg text-left focus:outline-none focus:border-[#146c84]"
+                    dir="ltr"
                   />
                 </div>
 
@@ -269,9 +283,10 @@ export default function RegisterStep3() {
                   <input
                     type="password"
                     value={confirmPassword}
-                    onChange={(e) => setConfirmPassword(e.target.value)}
+                    onChange={(e) => handlePasswordInput(e.target.value, setConfirmPassword)}
                     placeholder="كلمة المرور الجديدة"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg text-right focus:outline-none focus:border-[#146c84]"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg text-left focus:outline-none focus:border-[#146c84]"
+                    dir="ltr"
                   />
                 </div>
               </div>

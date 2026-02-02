@@ -591,8 +591,8 @@ export default function SobolHome() {
               <a href="#" className="hover:underline">إشعار الخصوصية</a>
             </div>
             <div className="flex items-center gap-4">
-              <img src="/images/vision-2030.png" alt="رؤية 2030" className="h-10 md:h-12" />
               <p className="text-white/60 text-[10px] md:text-sm">© 2026 جميع الحقوق محفوظة البريد السعودي | سبل</p>
+              <img src="/images/vision-2030.png" alt="رؤية 2030" className="h-10 md:h-12" />
             </div>
           </div>
         </div>

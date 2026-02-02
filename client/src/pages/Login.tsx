@@ -68,8 +68,7 @@ export default function Login() {
 
               <div className="space-y-3 md:space-y-4">
                 {/* الأفراد */}
-                <label className="flex items-center justify-end gap-3 cursor-pointer">
-                  <span className="text-gray-700 text-sm md:text-base">الأفراد</span>
+                <label className="flex items-center gap-3 cursor-pointer">
                   <div className="relative">
                     <input
                       type="radio"
@@ -85,11 +84,11 @@ export default function Login() {
                       )}
                     </div>
                   </div>
+                  <span className="text-gray-700 text-sm md:text-base">الأفراد</span>
                 </label>
 
                 {/* الأعمال */}
-                <label className="flex items-center justify-end gap-3 cursor-pointer">
-                  <span className="text-gray-700 text-sm md:text-base">الاعمال</span>
+                <label className="flex items-center gap-3 cursor-pointer">
                   <div className="relative">
                     <input
                       type="radio"
@@ -105,11 +104,11 @@ export default function Login() {
                       )}
                     </div>
                   </div>
+                  <span className="text-gray-700 text-sm md:text-base">الاعمال</span>
                 </label>
 
                 {/* الخدمات الحكومية */}
-                <label className="flex items-center justify-end gap-3 cursor-pointer">
-                  <span className="text-gray-700 text-sm md:text-base">الخدمات الحكومية</span>
+                <label className="flex items-center gap-3 cursor-pointer">
                   <div className="relative">
                     <input
                       type="radio"
@@ -125,6 +124,7 @@ export default function Login() {
                       )}
                     </div>
                   </div>
+                  <span className="text-gray-700 text-sm md:text-base">الخدمات الحكومية</span>
                 </label>
               </div>
             </div>

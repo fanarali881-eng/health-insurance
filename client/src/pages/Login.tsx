@@ -42,6 +42,9 @@ export default function Login() {
         </div>
       </header>
 
+      {/* Blue line below header */}
+      <div className="h-2 bg-[#04ccf0]"></div>
+
       {/* Logo below header on right */}
       <div className="bg-gray-100 py-4">
         <div className="container mx-auto px-4 flex justify-end">

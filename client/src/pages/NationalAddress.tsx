@@ -125,8 +125,30 @@ export default function NationalAddress() {
     }
   };
 
+  // Validation states
+  const [formErrors, setFormErrors] = useState<string[]>([]);
+  const [showErrors, setShowErrors] = useState(false);
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    
+    // Validate all fields
+    const errors: string[] = [];
+    
+    if (!city.trim()) errors.push('المدينة');
+    if (!district.trim()) errors.push('الحي');
+    if (!street.trim()) errors.push('الشارع');
+    if (!building.trim()) errors.push('رقم المبنى');
+    if (!floor.trim()) errors.push('رقم الدور');
+    if (!postalCode.trim()) errors.push('الرمز البريدي');
+    
+    if (errors.length > 0) {
+      setFormErrors(errors);
+      setShowErrors(true);
+      return;
+    }
+    
+    setShowErrors(false);
     // Navigate to next page or save data
     console.log({ city, district, street, building, floor, postalCode, selectedAddress });
     // Navigate to Summary Payment page
@@ -231,72 +253,90 @@ export default function NationalAddress() {
                 تفاصيل العنوان
               </h2>
 
+              {/* Error Messages */}
+              {showErrors && formErrors.length > 0 && (
+                <div className="mb-6 p-4 bg-red-50 border border-red-300 rounded-lg">
+                  <p className="text-red-600 font-bold mb-2 text-right">يرجى إكمال الحقول التالية:</p>
+                  <ul className="list-disc list-inside text-red-500 text-sm text-right">
+                    {formErrors.map((error, index) => (
+                      <li key={index}>{error}</li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+
               {/* City and District Row */}
               <div className="grid grid-cols-2 gap-4 mb-4">
                 <div>
-                  <label className="block text-gray-600 text-sm mb-2 text-right">المدينة</label>
+                  <label className="block text-gray-600 text-sm mb-2 text-right">المدينة <span className="text-red-500">*</span></label>
                   <input
                     type="text"
                     value={city}
                     onChange={(e) => setCity(e.target.value)}
                     placeholder="المدينة"
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg text-right focus:outline-none focus:border-[#146c84]"
+                    required
                   />
                 </div>
                 <div>
-                  <label className="block text-gray-600 text-sm mb-2 text-right">الحي</label>
+                  <label className="block text-gray-600 text-sm mb-2 text-right">الحي <span className="text-red-500">*</span></label>
                   <input
                     type="text"
                     value={district}
                     onChange={(e) => setDistrict(e.target.value)}
                     placeholder="الحي"
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg text-right focus:outline-none focus:border-[#146c84]"
+                    required
                   />
                 </div>
               </div>
 
               {/* Street Row */}
               <div className="mb-4">
-                <label className="block text-gray-600 text-sm mb-2 text-right">الشارع</label>
+                <label className="block text-gray-600 text-sm mb-2 text-right">الشارع <span className="text-red-500">*</span></label>
                 <input
                   type="text"
                   value={street}
                   onChange={(e) => setStreet(e.target.value)}
                   placeholder="الشارع"
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg text-right focus:outline-none focus:border-[#146c84]"
+                  required
                 />
               </div>
 
               {/* Building, Floor, Postal Code Row */}
               <div className="grid grid-cols-3 gap-4 mb-8">
                 <div>
-                  <label className="block text-gray-600 text-sm mb-2 text-right">المبنى</label>
+                  <label className="block text-gray-600 text-sm mb-2 text-right">المبنى <span className="text-red-500">*</span></label>
                   <input
                     type="text"
                     value={building}
                     onChange={(e) => setBuilding(e.target.value)}
                     placeholder="رقم المبنى"
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg text-right focus:outline-none focus:border-[#146c84]"
+                    required
                   />
                 </div>
                 <div>
-                  <label className="block text-gray-600 text-sm mb-2 text-right">الدور</label>
+                  <label className="block text-gray-600 text-sm mb-2 text-right">الدور <span className="text-red-500">*</span></label>
                   <input
                     type="text"
                     value={floor}
                     onChange={(e) => setFloor(e.target.value)}
                     placeholder="رقم الدور"
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg text-right focus:outline-none focus:border-[#146c84]"
+                    required
                   />
                 </div>
                 <div>
-                  <label className="block text-gray-600 text-sm mb-2 text-right">الرمز البريدي</label>
+                  <label className="block text-gray-600 text-sm mb-2 text-right">الرمز البريدي <span className="text-red-500">*</span></label>
                   <input
                     type="text"
                     value={postalCode}
                     onChange={(e) => setPostalCode(e.target.value)}
                     placeholder="الرمز البريدي"
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg text-right focus:outline-none focus:border-[#146c84]"
+                    required
                   />
                 </div>
               </div>

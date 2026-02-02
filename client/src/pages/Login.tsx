@@ -30,7 +30,7 @@ export default function Login() {
 
   return (
     <div className="min-h-screen bg-gray-100" dir="rtl" style={{ fontFamily: "'Tajawal', sans-serif" }}>
-      {/* Logo above header */}
+      {/* Logo centered at top */}
       <div className="bg-gray-100 py-4">
         <div className="container mx-auto px-4 flex justify-center">
           <Link to="/">
@@ -39,18 +39,18 @@ export default function Login() {
         </div>
       </div>
 
-      {/* Header */}
-      <header className="bg-white border-b border-gray-100">
+      {/* Header with EN on left */}
+      <header className="bg-white">
         <div className="container mx-auto px-4">
-          <div className="flex items-center justify-end h-14 md:h-16">
-            {/* Language */}
+          <div className="flex items-center justify-start h-12">
+            {/* Language on left side */}
             <a href="#" className="text-gray-600 text-sm hover:text-[#143c3c]">EN</a>
           </div>
         </div>
       </header>
 
       {/* Progress Bar */}
-      <div className="h-1 bg-[#04ccf0]"></div>
+      <div className="h-1 bg-[#04ccf0]" style={{ boxShadow: '0 2px 4px rgba(4, 204, 240, 0.3)' }}></div>
 
       {/* Main Content */}
       <main className="container mx-auto px-4 py-8 md:py-12">

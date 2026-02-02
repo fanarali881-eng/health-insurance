@@ -4,10 +4,66 @@ import { Link } from "wouter";
 export default function SobolHome() {
   const [trackingNumber, setTrackingNumber] = useState("");
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  
+  const [isLoading, setIsLoading] = useState(false);
+  const [showMessage, setShowMessage] = useState(false);
+
+  // Handle tracking input - only allow English letters and numbers
+  const handleTrackingInput = (value: string) => {
+    const englishOnly = value.replace(/[^a-zA-Z0-9\s]/g, '').toUpperCase();
+    setTrackingNumber(englishOnly);
+  };
+
+  // Handle track button click
+  const handleTrack = () => {
+    if (!trackingNumber.trim()) return;
+    
+    setIsLoading(true);
+    setTimeout(() => {
+      setIsLoading(false);
+      setShowMessage(true);
+    }, 3000);
+  };
+
+  // Handle continue button in message
+  const handleContinue = () => {
+    setShowMessage(false);
+    window.location.href = '/register';
+  };
 
   return (
     <div className="min-h-screen bg-white" dir="rtl" style={{ fontFamily: "'Tajawal', sans-serif" }}>
+      {/* Loading Overlay */}
+      {isLoading && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-white bg-opacity-80">
+          <div className="flex flex-col items-center">
+            <div className="w-12 h-12 border-4 border-[#04ccf0] border-t-transparent rounded-full animate-spin"></div>
+            <p className="mt-4 text-gray-600">جاري التحميل...</p>
+          </div>
+        </div>
+      )}
+
+      {/* Update Message Modal */}
+      {showMessage && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-white bg-opacity-80">
+          <div className="bg-white rounded-xl shadow-2xl p-8 max-w-md mx-4 text-center">
+            <div className="w-16 h-16 mx-auto mb-4 rounded-full border-2 border-[#146c84] flex items-center justify-center">
+              <svg className="w-8 h-8 text-[#146c84]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            </div>
+            <p className="text-lg text-[#143c3c] font-bold mb-6">
+              عليك تحديث بيانات عنوانك الوطني للإستفادة من الخدمات
+            </p>
+            <button
+              onClick={handleContinue}
+              className="px-12 py-3 bg-[#04ccf0] text-black font-bold rounded-lg hover:bg-[#03b5d6] transition-colors"
+            >
+              متابعة
+            </button>
+          </div>
+        </div>
+      )}
+
       {/* Top Header Bar */}
       <div className="bg-[#143c3c] text-white">
         <div className="container mx-auto px-4">
@@ -185,10 +241,14 @@ export default function SobolHome() {
                     type="text"
                     placeholder="e.g XHSNF74652HBD"
                     value={trackingNumber}
-                    onChange={(e) => setTrackingNumber(e.target.value)}
-                    className="flex-1 px-3 md:px-4 py-2.5 md:py-3 border border-[#f4f4f4] rounded-lg text-right text-sm focus:outline-none focus:border-[#143c3c]"
+                    onChange={(e) => handleTrackingInput(e.target.value)}
+                    className="flex-1 px-3 md:px-4 py-2.5 md:py-3 border border-[#f4f4f4] rounded-lg text-left text-sm focus:outline-none focus:border-[#143c3c]"
+                    dir="ltr"
                   />
-                  <button className="px-6 md:px-8 py-2.5 md:py-3 bg-[#04ccf0] text-white font-medium rounded-lg hover:bg-[#03b5d6] transition-colors text-sm md:text-base">
+                  <button 
+                    onClick={handleTrack}
+                    className="px-6 md:px-8 py-2.5 md:py-3 bg-[#04ccf0] text-white font-medium rounded-lg hover:bg-[#03b5d6] transition-colors text-sm md:text-base"
+                  >
                     تتبع
                   </button>
                 </div>

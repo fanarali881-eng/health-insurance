@@ -30,17 +30,19 @@ export default function Login() {
 
   return (
     <div className="min-h-screen bg-gray-100" dir="rtl" style={{ fontFamily: "'Tajawal', sans-serif" }}>
+      {/* Logo above header */}
+      <div className="bg-gray-100 py-4">
+        <div className="container mx-auto px-4 flex justify-center">
+          <Link to="/">
+            <img src="/images/spl-logo.png" alt="سبل" className="h-10 md:h-12 w-auto" />
+          </Link>
+        </div>
+      </div>
+
       {/* Header */}
       <header className="bg-white border-b border-gray-100">
         <div className="container mx-auto px-4">
-          <div className="flex items-center justify-between h-14 md:h-16">
-            {/* Logo */}
-            <div className="flex items-center">
-              <Link to="/">
-                <img src="/images/spl-logo.png" alt="سبل" className="h-10 md:h-12 w-auto" />
-              </Link>
-            </div>
-
+          <div className="flex items-center justify-end h-14 md:h-16">
             {/* Language */}
             <a href="#" className="text-gray-600 text-sm hover:text-[#143c3c]">EN</a>
           </div>
@@ -238,12 +240,7 @@ export default function Login() {
         </div>
       </footer>
 
-      {/* Logo below footer */}
-      <div className="bg-gray-100 py-4">
-        <div className="container mx-auto px-4 flex justify-center">
-          <img src="/images/spl-logo.png" alt="سبل" className="h-10 md:h-12 w-auto" />
-        </div>
-      </div>
+
     </div>
   );
 }

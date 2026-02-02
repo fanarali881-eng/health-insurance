@@ -230,6 +230,13 @@ export default function Login() {
           </div>
         </div>
       </main>
+
+      {/* Footer */}
+      <footer className="bg-[#143c3c] py-3">
+        <div className="container mx-auto px-4">
+          <a href="#" className="text-white text-sm hover:text-gray-300">English</a>
+        </div>
+      </footer>
     </div>
   );
 }

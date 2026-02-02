@@ -196,12 +196,14 @@ export default function Login() {
               </div>
 
               {/* Submit Button */}
-              <button
-                type="submit"
-                className="w-full py-3 md:py-4 bg-[#04ccf0] text-white font-bold rounded-lg hover:bg-[#03b5d6] transition-colors text-sm md:text-base"
-              >
-                تسجيل الدخول
-              </button>
+              <div className="flex justify-end">
+                <button
+                  type="submit"
+                  className="px-12 md:px-16 py-3 bg-[#04ccf0] text-white font-bold rounded-lg hover:bg-[#03b5d6] transition-colors text-sm md:text-base"
+                >
+                  تسجيل الدخول
+                </button>
+              </div>
 
               {/* Forgot Links */}
               <div className="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-8 mt-6">

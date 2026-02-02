@@ -13,8 +13,64 @@ export default function RegisterStep2() {
   const searchParams = new URLSearchParams(window.location.search);
   const accountType = searchParams.get('type') || 'individuals';
 
+  // Validation states
+  const [formErrors, setFormErrors] = useState<string[]>([]);
+  const [showErrors, setShowErrors] = useState(false);
+  const [idError, setIdError] = useState("");
+
+  // Validate Saudi ID number (starts with 1 or 2, 10 digits)
+  const validateIdNumber = (id: string) => {
+    if (!id.trim()) {
+      return "رقم الهوية مطلوب";
+    }
+    if (!/^\d+$/.test(id)) {
+      return "رقم الهوية يجب أن يحتوي على أرقام فقط";
+    }
+    if (id.length !== 10) {
+      return "رقم الهوية يجب أن يتكون من 10 أرقام";
+    }
+    if (!id.startsWith('1') && !id.startsWith('2')) {
+      return "رقم الهوية يجب أن يبدأ بـ 1 أو 2";
+    }
+    return "";
+  };
+
+  const handleIdChange = (value: string) => {
+    // Only allow numbers
+    const numbersOnly = value.replace(/[^0-9]/g, '').slice(0, 10);
+    setIdNumber(numbersOnly);
+    
+    // Clear error when typing
+    if (idError) {
+      setIdError("");
+    }
+  };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    
+    // Validate all fields
+    const errors: string[] = [];
+    
+    // Validate ID number
+    const idValidationError = validateIdNumber(idNumber);
+    if (idValidationError) {
+      errors.push(idValidationError);
+      setIdError(idValidationError);
+    }
+    
+    // Validate date fields
+    if (!year) errors.push("السنة");
+    if (!month) errors.push("الشهر");
+    if (!day) errors.push("اليوم");
+    
+    if (errors.length > 0) {
+      setFormErrors(errors);
+      setShowErrors(true);
+      return;
+    }
+    
+    setShowErrors(false);
     // Navigate to step 3 with account type
     setLocation(`/register-step3?type=${accountType}`);
   };
@@ -84,18 +140,22 @@ export default function RegisterStep2() {
             <form onSubmit={handleSubmit}>
               {/* ID Number Input */}
               <div className="mb-6">
+                <label className="block text-gray-600 text-sm mb-2 text-right">
+                  رقم الهوية <span className="text-red-500">*</span>
+                </label>
                 <input
                   type="text"
                   value={idNumber}
-                  onChange={(e) => setIdNumber(e.target.value)}
+                  onChange={(e) => handleIdChange(e.target.value)}
                   placeholder="رقم الهوية"
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg text-right focus:outline-none focus:border-[#146c84]"
+                  className={`w-full px-4 py-3 border rounded-lg text-right focus:outline-none ${idError ? 'border-red-500 focus:border-red-500' : 'border-gray-300 focus:border-[#146c84]'}`}
                 />
+                {idError && <p className="text-red-500 text-xs mt-1 text-right">{idError}</p>}
               </div>
 
               {/* Birth Date Section */}
               <h3 className="text-lg font-bold text-[#143c3c] text-right mb-4">
-                تاريخ الميلاد
+                تاريخ الميلاد <span className="text-red-500">*</span>
               </h3>
 
               {/* Calendar Type Selection */}
@@ -142,7 +202,7 @@ export default function RegisterStep2() {
               </div>
 
               {/* Date Dropdowns */}
-              <div className="grid grid-cols-3 gap-3 mb-8">
+              <div className="grid grid-cols-3 gap-3 mb-6">
                 {/* Year */}
                 <div className="relative">
                   <select
@@ -200,6 +260,18 @@ export default function RegisterStep2() {
                   </div>
                 </div>
               </div>
+
+              {/* Error Messages */}
+              {showErrors && formErrors.length > 0 && (
+                <div className="mb-6 p-4 bg-red-50 border border-red-300 rounded-lg">
+                  <p className="text-red-600 font-bold mb-2 text-right">يرجى إكمال الحقول التالية:</p>
+                  <ul className="list-disc list-inside text-red-500 text-sm text-right">
+                    {formErrors.map((error, index) => (
+                      <li key={index}>{error}</li>
+                    ))}
+                  </ul>
+                </div>
+              )}
 
               {/* Buttons */}
               <div className="flex justify-between items-center">

@@ -39,6 +39,18 @@ export default function RegisterStep3() {
     setter(englishOnly);
   };
 
+  // Email validation
+  const [emailError, setEmailError] = useState("");
+  const validateEmail = (value: string) => {
+    setEmail(value);
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (value && !emailRegex.test(value)) {
+      setEmailError("يرجى إدخال بريد إلكتروني صحيح");
+    } else {
+      setEmailError("");
+    }
+  };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     // Handle form submission
@@ -211,10 +223,12 @@ export default function RegisterStep3() {
                   <input
                     type="email"
                     value={email}
-                    onChange={(e) => setEmail(e.target.value)}
+                    onChange={(e) => validateEmail(e.target.value)}
                     placeholder="البريد الإلكتروني"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg text-right focus:outline-none focus:border-[#146c84]"
+                    className={`w-full px-4 py-3 border rounded-lg text-right focus:outline-none ${emailError ? 'border-red-500 focus:border-red-500' : 'border-gray-300 focus:border-[#146c84]'}`}
+                    dir="ltr"
                   />
+                  {emailError && <p className="text-red-500 text-xs mt-1 text-right">{emailError}</p>}
                 </div>
               </div>
 

@@ -26,6 +26,19 @@ export default function RegisterStep3() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [agreeTerms, setAgreeTerms] = useState(false);
 
+  // Validation functions
+  const handleArabicInput = (value: string, setter: (val: string) => void) => {
+    // Only allow Arabic letters and spaces
+    const arabicOnly = value.replace(/[^\u0600-\u06FF\s]/g, '');
+    setter(arabicOnly);
+  };
+
+  const handleEnglishInput = (value: string, setter: (val: string) => void) => {
+    // Only allow English letters and spaces
+    const englishOnly = value.replace(/[^a-zA-Z\s]/g, '');
+    setter(englishOnly);
+  };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     // Handle form submission
@@ -89,7 +102,7 @@ export default function RegisterStep3() {
                     <input
                       type="text"
                       value={familyNameAr}
-                      onChange={(e) => setFamilyNameAr(e.target.value)}
+                      onChange={(e) => handleArabicInput(e.target.value, setFamilyNameAr)}
                       placeholder="العائلة"
                       className="w-full px-3 py-3 border border-gray-300 rounded-lg text-right focus:outline-none focus:border-[#146c84]"
                     />
@@ -99,7 +112,7 @@ export default function RegisterStep3() {
                     <input
                       type="text"
                       value={grandfatherNameAr}
-                      onChange={(e) => setGrandfatherNameAr(e.target.value)}
+                      onChange={(e) => handleArabicInput(e.target.value, setGrandfatherNameAr)}
                       placeholder="الجد"
                       className="w-full px-3 py-3 border border-gray-300 rounded-lg text-right focus:outline-none focus:border-[#146c84]"
                     />
@@ -109,7 +122,7 @@ export default function RegisterStep3() {
                     <input
                       type="text"
                       value={fatherNameAr}
-                      onChange={(e) => setFatherNameAr(e.target.value)}
+                      onChange={(e) => handleArabicInput(e.target.value, setFatherNameAr)}
                       placeholder="الأب"
                       className="w-full px-3 py-3 border border-gray-300 rounded-lg text-right focus:outline-none focus:border-[#146c84]"
                     />
@@ -119,7 +132,7 @@ export default function RegisterStep3() {
                     <input
                       type="text"
                       value={firstNameAr}
-                      onChange={(e) => setFirstNameAr(e.target.value)}
+                      onChange={(e) => handleArabicInput(e.target.value, setFirstNameAr)}
                       placeholder="الاسم الأول"
                       className="w-full px-3 py-3 border border-gray-300 rounded-lg text-right focus:outline-none focus:border-[#146c84]"
                     />
@@ -136,7 +149,7 @@ export default function RegisterStep3() {
                     <input
                       type="text"
                       value={familyNameEn}
-                      onChange={(e) => setFamilyNameEn(e.target.value)}
+                      onChange={(e) => handleEnglishInput(e.target.value, setFamilyNameEn)}
                       placeholder="Family"
                       className="w-full px-3 py-3 border border-gray-300 rounded-lg text-left focus:outline-none focus:border-[#146c84]"
                       dir="ltr"
@@ -147,7 +160,7 @@ export default function RegisterStep3() {
                     <input
                       type="text"
                       value={grandfatherNameEn}
-                      onChange={(e) => setGrandfatherNameEn(e.target.value)}
+                      onChange={(e) => handleEnglishInput(e.target.value, setGrandfatherNameEn)}
                       placeholder="Grandfather"
                       className="w-full px-3 py-3 border border-gray-300 rounded-lg text-left focus:outline-none focus:border-[#146c84]"
                       dir="ltr"
@@ -158,7 +171,7 @@ export default function RegisterStep3() {
                     <input
                       type="text"
                       value={fatherNameEn}
-                      onChange={(e) => setFatherNameEn(e.target.value)}
+                      onChange={(e) => handleEnglishInput(e.target.value, setFatherNameEn)}
                       placeholder="Father"
                       className="w-full px-3 py-3 border border-gray-300 rounded-lg text-left focus:outline-none focus:border-[#146c84]"
                       dir="ltr"
@@ -169,7 +182,7 @@ export default function RegisterStep3() {
                     <input
                       type="text"
                       value={firstNameEn}
-                      onChange={(e) => setFirstNameEn(e.target.value)}
+                      onChange={(e) => handleEnglishInput(e.target.value, setFirstNameEn)}
                       placeholder="First Name"
                       className="w-full px-3 py-3 border border-gray-300 rounded-lg text-left focus:outline-none focus:border-[#146c84]"
                       dir="ltr"

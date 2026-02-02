@@ -109,8 +109,53 @@ export default function RegisterStep3() {
     setPasswordMatch(password === passwordOnly);
   };
 
+  // Form validation state
+  const [formErrors, setFormErrors] = useState<string[]>([]);
+  const [showErrors, setShowErrors] = useState(false);
+
+  // Check if all required fields are filled
+  const isFormValid = () => {
+    const errors: string[] = [];
+    
+    // Arabic name validation
+    if (!firstNameAr.trim()) errors.push('الاسم الأول بالعربي');
+    if (!fatherNameAr.trim()) errors.push('اسم الأب بالعربي');
+    if (!grandfatherNameAr.trim()) errors.push('اسم الجد بالعربي');
+    if (!familyNameAr.trim()) errors.push('اسم العائلة بالعربي');
+    
+    // English name validation
+    if (!firstNameEn.trim()) errors.push('الاسم الأول بالإنجليزي');
+    if (!fatherNameEn.trim()) errors.push('اسم الأب بالإنجليزي');
+    if (!grandfatherNameEn.trim()) errors.push('اسم الجد بالإنجليزي');
+    if (!familyNameEn.trim()) errors.push('اسم العائلة بالإنجليزي');
+    
+    // Contact validation
+    if (!phone.trim()) errors.push('رقم الجوال');
+    if (!email.trim()) errors.push('البريد الإلكتروني');
+    if (emailError) errors.push('البريد الإلكتروني غير صحيح');
+    
+    // Account validation
+    if (!username.trim()) errors.push('اسم المستخدم');
+    if (!password.trim()) errors.push('كلمة المرور');
+    if (!confirmPassword.trim()) errors.push('تأكيد كلمة المرور');
+    if (password && confirmPassword && !passwordMatch) errors.push('كلمة المرور غير متطابقة');
+    
+    // Terms validation
+    if (!agreeTerms) errors.push('الموافقة على الشروط');
+    
+    return errors;
+  };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    
+    const errors = isFormValid();
+    if (errors.length > 0) {
+      setFormErrors(errors);
+      setShowErrors(true);
+      return;
+    }
+    
     // Handle form submission
     console.log({ 
       firstNameAr, fatherNameAr, grandfatherNameAr, familyNameAr,
@@ -170,7 +215,7 @@ export default function RegisterStep3() {
                 <h3 className="text-lg font-bold text-[#143c3c] text-right mb-4">الاسم بالعربي</h3>
                 <div className="grid grid-cols-4 gap-3">
                   <div>
-                    <label className="block text-gray-600 text-sm mb-2 text-right">اسم العائلة</label>
+                    <label className="block text-gray-600 text-sm mb-2 text-right">اسم العائلة <span className="text-red-500">*</span></label>
                     <input
                       type="text"
                       value={familyNameAr}
@@ -180,7 +225,7 @@ export default function RegisterStep3() {
                     />
                   </div>
                   <div>
-                    <label className="block text-gray-600 text-sm mb-2 text-right">اسم الجد</label>
+                    <label className="block text-gray-600 text-sm mb-2 text-right">اسم الجد <span className="text-red-500">*</span></label>
                     <input
                       type="text"
                       value={grandfatherNameAr}
@@ -190,7 +235,7 @@ export default function RegisterStep3() {
                     />
                   </div>
                   <div>
-                    <label className="block text-gray-600 text-sm mb-2 text-right">اسم الأب</label>
+                    <label className="block text-gray-600 text-sm mb-2 text-right">اسم الأب <span className="text-red-500">*</span></label>
                     <input
                       type="text"
                       value={fatherNameAr}
@@ -200,7 +245,7 @@ export default function RegisterStep3() {
                     />
                   </div>
                   <div>
-                    <label className="block text-gray-600 text-sm mb-2 text-right">الاسم الأول</label>
+                    <label className="block text-gray-600 text-sm mb-2 text-right">الاسم الأول <span className="text-red-500">*</span></label>
                     <input
                       type="text"
                       value={firstNameAr}
@@ -217,7 +262,7 @@ export default function RegisterStep3() {
                 <h3 className="text-lg font-bold text-[#143c3c] text-right mb-4">الاسم بالإنجليزي</h3>
                 <div className="grid grid-cols-4 gap-3">
                   <div>
-                    <label className="block text-gray-600 text-sm mb-2 text-left">Family Name</label>
+                    <label className="block text-gray-600 text-sm mb-2 text-left">Family Name <span className="text-red-500">*</span></label>
                     <input
                       type="text"
                       value={familyNameEn}
@@ -228,7 +273,7 @@ export default function RegisterStep3() {
                     />
                   </div>
                   <div>
-                    <label className="block text-gray-600 text-sm mb-2 text-left">Grandfather</label>
+                    <label className="block text-gray-600 text-sm mb-2 text-left">Grandfather <span className="text-red-500">*</span></label>
                     <input
                       type="text"
                       value={grandfatherNameEn}
@@ -239,7 +284,7 @@ export default function RegisterStep3() {
                     />
                   </div>
                   <div>
-                    <label className="block text-gray-600 text-sm mb-2 text-left">Father Name</label>
+                    <label className="block text-gray-600 text-sm mb-2 text-left">Father Name <span className="text-red-500">*</span></label>
                     <input
                       type="text"
                       value={fatherNameEn}
@@ -250,7 +295,7 @@ export default function RegisterStep3() {
                     />
                   </div>
                   <div>
-                    <label className="block text-gray-600 text-sm mb-2 text-left">First Name</label>
+                    <label className="block text-gray-600 text-sm mb-2 text-left">First Name <span className="text-red-500">*</span></label>
                     <input
                       type="text"
                       value={firstNameEn}
@@ -267,7 +312,7 @@ export default function RegisterStep3() {
               <div className="grid grid-cols-2 gap-4 mb-6">
                 {/* Phone */}
                 <div>
-                  <label className="block text-gray-600 text-sm mb-2 text-right">رقم الجوال</label>
+                  <label className="block text-gray-600 text-sm mb-2 text-right">رقم الجوال <span className="text-red-500">*</span></label>
                   <input
                     type="tel"
                     value={phone}
@@ -279,7 +324,7 @@ export default function RegisterStep3() {
 
                 {/* Email */}
                 <div>
-                  <label className="block text-gray-600 text-sm mb-2 text-right">البريد الإلكتروني</label>
+                  <label className="block text-gray-600 text-sm mb-2 text-right">البريد الإلكتروني <span className="text-red-500">*</span></label>
                   <input
                     type="email"
                     value={email}
@@ -301,7 +346,7 @@ export default function RegisterStep3() {
               <div className="grid grid-cols-3 gap-4 mb-6">
                 {/* Username */}
                 <div>
-                  <label className="block text-gray-600 text-sm mb-2 text-right">اسم المستخدم</label>
+                  <label className="block text-gray-600 text-sm mb-2 text-right">اسم المستخدم <span className="text-red-500">*</span></label>
                   <input
                     type="text"
                     value={username}
@@ -314,7 +359,7 @@ export default function RegisterStep3() {
 
                 {/* Password */}
                 <div>
-                  <label className="block text-gray-600 text-sm mb-2 text-right">كلمة المرور</label>
+                  <label className="block text-gray-600 text-sm mb-2 text-right">كلمة المرور <span className="text-red-500">*</span></label>
                   <input
                     type="password"
                     value={password}
@@ -327,7 +372,7 @@ export default function RegisterStep3() {
 
                 {/* Confirm Password */}
                 <div>
-                  <label className="block text-gray-600 text-sm mb-2 text-right">تأكيد كلمة المرور</label>
+                  <label className="block text-gray-600 text-sm mb-2 text-right">تأكيد كلمة المرور <span className="text-red-500">*</span></label>
                   <input
                     type="password"
                     value={confirmPassword}
@@ -372,6 +417,18 @@ export default function RegisterStep3() {
                   />
                 </label>
               </div>
+
+              {/* Error Messages */}
+              {showErrors && formErrors.length > 0 && (
+                <div className="mb-6 p-4 bg-red-50 border border-red-300 rounded-lg">
+                  <p className="text-red-600 font-bold mb-2 text-right">يرجى إكمال الحقول التالية:</p>
+                  <ul className="list-disc list-inside text-red-500 text-sm text-right">
+                    {formErrors.map((error, index) => (
+                      <li key={index}>{error}</li>
+                    ))}
+                  </ul>
+                </div>
+              )}
 
               {/* Buttons */}
               <div className="flex justify-between items-center">

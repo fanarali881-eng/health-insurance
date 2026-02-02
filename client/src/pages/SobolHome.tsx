@@ -583,19 +583,6 @@ export default function SobolHome() {
             </div>
           </div>
 
-          {/* Badges */}
-          <div className="flex flex-wrap items-center justify-center md:justify-end gap-3 md:gap-4 py-4">
-            <div className="bg-white text-gray-800 rounded px-2 md:px-3 py-1.5 md:py-2 text-[10px] md:text-xs">
-              <div className="font-bold">Great Place</div>
-              <div className="font-bold">To Work.</div>
-              <div className="text-red-600 text-[8px] md:text-[10px]">Certified</div>
-            </div>
-            <div className="text-center">
-              <div className="text-xl md:text-2xl font-bold">2030</div>
-              <div className="text-[10px] md:text-xs">رؤية</div>
-            </div>
-          </div>
-
           {/* Bottom Bar */}
           <div className="flex flex-col md:flex-row items-center justify-between gap-3 md:gap-4 pt-6 md:pt-8 border-t border-white/20 text-xs md:text-sm">
             <div className="flex flex-wrap justify-center gap-4 md:gap-6">
@@ -603,7 +590,10 @@ export default function SobolHome() {
               <a href="#" className="hover:underline">سياسة الخصوصية</a>
               <a href="#" className="hover:underline">إشعار الخصوصية</a>
             </div>
-            <p className="text-white/60 text-center text-[10px] md:text-sm">© 2026 جميع الحقوق محفوظة البريد السعودي | سبل</p>
+            <div className="flex items-center gap-4">
+              <img src="/images/vision-2030.png" alt="رؤية 2030" className="h-10 md:h-12" />
+              <p className="text-white/60 text-[10px] md:text-sm">© 2026 جميع الحقوق محفوظة البريد السعودي | سبل</p>
+            </div>
           </div>
         </div>
       </footer>

@@ -47,9 +47,9 @@ export default function Login() {
 
       {/* Logo below header on right */}
       <div className="bg-gray-100 py-4">
-        <div className="flex justify-end px-4 md:px-8">
+        <div className="flex justify-start px-4 md:px-8">
           <Link to="/">
-            <img src="/images/spl-logo.png" alt="سبل" className="h-10 md:h-12 w-auto" />
+            <img src="/images/spl-logo.png" alt="سبل" className="h-12 md:h-14 w-auto" />
           </Link>
         </div>
       </div>

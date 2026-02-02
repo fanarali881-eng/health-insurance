@@ -45,12 +45,19 @@ export default function Login() {
       {/* Line below header */}
       <div className="h-2 bg-[#146c84]"></div>
 
-      {/* Logo below header on right - aligned with form box */}
+      {/* Logo and Register button below header */}
       <div className="bg-gray-100 py-4">
         <div className="container mx-auto px-4">
-          <div className="max-w-xl mx-auto flex justify-start">
+          <div className="max-w-xl mx-auto flex justify-between items-center">
+            {/* Logo on right */}
             <Link to="/">
               <img src="/images/spl-logo.png" alt="سبل" className="h-14 md:h-16 w-auto" />
+            </Link>
+            {/* Register button on left */}
+            <Link to="/register">
+              <button className="px-6 py-2 border-2 border-[#146c84] text-[#146c84] bg-white font-medium rounded hover:bg-gray-50 transition-colors">
+                تسجيل
+              </button>
             </Link>
           </div>
         </div>

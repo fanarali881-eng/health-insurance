@@ -109,7 +109,7 @@ export default function Register() {
                     <div className="w-5 h-5 rounded-full border-2 border-gray-400 flex items-center justify-center">
                     </div>
                   </div>
-                  <span className="text-gray-400 text-sm md:text-base line-through">الخدمات الحكومية</span>
+                  <span className="text-gray-400 text-sm md:text-base">الخدمات الحكومية</span>
                 </label>
               </div>
 

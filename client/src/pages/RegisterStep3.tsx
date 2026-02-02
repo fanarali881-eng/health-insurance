@@ -63,6 +63,47 @@ export default function RegisterStep3() {
     setter(passwordOnly);
   };
 
+  // Password strength checker
+  const [passwordStrength, setPasswordStrength] = useState({ level: 0, text: '', color: '' });
+  const [passwordMatch, setPasswordMatch] = useState(true);
+
+  const checkPasswordStrength = (pass: string) => {
+    let strength = 0;
+    if (pass.length >= 8) strength++;
+    if (/[a-z]/.test(pass)) strength++;
+    if (/[A-Z]/.test(pass)) strength++;
+    if (/[0-9]/.test(pass)) strength++;
+    if (/[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(pass)) strength++;
+
+    if (strength <= 1) {
+      setPasswordStrength({ level: 1, text: 'ضعيفة', color: 'bg-red-500' });
+    } else if (strength <= 3) {
+      setPasswordStrength({ level: 2, text: 'متوسطة', color: 'bg-yellow-500' });
+    } else {
+      setPasswordStrength({ level: 3, text: 'قوية', color: 'bg-green-500' });
+    }
+  };
+
+  const handlePasswordChange = (value: string) => {
+    const passwordOnly = value.replace(/[^a-zA-Z0-9!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/g, '');
+    setPassword(passwordOnly);
+    if (passwordOnly) {
+      checkPasswordStrength(passwordOnly);
+    } else {
+      setPasswordStrength({ level: 0, text: '', color: '' });
+    }
+    // Check match with confirm password
+    if (confirmPassword) {
+      setPasswordMatch(passwordOnly === confirmPassword);
+    }
+  };
+
+  const handleConfirmPasswordChange = (value: string) => {
+    const passwordOnly = value.replace(/[^a-zA-Z0-9!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/g, '');
+    setConfirmPassword(passwordOnly);
+    setPasswordMatch(password === passwordOnly);
+  };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     // Handle form submission
@@ -270,7 +311,7 @@ export default function RegisterStep3() {
                   <input
                     type="password"
                     value={password}
-                    onChange={(e) => handlePasswordInput(e.target.value, setPassword)}
+                    onChange={(e) => handlePasswordChange(e.target.value)}
                     placeholder="كلمة المرور الجديدة"
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg text-left focus:outline-none focus:border-[#146c84]"
                     dir="ltr"
@@ -283,13 +324,28 @@ export default function RegisterStep3() {
                   <input
                     type="password"
                     value={confirmPassword}
-                    onChange={(e) => handlePasswordInput(e.target.value, setConfirmPassword)}
+                    onChange={(e) => handleConfirmPasswordChange(e.target.value)}
                     placeholder="كلمة المرور الجديدة"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg text-left focus:outline-none focus:border-[#146c84]"
+                    className={`w-full px-4 py-3 border rounded-lg text-left focus:outline-none ${!passwordMatch && confirmPassword ? 'border-red-500 focus:border-red-500' : 'border-gray-300 focus:border-[#146c84]'}`}
                     dir="ltr"
                   />
+                  {!passwordMatch && confirmPassword && <p className="text-red-500 text-xs mt-1 text-right">كلمة المرور غير متطابقة</p>}
                 </div>
               </div>
+
+              {/* Password Strength Indicator */}
+              {password && (
+                <div className="mb-6">
+                  <div className="flex items-center gap-2 justify-end">
+                    <span className="text-sm text-gray-600">قوة كلمة المرور: <span className={`font-bold ${passwordStrength.level === 1 ? 'text-red-500' : passwordStrength.level === 2 ? 'text-yellow-500' : 'text-green-500'}`}>{passwordStrength.text}</span></span>
+                  </div>
+                  <div className="flex gap-1 mt-2 justify-end">
+                    <div className={`h-2 w-16 rounded ${passwordStrength.level >= 3 ? 'bg-green-500' : 'bg-gray-300'}`}></div>
+                    <div className={`h-2 w-16 rounded ${passwordStrength.level >= 2 ? (passwordStrength.level === 2 ? 'bg-yellow-500' : 'bg-green-500') : 'bg-gray-300'}`}></div>
+                    <div className={`h-2 w-16 rounded ${passwordStrength.level >= 1 ? (passwordStrength.level === 1 ? 'bg-red-500' : passwordStrength.level === 2 ? 'bg-yellow-500' : 'bg-green-500') : 'bg-gray-300'}`}></div>
+                  </div>
+                </div>
+              )}
 
               {/* Terms Agreement */}
               <div className="flex items-center gap-2 mb-8 justify-start">

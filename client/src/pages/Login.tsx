@@ -158,7 +158,7 @@ export default function Login() {
               </div>
 
               {/* CAPTCHA */}
-              <div className="mb-6 flex items-center gap-3">
+              <div className="mb-6 flex flex-row-reverse items-center gap-3">
                 {/* Refresh Button */}
                 <button
                   type="button"
@@ -196,7 +196,7 @@ export default function Login() {
               </div>
 
               {/* Submit Button */}
-              <div className="flex justify-start">
+              <div className="flex justify-end">
                 <button
                   type="submit"
                   className="px-12 md:px-16 py-3 bg-[#04ccf0] text-black font-bold rounded-lg hover:bg-[#03b5d6] transition-colors text-sm md:text-base"
@@ -206,7 +206,7 @@ export default function Login() {
               </div>
 
               {/* Forgot Links */}
-              <div className="flex flex-col md:flex-row items-start md:items-center justify-start gap-4 md:gap-8 mt-6">
+              <div className="flex flex-col md:flex-row items-end md:items-center justify-end gap-4 md:gap-8 mt-6">
                 <a href="#" className="flex items-center gap-2 text-black hover:text-gray-700 text-sm md:text-base">
                   نسيت اسم المستخدم
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">

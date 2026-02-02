@@ -571,9 +571,13 @@ export default function SobolHome() {
                   <img src="/images/google-play.png" alt="Google Play" className="h-8 md:h-10" />
                 </a>
               </div>
-              {/* Digital Stamp and Great Place To Work */}
+              {/* Digital Stamp and VAT */}
               <div className="flex gap-3 md:gap-4 mt-4 items-center">
-                <img src="/images/digital-stamp.png" alt="هيئة الحكومة الرقمية" className="h-16 md:h-20 brightness-0 invert" />
+                <img src="/images/digital-stamp.png" alt="هيئة الحكومة الرقمية" className="h-12 md:h-14 brightness-0 invert" />
+                <img src="/images/vat-logo.png" alt="ضريبة القيمة المضافة" className="h-12 md:h-14" />
+              </div>
+              {/* Great Place To Work */}
+              <div className="mt-4">
                 <img src="/images/great-place-to-work.png" alt="Great Place To Work" className="h-16 md:h-20" />
               </div>
             </div>

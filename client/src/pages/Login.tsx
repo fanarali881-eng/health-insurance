@@ -45,12 +45,14 @@ export default function Login() {
       {/* Line below header */}
       <div className="h-2 bg-[#146c84]"></div>
 
-      {/* Logo below header on right */}
+      {/* Logo below header on right - aligned with form box */}
       <div className="bg-gray-100 py-4">
-        <div className="flex justify-start px-4 md:px-8">
-          <Link to="/">
-            <img src="/images/spl-logo.png" alt="سبل" className="h-12 md:h-14 w-auto" />
-          </Link>
+        <div className="container mx-auto px-4">
+          <div className="max-w-xl mx-auto flex justify-start">
+            <Link to="/">
+              <img src="/images/spl-logo.png" alt="سبل" className="h-12 md:h-14 w-auto" />
+            </Link>
+          </div>
         </div>
       </div>
 

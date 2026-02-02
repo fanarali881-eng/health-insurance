@@ -6,6 +6,7 @@ export default function SobolHome() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [showMessage, setShowMessage] = useState(false);
+  const [trackingError, setTrackingError] = useState("");
 
   // Handle tracking input - only allow English letters and numbers
   const handleTrackingInput = (value: string) => {
@@ -15,6 +16,11 @@ export default function SobolHome() {
 
   // Handle track button click
   const handleTrack = () => {
+    if (!trackingNumber.trim()) {
+      setTrackingError("يرجى إدخال رقم التتبع");
+      return;
+    }
+    setTrackingError("");
     setIsLoading(true);
     setTimeout(() => {
       setIsLoading(false);
@@ -239,9 +245,13 @@ export default function SobolHome() {
                     type="text"
                     placeholder="e.g XHSNF74652HBD"
                     value={trackingNumber}
-                    onChange={(e) => handleTrackingInput(e.target.value)}
-                    className="flex-1 px-3 md:px-4 py-2.5 md:py-3 border border-[#f4f4f4] rounded-lg text-left text-sm focus:outline-none focus:border-[#143c3c]"
+                    onChange={(e) => {
+                      handleTrackingInput(e.target.value);
+                      setTrackingError("");
+                    }}
+                    className={`flex-1 px-3 md:px-4 py-2.5 md:py-3 border rounded-lg text-left text-sm focus:outline-none focus:border-[#143c3c] ${trackingError ? 'border-red-500' : 'border-[#f4f4f4]'}`}
                     dir="ltr"
+                    required
                   />
                   <button 
                     onClick={handleTrack}
@@ -250,6 +260,9 @@ export default function SobolHome() {
                     تتبع
                   </button>
                 </div>
+                {trackingError && (
+                  <p className="text-red-500 text-xs mt-2">{trackingError}</p>
+                )}
                 <p className="text-gray-400 text-[10px] md:text-xs mt-2 md:mt-3">
                   افصل بين أرقام التتبع المتعددة بمسافة لمعرفة حالة كل شحنة
                 </p>

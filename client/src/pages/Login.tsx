@@ -39,10 +39,15 @@ export default function Login() {
         </div>
       </div>
 
-      {/* Header - dark green bar with English on left */}
+      {/* Header - dark green bar with logo on right and English on left */}
       <header className="bg-[#143c3c] py-2">
         <div className="container mx-auto px-4">
-          <div className="flex items-center justify-start">
+          <div className="flex items-center justify-between">
+            {/* Logo on right */}
+            <Link to="/">
+              <img src="/images/spl-logo.png" alt="سبل" className="h-8 w-auto" />
+            </Link>
+            {/* English on left */}
             <a href="#" className="text-white text-sm hover:text-gray-300">English</a>
           </div>
         </div>

@@ -15,10 +15,11 @@ export default function SummaryPayment() {
 
   // Get service name from URL params
   const searchParams = new URLSearchParams(window.location.search);
-  const serviceName = searchParams.get('service') || 'قيد سجل تجاري لمؤسسة فردية';
+  const serviceName = searchParams.get('service') || 'توثيق العنوان الوطني';
 
   // Service prices - matching ServiceHero.tsx getServiceFee()
   const servicePrices: Record<string, number> = {
+    'توثيق العنوان الوطني': 10,
     'قيد سجل تجاري لمؤسسة فردية': 500,
     'تجديد سجل تجاري': 200,
     'حجز اسم تجاري': 100,

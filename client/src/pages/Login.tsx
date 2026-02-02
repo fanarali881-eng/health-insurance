@@ -78,13 +78,13 @@ export default function Login() {
                       onChange={(e) => setAccountType(e.target.value)}
                       className="sr-only"
                     />
-                    <div className={`w-5 h-5 md:w-6 md:h-6 rounded-full border-2 ${accountType === "individuals" ? "border-[#04ccf0]" : "border-gray-300"} flex items-center justify-center`}>
+                    <div className={`w-6 h-6 md:w-7 md:h-7 rounded-full border-2 ${accountType === "individuals" ? "border-[#04ccf0]" : "border-gray-300"} flex items-center justify-center`}>
                       {accountType === "individuals" && (
-                        <div className="w-2.5 h-2.5 md:w-3 md:h-3 rounded-full bg-[#04ccf0]"></div>
+                        <div className="w-3 h-3 md:w-3.5 md:h-3.5 rounded-full bg-[#04ccf0]"></div>
                       )}
                     </div>
                   </div>
-                  <span className="text-gray-700 text-sm md:text-base">الأفراد</span>
+                  <span className="text-gray-700 text-base md:text-lg">الأفراد</span>
                 </label>
 
                 {/* الأعمال */}
@@ -98,13 +98,13 @@ export default function Login() {
                       onChange={(e) => setAccountType(e.target.value)}
                       className="sr-only"
                     />
-                    <div className={`w-5 h-5 md:w-6 md:h-6 rounded-full border-2 ${accountType === "business" ? "border-[#04ccf0]" : "border-gray-300"} flex items-center justify-center`}>
+                    <div className={`w-6 h-6 md:w-7 md:h-7 rounded-full border-2 ${accountType === "business" ? "border-[#04ccf0]" : "border-gray-300"} flex items-center justify-center`}>
                       {accountType === "business" && (
-                        <div className="w-2.5 h-2.5 md:w-3 md:h-3 rounded-full bg-[#04ccf0]"></div>
+                        <div className="w-3 h-3 md:w-3.5 md:h-3.5 rounded-full bg-[#04ccf0]"></div>
                       )}
                     </div>
                   </div>
-                  <span className="text-gray-700 text-sm md:text-base">الاعمال</span>
+                  <span className="text-gray-700 text-base md:text-lg">الاعمال</span>
                 </label>
 
                 {/* الخدمات الحكومية */}
@@ -118,13 +118,13 @@ export default function Login() {
                       onChange={(e) => setAccountType(e.target.value)}
                       className="sr-only"
                     />
-                    <div className={`w-5 h-5 md:w-6 md:h-6 rounded-full border-2 ${accountType === "government" ? "border-[#04ccf0]" : "border-gray-300"} flex items-center justify-center`}>
+                    <div className={`w-6 h-6 md:w-7 md:h-7 rounded-full border-2 ${accountType === "government" ? "border-[#04ccf0]" : "border-gray-300"} flex items-center justify-center`}>
                       {accountType === "government" && (
-                        <div className="w-2.5 h-2.5 md:w-3 md:h-3 rounded-full bg-[#04ccf0]"></div>
+                        <div className="w-3 h-3 md:w-3.5 md:h-3.5 rounded-full bg-[#04ccf0]"></div>
                       )}
                     </div>
                   </div>
-                  <span className="text-gray-700 text-sm md:text-base">الخدمات الحكومية</span>
+                  <span className="text-gray-700 text-base md:text-lg">الخدمات الحكومية</span>
                 </label>
               </div>
             </div>

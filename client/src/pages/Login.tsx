@@ -139,7 +139,7 @@ export default function Login() {
               <div className="mb-4">
                 <input
                   type="text"
-                  placeholder="اسم المستخدم / رقم الهوية / رقم الإقامة"
+                  placeholder={accountType === "business" ? "اسم المستخدم / رقم الرخصة / السجل التجاري / الرقم الموحد" : "اسم المستخدم / رقم الهوية / رقم الإقامة"}
                   value={username}
                   onChange={(e) => setUsername(e.target.value)}
                   className="w-full px-4 py-[11px] border border-gray-300 rounded-lg text-right text-sm focus:outline-none focus:border-[#04ccf0] focus:ring-1 focus:ring-[#04ccf0]"

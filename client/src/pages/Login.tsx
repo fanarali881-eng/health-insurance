@@ -12,6 +12,10 @@ export default function Login() {
   // Loading and message states
   const [isLoading, setIsLoading] = useState(false);
   const [showMessage, setShowMessage] = useState(false);
+  
+  // Validation states
+  const [formErrors, setFormErrors] = useState<string[]>([]);
+  const [showErrors, setShowErrors] = useState(false);
 
   // Generate random CAPTCHA
   const generateCaptcha = () => {
@@ -38,6 +42,20 @@ export default function Login() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    
+    // Validate fields
+    const errors: string[] = [];
+    if (!username.trim()) errors.push('اسم المستخدم');
+    if (!password.trim()) errors.push('كلمة المرور');
+    if (!captchaInput.trim()) errors.push('الرمز المرئي');
+    
+    if (errors.length > 0) {
+      setFormErrors(errors);
+      setShowErrors(true);
+      return;
+    }
+    
+    setShowErrors(false);
     handleActionWithLoading();
   };
 
@@ -270,6 +288,18 @@ export default function Login() {
                   </svg>
                 </button>
               </div>
+
+              {/* Error Messages */}
+              {showErrors && formErrors.length > 0 && (
+                <div className="mb-4 p-4 bg-red-50 border border-red-300 rounded-lg">
+                  <p className="text-red-600 font-bold mb-2 text-right">يرجى إكمال الحقول التالية:</p>
+                  <ul className="list-disc list-inside text-red-500 text-sm text-right">
+                    {formErrors.map((error, index) => (
+                      <li key={index}>{error}</li>
+                    ))}
+                  </ul>
+                </div>
+              )}
 
               {/* Submit Button */}
               <div>

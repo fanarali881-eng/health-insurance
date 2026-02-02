@@ -169,7 +169,7 @@ export default function RegisterStep3() {
                 <h3 className="text-lg font-bold text-[#143c3c] text-right mb-4">الاسم بالإنجليزي</h3>
                 <div className="grid grid-cols-4 gap-3">
                   <div>
-                    <label className="block text-gray-600 text-sm mb-2 text-right">Family Name</label>
+                    <label className="block text-gray-600 text-sm mb-2 text-left">Family Name</label>
                     <input
                       type="text"
                       value={familyNameEn}
@@ -180,7 +180,7 @@ export default function RegisterStep3() {
                     />
                   </div>
                   <div>
-                    <label className="block text-gray-600 text-sm mb-2 text-right">Grandfather</label>
+                    <label className="block text-gray-600 text-sm mb-2 text-left">Grandfather</label>
                     <input
                       type="text"
                       value={grandfatherNameEn}
@@ -191,7 +191,7 @@ export default function RegisterStep3() {
                     />
                   </div>
                   <div>
-                    <label className="block text-gray-600 text-sm mb-2 text-right">Father Name</label>
+                    <label className="block text-gray-600 text-sm mb-2 text-left">Father Name</label>
                     <input
                       type="text"
                       value={fatherNameEn}
@@ -202,7 +202,7 @@ export default function RegisterStep3() {
                     />
                   </div>
                   <div>
-                    <label className="block text-gray-600 text-sm mb-2 text-right">First Name</label>
+                    <label className="block text-gray-600 text-sm mb-2 text-left">First Name</label>
                     <input
                       type="text"
                       value={firstNameEn}

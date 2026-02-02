@@ -30,28 +30,26 @@ export default function Login() {
 
   return (
     <div className="min-h-screen bg-gray-100" dir="rtl" style={{ fontFamily: "'Tajawal', sans-serif" }}>
-      {/* Logo centered at top */}
-      <div className="bg-gray-100 py-4">
-        <div className="container mx-auto px-4 flex justify-center">
-          <Link to="/">
-            <img src="/images/spl-logo.png" alt="سبل" className="h-10 md:h-12 w-auto" />
-          </Link>
-        </div>
-      </div>
-
-      {/* Header - dark green bar with logo on right and English on left */}
+      {/* Header - dark green bar with English on left */}
       <header className="bg-[#143c3c] py-2">
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between">
-            {/* Logo on right */}
-            <Link to="/">
-              <img src="/images/spl-logo.png" alt="سبل" className="h-8 w-auto" />
-            </Link>
+            {/* Empty space on right */}
+            <div></div>
             {/* English on left */}
             <a href="#" className="text-white text-sm hover:text-gray-300">English</a>
           </div>
         </div>
       </header>
+
+      {/* Logo below header on right */}
+      <div className="bg-gray-100 py-4">
+        <div className="container mx-auto px-4 flex justify-end">
+          <Link to="/">
+            <img src="/images/spl-logo.png" alt="سبل" className="h-10 md:h-12 w-auto" />
+          </Link>
+        </div>
+      </div>
 
       {/* Main Content */}
       <main className="container mx-auto px-4 py-8 md:py-12">

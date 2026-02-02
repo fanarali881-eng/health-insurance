@@ -142,7 +142,7 @@ export default function Login() {
                   placeholder="اسم المستخدم / رقم الهوية / رقم الإقامة"
                   value={username}
                   onChange={(e) => setUsername(e.target.value)}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg text-right text-sm focus:outline-none focus:border-[#04ccf0] focus:ring-1 focus:ring-[#04ccf0]"
+                  className="w-full px-4 py-2.5 border border-gray-300 rounded-lg text-right text-sm focus:outline-none focus:border-[#04ccf0] focus:ring-1 focus:ring-[#04ccf0]"
                 />
               </div>
 
@@ -153,7 +153,7 @@ export default function Login() {
                   placeholder="كلمة المرور"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg text-right text-sm focus:outline-none focus:border-[#04ccf0] focus:ring-1 focus:ring-[#04ccf0]"
+                  className="w-full px-4 py-2.5 border border-gray-300 rounded-lg text-right text-sm focus:outline-none focus:border-[#04ccf0] focus:ring-1 focus:ring-[#04ccf0]"
                 />
               </div>
 
@@ -165,11 +165,11 @@ export default function Login() {
                   placeholder="الرمز المرئي"
                   value={captchaInput}
                   onChange={(e) => setCaptchaInput(e.target.value)}
-                  className="flex-1 px-4 py-2 border border-gray-300 rounded-lg text-right text-sm focus:outline-none focus:border-[#04ccf0] focus:ring-1 focus:ring-[#04ccf0]"
+                  className="flex-1 px-4 py-2.5 border border-gray-300 rounded-lg text-right text-sm focus:outline-none focus:border-[#04ccf0] focus:ring-1 focus:ring-[#04ccf0]"
                 />
 
                 {/* CAPTCHA Display - Left side in RTL */}
-                <div className="bg-gray-100 border border-gray-300 rounded-lg px-4 py-2 min-w-[100px] text-center">
+                <div className="bg-gray-100 border border-gray-300 rounded-lg px-4 py-2.5 min-w-[100px] text-center">
                   <span 
                     className="text-xl md:text-2xl font-bold text-gray-700 select-none"
                     style={{ 
@@ -187,7 +187,7 @@ export default function Login() {
                 <button
                   type="button"
                   onClick={generateCaptcha}
-                  className="bg-gray-100 border border-gray-300 rounded-lg p-2 hover:bg-gray-200 transition-colors"
+                  className="bg-gray-100 border border-gray-300 rounded-lg p-2.5 hover:bg-gray-200 transition-colors"
                 >
                   <svg className="w-5 h-5 md:w-6 md:h-6 text-[#04ccf0]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />

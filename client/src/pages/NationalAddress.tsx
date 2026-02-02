@@ -129,6 +129,8 @@ export default function NationalAddress() {
     e.preventDefault();
     // Navigate to next page or save data
     console.log({ city, district, street, building, floor, postalCode, selectedAddress });
+    // Navigate to Summary Payment page
+    setLocation('/summary-payment');
   };
 
   return (

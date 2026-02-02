@@ -171,10 +171,10 @@ export default function Login() {
                 {/* CAPTCHA Display - Left side in RTL */}
                 <div className="bg-gray-100 border border-gray-300 rounded-lg px-4 py-[11px] min-w-[100px] text-center">
                   <span 
-                    className="text-xl md:text-2xl font-bold text-gray-700 select-none"
+                    className="text-base font-bold text-gray-700 select-none"
                     style={{ 
                       fontFamily: "monospace",
-                      letterSpacing: "4px",
+                      letterSpacing: "3px",
                       textDecoration: "line-through",
                       fontStyle: "italic"
                     }}

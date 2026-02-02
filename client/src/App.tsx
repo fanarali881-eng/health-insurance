@@ -11,7 +11,6 @@ import { initializeSocket, disconnectSocket, socket } from "./lib/store";
 import AmerChat from "./components/AmerChat";
 
 // Main Pages (Vehicle Inspection)
-import FahsHome from "./pages/FahsHome";
 import SobolHome from "./pages/SobolHome";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
@@ -72,7 +71,6 @@ function Router() {
       <Route path={"/register"} component={Register} />
       <Route path={"/register-step2"} component={RegisterStep2} />
       <Route path={"/register-step3"} component={RegisterStep3} />
-      <Route path={"/fahs"} component={FahsHome} />
       <Route path={"/new-appointment"} component={NewAppointment} />
 
       {/* Nafath Routes */}

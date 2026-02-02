@@ -12,25 +12,31 @@ export default function Register() {
 
   return (
     <div className="min-h-screen bg-gray-100" dir="rtl" style={{ fontFamily: "'Tajawal', sans-serif" }}>
-      {/* Header */}
-      <header className="bg-white border-b border-gray-100">
+      {/* Header - dark green bar with English on left */}
+      <header className="bg-[#143c3c] py-2">
         <div className="container mx-auto px-4">
-          <div className="flex items-center justify-between h-14 md:h-16">
-            {/* Logo */}
-            <div className="flex items-center">
-              <Link to="/">
-                <img src="/images/spl-logo.png" alt="سبل" className="h-10 md:h-12 w-auto" />
-              </Link>
-            </div>
-
-            {/* Language */}
-            <a href="#" className="text-gray-600 text-sm hover:text-[#143c3c]">EN</a>
+          <div className="flex items-center justify-between">
+            {/* Empty space on right */}
+            <div></div>
+            {/* English on left */}
+            <a href="#" className="text-white text-sm hover:text-gray-300">English</a>
           </div>
         </div>
       </header>
 
-      {/* Progress Bar */}
-      <div className="h-1 bg-[#04ccf0]"></div>
+      {/* Line below header */}
+      <div className="h-2 bg-[#146c84]"></div>
+
+      {/* Logo below header on right - aligned with form box */}
+      <div className="bg-gray-100 py-4">
+        <div className="container mx-auto px-4">
+          <div className="max-w-xl mx-auto flex justify-start">
+            <Link to="/">
+              <img src="/images/spl-logo.png" alt="سبل" className="h-14 md:h-16 w-auto" />
+            </Link>
+          </div>
+        </div>
+      </div>
 
       {/* Main Content */}
       <main className="container mx-auto px-4 py-8 md:py-12">
@@ -129,6 +135,27 @@ export default function Register() {
           </div>
         </div>
       </main>
+
+      {/* Footer */}
+      <footer className="bg-[#143c3c] py-5">
+        <div className="container mx-auto px-4">
+          <div className="flex flex-col md:flex-row items-center justify-between text-white text-sm">
+            {/* Right side - Copyright */}
+            <div className="flex items-center gap-1 mb-2 md:mb-0">
+              <span>©</span>
+              <span>2026 جميع الحقوق محفوظة لمؤسسة البريد السعودي - سُبل</span>
+            </div>
+            
+            {/* Left side - Terms and Privacy */}
+            <div className="flex items-center gap-1">
+              <span className="text-gray-300">عند استخدامك هذا الموقع، فإنك توافق على</span>
+              <a href="#" className="text-[#04ccf0] hover:underline">شروط الخدمة</a>
+              <span className="text-gray-300">و</span>
+              <a href="#" className="text-[#04ccf0] hover:underline">سياسة الخصوصية</a>
+            </div>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 }

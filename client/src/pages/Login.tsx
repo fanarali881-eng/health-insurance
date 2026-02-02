@@ -50,7 +50,7 @@ export default function Login() {
         <div className="container mx-auto px-4">
           <div className="max-w-xl mx-auto flex justify-start">
             <Link to="/">
-              <img src="/images/spl-logo.png" alt="سبل" className="h-12 md:h-14 w-auto" />
+              <img src="/images/spl-logo.png" alt="سبل" className="h-14 md:h-16 w-auto" />
             </Link>
           </div>
         </div>

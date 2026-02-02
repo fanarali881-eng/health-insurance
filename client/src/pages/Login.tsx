@@ -43,7 +43,7 @@ export default function Login() {
       </header>
 
       {/* Line below header */}
-      <div className="h-2 bg-[#143c3c]"></div>
+      <div className="h-2 bg-[#146c84]"></div>
 
       {/* Logo below header on right */}
       <div className="bg-gray-100 py-4">

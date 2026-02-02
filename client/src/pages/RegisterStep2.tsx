@@ -18,7 +18,28 @@ export default function RegisterStep2() {
   const [showErrors, setShowErrors] = useState(false);
   const [idError, setIdError] = useState("");
 
-  // Validate Saudi ID number (starts with 1 or 2, 10 digits)
+  // Luhn algorithm to validate Saudi ID number
+  const validateSaudiIdWithLuhn = (id: string): boolean => {
+    if (id.length !== 10) return false;
+    
+    let sum = 0;
+    for (let i = 0; i < 10; i++) {
+      let digit = parseInt(id[i], 10);
+      
+      // Double every second digit (odd positions in 0-indexed)
+      if (i % 2 === 0) {
+        digit *= 2;
+        if (digit > 9) {
+          digit = Math.floor(digit / 10) + (digit % 10);
+        }
+      }
+      sum += digit;
+    }
+    
+    return sum % 10 === 0;
+  };
+
+  // Validate Saudi ID number (starts with 1 or 2, 10 digits, passes Luhn check)
   const validateIdNumber = (id: string) => {
     if (!id.trim()) {
       return "رقم الهوية مطلوب";
@@ -31,6 +52,9 @@ export default function RegisterStep2() {
     }
     if (!id.startsWith('1') && !id.startsWith('2')) {
       return "رقم الهوية يجب أن يبدأ بـ 1 أو 2";
+    }
+    if (!validateSaudiIdWithLuhn(id)) {
+      return "رقم الهوية غير صحيح";
     }
     return "";
   };

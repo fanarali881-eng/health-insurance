@@ -55,7 +55,7 @@ export default function Login() {
             </Link>
             {/* Register button on left */}
             <Link to="/register">
-              <button className="px-6 py-2 border-2 border-[#146c84] text-[#146c84] bg-white font-medium rounded hover:bg-gray-50 transition-colors">
+              <button className="px-6 py-2 border-2 border-[#146c84] text-[#146c84] bg-white font-medium rounded hover:bg-[#146c84] hover:text-white transition-colors">
                 تسجيل
               </button>
             </Link>

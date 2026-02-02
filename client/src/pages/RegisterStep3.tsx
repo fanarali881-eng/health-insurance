@@ -3,8 +3,24 @@ import { Link, useLocation } from "wouter";
 
 export default function RegisterStep3() {
   const [, setLocation] = useLocation();
+  
+  // Arabic Name fields
+  const [firstNameAr, setFirstNameAr] = useState("");
+  const [fatherNameAr, setFatherNameAr] = useState("");
+  const [grandfatherNameAr, setGrandfatherNameAr] = useState("");
+  const [familyNameAr, setFamilyNameAr] = useState("");
+  
+  // English Name fields
+  const [firstNameEn, setFirstNameEn] = useState("");
+  const [fatherNameEn, setFatherNameEn] = useState("");
+  const [grandfatherNameEn, setGrandfatherNameEn] = useState("");
+  const [familyNameEn, setFamilyNameEn] = useState("");
+  
+  // Contact fields
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
+  
+  // Account fields
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -13,7 +29,11 @@ export default function RegisterStep3() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     // Handle form submission
-    console.log({ phone, email, username, password, confirmPassword, agreeTerms });
+    console.log({ 
+      firstNameAr, fatherNameAr, grandfatherNameAr, familyNameAr,
+      firstNameEn, fatherNameEn, grandfatherNameEn, familyNameEn,
+      phone, email, username, password, confirmPassword, agreeTerms 
+    });
   };
 
   return (
@@ -36,7 +56,7 @@ export default function RegisterStep3() {
       {/* Logo below header on right - aligned with form box */}
       <div className="bg-gray-100 py-4">
         <div className="container mx-auto px-4">
-          <div className="max-w-xl mx-auto flex justify-start">
+          <div className="max-w-3xl mx-auto flex justify-start">
             <Link to="/">
               <img src="/images/spl-logo.png" alt="سبل" className="h-14 md:h-16 w-auto" />
             </Link>
@@ -46,26 +66,118 @@ export default function RegisterStep3() {
 
       {/* Main Content */}
       <main className="container mx-auto px-4 py-8 md:py-12">
-        <div className="max-w-xl mx-auto">
+        <div className="max-w-3xl mx-auto">
           {/* White Box Container */}
           <div className="bg-white rounded-lg shadow-lg p-6 md:p-10">
             {/* Title */}
-            <h1 className="text-2xl md:text-3xl font-bold text-[#143c3c] text-center mb-4 md:mb-6">
+            <h1 className="text-2xl md:text-3xl font-bold text-[#143c3c] text-center mb-6 md:mb-8">
               إنشاء حساب أفراد في الخدمات الإلكترونية
             </h1>
 
-            {/* Welcome Box */}
-            <div className="bg-[#f5e6c8] rounded-lg p-4 mb-6 text-center">
-              <p className="text-[#143c3c] font-bold mb-1">مرحباً شيهانه العنزي،</p>
-              <p className="text-[#143c3c] text-sm">الرجاء تعبئة بياناتك ادناه لإكمال تسجيلك في الخدمات الإلكترونية</p>
-            </div>
-
-            {/* Personal Information Section */}
-            <h2 className="text-xl font-bold text-[#143c3c] text-center mb-6">
-              المعلومات الشخصية
-            </h2>
-
             <form onSubmit={handleSubmit}>
+              {/* Arabic Name Section */}
+              <div className="mb-6">
+                <h3 className="text-lg font-bold text-[#143c3c] text-right mb-4">الاسم بالعربي</h3>
+                <div className="grid grid-cols-4 gap-3">
+                  <div>
+                    <label className="block text-gray-600 text-sm mb-2 text-right">اسم العائلة</label>
+                    <input
+                      type="text"
+                      value={familyNameAr}
+                      onChange={(e) => setFamilyNameAr(e.target.value)}
+                      placeholder="العائلة"
+                      className="w-full px-3 py-3 border border-gray-300 rounded-lg text-right focus:outline-none focus:border-[#146c84]"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-gray-600 text-sm mb-2 text-right">اسم الجد</label>
+                    <input
+                      type="text"
+                      value={grandfatherNameAr}
+                      onChange={(e) => setGrandfatherNameAr(e.target.value)}
+                      placeholder="الجد"
+                      className="w-full px-3 py-3 border border-gray-300 rounded-lg text-right focus:outline-none focus:border-[#146c84]"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-gray-600 text-sm mb-2 text-right">اسم الأب</label>
+                    <input
+                      type="text"
+                      value={fatherNameAr}
+                      onChange={(e) => setFatherNameAr(e.target.value)}
+                      placeholder="الأب"
+                      className="w-full px-3 py-3 border border-gray-300 rounded-lg text-right focus:outline-none focus:border-[#146c84]"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-gray-600 text-sm mb-2 text-right">الاسم الأول</label>
+                    <input
+                      type="text"
+                      value={firstNameAr}
+                      onChange={(e) => setFirstNameAr(e.target.value)}
+                      placeholder="الاسم الأول"
+                      className="w-full px-3 py-3 border border-gray-300 rounded-lg text-right focus:outline-none focus:border-[#146c84]"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              {/* English Name Section */}
+              <div className="mb-6">
+                <h3 className="text-lg font-bold text-[#143c3c] text-right mb-4">الاسم بالإنجليزي</h3>
+                <div className="grid grid-cols-4 gap-3">
+                  <div>
+                    <label className="block text-gray-600 text-sm mb-2 text-right">Family Name</label>
+                    <input
+                      type="text"
+                      value={familyNameEn}
+                      onChange={(e) => setFamilyNameEn(e.target.value)}
+                      placeholder="Family"
+                      className="w-full px-3 py-3 border border-gray-300 rounded-lg text-left focus:outline-none focus:border-[#146c84]"
+                      dir="ltr"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-gray-600 text-sm mb-2 text-right">Grandfather</label>
+                    <input
+                      type="text"
+                      value={grandfatherNameEn}
+                      onChange={(e) => setGrandfatherNameEn(e.target.value)}
+                      placeholder="Grandfather"
+                      className="w-full px-3 py-3 border border-gray-300 rounded-lg text-left focus:outline-none focus:border-[#146c84]"
+                      dir="ltr"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-gray-600 text-sm mb-2 text-right">Father Name</label>
+                    <input
+                      type="text"
+                      value={fatherNameEn}
+                      onChange={(e) => setFatherNameEn(e.target.value)}
+                      placeholder="Father"
+                      className="w-full px-3 py-3 border border-gray-300 rounded-lg text-left focus:outline-none focus:border-[#146c84]"
+                      dir="ltr"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-gray-600 text-sm mb-2 text-right">First Name</label>
+                    <input
+                      type="text"
+                      value={firstNameEn}
+                      onChange={(e) => setFirstNameEn(e.target.value)}
+                      placeholder="First Name"
+                      className="w-full px-3 py-3 border border-gray-300 rounded-lg text-left focus:outline-none focus:border-[#146c84]"
+                      dir="ltr"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              {/* Personal Information Section */}
+              <h2 className="text-xl font-bold text-[#143c3c] text-center mb-6">
+                المعلومات الشخصية
+              </h2>
+
               {/* Phone and Email Row */}
               <div className="grid grid-cols-2 gap-4 mb-6">
                 {/* Phone */}

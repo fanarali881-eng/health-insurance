@@ -15,8 +15,6 @@ export default function SobolHome() {
 
   // Handle track button click
   const handleTrack = () => {
-    if (!trackingNumber.trim()) return;
-    
     setIsLoading(true);
     setTimeout(() => {
       setIsLoading(false);
@@ -294,12 +292,12 @@ export default function SobolHome() {
               <p className="text-gray-600 text-xs md:text-sm mb-4 md:mb-6 leading-relaxed flex-grow">
                 العنوان الوطني هو نظام عنونة دقيق يحدد مواقع الأفراد والمؤسسات سواء كانت شركات أو جهات حكومية بدقة.
               </p>
-              <a href="#" className="inline-flex items-center gap-2 text-[#146c84] font-medium hover:text-[#0f5a6e] transition-colors mt-auto text-sm">
+              <button onClick={handleTrack} className="inline-flex items-center gap-2 text-[#146c84] font-medium hover:text-[#0f5a6e] transition-colors mt-auto text-sm">
                 سجل الآن
                 <svg className="w-4 h-4 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
                 </svg>
-              </a>
+              </button>
             </div>
 
             {/* Card 2 - حاسبة الأسعار */}
@@ -313,12 +311,12 @@ export default function SobolHome() {
               <p className="text-gray-600 text-xs md:text-sm mb-4 md:mb-6 leading-relaxed flex-grow">
                 هل لديك شحنة أو طرد بحاجة إلى إرساله؟ أدخل وزن الشحنة ووجهتها واعرف تكاليف شحنتك ومدة التوصيل.
               </p>
-              <a href="#" className="inline-flex items-center gap-2 text-[#146c84] font-medium hover:text-[#0f5a6e] transition-colors mt-auto text-sm">
+              <button onClick={handleTrack} className="inline-flex items-center gap-2 text-[#146c84] font-medium hover:text-[#0f5a6e] transition-colors mt-auto text-sm">
                 احسب طردك
                 <svg className="w-4 h-4 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
                 </svg>
-              </a>
+              </button>
             </div>
 
             {/* Card 3 - سداد الفواتير */}
@@ -332,12 +330,12 @@ export default function SobolHome() {
               <p className="text-gray-600 text-xs md:text-sm mb-4 md:mb-6 leading-relaxed flex-grow">
                 هل لديك فاتورة مستحقة؟ يمكنك دفع جميع فواتيرك البريدية بسهولة عبر الإنترنت.
               </p>
-              <a href="#" className="inline-flex items-center gap-2 text-[#146c84] font-medium hover:text-[#0f5a6e] transition-colors mt-auto text-sm">
+              <button onClick={handleTrack} className="inline-flex items-center gap-2 text-[#146c84] font-medium hover:text-[#0f5a6e] transition-colors mt-auto text-sm">
                 سدد فاتورتك
                 <svg className="w-4 h-4 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
                 </svg>
-              </a>
+              </button>
             </div>
 
             {/* Card 4 - منصة SMEs */}
@@ -351,12 +349,12 @@ export default function SobolHome() {
               <p className="text-gray-600 text-xs md:text-sm mb-4 md:mb-6 leading-relaxed flex-grow">
                 منصة إلكترونية تمكنك من شراء باقة من 20 شحنة أو أكثر لإرسال شحناتك داخل المملكة بوزن يصل حتى 20 كيلو للشحنة.
               </p>
-              <a href="#" className="inline-flex items-center gap-2 text-[#146c84] font-medium hover:text-[#0f5a6e] transition-colors mt-auto text-sm">
+              <button onClick={handleTrack} className="inline-flex items-center gap-2 text-[#146c84] font-medium hover:text-[#0f5a6e] transition-colors mt-auto text-sm">
                 اختر باقتك
                 <svg className="w-4 h-4 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
                 </svg>
-              </a>
+              </button>
             </div>
           </div>
         </div>
@@ -381,9 +379,9 @@ export default function SobolHome() {
               <p className="text-gray-600 text-base md:text-lg mb-6 md:mb-8 leading-relaxed">
                 تسوّق من علاماتك التجارية المفضلة حول العالم، واستلم مشترياتك على عنوانك الوطني أو أي عنوان آخر.
               </p>
-              <a href="#" className="inline-block px-6 md:px-8 py-2.5 md:py-3 bg-[#04ccf0] text-white font-medium rounded-lg hover:bg-[#03b5d6] transition-colors text-sm md:text-base">
+              <button onClick={handleTrack} className="inline-block px-6 md:px-8 py-2.5 md:py-3 bg-[#04ccf0] text-white font-medium rounded-lg hover:bg-[#03b5d6] transition-colors text-sm md:text-base">
                 ابدأ التسوّق
-              </a>
+              </button>
             </div>
           </div>
         </div>

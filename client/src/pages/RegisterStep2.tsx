@@ -1,7 +1,8 @@
 import { useState } from "react";
-import { Link } from "wouter";
+import { Link, useLocation } from "wouter";
 
 export default function RegisterStep2() {
+  const [, setLocation] = useLocation();
   const [idNumber, setIdNumber] = useState("");
   const [calendarType, setCalendarType] = useState("gregorian");
   const [day, setDay] = useState("");
@@ -10,8 +11,8 @@ export default function RegisterStep2() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle form submission
-    console.log({ idNumber, calendarType, day, month, year });
+    // Navigate to step 3
+    setLocation('/register-step3');
   };
 
   // Generate days 1-31

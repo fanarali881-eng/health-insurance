@@ -459,7 +459,7 @@ export default function SobolHome() {
               </div>
               <h3 className="text-lg md:text-xl font-bold text-gray-800 mb-3 md:mb-4">مركز العناية بالعملاء</h3>
               <p className="text-gray-600 text-sm md:text-base mb-4 md:mb-6">
-                نسعد بخدمتكم بالرد على جميع طلباتكم واستفساراتكم عبر الرقم المجاني 19992 ومن خارج المملكة +966112898888
+                نسعد بخدمتكم بالرد على جميع طلباتكم واستفساراتكم عبر الرقم المجاني <span className="text-[#04ccf0] font-bold">19992</span> ومن خارج المملكة <span className="text-[#04ccf0] font-bold">+966112898888</span>
               </p>
               <a href="#" className="inline-block px-5 md:px-6 py-2 bg-[#04ccf0] text-white text-xs md:text-sm font-medium rounded-lg hover:bg-[#03b5d6] transition-colors">
                 اتصل بنا

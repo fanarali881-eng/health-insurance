@@ -563,17 +563,18 @@ export default function SobolHome() {
                 </a>
               </div>
               {/* App Download */}
-              <div className="flex gap-2 md:gap-4">
+              <div className="flex gap-2 md:gap-3">
                 <a href="#">
-                  <img src="/images/app-store.png" alt="App Store" className="h-10 md:h-12" />
+                  <img src="/images/app-store.png" alt="App Store" className="h-8 md:h-10" />
                 </a>
                 <a href="#">
-                  <img src="/images/google-play.png" alt="Google Play" className="h-10 md:h-12" />
+                  <img src="/images/google-play.png" alt="Google Play" className="h-8 md:h-10" />
                 </a>
               </div>
-              {/* Digital Stamp */}
-              <div className="mt-4">
-                <img src="/images/digital-stamp.png" alt="هيئة الحكومة الرقمية" className="h-20 md:h-24" />
+              {/* Digital Stamp and Great Place To Work */}
+              <div className="flex gap-3 md:gap-4 mt-4 items-center">
+                <img src="/images/digital-stamp.png" alt="هيئة الحكومة الرقمية" className="h-16 md:h-20" />
+                <img src="/images/great-place-to-work.png" alt="Great Place To Work" className="h-16 md:h-20" />
               </div>
             </div>
           </div>

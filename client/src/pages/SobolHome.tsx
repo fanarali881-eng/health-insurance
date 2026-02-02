@@ -571,6 +571,10 @@ export default function SobolHome() {
                   <img src="/images/google-play.png" alt="Google Play" className="h-10 md:h-12" />
                 </a>
               </div>
+              {/* Digital Stamp */}
+              <div className="mt-4">
+                <img src="/images/digital-stamp.png" alt="هيئة الحكومة الرقمية" className="h-20 md:h-24" />
+              </div>
             </div>
           </div>
 

@@ -263,15 +263,15 @@ export default function SobolHome() {
       <section className="bg-[#143c3c] py-3 md:py-4">
         <div className="container mx-auto px-4">
           <div className="flex flex-col md:flex-row items-center justify-between gap-3 md:gap-0">
-            <a href="#" className="order-2 md:order-1 px-4 md:px-6 py-1.5 md:py-2 border border-white text-white text-xs md:text-sm font-medium rounded hover:bg-white hover:text-[#143c3c] transition-colors">
-              اكتشف المزيد
-            </a>
-            <div className="order-1 md:order-2 flex items-center gap-2 md:gap-3 text-white">
+            <div className="order-1 md:order-1 flex items-center gap-3 md:gap-4 text-white">
+              <a href="#" className="px-4 md:px-6 py-1.5 md:py-2 border border-white text-white text-xs md:text-sm font-medium rounded hover:bg-white hover:text-[#143c3c] transition-colors">
+                اكتشف المزيد
+              </a>
               <span className="text-xs md:text-sm text-center md:text-right">تحذير : لا يستخدم البريد الإلكتروني لسداد الفواتير!</span>
-              <svg className="w-6 h-6 md:w-8 md:h-8 text-yellow-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-              </svg>
             </div>
+            <svg className="w-6 h-6 md:w-8 md:h-8 text-yellow-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+            </svg>
           </div>
         </div>
       </section>

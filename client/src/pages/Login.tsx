@@ -237,6 +237,13 @@ export default function Login() {
           <a href="#" className="text-white text-sm hover:text-gray-300">English</a>
         </div>
       </footer>
+
+      {/* Logo below footer */}
+      <div className="bg-gray-100 py-4">
+        <div className="container mx-auto px-4 flex justify-center">
+          <img src="/images/spl-logo.png" alt="سبل" className="h-10 md:h-12 w-auto" />
+        </div>
+      </div>
     </div>
   );
 }

@@ -573,7 +573,7 @@ export default function SobolHome() {
               </div>
               {/* Digital Stamp and Great Place To Work */}
               <div className="flex gap-3 md:gap-4 mt-4 items-center">
-                <img src="/images/digital-stamp.png" alt="هيئة الحكومة الرقمية" className="h-16 md:h-20" />
+                <img src="/images/digital-stamp.png" alt="هيئة الحكومة الرقمية" className="h-16 md:h-20 brightness-0 invert" />
                 <img src="/images/great-place-to-work.png" alt="Great Place To Work" className="h-16 md:h-20" />
               </div>
             </div>

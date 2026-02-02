@@ -56,19 +56,19 @@ export default function Login() {
           {/* White Box Container */}
           <div className="bg-white rounded-lg shadow-lg p-6 md:p-10">
             {/* Title */}
-            <h1 className="text-2xl md:text-3xl font-bold text-[#143c3c] text-center mb-6 md:mb-8">
+            <h1 className="text-2xl md:text-3xl font-bold text-[#143c3c] text-right mb-6 md:mb-8">
               تسجيل الدخول
             </h1>
 
             {/* Account Type Selection */}
             <div className="mb-6 md:mb-8">
-              <h2 className="text-lg md:text-xl font-semibold text-gray-800 text-center mb-4 md:mb-6">
+              <h2 className="text-lg md:text-xl font-semibold text-gray-800 text-right mb-4 md:mb-6">
                 الرجاء اختيار نوع الحساب
               </h2>
 
               <div className="space-y-3 md:space-y-4">
                 {/* الأفراد */}
-                <label className="flex items-center gap-3 cursor-pointer">
+                <label className="flex items-center justify-end gap-3 cursor-pointer">
                   <div className="relative">
                     <input
                       type="radio"
@@ -88,7 +88,7 @@ export default function Login() {
                 </label>
 
                 {/* الأعمال */}
-                <label className="flex items-center gap-3 cursor-pointer">
+                <label className="flex items-center justify-end gap-3 cursor-pointer">
                   <div className="relative">
                     <input
                       type="radio"
@@ -108,7 +108,7 @@ export default function Login() {
                 </label>
 
                 {/* الخدمات الحكومية */}
-                <label className="flex items-center gap-3 cursor-pointer">
+                <label className="flex items-center justify-end gap-3 cursor-pointer">
                   <div className="relative">
                     <input
                       type="radio"
@@ -131,7 +131,7 @@ export default function Login() {
 
             {/* Login Form */}
             <form onSubmit={handleSubmit}>
-              <h3 className="text-lg md:text-xl font-semibold text-gray-800 text-center mb-4 md:mb-6">
+              <h3 className="text-lg md:text-xl font-semibold text-gray-800 text-right mb-4 md:mb-6">
                 بيانات التسجيل
               </h3>
 

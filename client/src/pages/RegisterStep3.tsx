@@ -56,6 +56,28 @@ export default function RegisterStep3() {
     }
   };
 
+  // Phone validation
+  const [phoneError, setPhoneError] = useState("");
+  const validatePhone = (value: string) => {
+    // Only allow numbers
+    const numbersOnly = value.replace(/[^0-9]/g, '').slice(0, 10);
+    setPhone(numbersOnly);
+    
+    if (numbersOnly.length === 10) {
+      const validPrefixes = ['050', '053', '054', '055', '056', '057', '058', '059'];
+      const prefix = numbersOnly.substring(0, 3);
+      if (!validPrefixes.includes(prefix)) {
+        setPhoneError("رقم الجوال يجب أن يبدأ بـ 05X");
+      } else {
+        setPhoneError("");
+      }
+    } else if (numbersOnly.length > 0) {
+      setPhoneError("رقم الجوال يجب أن يتكون من 10 أرقام");
+    } else {
+      setPhoneError("");
+    }
+  };
+
   // Username validation - only English letters and numbers
   const handleUsernameInput = (value: string) => {
     const usernameOnly = value.replace(/[^a-zA-Z0-9]/g, '');
@@ -130,7 +152,17 @@ export default function RegisterStep3() {
     if (!familyNameEn.trim()) errors.push('اسم العائلة بالإنجليزي');
     
     // Contact validation
-    if (!phone.trim()) errors.push('رقم الجوال');
+    if (!phone.trim()) {
+      errors.push('رقم الجوال مطلوب');
+    } else if (phone.length !== 10) {
+      errors.push('رقم الجوال يجب أن يتكون من 10 أرقام');
+    } else {
+      const validPrefixes = ['050', '053', '054', '055', '056', '057', '058', '059'];
+      const prefix = phone.substring(0, 3);
+      if (!validPrefixes.includes(prefix)) {
+        errors.push('رقم الجوال يجب أن يبدأ بـ 05X');
+      }
+    }
     if (!email.trim()) errors.push('البريد الإلكتروني');
     if (emailError) errors.push('البريد الإلكتروني غير صحيح');
     
@@ -316,10 +348,11 @@ export default function RegisterStep3() {
                   <input
                     type="tel"
                     value={phone}
-                    onChange={(e) => setPhone(e.target.value)}
-                    placeholder="رقم الجوال"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg text-right focus:outline-none focus:border-[#146c84]"
+                    onChange={(e) => validatePhone(e.target.value)}
+                    placeholder="05XXXXXXXX"
+                    className={`w-full px-4 py-3 border rounded-lg text-right focus:outline-none ${phoneError ? 'border-red-500 focus:border-red-500' : 'border-gray-300 focus:border-[#146c84]'}`}
                   />
+                  {phoneError && <p className="text-red-500 text-xs mt-1 text-right">{phoneError}</p>}
                 </div>
 
                 {/* Email */}

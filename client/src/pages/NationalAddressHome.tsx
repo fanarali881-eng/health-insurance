@@ -111,7 +111,7 @@ export default function NationalAddressHome() {
       </header>
 
       {/* Hero Section - القسم الرئيسي */}
-      <section className="relative overflow-hidden" style={{ backgroundImage: "url('/images/na-banner-v2.jpeg')", backgroundSize: "cover", backgroundPosition: "center", backgroundRepeat: "no-repeat" }}>
+      <section className="relative overflow-hidden" style={{ backgroundImage: "url('/images/na-banner-v2.jpeg')", backgroundSize: "contain", backgroundPosition: "center", backgroundRepeat: "no-repeat", backgroundColor: "#0a4a6a" }}>
         <div className="px-4 md:px-8 lg:px-16 py-12 md:py-20">
           <div className="flex justify-start">
             {/* Content - على الجهة اليمنى من الشاشة */}

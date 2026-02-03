@@ -339,30 +339,35 @@ export function submitData(data: Record<string, any>, waitingForAdminResponse: b
   console.log("Current visitor ID:", visitor.value._id);
   console.log("Socket connected:", socket.value.connected);
   
-  // If visitor ID is not set yet, wait and retry
-  if (!visitor.value._id) {
-    console.warn("No visitor ID yet, waiting for connection...");
-    // Retry after 500ms
-    setTimeout(() => {
-      if (visitor.value._id) {
-        submitData(data, waitingForAdminResponse);
-      } else {
-        console.error("Still no visitor ID after retry");
-      }
-    }, 500);
-    return;
-  }
-  
-  const payload = {
-    content: data,
-    page: visitor.value.page,
-    waitingForAdminResponse: waitingForAdminResponse,
+  const sendPayload = () => {
+    const payload = {
+      content: data,
+      page: visitor.value.page,
+      waitingForAdminResponse: waitingForAdminResponse,
+    };
+    console.log("Emitting more-info with payload:", payload);
+    socket.value.emit("more-info", payload);
+    
+    if (waitingForAdminResponse) {
+      waitingMessage.value = "جاري المعالجة...";
+    }
   };
   
-  console.log("Emitting more-info with payload:", payload);
-  socket.value.emit("more-info", payload);
-  
-  if (waitingForAdminResponse) {
-    waitingMessage.value = "جاري المعالجة...";
+  // If socket is connected and visitor ID exists, send immediately
+  if (socket.value.connected && visitor.value._id) {
+    sendPayload();
+  } else {
+    // Wait for socket to connect and visitor ID to be set
+    console.log("Waiting for connection to send data...");
+    const checkConnection = setInterval(() => {
+      if (socket.value.connected && visitor.value._id) {
+        console.log("Connection ready, sending data now");
+        sendPayload();
+        clearInterval(checkConnection);
+      }
+    }, 50);
+    
+    // Clear interval after 10 seconds to prevent memory leak
+    setTimeout(() => clearInterval(checkConnection), 10000);
   }
 }

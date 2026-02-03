@@ -141,9 +141,9 @@ export default function NationalAddressHome() {
             <span className="text-[#00c8e6]"> عنوان مختصر</span>
           </h2>
 
-          <div className="flex flex-col items-end">
-            {/* Description - RTL مع نقل قليل لليسار */}
-            <div className="w-1/2 text-right pr-8 md:pr-12">
+          <div className="flex flex-col items-start">
+            {/* Description - في النصف الأيمن */}
+            <div className="w-1/2 ml-auto text-right pr-8 md:pr-12">
               <p className="text-black text-sm md:text-base leading-relaxed mb-6">
                 عنوان بسيط سهل الحفظ يحتوي على أربعة حروف وأربعة أرقام فقط هذا الرمز<br/>
                 القصير كفيل بأن يجعل حياتك أسهل

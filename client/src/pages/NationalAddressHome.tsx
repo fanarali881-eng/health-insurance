@@ -2,137 +2,85 @@ import { useState } from "react";
 import { Link } from "wouter";
 
 export default function NationalAddressHome() {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [activeTab, setActiveTab] = useState("individual");
 
   return (
     <div className="min-h-screen bg-white" dir="rtl" style={{ fontFamily: "'Tajawal', sans-serif" }}>
-      {/* Top Header Bar */}
-      <div className="bg-[#143c3c] text-white">
+      {/* Top Header - Green Bar */}
+      <div className="bg-[#143c3c]">
         <div className="container mx-auto px-4">
-          <div className="flex items-center justify-between h-10 md:h-12">
-            {/* Right Side - Tabs */}
-            <div className="hidden md:flex items-center gap-0">
-              <button className="px-4 md:px-6 py-2 md:py-3 bg-white text-[#143c3c] font-medium text-xs md:text-sm">
+          <div className="flex items-center justify-between h-12">
+            {/* Right - Tabs */}
+            <div className="flex items-center">
+              <button 
+                onClick={() => setActiveTab("individual")}
+                className={`px-6 py-3 text-sm font-medium ${activeTab === "individual" ? "bg-[#f7e733] text-[#143c3c]" : "text-white hover:bg-[#1a4a4a]"}`}
+              >
                 الأفراد
               </button>
-              <button className="px-4 md:px-6 py-2 md:py-3 text-white hover:bg-[#0f2e2e] font-medium text-xs md:text-sm">
+              <button 
+                onClick={() => setActiveTab("enterprise")}
+                className={`px-6 py-3 text-sm font-medium ${activeTab === "enterprise" ? "bg-[#f7e733] text-[#143c3c]" : "text-white hover:bg-[#1a4a4a]"}`}
+              >
                 الأعمال
               </button>
-              <button className="px-4 md:px-6 py-2 md:py-3 text-white hover:bg-[#0f2e2e] font-medium text-xs md:text-sm">
+              <button 
+                onClick={() => setActiveTab("government")}
+                className={`px-6 py-3 text-sm font-medium ${activeTab === "government" ? "bg-[#f7e733] text-[#143c3c]" : "text-white hover:bg-[#1a4a4a]"}`}
+              >
                 الخدمات الحكومية
               </button>
             </div>
             
-            {/* Mobile Menu Button */}
-            <button 
-              className="md:hidden text-white p-2"
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            >
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-              </svg>
-            </button>
-            
-            {/* Left Side - Actions */}
-            <div className="flex items-center gap-2 md:gap-4">
-              <a href="#" className="hidden md:block text-white text-sm hover:underline">مساعدة</a>
+            {/* Left - Actions */}
+            <div className="flex items-center gap-4">
+              <a href="#" className="text-white text-sm hover:underline">مساعدة</a>
               <button className="text-white">
-                <svg className="w-4 h-4 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                 </svg>
               </button>
               <button className="text-white">
-                <svg className="w-4 h-4 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                 </svg>
               </button>
-              <a href="#" className="text-white text-xs md:text-sm hover:underline">EN</a>
+              <a href="#" className="text-white text-sm hover:underline">English</a>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Mobile Menu */}
-      {mobileMenuOpen && (
-        <div className="md:hidden bg-[#143c3c] text-white py-4 px-4">
-          <div className="flex flex-col gap-2">
-            <button className="px-4 py-2 bg-white text-[#143c3c] font-medium text-sm rounded">الأفراد</button>
-            <button className="px-4 py-2 text-white font-medium text-sm">الأعمال</button>
-            <button className="px-4 py-2 text-white font-medium text-sm">الخدمات الحكومية</button>
-            <a href="#" className="px-4 py-2 text-white text-sm">مساعدة</a>
-          </div>
-        </div>
-      )}
-
-      {/* Main Navigation */}
+      {/* Main Header - White */}
       <header className="bg-white border-b border-gray-100 sticky top-0 z-50">
         <div className="container mx-auto px-4">
-          <div className="flex items-center justify-between h-14 md:h-16">
+          <div className="flex items-center justify-between h-16">
             {/* Logo */}
-            <div className="flex items-center">
-              <Link to="/">
-                <img src="/images/spl-logo.png" alt="سبل" className="h-10 md:h-12 w-auto" />
-              </Link>
-            </div>
+            <Link to="/">
+              <img src="/images/spl-logo.png" alt="سبل" className="h-12" />
+            </Link>
 
-            {/* Navigation Links */}
+            {/* Navigation */}
             <nav className="hidden lg:flex items-center gap-1">
-              <div className="relative group">
-                <a href="#" className="px-4 py-2 text-gray-700 text-sm font-medium hover:text-[#143c3c] flex items-center gap-1">
-                  إرسال
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                  </svg>
-                </a>
-              </div>
-              <div className="relative group">
-                <a href="#" className="px-4 py-2 text-gray-700 text-sm font-medium hover:text-[#143c3c] flex items-center gap-1">
-                  استلام
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                  </svg>
-                </a>
-              </div>
-              <a href="#" className="px-4 py-2 text-gray-700 text-sm font-medium hover:text-[#143c3c]">
-                عالمي
-              </a>
-              <div className="relative group">
-                <a href="#" className="px-4 py-2 text-[#143c3c] text-sm font-bold hover:text-[#143c3c] flex items-center gap-1 border-b-2 border-[#04ccf0]">
-                  العنوان الوطني
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                  </svg>
-                </a>
-              </div>
-              <div className="relative group">
-                <a href="#" className="px-4 py-2 text-gray-700 text-sm font-medium hover:text-[#143c3c] flex items-center gap-1">
-                  خدمات التجزئة
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                  </svg>
-                </a>
-              </div>
-              <div className="relative group">
-                <a href="#" className="px-4 py-2 text-gray-700 text-sm font-medium hover:text-[#143c3c] flex items-center gap-1">
-                  خدمات التمويل
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                  </svg>
-                </a>
-              </div>
-              <a href="#" className="px-4 py-2 text-gray-700 text-sm font-medium hover:text-[#143c3c]">
-                الطوابع
-              </a>
+              <a href="#" className="px-4 py-2 text-gray-700 text-sm font-medium hover:text-[#143c3c]">إرسال</a>
+              <a href="#" className="px-4 py-2 text-gray-700 text-sm font-medium hover:text-[#143c3c]">استلام</a>
+              <a href="#" className="px-4 py-2 text-gray-700 text-sm font-medium hover:text-[#143c3c]">عالمي</a>
+              <a href="#" className="px-4 py-2 text-[#143c3c] text-sm font-bold border-b-2 border-[#00c8e6]">العنوان الوطني</a>
+              <a href="#" className="px-4 py-2 text-gray-700 text-sm font-medium hover:text-[#143c3c]">خدمات التجزئة</a>
+              <a href="#" className="px-4 py-2 text-gray-700 text-sm font-medium hover:text-[#143c3c]">خدمات التمويل</a>
+              <a href="#" className="px-4 py-2 text-gray-700 text-sm font-medium hover:text-[#143c3c]">الطوابع</a>
             </nav>
 
-            {/* Auth Buttons */}
-            <div className="flex items-center gap-2">
-              <Link to="/login" className="px-4 md:px-6 py-1.5 md:py-2 border border-[#143c3c] text-[#143c3c] text-xs md:text-sm font-medium rounded hover:bg-[#143c3c] hover:text-white transition-colors">
-                دخول
+            {/* Auth */}
+            <div className="flex items-center gap-3">
+              <Link to="/login">
+                <button className="px-6 py-2 border border-[#143c3c] text-[#143c3c] text-sm font-medium rounded hover:bg-[#143c3c] hover:text-white transition-colors">
+                  دخول
+                </button>
               </Link>
-              <Link to="/register" className="px-4 md:px-6 py-1.5 md:py-2 text-gray-600 text-xs md:text-sm font-medium hover:text-[#143c3c]">
-                تسجيل
+              <Link to="/register">
+                <span className="text-gray-600 text-sm font-medium hover:text-[#143c3c] cursor-pointer">تسجيل</span>
               </Link>
             </div>
           </div>
@@ -140,144 +88,152 @@ export default function NationalAddressHome() {
       </header>
 
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-l from-[#0a4a5c] via-[#0d5a6c] to-[#146c84] py-12 md:py-20 overflow-hidden">
-        {/* Background Pattern */}
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute right-0 top-0 w-1/2 h-full">
-            <img src="/images/na-pattern.png" alt="" className="w-full h-full object-cover" />
-          </div>
-        </div>
-        
-        <div className="container mx-auto px-4 relative z-10">
-          <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-12">
+      <section className="relative overflow-hidden" style={{ background: "linear-gradient(to left, #0a5a6a, #0d6a7a, #107080)" }}>
+        <div className="container mx-auto px-4 py-16 lg:py-24">
+          <div className="flex flex-col lg:flex-row items-center">
+            {/* Left Side - Decorative Text */}
+            <div className="hidden lg:block lg:w-1/3 relative">
+              <div className="text-white/30 text-[80px] font-bold leading-none" style={{ writingMode: "vertical-rl" }}>
+                <span className="block">العنوان الوطني</span>
+              </div>
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+                <span className="text-[#4ade80] text-6xl font-bold">إلزامي</span>
+              </div>
+              <div className="text-white/30 text-3xl font-bold mt-8">لكل شحنة</div>
+            </div>
+
             {/* Right Side - Content */}
-            <div className="w-full lg:w-1/2 text-right">
-              {/* Logo */}
-              <div className="flex justify-end mb-6">
-                <div className="text-center">
-                  <img src="/images/national-address-logo.png" alt="العنوان الوطني" className="h-20 md:h-24 w-auto mx-auto" />
-                  <p className="text-white text-sm mt-2">عنوانك هويتك المكانية</p>
+            <div className="w-full lg:w-2/3 text-right">
+              <div className="flex flex-col lg:flex-row items-start lg:items-center gap-8">
+                {/* Text Content */}
+                <div className="flex-1">
+                  {/* Logo Badge */}
+                  <div className="flex justify-end mb-6">
+                    <div className="text-center">
+                      {/* National Address Icon */}
+                      <div className="mb-2">
+                        <svg className="w-20 h-20 mx-auto" viewBox="0 0 100 100">
+                          <path d="M50 10 L50 30 M50 40 L50 60 M50 70 L50 90" stroke="#1e3a5f" strokeWidth="4" fill="none"/>
+                          <path d="M30 50 C30 30 50 10 50 10 C50 10 70 30 70 50 C70 70 50 80 50 80 C50 80 30 70 30 50" stroke="#c41e3a" strokeWidth="3" fill="none"/>
+                          <circle cx="50" cy="50" r="8" fill="#00c8e6"/>
+                        </svg>
+                      </div>
+                      <div className="text-white text-xl font-bold">العنوان الوطني</div>
+                      <div className="text-white/80 text-xs tracking-wider">NATIONAL ADDRESS</div>
+                      <div className="text-[#00c8e6] text-sm mt-1">عنوانك هويتك المكانية</div>
+                    </div>
+                  </div>
+
+                  {/* Main Heading */}
+                  <h1 className="text-3xl lg:text-5xl font-bold text-white mb-6 leading-tight">
+                    عنوانك هو هويتك المكانية الإلزامية...
+                  </h1>
+
+                  {/* Description */}
+                  <p className="text-white/90 text-lg mb-8 leading-relaxed">
+                    العنوان الوطني يضمن وصول شحناتك ومعاملاتك بسرعة وموثوقية. ابتداءً من 1 يناير 2026 سيصبح استخدامه إلزامياً لكل فرد وجهة.
+                  </p>
+
+                  {/* CTA Button */}
+                  <Link to="/register">
+                    <button className="px-12 py-4 bg-[#143c3c] text-white font-bold text-lg rounded hover:bg-[#0f2e2e] transition-colors">
+                      سجّل الآن
+                    </button>
+                  </Link>
+                </div>
+
+                {/* Person Image */}
+                <div className="hidden lg:block">
+                  <img src="/images/saudi-person.png" alt="" className="h-80 object-contain" />
                 </div>
               </div>
-              
-              {/* Main Title */}
-              <h1 className="text-2xl md:text-4xl lg:text-5xl font-bold text-white mb-4 leading-tight">
-                عنوانك هو هويتك المكانية الإلزامية...
-              </h1>
-              
-              {/* Description */}
-              <p className="text-white/90 text-base md:text-lg mb-8 leading-relaxed">
-                العنوان الوطني يضمن وصول شحناتك ومعاملاتك بسرعة وموثوقية. ابتداءً من 1 يناير 2026 سيصبح استخدامه إلزامياً لكل فرد وجهة.
-              </p>
-              
-              {/* CTA Button */}
-              <Link to="/register">
-                <button className="px-10 md:px-16 py-3 md:py-4 bg-[#143c3c] text-white font-bold rounded-lg hover:bg-[#0f2e2e] transition-colors text-base md:text-lg">
-                  سجّل الآن
-                </button>
-              </Link>
             </div>
-            
-            {/* Left Side - Image */}
-            <div className="w-full lg:w-1/2 hidden lg:block">
-              <div className="relative">
-                <img 
-                  src="/images/na-hero-image.png" 
-                  alt="العنوان الوطني" 
-                  className="w-full max-w-md mx-auto"
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-        
-        {/* Decorative Text */}
-        <div className="absolute left-0 top-1/2 -translate-y-1/2 opacity-20 hidden xl:block">
-          <div className="text-white text-[120px] font-bold leading-none whitespace-nowrap transform -rotate-0">
-            <div>العنوان الوطني</div>
-            <div className="text-[#04ccf0]">إلزامي</div>
-            <div>لكل شحنة</div>
           </div>
         </div>
       </section>
 
       {/* Short Address Section */}
-      <section className="py-12 md:py-16 bg-white">
+      <section className="py-16 bg-white">
         <div className="container mx-auto px-4">
-          <h2 className="text-2xl md:text-3xl font-bold text-center mb-8">
+          <h2 className="text-3xl font-bold text-center mb-12">
             <span className="text-gray-800">من عنوان مفصل إلى:</span>
-            <span className="text-[#04ccf0]"> عنوان مختصر</span>
+            <span className="text-[#00c8e6]"> عنوان مختصر</span>
           </h2>
-          
-          <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-16">
-            {/* Short Address Example */}
+
+          <div className="flex flex-col lg:flex-row items-center gap-12">
+            {/* Address Diagram */}
             <div className="w-full lg:w-1/2">
-              <div className="text-center">
-                <div className="inline-block relative">
-                  <span className="text-4xl md:text-5xl font-bold">
-                    <span className="text-[#146c84]">RRRD</span>
-                    <span className="text-[#04ccf0]">2929</span>
-                  </span>
-                  
-                  {/* Labels */}
-                  <div className="mt-6 flex flex-wrap justify-center gap-4 text-xs md:text-sm">
-                    <div className="flex items-center gap-1">
-                      <span className="w-3 h-3 bg-orange-500 rounded-full"></span>
-                      <span className="text-gray-600">حرف تمييز</span>
+              <div className="relative">
+                {/* RRRD2929 with labels */}
+                <div className="flex justify-center items-center">
+                  <div className="relative">
+                    <div className="text-5xl font-bold tracking-wider">
+                      <span className="text-[#146c84]">RRRD</span>
+                      <span className="text-[#00c8e6]">2929</span>
                     </div>
-                    <div className="flex items-center gap-1">
-                      <span className="w-3 h-3 bg-green-500 rounded-full"></span>
-                      <span className="text-gray-600">رمز المنطقة</span>
+                    
+                    {/* Labels with lines */}
+                    <div className="absolute -top-12 right-0 text-sm text-gray-600 flex items-end gap-1">
+                      <span>رقم المبنى</span>
+                      <div className="w-8 h-px bg-[#00c8e6]"></div>
                     </div>
-                    <div className="flex items-center gap-1">
-                      <span className="w-3 h-3 bg-blue-500 rounded-full"></span>
-                      <span className="text-gray-600">رمز الفرع</span>
+                    <div className="absolute -top-12 right-24 text-sm text-gray-600 flex items-end gap-1">
+                      <span>حرف تمييز</span>
+                      <div className="w-8 h-px bg-orange-500"></div>
                     </div>
-                    <div className="flex items-center gap-1">
-                      <span className="w-3 h-3 bg-cyan-500 rounded-full"></span>
-                      <span className="text-gray-600">رقم المبنى</span>
+                    <div className="absolute -bottom-12 right-0 text-sm text-gray-600 flex items-start gap-1">
+                      <span>رمز القسم</span>
+                      <div className="w-8 h-px bg-blue-500"></div>
+                    </div>
+                    <div className="absolute -bottom-12 right-20 text-sm text-gray-600 flex items-start gap-1">
+                      <span>رمز الفرع</span>
+                      <div className="w-8 h-px bg-blue-400"></div>
+                    </div>
+                    <div className="absolute -bottom-12 left-0 text-sm text-gray-600 flex items-start gap-1">
+                      <span>رمز المنطقة</span>
+                      <div className="w-8 h-px bg-green-500"></div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-            
+
             {/* Description */}
             <div className="w-full lg:w-1/2 text-right">
-              <p className="text-gray-700 text-base md:text-lg leading-relaxed mb-6">
+              <p className="text-gray-700 text-lg leading-relaxed mb-6">
                 عنوان بسيط سهل الحفظ يحتوي على أربعة حروف وأربعة أرقام فقط هذا الرمز القصير كفيل بأن يجعل حياتك أسهل
               </p>
-              
-              <p className="text-gray-600 text-sm md:text-base mb-4">بإمكانك معرفة عنوانك المختصر من خلال</p>
-              
+
+              <p className="text-gray-600 mb-4">بإمكانك معرفة عنوانك المختصر من خلال</p>
+
               {/* App Icons */}
               <div className="flex flex-wrap justify-end gap-4">
                 <div className="flex flex-col items-center">
-                  <div className="w-12 h-12 md:w-14 md:h-14 bg-[#146c84] rounded-lg flex items-center justify-center">
+                  <div className="w-14 h-14 bg-[#146c84] rounded-lg flex items-center justify-center">
                     <span className="text-white text-xs font-bold">سبل</span>
                   </div>
                   <span className="text-xs text-gray-600 mt-1">سبل أون لاين</span>
                 </div>
                 <div className="flex flex-col items-center">
-                  <div className="w-12 h-12 md:w-14 md:h-14 bg-[#04ccf0] rounded-lg flex items-center justify-center">
+                  <div className="w-14 h-14 bg-[#00c8e6] rounded-lg flex items-center justify-center">
                     <span className="text-white text-xs font-bold">مها</span>
                   </div>
-                  <span className="text-xs text-gray-600 mt-1">المساعد الافتراضي</span>
+                  <span className="text-xs text-gray-600 mt-1">(المساعد الافتراضي)</span>
                 </div>
                 <div className="flex flex-col items-center">
-                  <div className="w-12 h-12 md:w-14 md:h-14 bg-green-600 rounded-lg flex items-center justify-center">
+                  <div className="w-14 h-14 bg-[#2d8a5e] rounded-lg flex items-center justify-center">
                     <span className="text-white text-xs font-bold">توكلنا</span>
                   </div>
                   <span className="text-xs text-gray-600 mt-1">توكلنا</span>
                 </div>
                 <div className="flex flex-col items-center">
-                  <div className="w-12 h-12 md:w-14 md:h-14 bg-green-500 rounded-lg flex items-center justify-center">
+                  <div className="w-14 h-14 bg-[#4caf50] rounded-lg flex items-center justify-center">
                     <span className="text-white text-xs font-bold">صحتي</span>
                   </div>
                   <span className="text-xs text-gray-600 mt-1">صحتي</span>
                 </div>
                 <div className="flex flex-col items-center">
-                  <div className="w-12 h-12 md:w-14 md:h-14 bg-[#5c3d2e] rounded-lg flex items-center justify-center">
+                  <div className="w-14 h-14 bg-[#5d4037] rounded-lg flex items-center justify-center">
                     <span className="text-white text-xs font-bold">أبشر</span>
                   </div>
                   <span className="text-xs text-gray-600 mt-1">أبشر</span>
@@ -288,107 +244,125 @@ export default function NationalAddressHome() {
         </div>
       </section>
 
-      {/* Register Your Address Section */}
-      <section className="py-12 md:py-16 bg-[#143c3c]">
+      {/* Register Section - Dark */}
+      <section className="py-16 bg-[#143c3c]">
         <div className="container mx-auto px-4">
-          <h2 className="text-2xl md:text-3xl font-bold text-white text-center mb-4">
-            تسجيل عنوانك الوطني
-          </h2>
-          <p className="text-white/80 text-center max-w-3xl mx-auto mb-10 text-sm md:text-base">
+          <h2 className="text-3xl font-bold text-white text-center mb-4">تسجيل عنوانك الوطني</h2>
+          <p className="text-white/80 text-center max-w-4xl mx-auto mb-12">
             سواء كنت فرد، قطاع تجاري أو حكومي تتواجد في قرية أو مدينة يحتوي عنوانك على مجموعة من البيانات والتي تعبر عنها بالدلائل الجغرافية والمكانية والتي تمثل بمجملها بصمتك الجغرافية
           </p>
-          
-          {/* Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
-            {/* Individuals Card */}
-            <div className="bg-white rounded-xl p-6 md:p-8 text-center hover:shadow-xl transition-shadow">
-              <div className="w-16 h-16 md:w-20 md:h-20 bg-[#146c84]/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                <svg className="w-8 h-8 md:w-10 md:h-10 text-[#146c84]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                </svg>
-              </div>
-              <h3 className="text-xl md:text-2xl font-bold text-[#143c3c] mb-4">العنوان الوطني للأفراد</h3>
-              <Link to="/register">
-                <button className="flex items-center justify-center gap-2 mx-auto text-[#04ccf0] font-bold hover:text-[#03b5d6] transition-colors">
-                  <span>سجّل الآن</span>
-                  <svg className="w-5 h-5 rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+
+          {/* Video + Cards */}
+          <div className="flex flex-col lg:flex-row gap-8 items-center">
+            {/* Video */}
+            <div className="w-full lg:w-1/3">
+              <div className="bg-black rounded-lg overflow-hidden aspect-video">
+                <div className="w-full h-full flex items-center justify-center">
+                  <svg className="w-16 h-16 text-white/50" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M8 5v14l11-7z"/>
                   </svg>
-                </button>
-              </Link>
+                </div>
+              </div>
             </div>
-            
-            {/* Business Card */}
-            <div className="bg-white rounded-xl p-6 md:p-8 text-center hover:shadow-xl transition-shadow">
-              <div className="w-16 h-16 md:w-20 md:h-20 bg-[#146c84]/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                <svg className="w-8 h-8 md:w-10 md:h-10 text-[#146c84]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
-                </svg>
-              </div>
-              <h3 className="text-xl md:text-2xl font-bold text-[#143c3c] mb-4">العنوان الوطني للأعمال</h3>
-              <Link to="/register">
-                <button className="flex items-center justify-center gap-2 mx-auto text-[#04ccf0] font-bold hover:text-[#03b5d6] transition-colors">
-                  <span>سجّل الآن</span>
-                  <svg className="w-5 h-5 rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+
+            {/* Cards */}
+            <div className="w-full lg:w-2/3 grid grid-cols-1 md:grid-cols-2 gap-6">
+              {/* Individuals Card */}
+              <div className="bg-white rounded-xl p-8 text-center border-2 border-[#c41e3a]">
+                <div className="w-16 h-16 mx-auto mb-4 flex items-center justify-center">
+                  <svg className="w-12 h-12 text-[#c41e3a]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                   </svg>
-                </button>
-              </Link>
+                </div>
+                <h3 className="text-xl font-bold text-[#143c3c] mb-4">العنوان الوطني للأفراد</h3>
+                <Link to="/register">
+                  <button className="flex items-center justify-center gap-2 mx-auto text-[#00c8e6] font-bold hover:text-[#00a8c6]">
+                    <svg className="w-5 h-5 rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                    </svg>
+                    <span>سجّل الآن</span>
+                  </button>
+                </Link>
+              </div>
+
+              {/* Business Card */}
+              <div className="bg-white rounded-xl p-8 text-center border-2 border-[#00c8e6]">
+                <div className="w-16 h-16 mx-auto mb-4 flex items-center justify-center">
+                  <svg className="w-12 h-12 text-[#00c8e6]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                  </svg>
+                </div>
+                <h3 className="text-xl font-bold text-[#143c3c] mb-4">العنوان الوطني للأعمال</h3>
+                <Link to="/register">
+                  <button className="flex items-center justify-center gap-2 mx-auto text-[#00c8e6] font-bold hover:text-[#00a8c6]">
+                    <svg className="w-5 h-5 rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                    </svg>
+                    <span>سجّل الآن</span>
+                  </button>
+                </Link>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
       {/* Free Service Section */}
-      <section className="py-12 md:py-16 bg-white">
+      <section className="py-16 bg-white">
         <div className="container mx-auto px-4">
-          <h2 className="text-2xl md:text-3xl font-bold text-[#04ccf0] text-center mb-2">خدمة مجانية</h2>
-          <p className="text-gray-600 text-center mb-10">ذات مميزات استثنائية</p>
-          
-          {/* Features Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <h2 className="text-3xl font-bold text-[#00c8e6] text-center mb-2">خدمة مجانية</h2>
+          <p className="text-gray-600 text-center mb-12">ذات مميزات استثنائية</p>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {/* Feature 1 */}
             <div className="bg-white border border-gray-200 rounded-xl p-6 text-center hover:shadow-lg transition-shadow">
-              <div className="w-14 h-14 bg-[#146c84]/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                <svg className="w-7 h-7 text-[#146c84]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              <div className="w-16 h-16 mx-auto mb-4">
+                <svg viewBox="0 0 64 64" className="w-full h-full">
+                  <circle cx="32" cy="32" r="28" fill="none" stroke="#00c8e6" strokeWidth="2"/>
+                  <circle cx="32" cy="32" r="20" fill="none" stroke="#c41e3a" strokeWidth="2"/>
+                  <circle cx="32" cy="32" r="4" fill="#143c3c"/>
                 </svg>
               </div>
               <p className="text-gray-700 text-sm leading-relaxed">
                 تغطي كامل مناطق المملكة العربية السعودية بدقة تصل إلى ١ متر مربع
               </p>
             </div>
-            
+
             {/* Feature 2 */}
             <div className="bg-white border border-gray-200 rounded-xl p-6 text-center hover:shadow-lg transition-shadow">
-              <div className="w-14 h-14 bg-[#04ccf0]/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                <svg className="w-7 h-7 text-[#04ccf0]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+              <div className="w-16 h-16 mx-auto mb-4">
+                <svg viewBox="0 0 64 64" className="w-full h-full">
+                  <path d="M32 8 L32 20 M32 44 L32 56 M8 32 L20 32 M44 32 L56 32" stroke="#00c8e6" strokeWidth="2"/>
+                  <circle cx="32" cy="32" r="12" fill="none" stroke="#c41e3a" strokeWidth="2"/>
+                  <path d="M32 20 L38 32 L32 44 L26 32 Z" fill="#00c8e6"/>
                 </svg>
               </div>
               <p className="text-gray-700 text-sm leading-relaxed">
-                تؤهلك للحصول على ١٠ عناوين في أنحاء العالم عن طريق خدمة عالمي
+                تؤهلك للحصول على <span className="text-[#c41e3a] font-bold">١٠ عناوين في أنحاء العالم</span> عن طريق خدمة عالمي
               </p>
             </div>
-            
+
             {/* Feature 3 */}
             <div className="bg-white border border-gray-200 rounded-xl p-6 text-center hover:shadow-lg transition-shadow">
-              <div className="w-14 h-14 bg-[#146c84]/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                <svg className="w-7 h-7 text-[#146c84]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+              <div className="w-16 h-16 mx-auto mb-4">
+                <svg viewBox="0 0 64 64" className="w-full h-full">
+                  <rect x="16" y="24" width="32" height="24" rx="4" fill="none" stroke="#00c8e6" strokeWidth="2"/>
+                  <path d="M24 24 L24 16 L40 16 L40 24" fill="none" stroke="#00c8e6" strokeWidth="2"/>
+                  <circle cx="32" cy="36" r="6" fill="#c41e3a"/>
                 </svg>
               </div>
               <p className="text-gray-700 text-sm leading-relaxed">
-                استخدام العنوان يسرع وصول الشحنات إليك دون الحاجة لاتصالات إضافية
+                استخدام العنوان <span className="text-[#c41e3a] font-bold">يسرع وصول الشحنات إليك</span> دون الحاجة لاتصالات إضافية
               </p>
             </div>
-            
+
             {/* Feature 4 */}
             <div className="bg-white border border-gray-200 rounded-xl p-6 text-center hover:shadow-lg transition-shadow">
-              <div className="w-14 h-14 bg-[#04ccf0]/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                <svg className="w-7 h-7 text-[#04ccf0]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+              <div className="w-16 h-16 mx-auto mb-4">
+                <svg viewBox="0 0 64 64" className="w-full h-full">
+                  <circle cx="32" cy="24" r="12" fill="none" stroke="#00c8e6" strokeWidth="2"/>
+                  <path d="M20 56 L20 44 C20 38 26 34 32 34 C38 34 44 38 44 44 L44 56" fill="none" stroke="#00c8e6" strokeWidth="2"/>
+                  <path d="M28 24 L32 28 L40 20" fill="none" stroke="#c41e3a" strokeWidth="2"/>
                 </svg>
               </div>
               <p className="text-gray-700 text-sm leading-relaxed">
@@ -400,60 +374,63 @@ export default function NationalAddressHome() {
       </section>
 
       {/* Address Components Section */}
-      <section className="py-12 md:py-16 bg-gray-50">
+      <section className="py-16 bg-gray-50">
         <div className="container mx-auto px-4">
-          <h2 className="text-2xl md:text-3xl font-bold text-[#143c3c] text-center mb-10">مكوّنات العنوان الوطني</h2>
-          
-          <div className="max-w-4xl mx-auto bg-white rounded-xl p-6 md:p-8 shadow-sm">
-            {/* Short Address */}
-            <div className="flex items-center justify-between mb-6 pb-4 border-b border-gray-200">
-              <span className="text-[#04ccf0] font-bold">العنوان المختصر</span>
-              <span className="text-xl md:text-2xl font-bold text-gray-800">RRRD2929</span>
+          <h2 className="text-3xl font-bold text-[#143c3c] text-center mb-12">مكوّنات العنوان الوطني</h2>
+
+          <div className="max-w-4xl mx-auto bg-white rounded-xl shadow-sm overflow-hidden">
+            {/* Short Address Row */}
+            <div className="flex items-center justify-between p-6 border-b border-gray-100">
+              <div className="flex items-center gap-2">
+                <div className="w-16 h-1 bg-[#00c8e6]"></div>
+                <span className="text-[#00c8e6] font-bold">العنوان المختصر</span>
+              </div>
+              <span className="text-2xl font-bold text-gray-800">RRRD2929</span>
             </div>
-            
+
             {/* Building Number */}
-            <div className="flex items-start justify-between mb-4 pb-4 border-b border-gray-100">
+            <div className="flex flex-col md:flex-row items-start md:items-center justify-between p-6 border-b border-gray-100 gap-4">
               <div className="text-right">
-                <span className="text-[#e74c3c] font-bold block">رقم المبنى</span>
-                <span className="text-gray-500 text-sm">(4 أرقام فريدة تمثل مبنى سكني أو تجاري)</span>
+                <span className="text-[#c41e3a] font-bold">رقم المبنى</span>
+                <span className="text-gray-500 text-sm block">(4 أرقام فريدة تمثل مبنى سكني أو تجاري)</span>
               </div>
               <div className="text-left">
-                <span className="text-gray-600 text-sm">الشارع (اسم الشارع الذي يقع عليه المدخل الرئيسي للمبنى)</span>
-                <span className="text-gray-800 font-bold block">2929، ريحانة بنت زيد</span>
+                <span className="text-gray-800 font-bold">2929، ريحانة بنت زيد</span>
+                <span className="text-gray-500 text-sm block">الشارع (اسم الشارع الذي يقع عليه المدخل الرئيسي للمبنى)</span>
               </div>
             </div>
-            
+
             {/* Secondary Number */}
-            <div className="flex items-start justify-between mb-4 pb-4 border-b border-gray-100">
+            <div className="flex flex-col md:flex-row items-start md:items-center justify-between p-6 border-b border-gray-100 gap-4">
               <div className="text-right">
-                <span className="text-[#3498db] font-bold block">الرقم الفرعي</span>
-                <span className="text-gray-500 text-sm">(4 أرقام تمثل احداثيات الموقع الدقيق للمبنى، مفيدة في حال لا يوجد اسم شارع أو حي)</span>
+                <span className="text-[#3498db] font-bold">الرقم الفرعي</span>
+                <span className="text-gray-500 text-sm block">(4 أرقام تمثل احداثيات الموقع الدقيق للمبنى، مفيدة في حال لا يوجد اسم شارع أو حي)</span>
               </div>
               <div className="text-left">
-                <span className="text-gray-600 text-sm">الحي (اسم الحي الذي يتواجد به المبنى)</span>
-                <span className="text-gray-800 font-bold block">8118، حي العارض</span>
+                <span className="text-gray-800 font-bold">8118، حي العارض</span>
+                <span className="text-gray-500 text-sm block">الحي (اسم الحي الذي يتواجد به المبنى)</span>
               </div>
             </div>
-            
+
             {/* Postal Code */}
-            <div className="flex items-start justify-between mb-4 pb-4 border-b border-gray-100">
+            <div className="flex flex-col md:flex-row items-start md:items-center justify-between p-6 border-b border-gray-100 gap-4">
               <div className="text-right">
-                <span className="text-[#9b59b6] font-bold block">الرمز البريدي</span>
-                <span className="text-gray-500 text-sm">(5 أرقام، لكل رقم مدلول مكاني فريد، شبكة الرموز البريدية تغطي المملكة العربية السعودية بنسبة 100%)</span>
+                <span className="text-[#9b59b6] font-bold">الرمز البريدي</span>
+                <span className="text-gray-500 text-sm block">(5 أرقام، لكل رقم مدلول مكاني فريد، شبكة الرموز البريدية تغطي المملكة العربية السعودية بنسبة 100%)</span>
               </div>
               <div className="text-left">
-                <span className="text-gray-800 font-bold block">13337</span>
+                <span className="text-gray-800 font-bold">13337</span>
               </div>
             </div>
-            
+
             {/* City */}
-            <div className="flex items-start justify-between">
+            <div className="flex flex-col md:flex-row items-start md:items-center justify-between p-6 gap-4">
               <div className="text-right">
-                <span className="text-[#27ae60] font-bold block">المدينة</span>
-                <span className="text-gray-500 text-sm">(المدينة التي يتواجد بها العنوان الوطني)</span>
+                <span className="text-[#27ae60] font-bold">المدينة</span>
+                <span className="text-gray-500 text-sm block">(المدينة التي يتواجد بها العنوان الوطني)</span>
               </div>
               <div className="text-left">
-                <span className="text-gray-800 font-bold block">الرياض</span>
+                <span className="text-gray-800 font-bold">الرياض</span>
               </div>
             </div>
           </div>
@@ -461,80 +438,86 @@ export default function NationalAddressHome() {
       </section>
 
       {/* Services Section */}
-      <section className="py-12 md:py-16 bg-white">
+      <section className="py-16 bg-white">
         <div className="container mx-auto px-4">
-          <h2 className="text-2xl md:text-3xl font-bold text-[#143c3c] text-center mb-10">خدمات العنوان الوطني</h2>
-          
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <h2 className="text-3xl font-bold text-[#143c3c] text-center mb-12">خدمات العنوان الوطني</h2>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {/* Service 1 */}
-            <div className="bg-white border border-gray-200 rounded-xl p-6 text-center hover:shadow-lg transition-shadow">
-              <div className="w-14 h-14 bg-[#146c84]/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                <svg className="w-7 h-7 text-[#146c84]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+            <div className="bg-white border-2 border-[#c41e3a] rounded-xl p-6 text-center">
+              <div className="w-12 h-12 mx-auto mb-4">
+                <svg viewBox="0 0 48 48" className="w-full h-full">
+                  <rect x="8" y="8" width="32" height="32" rx="4" fill="none" stroke="#c41e3a" strokeWidth="2"/>
+                  <path d="M16 24 L22 30 L32 18" fill="none" stroke="#c41e3a" strokeWidth="2"/>
                 </svg>
               </div>
-              <h3 className="text-gray-800 font-bold mb-3">طلب إثبات عنوان وطني</h3>
+              <h3 className="text-gray-800 font-bold mb-4">طلب إثبات عنوان وطني</h3>
               <Link to="/register">
-                <button className="text-[#04ccf0] font-bold text-sm hover:text-[#03b5d6] transition-colors flex items-center justify-center gap-1 mx-auto">
-                  <span>اطلب الآن</span>
+                <button className="flex items-center justify-center gap-2 mx-auto text-[#00c8e6] font-bold text-sm">
                   <svg className="w-4 h-4 rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
                   </svg>
+                  <span>اطلب الآن</span>
                 </button>
               </Link>
             </div>
-            
+
             {/* Service 2 */}
-            <div className="bg-white border border-gray-200 rounded-xl p-6 text-center hover:shadow-lg transition-shadow">
-              <div className="w-14 h-14 bg-[#04ccf0]/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                <svg className="w-7 h-7 text-[#04ccf0]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+            <div className="bg-white border-2 border-[#00c8e6] rounded-xl p-6 text-center">
+              <div className="w-12 h-12 mx-auto mb-4">
+                <svg viewBox="0 0 48 48" className="w-full h-full">
+                  <circle cx="24" cy="16" r="8" fill="none" stroke="#00c8e6" strokeWidth="2"/>
+                  <path d="M12 40 L12 32 C12 28 18 24 24 24 C30 24 36 28 36 32 L36 40" fill="none" stroke="#00c8e6" strokeWidth="2"/>
+                  <circle cx="36" cy="32" r="6" fill="none" stroke="#00c8e6" strokeWidth="2"/>
+                  <path d="M34 32 L36 34 L40 30" fill="none" stroke="#00c8e6" strokeWidth="2"/>
                 </svg>
               </div>
-              <h3 className="text-gray-800 font-bold mb-3">إضافة تابعين وإدارة عناوينك</h3>
+              <h3 className="text-gray-800 font-bold mb-4">إضافة تابعين وإدارة عناوينك</h3>
               <Link to="/register">
-                <button className="text-[#04ccf0] font-bold text-sm hover:text-[#03b5d6] transition-colors flex items-center justify-center gap-1 mx-auto">
+                <button className="flex items-center justify-center gap-2 mx-auto text-[#00c8e6] font-bold text-sm">
+                  <svg className="w-4 h-4 rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                  </svg>
                   <span>إدارة عنوانك</span>
-                  <svg className="w-4 h-4 rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                  </svg>
                 </button>
               </Link>
             </div>
-            
+
             {/* Service 3 */}
-            <div className="bg-white border border-gray-200 rounded-xl p-6 text-center hover:shadow-lg transition-shadow">
-              <div className="w-14 h-14 bg-[#146c84]/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                <svg className="w-7 h-7 text-[#146c84]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+            <div className="bg-white border-2 border-[#00c8e6] rounded-xl p-6 text-center">
+              <div className="w-12 h-12 mx-auto mb-4">
+                <svg viewBox="0 0 48 48" className="w-full h-full">
+                  <rect x="12" y="8" width="24" height="32" rx="2" fill="none" stroke="#00c8e6" strokeWidth="2"/>
+                  <circle cx="24" cy="20" r="6" fill="none" stroke="#00c8e6" strokeWidth="2"/>
+                  <path d="M18 32 L30 32" stroke="#00c8e6" strokeWidth="2"/>
                 </svg>
               </div>
-              <h3 className="text-gray-800 font-bold mb-3">تركيب لوحة عنوان وطني</h3>
+              <h3 className="text-gray-800 font-bold mb-4">تركيب لوحة عنوان وطني</h3>
               <Link to="/register">
-                <button className="text-[#04ccf0] font-bold text-sm hover:text-[#03b5d6] transition-colors flex items-center justify-center gap-1 mx-auto">
-                  <span>اطلب الآن</span>
+                <button className="flex items-center justify-center gap-2 mx-auto text-[#00c8e6] font-bold text-sm">
                   <svg className="w-4 h-4 rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
                   </svg>
+                  <span>اطلب الآن</span>
                 </button>
               </Link>
             </div>
-            
+
             {/* Service 4 */}
-            <div className="bg-white border border-gray-200 rounded-xl p-6 text-center hover:shadow-lg transition-shadow">
-              <div className="w-14 h-14 bg-[#04ccf0]/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                <svg className="w-7 h-7 text-[#04ccf0]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+            <div className="bg-white border-2 border-[#c41e3a] rounded-xl p-6 text-center">
+              <div className="w-12 h-12 mx-auto mb-4">
+                <svg viewBox="0 0 48 48" className="w-full h-full">
+                  <circle cx="24" cy="24" r="16" fill="none" stroke="#c41e3a" strokeWidth="2"/>
+                  <path d="M16 24 L22 30 L32 18" fill="none" stroke="#c41e3a" strokeWidth="2"/>
                 </svg>
               </div>
-              <h3 className="text-gray-800 font-bold mb-3">تحقق من إثبات العنوان</h3>
+              <h3 className="text-gray-800 font-bold mb-4">تحقق من إثبات العنوان</h3>
               <Link to="/register">
-                <button className="text-[#04ccf0] font-bold text-sm hover:text-[#03b5d6] transition-colors flex items-center justify-center gap-1 mx-auto">
-                  <span>تحقق الآن</span>
+                <button className="flex items-center justify-center gap-2 mx-auto text-[#00c8e6] font-bold text-sm">
                   <svg className="w-4 h-4 rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
                   </svg>
+                  <span>تحقق الآن</span>
                 </button>
               </Link>
             </div>
@@ -543,17 +526,17 @@ export default function NationalAddressHome() {
       </section>
 
       {/* Warning Section */}
-      <section className="py-10 md:py-14 bg-[#146c84]">
+      <section className="py-12 bg-[#146c84]">
         <div className="container mx-auto px-4">
-          <div className="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-6 text-center md:text-right">
+          <div className="flex flex-col md:flex-row items-center justify-center gap-6 text-center md:text-right">
             <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center flex-shrink-0">
-              <svg className="w-8 h-8 text-yellow-400" fill="currentColor" viewBox="0 0 24 24">
+              <svg className="w-8 h-8 text-[#00c8e6]" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
               </svg>
             </div>
             <div>
-              <h3 className="text-xl md:text-2xl font-bold text-white mb-2">احذر من المسائلة القانونية</h3>
-              <p className="text-white/90 text-sm md:text-base max-w-3xl">
+              <h3 className="text-2xl font-bold text-white mb-2">احذر من المسائلة القانونية</h3>
+              <p className="text-white/90 max-w-4xl">
                 العنوان الوطني هو نظام عنونة دقيق يؤهلك للحصول على مستوى أعلى من الخدمات الحكومية والتجارية لذا من مسؤولية كل فرد وكل جهة القيام بالتسجيل في العنوان الوطني والإلتزام بإدخال بيانات صحيحة تفادياً للمساءلة القانونية.
               </p>
             </div>
@@ -562,7 +545,7 @@ export default function NationalAddressHome() {
       </section>
 
       {/* Footer */}
-      <footer className="bg-[#143c3c] py-10 md:py-14">
+      <footer className="bg-[#143c3c] py-12">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-8 mb-10">
             {/* Column 1 */}
@@ -574,9 +557,11 @@ export default function NationalAddressHome() {
                 <li><a href="#" className="text-white/70 text-sm hover:text-white">مجلس الإدارة</a></li>
                 <li><a href="#" className="text-white/70 text-sm hover:text-white">القادة</a></li>
                 <li><a href="#" className="text-white/70 text-sm hover:text-white">الهيكل التنظيمي</a></li>
+                <li><a href="#" className="text-white/70 text-sm hover:text-white">استراتيجية البريد السعودي</a></li>
+                <li><a href="#" className="text-white/70 text-sm hover:text-white">المسؤولية الاجتماعية</a></li>
               </ul>
             </div>
-            
+
             {/* Column 2 */}
             <div>
               <h4 className="text-white font-bold mb-4">المركز الإعلامي</h4>
@@ -588,7 +573,7 @@ export default function NationalAddressHome() {
                 <li><a href="#" className="text-white/70 text-sm hover:text-white">التقارير السنوية</a></li>
               </ul>
             </div>
-            
+
             {/* Column 3 */}
             <div>
               <h4 className="text-white font-bold mb-4">أخرى</h4>
@@ -597,9 +582,10 @@ export default function NationalAddressHome() {
                 <li><a href="#" className="text-white/70 text-sm hover:text-white">المنافسات والمناقصات</a></li>
                 <li><a href="#" className="text-white/70 text-sm hover:text-white">التوعية بالاحتيال</a></li>
                 <li><a href="#" className="text-white/70 text-sm hover:text-white">البيانات المفتوحة</a></li>
+                <li><a href="#" className="text-white/70 text-sm hover:text-white">مشاركة البيانات</a></li>
               </ul>
             </div>
-            
+
             {/* Column 4 */}
             <div>
               <h4 className="text-white font-bold mb-4">مواقع ذات علاقة</h4>
@@ -609,48 +595,58 @@ export default function NationalAddressHome() {
                 <li><a href="#" className="text-white/70 text-sm hover:text-white">أبشر</a></li>
                 <li><a href="#" className="text-white/70 text-sm hover:text-white">إرسال</a></li>
                 <li><a href="#" className="text-white/70 text-sm hover:text-white">ناقل</a></li>
+                <li><a href="#" className="text-white/70 text-sm hover:text-white">المركز السعودي للأعمال</a></li>
               </ul>
             </div>
-            
+
             {/* Column 5 - Social */}
             <div className="col-span-2 md:col-span-4 lg:col-span-1">
-              <h4 className="text-white font-bold mb-4">تابعنا</h4>
-              <div className="flex gap-3">
-                <a href="#" className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-white/20 transition-colors">
+              <div className="flex gap-3 mb-6">
+                <a href="#" className="w-10 h-10 bg-[#1877f2] rounded-full flex items-center justify-center">
                   <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/>
+                    <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
                   </svg>
                 </a>
-                <a href="#" className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-white/20 transition-colors">
+                <a href="#" className="w-10 h-10 bg-black rounded-full flex items-center justify-center">
                   <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
                   </svg>
                 </a>
-                <a href="#" className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-white/20 transition-colors">
+                <a href="#" className="w-10 h-10 bg-[#ff0000] rounded-full flex items-center justify-center">
                   <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/>
+                    <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
                   </svg>
                 </a>
-                <a href="#" className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-white/20 transition-colors">
+                <a href="#" className="w-10 h-10 bg-[#0077b5] rounded-full flex items-center justify-center">
                   <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M4.98 3.5c0 1.381-1.11 2.5-2.48 2.5s-2.48-1.119-2.48-2.5c0-1.38 1.11-2.5 2.48-2.5s2.48 1.12 2.48 2.5zm.02 4.5h-5v16h5v-16zm7.982 0h-4.968v16h4.969v-8.399c0-4.67 6.029-5.052 6.029 0v8.399h4.988v-10.131c0-7.88-8.922-7.593-11.018-3.714v-2.155z"/>
+                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                  </svg>
+                </a>
+                <a href="#" className="w-10 h-10 bg-gradient-to-tr from-[#f09433] via-[#e6683c] to-[#bc1888] rounded-full flex items-center justify-center">
+                  <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/>
+                  </svg>
+                </a>
+                <a href="#" className="w-10 h-10 bg-[#25d366] rounded-full flex items-center justify-center">
+                  <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
                   </svg>
                 </a>
               </div>
-              
-              {/* App Store Links */}
-              <div className="flex gap-2 mt-6">
+
+              {/* App Store Badges */}
+              <div className="flex gap-2">
                 <a href="#" className="block">
-                  <img src="/images/app-store-badge.png" alt="App Store" className="h-10" />
+                  <img src="/images/app-store.png" alt="App Store" className="h-10" />
                 </a>
                 <a href="#" className="block">
-                  <img src="/images/google-play-badge.png" alt="Google Play" className="h-10" />
+                  <img src="/images/google-play.png" alt="Google Play" className="h-10" />
                 </a>
               </div>
             </div>
           </div>
-          
-          {/* Bottom Bar */}
+
+          {/* Bottom */}
           <div className="border-t border-white/20 pt-6">
             <div className="flex flex-col md:flex-row items-center justify-between gap-4">
               <div className="flex items-center gap-4 text-white/70 text-sm">

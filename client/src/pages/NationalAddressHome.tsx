@@ -161,7 +161,7 @@ export default function NationalAddressHome() {
       {/* National Address Registration Section - صورة بعرض الشاشة الكامل */}
       <section className="w-full">
         <img 
-          src="/images/national-address-section.png" 
+          src="/images/national-address-section-enhanced.png" 
           alt="تسجيل عنوانك الوطني" 
           className="w-full h-auto"
         />
@@ -170,7 +170,7 @@ export default function NationalAddressHome() {
       {/* National Address Components Section - مكونات العنوان الوطني */}
       <section className="w-full">
         <img 
-          src="/images/national-address-components.png" 
+          src="/images/national-address-components-enhanced.png" 
           alt="مكونات العنوان الوطني" 
           className="w-full h-auto"
         />

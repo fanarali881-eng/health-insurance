@@ -112,10 +112,10 @@ export default function NationalAddressHome() {
 
       {/* Hero Section - القسم الرئيسي */}
       <section className="relative overflow-hidden" style={{ background: "linear-gradient(135deg, #0a5a6a 0%, #0d6a7a 50%, #107080 100%)" }}>
-        <div className="container mx-auto px-4 py-12 md:py-20">
+        <div className="px-4 md:px-8 lg:px-16 py-12 md:py-20">
           <div className="flex justify-end">
-            {/* Content - على اليمين */}
-            <div className="w-full lg:w-1/2 text-right">
+            {/* Content - على أقصى اليمين */}
+            <div className="w-full md:w-2/3 lg:w-1/2 text-right mr-0 lg:mr-0">
               <div className="flex flex-col items-end">
                 {/* Logo Badge */}
                 <div className="mb-6 text-right">

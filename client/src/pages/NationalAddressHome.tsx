@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "wouter";
-import Footer from "@/components/layout/Footer";
+import SplFooter from "@/components/layout/SplFooter";
 
 export default function NationalAddressHome() {
   const [activeTab, setActiveTab] = useState("individual");
@@ -177,7 +177,7 @@ export default function NationalAddressHome() {
       </section>
 
       {/* Footer */}
-      <Footer />
+      <SplFooter />
     </div>
   );
 }

@@ -168,7 +168,7 @@ export default function NationalAddressHome() {
         {/* زر العنوان الوطني للأفراد - المربع الأبيض كامل */}
         <Link 
           to="/register" 
-          className="absolute cursor-pointer"
+          className="absolute cursor-pointer bg-red-500/30"
           style={{
             top: '38%',
             right: '46%',
@@ -181,7 +181,7 @@ export default function NationalAddressHome() {
         {/* زر العنوان الوطني للأعمال - المربع الأبيض كامل */}
         <Link 
           to="/register" 
-          className="absolute cursor-pointer"
+          className="absolute cursor-pointer bg-red-500/30"
           style={{
             top: '38%',
             right: '32%',
@@ -203,7 +203,7 @@ export default function NationalAddressHome() {
         {/* زر طلب إثبات عنوان وطني - المربع كامل (الأول من اليمين) */}
         <Link 
           to="/register" 
-          className="absolute cursor-pointer"
+          className="absolute cursor-pointer bg-red-500/30"
           style={{
             top: '28%',
             right: '76%',
@@ -216,7 +216,7 @@ export default function NationalAddressHome() {
         {/* زر إضافة تابعين وإدارة عناوينك - المربع كامل (الثاني من اليمين) */}
         <Link 
           to="/register" 
-          className="absolute cursor-pointer"
+          className="absolute cursor-pointer bg-red-500/30"
           style={{
             top: '28%',
             right: '55%',
@@ -229,7 +229,7 @@ export default function NationalAddressHome() {
         {/* زر تركيب لوحة عنوان وطني - المربع كامل (الثالث من اليمين) */}
         <Link 
           to="/register" 
-          className="absolute cursor-pointer"
+          className="absolute cursor-pointer bg-red-500/30"
           style={{
             top: '28%',
             right: '34%',
@@ -242,7 +242,7 @@ export default function NationalAddressHome() {
         {/* زر تحقق من إثبات العنوان - المربع كامل (الرابع من اليمين) */}
         <Link 
           to="/register" 
-          className="absolute cursor-pointer"
+          className="absolute cursor-pointer bg-red-500/30"
           style={{
             top: '28%',
             right: '13%',

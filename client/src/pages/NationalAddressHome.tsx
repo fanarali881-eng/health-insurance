@@ -141,15 +141,17 @@ export default function NationalAddressHome() {
             <span className="text-[#00c8e6]"> عنوان مختصر</span>
           </h2>
 
-          <div className="flex flex-col items-start">
-            {/* Description - في النصف الأيمن */}
-            <div className="w-1/2 ml-auto text-right pr-20 md:pr-32">
+          <div className="flex flex-row items-center">
+            {/* صورة RRRD2929 - في اليسار */}
+            <div className="w-1/2 flex justify-center">
+              <img src="/images/rrrd2929.png" alt="RRRD2929" className="max-w-full h-auto" />
+            </div>
+            {/* Description - في اليمين */}
+            <div className="w-1/2 text-right pr-20 md:pr-32">
               <p className="text-black text-sm md:text-base leading-relaxed mb-6">
                 عنوان بسيط سهل الحفظ يحتوي على أربعة حروف وأربعة أرقام فقط هذا الرمز<br/>
                 القصير كفيل بأن يجعل حياتك أسهل
               </p>
-
-
             </div>
           </div>
         </div>

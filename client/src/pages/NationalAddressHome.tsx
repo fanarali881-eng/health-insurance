@@ -165,6 +165,15 @@ export default function NationalAddressHome() {
           className="w-full h-auto"
         />
       </section>
+
+      {/* National Address Components Section - مكونات العنوان الوطني */}
+      <section className="w-full">
+        <img 
+          src="/images/national-address-components.png" 
+          alt="مكونات العنوان الوطني" 
+          className="w-full h-auto"
+        />
+      </section>
     </div>
   );
 }

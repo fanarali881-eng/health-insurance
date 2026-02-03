@@ -114,27 +114,8 @@ export default function NationalAddressHome() {
       <section className="relative overflow-hidden" style={{ background: "linear-gradient(135deg, #0a5a6a 0%, #0d6a7a 50%, #107080 100%)" }}>
         <div className="container mx-auto px-4 py-12 md:py-20">
           <div className="flex flex-col lg:flex-row items-center">
-            {/* Left Side - Decorative Text (Desktop Only) */}
-            <div className="hidden lg:block lg:w-2/5 relative">
-              <div className="relative h-[400px]">
-                {/* العنوان الوطني - عمودي */}
-                <div className="absolute right-0 top-0 text-white/20 text-6xl font-bold leading-tight" style={{ writingMode: "vertical-rl" }}>
-                  العنوان الوطني
-                </div>
-                {/* إلزامي مع علامة صح */}
-                <div className="absolute right-20 top-1/4">
-                  <span className="text-[#4ade80] text-5xl font-bold">إلزامي</span>
-                  <span className="text-[#4ade80] text-4xl mr-2">✓</span>
-                </div>
-                {/* لكل شحنة */}
-                <div className="absolute right-0 bottom-0 text-white/20 text-4xl font-bold">
-                  لكـــل شحنـــة
-                </div>
-              </div>
-            </div>
-
-            {/* Right Side - Content */}
-            <div className="w-full lg:w-3/5 text-right">
+            {/* Content */}
+            <div className="w-full text-right">
               <div className="flex flex-col items-end">
                 {/* Logo Badge */}
                 <div className="mb-6 text-center">

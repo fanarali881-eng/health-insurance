@@ -168,7 +168,7 @@ export default function NationalAddressHome() {
         {/* زر العنوان الوطني للأفراد - المربع الأبيض كامل */}
         <Link 
           to="/register" 
-          className="absolute cursor-pointer bg-red-500/30"
+          className="absolute cursor-pointer"
           style={{
             top: '22%',
             right: '59%',
@@ -181,7 +181,7 @@ export default function NationalAddressHome() {
         {/* زر العنوان الوطني للأعمال - المربع الأبيض كامل */}
         <Link 
           to="/register" 
-          className="absolute cursor-pointer bg-red-500/30"
+          className="absolute cursor-pointer"
           style={{
             top: '22%',
             right: '45%',
@@ -203,7 +203,7 @@ export default function NationalAddressHome() {
         {/* زر واحد يغطي كل المربعات الأربعة */}
         <Link 
           to="/register" 
-          className="absolute cursor-pointer bg-red-500/30"
+          className="absolute cursor-pointer"
           style={{
             top: '62%',
             right: '12%',

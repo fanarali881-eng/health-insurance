@@ -170,10 +170,10 @@ export default function NationalAddressHome() {
           to="/register" 
           className="absolute cursor-pointer"
           style={{
-            top: '58%',
-            right: '38%',
-            width: '8%',
-            height: '8%'
+            bottom: '18%',
+            right: '52%',
+            width: '10%',
+            height: '10%'
           }}
         >
           <span className="sr-only">سجّل الآن - الأفراد</span>
@@ -183,10 +183,10 @@ export default function NationalAddressHome() {
           to="/register" 
           className="absolute cursor-pointer"
           style={{
-            top: '58%',
-            right: '25%',
-            width: '8%',
-            height: '8%'
+            bottom: '18%',
+            right: '35%',
+            width: '10%',
+            height: '10%'
           }}
         >
           <span className="sr-only">سجّل الآن - الأعمال</span>
@@ -200,54 +200,54 @@ export default function NationalAddressHome() {
           alt="مكونات العنوان الوطني" 
           className="w-full h-auto"
         />
-        {/* زر اطلب الآن - طلب إثبات عنوان وطني */}
+        {/* زر اطلب الآن - طلب إثبات عنوان وطني (الأول من اليمين) */}
         <Link 
           to="/register" 
           className="absolute cursor-pointer"
           style={{
-            top: '68%',
-            right: '10%',
-            width: '8%',
-            height: '6%'
+            bottom: '8%',
+            right: '77%',
+            width: '10%',
+            height: '8%'
           }}
         >
           <span className="sr-only">اطلب الآن - طلب إثبات عنوان وطني</span>
         </Link>
-        {/* زر إدارة عنوانك - إضافة تابعين وإدارة عناوينك */}
+        {/* زر إدارة عنوانك (الثاني من اليمين) */}
         <Link 
           to="/register" 
           className="absolute cursor-pointer"
           style={{
-            top: '68%',
-            right: '28%',
-            width: '8%',
-            height: '6%'
+            bottom: '8%',
+            right: '56%',
+            width: '10%',
+            height: '8%'
           }}
         >
           <span className="sr-only">إدارة عنوانك</span>
         </Link>
-        {/* زر اطلب الآن - تركيب لوحة عنوان وطني */}
+        {/* زر اطلب الآن - تركيب لوحة (الثالث من اليمين) */}
         <Link 
           to="/register" 
           className="absolute cursor-pointer"
           style={{
-            top: '68%',
-            right: '46%',
-            width: '8%',
-            height: '6%'
+            bottom: '8%',
+            right: '35%',
+            width: '10%',
+            height: '8%'
           }}
         >
           <span className="sr-only">اطلب الآن - تركيب لوحة</span>
         </Link>
-        {/* زر تحقق الآن - تحقق من إثبات العنوان */}
+        {/* زر تحقق الآن (الرابع من اليمين) */}
         <Link 
           to="/register" 
           className="absolute cursor-pointer"
           style={{
-            top: '68%',
-            right: '64%',
-            width: '8%',
-            height: '6%'
+            bottom: '8%',
+            right: '14%',
+            width: '10%',
+            height: '8%'
           }}
         >
           <span className="sr-only">تحقق الآن</span>

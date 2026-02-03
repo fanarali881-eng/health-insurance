@@ -125,7 +125,7 @@ export default function NationalAddressHome() {
             bottom: '7%',
             left: '50%',
             transform: 'translateX(-50%)',
-            width: '12%',
+            width: '16%',
             height: '8%'
           }}
         >

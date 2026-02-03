@@ -170,8 +170,8 @@ export default function NationalAddressHome() {
           to="/register" 
           className="absolute cursor-pointer bg-red-500/30"
           style={{
-            top: '32%',
-            right: '53%',
+            top: '22%',
+            right: '58%',
             width: '12%',
             height: '18%'
           }}
@@ -183,8 +183,8 @@ export default function NationalAddressHome() {
           to="/register" 
           className="absolute cursor-pointer bg-red-500/30"
           style={{
-            top: '32%',
-            right: '39%',
+            top: '22%',
+            right: '44%',
             width: '12%',
             height: '18%'
           }}

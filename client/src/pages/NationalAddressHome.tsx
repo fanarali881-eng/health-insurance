@@ -113,14 +113,14 @@ export default function NationalAddressHome() {
       {/* Hero Section - القسم الرئيسي */}
       <section className="relative overflow-hidden" style={{ background: "linear-gradient(135deg, #0a5a6a 0%, #0d6a7a 50%, #107080 100%)" }}>
         <div className="px-4 md:px-8 lg:px-16 py-12 md:py-20">
-          <div className="flex justify-end">
-            {/* Content - على أقصى اليمين */}
-            <div className="w-full md:w-2/3 lg:w-1/2 text-right mr-0 lg:mr-0">
-              <div className="flex flex-col items-end">
+          <div className="flex justify-start">
+            {/* Content - على الجهة اليمنى من الشاشة */}
+            <div className="w-full md:w-2/3 lg:w-1/2 text-right">
+              <div className="flex flex-col items-start">
                 {/* Logo Badge */}
-                <div className="mb-6 text-right">
+                <div className="mb-6">
                   {/* National Address Icon */}
-                  <div className="mb-3 flex justify-end">
+                  <div className="mb-3">
                     <svg className="w-16 h-16 md:w-20 md:h-20" viewBox="0 0 80 80">
                       <path d="M40 5 L40 20" stroke="#1e3a5f" strokeWidth="3" fill="none"/>
                       <path d="M40 30 L40 45" stroke="#1e3a5f" strokeWidth="3" fill="none"/>
@@ -135,12 +135,12 @@ export default function NationalAddressHome() {
                 </div>
 
                 {/* Main Heading */}
-                <h1 className="text-2xl md:text-4xl lg:text-5xl font-bold text-white mb-4 md:mb-6 leading-tight text-right">
+                <h1 className="text-2xl md:text-4xl lg:text-5xl font-bold text-white mb-4 md:mb-6 leading-tight">
                   عنوانك هو هويتك المكانية الإلزامية...
                 </h1>
 
                 {/* Description */}
-                <p className="text-white/90 text-base md:text-lg mb-6 md:mb-8 leading-relaxed text-right">
+                <p className="text-white/90 text-base md:text-lg mb-6 md:mb-8 leading-relaxed">
                   العنوان الوطني يضمن وصول شحناتك ومعاملاتك بسرعة وموثوقية. ابتداءً من 1 يناير 2026 سيصبح استخدامه إلزامياً لكل فرد وجهة.
                 </p>
 

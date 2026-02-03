@@ -143,7 +143,7 @@ export default function NationalAddressHome() {
 
           <div className="flex flex-col items-end">
             {/* Description - RTL مع نقل قليل لليسار */}
-            <div className="w-full text-right mr-[30%] md:mr-[35%]">
+            <div className="w-full text-right mr-[35%] md:mr-[40%]">
               <p className="text-black text-sm md:text-base leading-relaxed mb-6">
                 عنوان بسيط سهل الحفظ يحتوي على أربعة حروف وأربعة أرقام فقط هذا الرمز<br/>
                 القصير كفيل بأن يجعل حياتك أسهل

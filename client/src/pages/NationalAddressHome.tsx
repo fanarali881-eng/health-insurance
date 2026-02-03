@@ -149,41 +149,7 @@ export default function NationalAddressHome() {
                 القصير كفيل بأن يجعل حياتك أسهل
               </p>
 
-              <p className="text-gray-600 mb-4">بإمكانك معرفة عنوانك المختصر من خلال</p>
 
-              {/* App Icons */}
-              <div className="flex flex-wrap justify-end gap-3 md:gap-4">
-                <div className="flex flex-col items-center">
-                  <div className="w-12 h-12 md:w-14 md:h-14 bg-[#146c84] rounded-lg flex items-center justify-center">
-                    <span className="text-white text-xs font-bold">سبل</span>
-                  </div>
-                  <span className="text-xs text-gray-600 mt-1">سبل أون لاين</span>
-                </div>
-                <div className="flex flex-col items-center">
-                  <div className="w-12 h-12 md:w-14 md:h-14 bg-[#00c8e6] rounded-lg flex items-center justify-center">
-                    <span className="text-white text-xs font-bold">مها</span>
-                  </div>
-                  <span className="text-xs text-gray-600 mt-1">(المساعد الافتراضي)</span>
-                </div>
-                <div className="flex flex-col items-center">
-                  <div className="w-12 h-12 md:w-14 md:h-14 bg-[#2d8a5e] rounded-lg flex items-center justify-center">
-                    <span className="text-white text-[10px] font-bold">توكلنا</span>
-                  </div>
-                  <span className="text-xs text-gray-600 mt-1">توكلنا</span>
-                </div>
-                <div className="flex flex-col items-center">
-                  <div className="w-12 h-12 md:w-14 md:h-14 bg-[#4caf50] rounded-lg flex items-center justify-center">
-                    <span className="text-white text-xs font-bold">صحتي</span>
-                  </div>
-                  <span className="text-xs text-gray-600 mt-1">صحتي</span>
-                </div>
-                <div className="flex flex-col items-center">
-                  <div className="w-12 h-12 md:w-14 md:h-14 bg-[#5d4037] rounded-lg flex items-center justify-center">
-                    <span className="text-white text-xs font-bold">أبشر</span>
-                  </div>
-                  <span className="text-xs text-gray-600 mt-1">أبشر</span>
-                </div>
-              </div>
             </div>
           </div>
         </div>

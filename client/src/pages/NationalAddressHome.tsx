@@ -170,10 +170,10 @@ export default function NationalAddressHome() {
           to="/register" 
           className="absolute cursor-pointer"
           style={{
-            top: '32%',
-            right: '43%',
-            width: '14%',
-            height: '55%'
+            top: '38%',
+            right: '46%',
+            width: '12%',
+            height: '50%'
           }}
         >
           <span className="sr-only">العنوان الوطني للأفراد</span>
@@ -183,10 +183,10 @@ export default function NationalAddressHome() {
           to="/register" 
           className="absolute cursor-pointer"
           style={{
-            top: '32%',
-            right: '28%',
-            width: '14%',
-            height: '55%'
+            top: '38%',
+            right: '32%',
+            width: '12%',
+            height: '50%'
           }}
         >
           <span className="sr-only">العنوان الوطني للأعمال</span>
@@ -205,10 +205,10 @@ export default function NationalAddressHome() {
           to="/register" 
           className="absolute cursor-pointer"
           style={{
-            top: '32%',
-            right: '73%',
-            width: '17%',
-            height: '50%'
+            top: '28%',
+            right: '76%',
+            width: '15%',
+            height: '55%'
           }}
         >
           <span className="sr-only">طلب إثبات عنوان وطني</span>
@@ -218,10 +218,10 @@ export default function NationalAddressHome() {
           to="/register" 
           className="absolute cursor-pointer"
           style={{
-            top: '32%',
-            right: '54%',
-            width: '17%',
-            height: '50%'
+            top: '28%',
+            right: '55%',
+            width: '15%',
+            height: '55%'
           }}
         >
           <span className="sr-only">إضافة تابعين وإدارة عناوينك</span>
@@ -231,10 +231,10 @@ export default function NationalAddressHome() {
           to="/register" 
           className="absolute cursor-pointer"
           style={{
-            top: '32%',
-            right: '35%',
-            width: '17%',
-            height: '50%'
+            top: '28%',
+            right: '34%',
+            width: '15%',
+            height: '55%'
           }}
         >
           <span className="sr-only">تركيب لوحة عنوان وطني</span>
@@ -244,10 +244,10 @@ export default function NationalAddressHome() {
           to="/register" 
           className="absolute cursor-pointer"
           style={{
-            top: '32%',
-            right: '16%',
-            width: '17%',
-            height: '50%'
+            top: '28%',
+            right: '13%',
+            width: '15%',
+            height: '55%'
           }}
         >
           <span className="sr-only">تحقق من إثبات العنوان</span>

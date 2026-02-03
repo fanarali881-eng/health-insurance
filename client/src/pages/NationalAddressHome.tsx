@@ -111,46 +111,46 @@ export default function NationalAddressHome() {
       </header>
 
       {/* Hero Section - القسم الرئيسي */}
-      <section className="relative overflow-hidden">
-        {/* Background Image with 25% opacity */}
-        <div className="absolute inset-0" style={{ backgroundImage: "url('/images/na-banner-v2.jpeg')", backgroundSize: "contain", backgroundPosition: "center", backgroundRepeat: "no-repeat", opacity: 0.25 }}></div>
-        {/* Background Color */}
-        <div className="absolute inset-0 bg-[#0a4a6a]" style={{ zIndex: -1 }}></div>
-        <div className="relative px-4 md:px-8 lg:px-16 py-12 md:py-20">
-          <div className="flex justify-start">
-            {/* Content - على الجهة اليمنى من الشاشة */}
-            <div className="w-full md:w-2/3 lg:w-1/2 text-right">
-              <div className="flex flex-col items-start">
+      <section className="relative overflow-hidden" style={{ backgroundImage: "url('/images/na-banner-v2.jpeg')", backgroundSize: "cover", backgroundPosition: "left center", backgroundRepeat: "no-repeat" }}>
+        <div className="container mx-auto px-4 md:px-8 lg:px-16 py-16 md:py-24">
+          <div className="flex justify-end">
+            {/* Content - على اليمين */}
+            <div className="w-full md:w-1/2 lg:w-2/5 text-right">
+              <div className="flex flex-col items-end">
                 {/* Logo Badge */}
-                <div className="mb-6">
-                  {/* National Address Icon */}
-                  <div className="mb-3">
-                    <svg className="w-16 h-16 md:w-20 md:h-20" viewBox="0 0 80 80">
-                      <path d="M40 5 L40 20" stroke="#1e3a5f" strokeWidth="3" fill="none"/>
-                      <path d="M40 30 L40 45" stroke="#1e3a5f" strokeWidth="3" fill="none"/>
-                      <path d="M40 55 L40 70" stroke="#1e3a5f" strokeWidth="3" fill="none"/>
-                      <path d="M25 40 C25 25 40 10 40 10 C40 10 55 25 55 40 C55 55 40 65 40 65 C40 65 25 55 25 40" stroke="#c41e3a" strokeWidth="2.5" fill="none"/>
-                      <circle cx="40" cy="40" r="6" fill="#00c8e6"/>
+                <div className="mb-6 text-center">
+                  {/* National Address Icon - مطابق للصورة */}
+                  <div className="mb-3 flex justify-center">
+                    <svg className="w-20 h-20 md:w-24 md:h-24" viewBox="0 0 100 100">
+                      {/* الخطوط الحمراء الخارجية */}
+                      <path d="M50 10 C30 10 15 30 15 50 C15 70 50 95 50 95 C50 95 85 70 85 50 C85 30 70 10 50 10" stroke="#c41e3a" strokeWidth="3" fill="none"/>
+                      {/* الخطوط الزرقاء الداخلية */}
+                      <path d="M50 20 C35 20 25 35 25 50 C25 65 50 85 50 85 C50 85 75 65 75 50 C75 35 65 20 50 20" stroke="#1e3a5f" strokeWidth="2.5" fill="none"/>
+                      {/* الدائرة الزرقاء في المنتصف */}
+                      <circle cx="50" cy="45" r="8" fill="#00c8e6"/>
+                      {/* الخطوط الجانبية */}
+                      <path d="M30 50 L10 50" stroke="#c41e3a" strokeWidth="2"/>
+                      <path d="M70 50 L90 50" stroke="#c41e3a" strokeWidth="2"/>
                     </svg>
                   </div>
-                  <div className="text-white text-lg md:text-xl font-bold">العنوان الوطني</div>
-                  <div className="text-white/70 text-xs tracking-widest">NATIONAL ADDRESS</div>
-                  <div className="text-[#00c8e6] text-sm mt-1">عنوانك هويتك المكانية</div>
+                  <div className="text-white text-xl md:text-2xl font-bold">العنوان الوطني</div>
+                  <div className="text-white/80 text-sm tracking-widest">NATIONAL ADDRESS</div>
+                  <div className="text-[#00c8e6] text-base mt-1">عنوانك هويتك المكانية</div>
                 </div>
 
                 {/* Main Heading */}
-                <h1 className="text-2xl md:text-4xl lg:text-5xl font-bold text-white mb-4 md:mb-6 leading-tight">
+                <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4 md:mb-6 leading-tight text-right">
                   عنوانك هو هويتك المكانية الإلزامية...
                 </h1>
 
                 {/* Description */}
-                <p className="text-white/90 text-base md:text-lg mb-6 md:mb-8 leading-relaxed">
+                <p className="text-white/90 text-base md:text-lg mb-8 leading-relaxed text-right">
                   العنوان الوطني يضمن وصول شحناتك ومعاملاتك بسرعة وموثوقية. ابتداءً من 1 يناير 2026 سيصبح استخدامه إلزامياً لكل فرد وجهة.
                 </p>
 
                 {/* CTA Button */}
                 <Link to="/register">
-                  <button className="px-10 md:px-14 py-3 md:py-4 bg-[#143c3c] text-white font-bold text-base md:text-lg rounded hover:bg-[#0f2e2e] transition-colors">
+                  <button className="px-12 md:px-16 py-4 bg-[#1a2a4a] text-white font-bold text-lg rounded hover:bg-[#0f1e3a] transition-colors">
                     سجّل الآن
                   </button>
                 </Link>

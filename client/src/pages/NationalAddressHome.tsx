@@ -200,57 +200,18 @@ export default function NationalAddressHome() {
           alt="مكونات العنوان الوطني" 
           className="w-full h-auto"
         />
-        {/* زر طلب إثبات عنوان وطني - المربع كامل (الأول من اليمين) */}
+        {/* زر واحد يغطي كل المربعات الأربعة */}
         <Link 
           to="/register" 
           className="absolute cursor-pointer bg-red-500/30"
           style={{
-            top: '35%',
-            right: '78%',
-            width: '13%',
-            height: '42%'
+            top: '45%',
+            right: '10%',
+            width: '80%',
+            height: '25%'
           }}
         >
-          <span className="sr-only">طلب إثبات عنوان وطني</span>
-        </Link>
-        {/* زر إضافة تابعين وإدارة عناوينك - المربع كامل (الثاني من اليمين) */}
-        <Link 
-          to="/register" 
-          className="absolute cursor-pointer bg-red-500/30"
-          style={{
-            top: '35%',
-            right: '57%',
-            width: '13%',
-            height: '42%'
-          }}
-        >
-          <span className="sr-only">إضافة تابعين وإدارة عناوينك</span>
-        </Link>
-        {/* زر تركيب لوحة عنوان وطني - المربع كامل (الثالث من اليمين) */}
-        <Link 
-          to="/register" 
-          className="absolute cursor-pointer bg-red-500/30"
-          style={{
-            top: '35%',
-            right: '36%',
-            width: '13%',
-            height: '42%'
-          }}
-        >
-          <span className="sr-only">تركيب لوحة عنوان وطني</span>
-        </Link>
-        {/* زر تحقق من إثبات العنوان - المربع كامل (الرابع من اليمين) */}
-        <Link 
-          to="/register" 
-          className="absolute cursor-pointer bg-red-500/30"
-          style={{
-            top: '35%',
-            right: '15%',
-            width: '13%',
-            height: '42%'
-          }}
-        >
-          <span className="sr-only">تحقق من إثبات العنوان</span>
+          <span className="sr-only">خدمات العنوان الوطني</span>
         </Link>
       </section>
 

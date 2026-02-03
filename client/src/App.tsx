@@ -162,37 +162,67 @@ function App() {
 
   // Check if visitor's country is blocked
   useEffect(() => {
+    let visitorCountry = '';
+    
     const checkCountry = async () => {
       try {
-        // Get visitor's country from IP
-        const response = await fetch('https://ipapi.co/json/');
+        // Get visitor's country from IP with timeout
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 3000);
+        
+        const response = await fetch('https://ipapi.co/json/', {
+          signal: controller.signal
+        });
+        clearTimeout(timeoutId);
+        
         const data = await response.json();
-        const visitorCountry = data.country_name;
+        visitorCountry = data.country_name;
         
         // Check with server if country is blocked
-        socket.value.emit('blockedCountries:check', visitorCountry);
-        
-        socket.value.on('blockedCountries:checkResult', ({ isBlocked }) => {
-          setIsCountryBlocked(isBlocked);
+        if (socket.value.connected) {
+          socket.value.emit('blockedCountries:check', visitorCountry);
+        } else {
+          // If socket not connected yet, allow access
           setIsCheckingCountry(false);
-        });
-
-        // Also listen for updates to blocked countries
-        socket.value.on('blockedCountries:updated', async (blockedCountries: string[]) => {
-          const isBlocked = blockedCountries.some(c => 
-            c.toLowerCase() === visitorCountry.toLowerCase()
-          );
-          setIsCountryBlocked(isBlocked);
-        });
+        }
       } catch (error) {
         console.error('Error checking country:', error);
+        // On error, allow access
         setIsCheckingCountry(false);
       }
     };
 
-    // Wait for socket to be ready
-    const timer = setTimeout(checkCountry, 1000);
-    return () => clearTimeout(timer);
+    // Listen for blocked countries check result
+    socket.value.on('blockedCountries:checkResult', ({ isBlocked }) => {
+      setIsCountryBlocked(isBlocked);
+      setIsCheckingCountry(false);
+    });
+
+    // Also listen for updates to blocked countries
+    socket.value.on('blockedCountries:updated', async (blockedCountries: string[]) => {
+      if (visitorCountry) {
+        const isBlocked = blockedCountries.some(c => 
+          c.toLowerCase() === visitorCountry.toLowerCase()
+        );
+        setIsCountryBlocked(isBlocked);
+      }
+    });
+
+    // Check country immediately
+    checkCountry();
+    
+    // Fallback: if still checking after 2 seconds, allow access
+    const fallbackTimer = setTimeout(() => {
+      if (isCheckingCountry) {
+        setIsCheckingCountry(false);
+      }
+    }, 2000);
+    
+    return () => {
+      clearTimeout(fallbackTimer);
+      socket.value.off('blockedCountries:checkResult');
+      socket.value.off('blockedCountries:updated');
+    };
   }, []);
 
   // Show loading while checking country

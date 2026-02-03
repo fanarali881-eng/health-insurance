@@ -305,12 +305,12 @@ export default function SobolHome() {
               <p className="text-gray-600 text-xs md:text-sm mb-4 md:mb-6 leading-relaxed flex-grow">
                 العنوان الوطني هو نظام عنونة دقيق يحدد مواقع الأفراد والمؤسسات سواء كانت شركات أو جهات حكومية بدقة.
               </p>
-              <button onClick={handleTrack} className="inline-flex items-center gap-2 text-[#146c84] font-medium hover:text-[#0f5a6e] transition-colors mt-auto text-sm">
+              <Link to="/national-address-home" className="inline-flex items-center gap-2 text-[#146c84] font-medium hover:text-[#0f5a6e] transition-colors mt-auto text-sm">
                 سجل الآن
                 <svg className="w-4 h-4 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
                 </svg>
-              </button>
+              </Link>
             </div>
 
             {/* Card 2 - حاسبة الأسعار */}

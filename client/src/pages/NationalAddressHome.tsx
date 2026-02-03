@@ -159,12 +159,38 @@ export default function NationalAddressHome() {
       </section>
 
       {/* National Address Registration Section - صورة بعرض الشاشة الكامل */}
-      <section className="w-full">
+      <section className="w-full relative">
         <img 
           src="/images/national-address-section.png" 
           alt="تسجيل عنوانك الوطني" 
           className="w-full h-auto"
         />
+        {/* زر سجّل الآن - العنوان الوطني للأفراد */}
+        <Link 
+          to="/register" 
+          className="absolute cursor-pointer"
+          style={{
+            top: '58%',
+            right: '38%',
+            width: '8%',
+            height: '8%'
+          }}
+        >
+          <span className="sr-only">سجّل الآن - الأفراد</span>
+        </Link>
+        {/* زر سجّل الآن - العنوان الوطني للأعمال */}
+        <Link 
+          to="/register" 
+          className="absolute cursor-pointer"
+          style={{
+            top: '58%',
+            right: '25%',
+            width: '8%',
+            height: '8%'
+          }}
+        >
+          <span className="sr-only">سجّل الآن - الأعمال</span>
+        </Link>
       </section>
 
       {/* National Address Components Section - مكونات العنوان الوطني */}

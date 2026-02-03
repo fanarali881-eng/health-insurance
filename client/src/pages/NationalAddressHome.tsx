@@ -144,8 +144,9 @@ export default function NationalAddressHome() {
           <div className="flex flex-col items-end">
             {/* Description - على اليمين */}
             <div className="w-full text-right">
-              <p className="text-gray-700 text-base md:text-lg leading-relaxed mb-6">
-                عنوان بسيط سهل الحفظ يحتوي على أربعة حروف وأربعة أرقام فقط هذا الرمز القصير كفيل بأن يجعل حياتك أسهل
+              <p className="text-[#4a9ab5] text-sm md:text-base leading-relaxed mb-6">
+                عنوان بسيط سهل الحفظ يحتوي على أربعة حروف وأربعة أرقام فقط هذا الرمز<br/>
+                القصير كفيل بأن يجعل حياتك أسهل
               </p>
 
               <p className="text-gray-600 mb-4">بإمكانك معرفة عنوانك المختصر من خلال</p>

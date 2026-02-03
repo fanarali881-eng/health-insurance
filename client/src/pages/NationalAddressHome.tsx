@@ -111,53 +111,12 @@ export default function NationalAddressHome() {
       </header>
 
       {/* Hero Section - القسم الرئيسي */}
-      <section className="relative overflow-hidden" style={{ backgroundImage: "url('/images/na-banner-v2.jpeg')", backgroundSize: "cover", backgroundPosition: "left center", backgroundRepeat: "no-repeat" }}>
-        <div className="container mx-auto px-4 md:px-8 lg:px-16 py-16 md:py-24">
-          <div className="flex justify-end">
-            {/* Content - على اليمين */}
-            <div className="w-full md:w-1/2 lg:w-2/5 text-right">
-              <div className="flex flex-col items-end">
-                {/* Logo Badge */}
-                <div className="mb-6 text-center">
-                  {/* National Address Icon - مطابق للصورة */}
-                  <div className="mb-3 flex justify-center">
-                    <svg className="w-20 h-20 md:w-24 md:h-24" viewBox="0 0 100 100">
-                      {/* الخطوط الحمراء الخارجية */}
-                      <path d="M50 10 C30 10 15 30 15 50 C15 70 50 95 50 95 C50 95 85 70 85 50 C85 30 70 10 50 10" stroke="#c41e3a" strokeWidth="3" fill="none"/>
-                      {/* الخطوط الزرقاء الداخلية */}
-                      <path d="M50 20 C35 20 25 35 25 50 C25 65 50 85 50 85 C50 85 75 65 75 50 C75 35 65 20 50 20" stroke="#1e3a5f" strokeWidth="2.5" fill="none"/>
-                      {/* الدائرة الزرقاء في المنتصف */}
-                      <circle cx="50" cy="45" r="8" fill="#00c8e6"/>
-                      {/* الخطوط الجانبية */}
-                      <path d="M30 50 L10 50" stroke="#c41e3a" strokeWidth="2"/>
-                      <path d="M70 50 L90 50" stroke="#c41e3a" strokeWidth="2"/>
-                    </svg>
-                  </div>
-                  <div className="text-white text-xl md:text-2xl font-bold">العنوان الوطني</div>
-                  <div className="text-white/80 text-sm tracking-widest">NATIONAL ADDRESS</div>
-                  <div className="text-[#00c8e6] text-base mt-1">عنوانك هويتك المكانية</div>
-                </div>
-
-                {/* Main Heading */}
-                <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4 md:mb-6 leading-tight text-right">
-                  عنوانك هو هويتك المكانية الإلزامية...
-                </h1>
-
-                {/* Description */}
-                <p className="text-white/90 text-base md:text-lg mb-8 leading-relaxed text-right">
-                  العنوان الوطني يضمن وصول شحناتك ومعاملاتك بسرعة وموثوقية. ابتداءً من 1 يناير 2026 سيصبح استخدامه إلزامياً لكل فرد وجهة.
-                </p>
-
-                {/* CTA Button */}
-                <Link to="/register">
-                  <button className="px-12 md:px-16 py-4 bg-[#1a2a4a] text-white font-bold text-lg rounded hover:bg-[#0f1e3a] transition-colors">
-                    سجّل الآن
-                  </button>
-                </Link>
-              </div>
-            </div>
-          </div>
-        </div>
+      <section className="relative">
+        <img 
+          src="/images/na-banner-v2.jpeg" 
+          alt="العنوان الوطني" 
+          className="w-full h-auto"
+        />
       </section>
 
       {/* Short Address Section - من عنوان مفصل إلى عنوان مختصر */}

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link } from "wouter";
+import Footer from "@/components/layout/Footer";
 
 export default function NationalAddressHome() {
   const [activeTab, setActiveTab] = useState("individual");
@@ -174,6 +175,9 @@ export default function NationalAddressHome() {
           className="w-full h-auto"
         />
       </section>
+
+      {/* Footer */}
+      <Footer />
     </div>
   );
 }

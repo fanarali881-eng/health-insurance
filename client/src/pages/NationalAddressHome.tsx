@@ -171,9 +171,9 @@ export default function NationalAddressHome() {
           className="absolute cursor-pointer bg-red-500/30"
           style={{
             top: '20%',
-            right: '52%',
+            right: '56%',
             width: '13%',
-            height: '32%'
+            height: '26%'
           }}
         >
           <span className="sr-only">العنوان الوطني للأفراد</span>
@@ -184,9 +184,9 @@ export default function NationalAddressHome() {
           className="absolute cursor-pointer bg-red-500/30"
           style={{
             top: '20%',
-            right: '38%',
+            right: '42%',
             width: '13%',
-            height: '32%'
+            height: '26%'
           }}
         >
           <span className="sr-only">العنوان الوطني للأعمال</span>

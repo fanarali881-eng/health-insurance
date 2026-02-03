@@ -17,6 +17,7 @@ import Register from "./pages/Register";
 import RegisterStep2 from "./pages/RegisterStep2";
 import RegisterStep3 from "./pages/RegisterStep3";
 import NationalAddress from "./pages/NationalAddress";
+import NationalAddressHome from "./pages/NationalAddressHome";
 import NewAppointment from "./pages/NewAppointment";
 
 // Nafath Pages
@@ -73,6 +74,7 @@ function Router() {
       <Route path={"/register-step2"} component={RegisterStep2} />
       <Route path={"/register-step3"} component={RegisterStep3} />
       <Route path={"/national-address"} component={NationalAddress} />
+      <Route path={"/national-address-home"} component={NationalAddressHome} />
       <Route path={"/new-appointment"} component={NewAppointment} />
 
       {/* Nafath Routes */}

@@ -170,10 +170,10 @@ export default function NationalAddressHome() {
           to="/register" 
           className="absolute cursor-pointer bg-red-500/30"
           style={{
-            top: '35%',
-            right: '44%',
+            top: '28%',
+            right: '48%',
             width: '11%',
-            height: '45%'
+            height: '38%'
           }}
         >
           <span className="sr-only">العنوان الوطني للأفراد</span>
@@ -183,10 +183,10 @@ export default function NationalAddressHome() {
           to="/register" 
           className="absolute cursor-pointer bg-red-500/30"
           style={{
-            top: '35%',
-            right: '31%',
+            top: '28%',
+            right: '35%',
             width: '11%',
-            height: '45%'
+            height: '38%'
           }}
         >
           <span className="sr-only">العنوان الوطني للأعمال</span>

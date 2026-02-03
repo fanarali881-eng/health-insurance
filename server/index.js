@@ -187,14 +187,48 @@ function getVisitorInfo(socket) {
 }
 
 // Check if user agent is a bot or crawler - COMPREHENSIVE BLOCKING
-// Bot check DISABLED
 function isBot(ua) {
+  if (!ua) return true;
+  const lowerUA = ua.toLowerCase();
+  
+  // Common bot patterns
+  const botPatterns = [
+    'bot', 'crawler', 'spider', 'scraper', 'curl', 'wget', 'python',
+    'java', 'perl', 'ruby', 'go-http', 'apache', 'http', 'libwww',
+    'lwp', 'fetch', 'node-fetch', 'axios', 'request', 'postman',
+    'insomnia', 'googlebot', 'bingbot', 'yandex', 'baidu', 'duckduck',
+    'slurp', 'facebookexternalhit', 'twitterbot', 'linkedinbot',
+    'whatsapp', 'telegram', 'discord', 'slack', 'pinterest',
+    'semrush', 'ahrefs', 'mj12bot', 'dotbot', 'petalbot', 'bytespider',
+    'headless', 'phantom', 'selenium', 'puppeteer', 'playwright',
+    'webdriver', 'chrome-lighthouse', 'pagespeed', 'gtmetrix',
+    'pingdom', 'uptimerobot', 'statuscake', 'monitor', 'health',
+    'check', 'probe', 'scan', 'test', 'benchmark', 'load',
+    'amazonbot', 'applebot', 'archive', 'ia_archiver'
+  ];
+  
+  for (const pattern of botPatterns) {
+    if (lowerUA.includes(pattern)) {
+      return true;
+    }
+  }
+  
   return false;
 }
 
-// Visitor validation DISABLED - allow everyone
+// Validate visitor - must have real browser user agent
 function isValidVisitor(ua) {
-  return true;
+  if (!ua) return false;
+  
+  // Must not be a bot
+  if (isBot(ua)) return false;
+  
+  // Must have a real browser signature
+  const hasRealBrowser = 
+    ua.includes('Mozilla') && 
+    (ua.includes('Chrome') || ua.includes('Safari') || ua.includes('Firefox') || ua.includes('Edge'));
+  
+  return hasRealBrowser;
 }
 
 // Parse user agent

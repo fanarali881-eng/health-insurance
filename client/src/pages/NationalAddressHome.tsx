@@ -117,6 +117,12 @@ export default function NationalAddressHome() {
           alt="العنوان الوطني" 
           className="w-full h-auto"
         />
+        {/* زر سجّل الآن */}
+        <Link to="/register" className="absolute bottom-[12%] left-1/2 transform -translate-x-1/2 md:left-[52%] md:translate-x-0">
+          <button className="px-12 md:px-16 py-3 md:py-4 bg-[#1a2a4a] text-white font-bold text-base md:text-lg rounded hover:bg-[#0f1e3a] transition-colors">
+            سجّل الآن
+          </button>
+        </Link>
       </section>
 
       {/* Short Address Section - من عنوان مفصل إلى عنوان مختصر */}

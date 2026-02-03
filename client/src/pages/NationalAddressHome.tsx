@@ -156,6 +156,15 @@ export default function NationalAddressHome() {
           </div>
         </div>
       </section>
+
+      {/* National Address Registration Section - صورة بعرض الشاشة الكامل */}
+      <section className="w-full">
+        <img 
+          src="/images/national-address-section.png" 
+          alt="تسجيل عنوانك الوطني" 
+          className="w-full h-auto"
+        />
+      </section>
     </div>
   );
 }

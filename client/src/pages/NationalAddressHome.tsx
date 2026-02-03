@@ -118,9 +118,18 @@ export default function NationalAddressHome() {
           className="w-full h-auto"
         />
         {/* زر سجّل الآن - يغطي الزر في الصورة */}
-        <Link to="/register" className="absolute bottom-[8%] right-[38%] md:right-[40%] lg:right-[42%]">
-          <button className="w-[180px] md:w-[200px] h-[45px] md:h-[50px] bg-transparent hover:bg-[#1a2a4a]/20 transition-colors cursor-pointer">
-          </button>
+        <Link 
+          to="/register" 
+          className="absolute cursor-pointer"
+          style={{
+            bottom: '7%',
+            left: '50%',
+            transform: 'translateX(-50%)',
+            width: '12%',
+            height: '8%'
+          }}
+        >
+          <span className="sr-only">سجّل الآن</span>
         </Link>
       </section>
 

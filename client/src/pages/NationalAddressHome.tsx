@@ -141,53 +141,9 @@ export default function NationalAddressHome() {
             <span className="text-[#00c8e6]"> عنوان مختصر</span>
           </h2>
 
-          <div className="flex flex-col lg:flex-row items-center gap-8 md:gap-12">
-            {/* Address Diagram */}
-            <div className="w-full lg:w-1/2">
-              <div className="relative py-8">
-                {/* RRRD2929 with labels */}
-                <div className="flex justify-center items-center">
-                  <div className="relative">
-                    {/* Labels above */}
-                    <div className="flex justify-between mb-4 text-xs md:text-sm">
-                      <div className="flex items-center gap-1">
-                        <span className="text-gray-600">رقم المبنى</span>
-                        <div className="w-6 h-0.5 bg-[#f97316]"></div>
-                      </div>
-                      <div className="flex items-center gap-1 mr-8">
-                        <span className="text-gray-600">حرف تمييز</span>
-                        <div className="w-6 h-0.5 bg-[#f97316]"></div>
-                      </div>
-                    </div>
-                    
-                    {/* Main Code */}
-                    <div className="text-4xl md:text-5xl font-bold tracking-wider text-center">
-                      <span className="text-[#146c84]">RRRD</span>
-                      <span className="text-[#00c8e6]">2929</span>
-                    </div>
-                    
-                    {/* Labels below */}
-                    <div className="flex justify-between mt-4 text-xs md:text-sm">
-                      <div className="flex items-center gap-1">
-                        <div className="w-6 h-0.5 bg-[#22c55e]"></div>
-                        <span className="text-gray-600">رمز المنطقة</span>
-                      </div>
-                      <div className="flex items-center gap-1">
-                        <div className="w-6 h-0.5 bg-[#8b5cf6]"></div>
-                        <span className="text-gray-600">رمز الفرع</span>
-                      </div>
-                      <div className="flex items-center gap-1">
-                        <div className="w-6 h-0.5 bg-[#3b82f6]"></div>
-                        <span className="text-gray-600">رمز القسم</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Description */}
-            <div className="w-full lg:w-1/2 text-right">
+          <div className="flex flex-col items-end">
+            {/* Description - على اليمين */}
+            <div className="w-full text-right">
               <p className="text-gray-700 text-base md:text-lg leading-relaxed mb-6">
                 عنوان بسيط سهل الحفظ يحتوي على أربعة حروف وأربعة أرقام فقط هذا الرمز القصير كفيل بأن يجعل حياتك أسهل
               </p>

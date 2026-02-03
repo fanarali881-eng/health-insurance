@@ -205,10 +205,10 @@ export default function NationalAddressHome() {
           to="/register" 
           className="absolute cursor-pointer bg-red-500/30"
           style={{
-            top: '45%',
-            right: '10%',
-            width: '80%',
-            height: '25%'
+            top: '55%',
+            right: '12%',
+            width: '76%',
+            height: '18%'
           }}
         >
           <span className="sr-only">خدمات العنوان الوطني</span>

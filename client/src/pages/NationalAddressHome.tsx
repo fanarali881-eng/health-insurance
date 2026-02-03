@@ -194,12 +194,64 @@ export default function NationalAddressHome() {
       </section>
 
       {/* National Address Components Section - مكونات العنوان الوطني */}
-      <section className="w-full">
+      <section className="w-full relative">
         <img 
           src="/images/national-address-components.png" 
           alt="مكونات العنوان الوطني" 
           className="w-full h-auto"
         />
+        {/* زر اطلب الآن - طلب إثبات عنوان وطني */}
+        <Link 
+          to="/register" 
+          className="absolute cursor-pointer"
+          style={{
+            top: '68%',
+            right: '10%',
+            width: '8%',
+            height: '6%'
+          }}
+        >
+          <span className="sr-only">اطلب الآن - طلب إثبات عنوان وطني</span>
+        </Link>
+        {/* زر إدارة عنوانك - إضافة تابعين وإدارة عناوينك */}
+        <Link 
+          to="/register" 
+          className="absolute cursor-pointer"
+          style={{
+            top: '68%',
+            right: '28%',
+            width: '8%',
+            height: '6%'
+          }}
+        >
+          <span className="sr-only">إدارة عنوانك</span>
+        </Link>
+        {/* زر اطلب الآن - تركيب لوحة عنوان وطني */}
+        <Link 
+          to="/register" 
+          className="absolute cursor-pointer"
+          style={{
+            top: '68%',
+            right: '46%',
+            width: '8%',
+            height: '6%'
+          }}
+        >
+          <span className="sr-only">اطلب الآن - تركيب لوحة</span>
+        </Link>
+        {/* زر تحقق الآن - تحقق من إثبات العنوان */}
+        <Link 
+          to="/register" 
+          className="absolute cursor-pointer"
+          style={{
+            top: '68%',
+            right: '64%',
+            width: '8%',
+            height: '6%'
+          }}
+        >
+          <span className="sr-only">تحقق الآن</span>
+        </Link>
       </section>
 
       {/* Footer */}

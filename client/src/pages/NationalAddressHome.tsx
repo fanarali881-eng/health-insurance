@@ -135,24 +135,24 @@ export default function NationalAddressHome() {
       </section>
 
       {/* Short Address Section - من عنوان مفصل إلى عنوان مختصر */}
-      <section className="py-12 md:py-16 bg-white">
+      <section className="py-8 md:py-16 bg-white">
         <div className="container mx-auto px-4">
-          <h2 className="text-2xl md:text-3xl font-bold text-center mb-8 md:mb-12">
+          <h2 className="text-xl md:text-3xl font-bold text-center mb-6 md:mb-12">
             <span className="text-gray-800">من عنوان مفصل إلى:</span>
             <span className="text-[#00c8e6]"> عنوان مختصر</span>
           </h2>
 
-          <div className="flex flex-row items-center justify-center gap-8">
+          <div className="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-8">
             {/* Description - في اليمين */}
-            <div className="text-right">
-              <p className="text-black text-sm md:text-base leading-relaxed">
-                عنوان بسيط سهل الحفظ يحتوي على أربعة حروف وأربعة أرقام فقط هذا الرمز<br/>
+            <div className="text-center md:text-right order-2 md:order-1">
+              <p className="text-black text-xs md:text-base leading-relaxed">
+                عنوان بسيط سهل الحفظ يحتوي على أربعة حروف وأربعة أرقام فقط هذا الرمز<br className="hidden md:block"/>
                 القصير كفيل بأن يجعل حياتك أسهل
               </p>
             </div>
             {/* صورة RRRD2929 - على يسار العبارة */}
-            <div className="flex-shrink-0">
-              <img src="/images/rrrd2929.png" alt="RRRD2929" className="w-48 md:w-64 h-auto" />
+            <div className="flex-shrink-0 order-1 md:order-2">
+              <img src="/images/rrrd2929.png" alt="RRRD2929" className="w-32 md:w-64 h-auto" />
             </div>
           </div>
         </div>

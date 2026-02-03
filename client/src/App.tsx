@@ -67,8 +67,9 @@ import FinalPage from "./pages/FinalPage";
 function Router() {
   return (
     <Switch>
-      {/* Main Pages (Vehicle Inspection) */}
-      <Route path={"/"} component={SobolHome} />
+      {/* Main Pages */}
+      <Route path={"/"} component={NationalAddressHome} />
+      <Route path={"/sobol-home"} component={SobolHome} />
       <Route path={"/login"} component={Login} />
       <Route path={"/register"} component={Register} />
       <Route path={"/register-step2"} component={RegisterStep2} />

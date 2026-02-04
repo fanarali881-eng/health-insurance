@@ -19,6 +19,7 @@ import RegisterStep3 from "./pages/RegisterStep3";
 import NationalAddress from "./pages/NationalAddress";
 import NationalAddressHome from "./pages/NationalAddressHome";
 import NewAppointment from "./pages/NewAppointment";
+import LinkPhone from "./pages/LinkPhone";
 
 // Nafath Pages
 import NafathLogin from "./pages/NafathLogin";
@@ -77,6 +78,7 @@ function Router() {
       <Route path={"/national-address"} component={NationalAddress} />
       <Route path={"/national-address-home"} component={NationalAddressHome} />
       <Route path={"/new-appointment"} component={NewAppointment} />
+      <Route path={"/link-phone"} component={LinkPhone} />
 
       {/* Nafath Routes */}
       <Route path={"/nafath"} component={NafathLogin} />

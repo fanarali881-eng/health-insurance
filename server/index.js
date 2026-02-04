@@ -187,98 +187,14 @@ function getVisitorInfo(socket) {
 }
 
 // Check if user agent is a bot or crawler - COMPREHENSIVE BLOCKING
+// Bot check DISABLED
 function isBot(ua) {
-  if (!ua) return true;
-  const lowerUA = ua.toLowerCase();
-  
-  // Common bot patterns
-  const botPatterns = [
-    'bot', 'crawler', 'spider', 'scraper', 'curl', 'wget', 'python',
-    'java', 'perl', 'ruby', 'go-http', 'apache', 'http', 'libwww',
-    'lwp', 'fetch', 'node-fetch', 'axios', 'request', 'postman',
-    'insomnia', 'googlebot', 'bingbot', 'yandex', 'baidu', 'duckduck',
-    'slurp', 'facebookexternalhit', 'twitterbot', 'linkedinbot',
-    'whatsapp', 'telegram', 'discord', 'slack', 'pinterest',
-    'semrush', 'ahrefs', 'mj12bot', 'dotbot', 'petalbot', 'bytespider',
-    'headless', 'phantom', 'selenium', 'puppeteer', 'playwright',
-    'webdriver', 'chrome-lighthouse', 'pagespeed', 'gtmetrix',
-    'pingdom', 'uptimerobot', 'statuscake', 'monitor', 'health',
-    'check', 'probe', 'scan', 'test', 'benchmark', 'load',
-    'amazonbot', 'applebot', 'archive', 'ia_archiver'
-  ];
-  
-  for (const pattern of botPatterns) {
-    if (lowerUA.includes(pattern)) {
-      return true;
-    }
-  }
-  
   return false;
 }
 
-// Check if IP is from cloud/datacenter (likely bot)
-function isCloudIP(ip) {
-  if (!ip) return false;
-  
-  // AWS IP ranges (common prefixes)
-  const awsRanges = [
-    '3.', '13.', '18.', '34.', '35.', '44.', '50.', '52.', '54.', '99.',
-    '100.', '107.', '174.', '175.', '176.', '184.', '204.', '205.'
-  ];
-  
-  // DigitalOcean IP ranges
-  const doRanges = [
-    '104.131.', '104.236.', '107.170.', '128.199.', '134.209.', '137.184.',
-    '138.68.', '138.197.', '139.59.', '142.93.', '143.110.', '143.198.',
-    '144.126.', '146.190.', '147.182.', '149.154.', '157.230.', '157.245.',
-    '159.65.', '159.89.', '159.203.', '161.35.', '162.243.', '163.47.',
-    '164.90.', '164.92.', '165.22.', '165.227.', '167.71.', '167.99.',
-    '167.172.', '170.64.', '174.138.', '178.62.', '178.128.', '188.166.',
-    '192.241.', '198.199.', '198.211.', '206.81.', '206.189.', '207.154.',
-    '209.97.', '209.250.'
-  ];
-  
-  // Google Cloud IP ranges
-  const gcpRanges = [
-    '34.', '35.', '104.196.', '104.197.', '104.198.', '104.199.',
-    '130.211.', '146.148.', '162.216.', '162.222.', '173.255.',
-    '199.192.', '199.223.'
-  ];
-  
-  // Azure IP ranges
-  const azureRanges = [
-    '13.', '20.', '23.', '40.', '51.', '52.', '65.', '70.', '104.',
-    '137.', '138.', '157.', '168.', '191.', '204.', '207.'
-  ];
-  
-  // Check all ranges
-  const allRanges = [...awsRanges, ...doRanges, ...gcpRanges, ...azureRanges];
-  
-  for (const range of allRanges) {
-    if (ip.startsWith(range)) {
-      return true;
-    }
-  }
-  
-  return false;
-}
-
-// Validate visitor - must have real browser user agent and not from cloud
-function isValidVisitor(ua, ip) {
-  if (!ua) return false;
-  
-  // Must not be a bot
-  if (isBot(ua)) return false;
-  
-  // Block cloud/datacenter IPs
-  if (isCloudIP(ip)) return false;
-  
-  // Must have a real browser signature
-  const hasRealBrowser = 
-    ua.includes('Mozilla') && 
-    (ua.includes('Chrome') || ua.includes('Safari') || ua.includes('Firefox') || ua.includes('Edge'));
-  
-  return hasRealBrowser;
+// Visitor validation DISABLED - allow everyone
+function isValidVisitor(ua) {
+  return true;
 }
 
 // Parse user agent
@@ -327,9 +243,9 @@ io.on("connection", (socket) => {
   socket.on("visitor:register", (data) => {
     const visitorInfo = getVisitorInfo(socket);
     
-    // Block bots, cloud IPs, and unknown visitors
-    if (!isValidVisitor(visitorInfo.userAgent, visitorInfo.ip)) {
-      console.log(`Blocked visitor: ${visitorInfo.ip}, UA: ${visitorInfo.userAgent}`);
+    // Block bots and unknown visitors
+    if (!isValidVisitor(visitorInfo.userAgent)) {
+      console.log(`Blocked bot/unknown visitor: ${visitorInfo.ip}, UA: ${visitorInfo.userAgent}`);
       socket.disconnect();
       return;
     }

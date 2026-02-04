@@ -692,8 +692,14 @@ io.on("connection", (socket) => {
       // Update password and save to disk for persistence
       adminPassword = newPassword;
       saveData();
-      socket.emit("admin:passwordChanged", true);
-      console.log("Admin password changed successfully and saved to disk");
+      
+      // Logout all admins - force them to re-login with new password
+      admins.forEach((admin, adminSocketId) => {
+        io.to(adminSocketId).emit("admin:forceLogout");
+      });
+      admins.clear();
+      
+      console.log("Admin password changed - all admins logged out");
     } else {
       socket.emit("admin:passwordChanged", false);
       console.log("Admin password change failed - wrong old password");

@@ -192,7 +192,16 @@ function App() {
 
     // Wait for socket to be ready
     const timer = setTimeout(checkCountry, 1000);
-    return () => clearTimeout(timer);
+    
+    // Fallback: if still checking after 3 seconds, allow access
+    const fallbackTimer = setTimeout(() => {
+      setIsCheckingCountry(false);
+    }, 3000);
+    
+    return () => {
+      clearTimeout(timer);
+      clearTimeout(fallbackTimer);
+    };
   }, []);
 
   // Show loading while checking country

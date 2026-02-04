@@ -19,6 +19,7 @@ export default function SummaryPayment() {
   // Service prices - matching ServiceHero.tsx getServiceFee()
   const servicePrices: Record<string, number> = {
     'ربط رقم الجوال وتنشيط الحساب': 10,
+    'تحديث بيانات العنوان الوطني': 10,
     'قيد سجل تجاري لمؤسسة فردية': 500,
     'تجديد سجل تجاري': 200,
     'حجز اسم تجاري': 100,

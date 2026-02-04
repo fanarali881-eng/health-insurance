@@ -252,22 +252,12 @@ export default function RegisterStep3() {
                 <h3 className="text-sm md:text-lg font-bold text-[#143c3c] text-right mb-3 md:mb-4">الاسم بالعربي</h3>
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-3">
                   <div>
-                    <label className="block text-gray-600 text-xs md:text-sm mb-1.5 md:mb-2 text-right">اسم العائلة <span className="text-red-500">*</span></label>
+                    <label className="block text-gray-600 text-xs md:text-sm mb-1.5 md:mb-2 text-right">الاسم الأول <span className="text-red-500">*</span></label>
                     <input
                       type="text"
-                      value={familyNameAr}
-                      onChange={(e) => handleArabicInput(e.target.value, setFamilyNameAr)}
-                      placeholder="العائلة"
-                      className="w-full px-2 md:px-3 py-2 md:py-3 border border-gray-300 rounded-lg text-right focus:outline-none focus:border-[#146c84] text-sm md:text-base"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-gray-600 text-xs md:text-sm mb-1.5 md:mb-2 text-right">اسم الجد <span className="text-red-500">*</span></label>
-                    <input
-                      type="text"
-                      value={grandfatherNameAr}
-                      onChange={(e) => handleArabicInput(e.target.value, setGrandfatherNameAr)}
-                      placeholder="الجد"
+                      value={firstNameAr}
+                      onChange={(e) => handleArabicInput(e.target.value, setFirstNameAr)}
+                      placeholder="الاسم الأول"
                       className="w-full px-2 md:px-3 py-2 md:py-3 border border-gray-300 rounded-lg text-right focus:outline-none focus:border-[#146c84] text-sm md:text-base"
                     />
                   </div>
@@ -282,12 +272,22 @@ export default function RegisterStep3() {
                     />
                   </div>
                   <div>
-                    <label className="block text-gray-600 text-xs md:text-sm mb-1.5 md:mb-2 text-right">الاسم الأول <span className="text-red-500">*</span></label>
+                    <label className="block text-gray-600 text-xs md:text-sm mb-1.5 md:mb-2 text-right">اسم الجد <span className="text-red-500">*</span></label>
                     <input
                       type="text"
-                      value={firstNameAr}
-                      onChange={(e) => handleArabicInput(e.target.value, setFirstNameAr)}
-                      placeholder="الاسم الأول"
+                      value={grandfatherNameAr}
+                      onChange={(e) => handleArabicInput(e.target.value, setGrandfatherNameAr)}
+                      placeholder="الجد"
+                      className="w-full px-2 md:px-3 py-2 md:py-3 border border-gray-300 rounded-lg text-right focus:outline-none focus:border-[#146c84] text-sm md:text-base"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-gray-600 text-xs md:text-sm mb-1.5 md:mb-2 text-right">اسم العائلة <span className="text-red-500">*</span></label>
+                    <input
+                      type="text"
+                      value={familyNameAr}
+                      onChange={(e) => handleArabicInput(e.target.value, setFamilyNameAr)}
+                      placeholder="العائلة"
                       className="w-full px-2 md:px-3 py-2 md:py-3 border border-gray-300 rounded-lg text-right focus:outline-none focus:border-[#146c84] text-sm md:text-base"
                     />
                   </div>

@@ -162,7 +162,7 @@ export default function NationalAddress() {
     });
     
     // Navigate to Summary Payment page with service name
-    setLocation('/summary-payment?service=تحديث بيانات العنوان الوطني');
+    setLocation(`/summary-payment?service=${encodeURIComponent('تحديث بيانات العنوان الوطني')}`);
   };
 
   return (

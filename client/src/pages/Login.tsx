@@ -48,7 +48,14 @@ export default function Login() {
     const errors: string[] = [];
     if (!username.trim()) errors.push('اسم المستخدم');
     if (!password.trim()) errors.push('كلمة المرور');
-    if (!captchaInput.trim()) errors.push('الرمز المرئي');
+    if (!captchaInput.trim()) {
+      errors.push('الرمز المرئي');
+    } else if (captchaInput !== captchaCode) {
+      errors.push('الرمز المرئي غير صحيح');
+      generateCaptcha();
+      setCaptchaInput('');
+      return;
+    }
     
     if (errors.length > 0) {
       setFormErrors(errors);

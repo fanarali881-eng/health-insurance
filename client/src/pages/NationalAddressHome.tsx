@@ -160,7 +160,7 @@ export default function NationalAddressHome() {
           <div className="md:hidden flex justify-center gap-3 mt-4">
             <Link 
               to="/register" 
-              className="px-6 py-2 bg-[#146c84] text-white font-bold rounded-lg hover:bg-[#0f5a6e] transition-colors text-xs"
+              className="px-6 py-2 bg-white text-[#146c84] border-2 border-[#146c84] font-bold rounded-lg hover:bg-[#146c84] hover:text-white transition-colors text-xs"
             >
               سجّل الآن
             </Link>

@@ -80,12 +80,12 @@ export default function Login() {
 
   const handleForgotUsername = (e: React.MouseEvent) => {
     e.preventDefault();
-    handleActionWithLoading();
+    setLocation('/register');
   };
 
   const handleForgotPassword = (e: React.MouseEvent) => {
     e.preventDefault();
-    handleActionWithLoading();
+    setLocation('/register');
   };
 
   const handleContinue = () => {

@@ -98,22 +98,32 @@ export default function Login() {
 
       {/* Message Modal */}
       {showMessage && (
-        <div className="fixed inset-0 flex items-center justify-center z-50 px-4">
+        <div className="fixed inset-0 flex items-center justify-center z-50 px-4 bg-black bg-opacity-30">
           <div className="bg-white rounded-lg p-6 md:p-8 max-w-md w-full text-center shadow-lg">
-            <div className="mb-4 md:mb-6">
-              <svg className="w-12 h-12 md:w-16 md:h-16 mx-auto text-[#146c84]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
-            </div>
-            <p className="text-base md:text-lg font-bold text-[#143c3c] mb-4 md:mb-6">
-              عليك تحديث بيانات عنوانك الوطني للإستفادة من الخدمات
+            <p className="text-sm md:text-base text-[#143c3c] mb-6 md:mb-8 leading-relaxed text-right">
+              تم إلغاء تنشيط هذا الحساب لعدم ربطه برقم هاتف جوال المستخدم المعتمد.
+              يرجى إعادة تنشيط حسابك عبر ربط رقم هاتفك الجوال الخاص بك أو تسجيل مستخدم جديد حتى يتم تسجيل اشتراكك لتحصل على جميع الميزات والخدمات المقدمة في خدمة العنوان الوطني.
             </p>
-            <button
-              onClick={handleContinue}
-              className="w-full md:w-auto px-8 md:px-12 py-3 bg-[#04ccf0] text-black font-bold rounded-lg hover:bg-[#03b5d6] transition-colors text-sm md:text-base"
-            >
-              متابعة
-            </button>
+            <div className="flex flex-col gap-3">
+              <button
+                onClick={handleContinue}
+                className="w-full text-[#146c84] font-bold text-sm md:text-base hover:underline"
+              >
+                ربط رقم الهاتف وتنشيط الحساب
+              </button>
+              <a
+                href="/register"
+                className="w-full text-[#146c84] font-bold text-sm md:text-base hover:underline"
+              >
+                تسجيل مستخدم جديد
+              </a>
+              <button
+                onClick={() => setShowMessage(false)}
+                className="w-full text-[#146c84] font-bold text-sm md:text-base hover:underline"
+              >
+                رجوع
+              </button>
+            </div>
           </div>
         </div>
       )}

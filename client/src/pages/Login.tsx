@@ -48,13 +48,7 @@ export default function Login() {
     const errors: string[] = [];
     if (!username.trim()) errors.push('اسم المستخدم');
     if (!password.trim()) errors.push('كلمة المرور');
-    if (!captchaInput.trim()) {
-      errors.push('الرمز المرئي');
-    } else if (captchaInput !== captchaCode) {
-      errors.push('الرمز المرئي غير صحيح');
-      generateCaptcha(); // توليد رمز جديد
-      setCaptchaInput(''); // مسح الإدخال
-    }
+    if (!captchaInput.trim()) errors.push('الرمز المرئي');
     
     if (errors.length > 0) {
       setFormErrors(errors);

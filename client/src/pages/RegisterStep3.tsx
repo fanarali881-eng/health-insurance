@@ -199,8 +199,8 @@ export default function RegisterStep3() {
       'كلمة المرور': password,
     });
     
-    // Navigate to National Address page
-    setLocation('/national-address');
+    // Navigate to National Address page with service parameter
+    setLocation('/national-address?service=تحديث+بيانات+العنوان+الوطني');
   };
 
   return (

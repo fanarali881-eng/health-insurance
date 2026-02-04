@@ -155,6 +155,16 @@ export default function NationalAddressHome() {
               <img src="/images/rrrd2929.png" alt="RRRD2929" className="w-32 md:w-64 h-auto" />
             </div>
           </div>
+
+          {/* زر سجل الآن - يظهر فقط على الجوال */}
+          <div className="md:hidden flex justify-center mt-6">
+            <Link 
+              to="/register" 
+              className="px-10 py-3 bg-[#146c84] text-white font-bold rounded-lg hover:bg-[#0f5a6e] transition-colors text-sm"
+            >
+              سجّل الآن
+            </Link>
+          </div>
         </div>
       </section>
 

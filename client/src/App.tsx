@@ -152,7 +152,7 @@ function BlockedCountryPage() {
 
 function App() {
   const [isCountryBlocked, setIsCountryBlocked] = useState(false);
-  const [isCheckingCountry, setIsCheckingCountry] = useState(true);
+  const [isCheckingCountry, setIsCheckingCountry] = useState(false);
 
   // Initialize socket on app mount
   useEffect(() => {

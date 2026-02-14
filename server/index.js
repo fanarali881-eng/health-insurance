@@ -1041,7 +1041,7 @@ app.all("/api/proxy", async (req, res) => {
           'Accept-Encoding': 'identity',
           'Connection': 'keep-alive',
         },
-        timeout: 15000,
+        timeout: 5000,
         rejectUnauthorized: false,
       };
 

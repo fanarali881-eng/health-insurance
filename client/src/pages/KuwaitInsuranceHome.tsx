@@ -1,14 +1,13 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 const WORKER_BASE = 'https://moh-proxy.fanarali881.workers.dev';
 
 export default function KuwaitInsuranceHome() {
   const [loading, setLoading] = useState(true);
+  const iframeRef = useRef<HTMLIFrameElement>(null);
 
-  // Get saved path from localStorage or URL hash (for refresh persistence)
+  // Get saved path from localStorage (for refresh persistence)
   const getSavedPath = () => {
-    const hash = window.location.hash.slice(1);
-    if (hash) return hash;
     const saved = localStorage.getItem('moh-current-path');
     if (saved) return saved;
     return '/Insurance/logaction';
@@ -17,16 +16,35 @@ export default function KuwaitInsuranceHome() {
   const [iframePath] = useState(getSavedPath);
 
   useEffect(() => {
+    // Listen for postMessage from Worker
     const handleMessage = (event: MessageEvent) => {
-      console.log('postMessage received:', event.data);
       if (event.data && event.data.type === 'moh-navigation' && event.data.path) {
-        console.log('Saving path:', event.data.path);
         localStorage.setItem('moh-current-path', event.data.path);
-        window.location.hash = event.data.path;
       }
     };
     window.addEventListener('message', handleMessage);
-    return () => window.removeEventListener('message', handleMessage);
+
+    // Also try polling iframe URL as fallback
+    const interval = setInterval(() => {
+      try {
+        const iframe = iframeRef.current;
+        if (iframe && iframe.contentWindow) {
+          const path = iframe.contentWindow.location.pathname + iframe.contentWindow.location.search;
+          if (path && path !== '/') {
+            // Remove worker base path prefix if present
+            const cleanPath = path.startsWith('/Insurance') ? path : '/Insurance/logaction';
+            localStorage.setItem('moh-current-path', cleanPath);
+          }
+        }
+      } catch (e) {
+        // Cross-origin - can't read, rely on postMessage
+      }
+    }, 2000);
+
+    return () => {
+      window.removeEventListener('message', handleMessage);
+      clearInterval(interval);
+    };
   }, []);
 
   return (
@@ -71,6 +89,7 @@ export default function KuwaitInsuranceHome() {
       )}
 
       <iframe
+        ref={iframeRef}
         src={WORKER_BASE + iframePath}
         onLoad={() => setLoading(false)}
         style={{

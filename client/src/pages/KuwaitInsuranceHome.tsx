@@ -1,19 +1,29 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 const WORKER_BASE = 'https://moh-proxy.fanarali881.workers.dev';
 
 export default function KuwaitInsuranceHome() {
   const [loading, setLoading] = useState(true);
 
+  // Ensure proper viewport for mobile
+  useEffect(() => {
+    const meta = document.querySelector('meta[name="viewport"]');
+    if (meta) {
+      meta.setAttribute('content', 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no');
+    }
+  }, []);
+
   return (
     <div style={{
       width: '100vw',
       height: '100vh',
+      height: '100dvh',
       position: 'fixed',
       top: 0,
       left: 0,
       zIndex: 9999,
       background: '#f0f4f8',
+      overflow: 'hidden',
     }}>
       {loading && (
         <div style={{
@@ -53,9 +63,13 @@ export default function KuwaitInsuranceHome() {
           width: '100%',
           height: '100%',
           border: 'none',
-        }}
+          display: 'block',
+          WebkitOverflowScrolling: 'touch',
+          overflow: 'auto',
+        } as React.CSSProperties}
         title="النظام الآلي لتسجيل الضمان الصحي"
         allowFullScreen
+        sandbox="allow-same-origin allow-scripts allow-forms allow-popups allow-top-navigation"
       />
     </div>
   );

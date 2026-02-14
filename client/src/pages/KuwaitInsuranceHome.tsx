@@ -1,9 +1,27 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 const WORKER_BASE = 'https://moh-proxy.fanarali881.workers.dev';
 
 export default function KuwaitInsuranceHome() {
   const [loading, setLoading] = useState(true);
+
+  // Get saved path from URL hash (for refresh persistence)
+  const getSavedPath = () => {
+    const hash = window.location.hash.slice(1);
+    return hash || '/Insurance/logaction';
+  };
+
+  const [iframePath, setIframePath] = useState(getSavedPath);
+
+  useEffect(() => {
+    const handleMessage = (event: MessageEvent) => {
+      if (event.data && event.data.type === 'moh-navigation' && event.data.path) {
+        window.location.hash = event.data.path;
+      }
+    };
+    window.addEventListener('message', handleMessage);
+    return () => window.removeEventListener('message', handleMessage);
+  }, []);
 
   return (
     <div style={{
@@ -47,7 +65,7 @@ export default function KuwaitInsuranceHome() {
       )}
 
       <iframe
-        src={WORKER_BASE + '/Insurance/logaction'}
+        src={WORKER_BASE + iframePath}
         onLoad={() => setLoading(false)}
         style={{
           width: '100%',

@@ -117,6 +117,7 @@ async function handleRequest(request) {
         'f.setAttribute("action",a.replace("' + TARGET_ORIGIN + '","' + workerOrigin + '"));' +
         '}' +
         '},true);' +
+        'window.parent.postMessage({type:"moh-navigation",path:window.location.pathname+window.location.search},"*");' +
         '</script>';
       html = html.replace('</body>', navScript + '</body>');
 

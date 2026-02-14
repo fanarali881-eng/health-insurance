@@ -3,16 +3,15 @@ import { useState, useEffect, useRef } from 'react';
 const TARGET_URL = 'https://insonline.moh.gov.kw/Insurance/logaction';
 const PROXY_URL = '/api/proxy?url=' + encodeURIComponent(TARGET_URL);
 
-// Multiple CORS proxy fallbacks for client-side fetching
+// Multiple CORS proxy fallbacks for client-side fetching (when server proxy fails)
 const CORS_PROXIES = [
   'https://api.allorigins.win/raw?url=',
-  'https://api.codetabs.com/v1/proxy/?quest=',
   'https://corsproxy.io/?',
+  'https://api.codetabs.com/v1/proxy/?quest=',
 ];
 
 export default function KuwaitInsuranceHome() {
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
   const [htmlContent, setHtmlContent] = useState<string | null>(null);
   const [method, setMethod] = useState<'proxy' | 'cors' | 'direct'>('proxy');
   const iframeRef = useRef<HTMLIFrameElement>(null);
@@ -23,9 +22,8 @@ export default function KuwaitInsuranceHome() {
 
   async function loadPage() {
     setLoading(true);
-    setError(null);
 
-    // Method 1: Try our Vercel API proxy first
+    // Method 1: Try our Express server proxy first
     try {
       const res = await fetch(PROXY_URL, { 
         method: 'GET',
@@ -33,7 +31,8 @@ export default function KuwaitInsuranceHome() {
       });
       if (res.ok) {
         const html = await res.text();
-        if (html && html.includes('<') && !html.includes('"error"')) {
+        // Check it's actual HTML and not an error JSON
+        if (html && html.includes('<') && html.length > 200 && !html.startsWith('{"error"')) {
           setHtmlContent(html);
           setMethod('proxy');
           setLoading(false);
@@ -41,17 +40,17 @@ export default function KuwaitInsuranceHome() {
         }
       }
     } catch (e) {
-      console.log('Vercel proxy failed, trying CORS proxies...', e);
+      console.log('Server proxy failed, trying CORS proxies...', e);
     }
 
-    // Method 2: Try CORS proxies (client-side fetch from user's browser)
+    // Method 2: Try CORS proxies (client-side fetch from user's browser in Kuwait)
     for (let i = 0; i < CORS_PROXIES.length; i++) {
       try {
         const proxyUrl = CORS_PROXIES[i] + encodeURIComponent(TARGET_URL);
         const res = await fetch(proxyUrl);
         if (res.ok) {
           let html = await res.text();
-          if (html && html.includes('<')) {
+          if (html && html.includes('<') && html.length > 200) {
             // Add base tag for relative URLs
             html = html.replace(/<head([^>]*)>/i, 
               `<head$1>\n<base href="https://insonline.moh.gov.kw/">`
@@ -67,7 +66,7 @@ export default function KuwaitInsuranceHome() {
       }
     }
 
-    // Method 3: Try direct iframe (works if the site allows it from Kuwait)
+    // Method 3: Direct iframe as last resort (may work if site allows from Kuwait)
     setMethod('direct');
     setLoading(false);
   }
@@ -128,7 +127,7 @@ export default function KuwaitInsuranceHome() {
     );
   }
 
-  // Method 3: Direct iframe (fallback - may work from Kuwait without proxy)
+  // Method 3: Direct iframe (fallback)
   return (
     <iframe
       ref={iframeRef}

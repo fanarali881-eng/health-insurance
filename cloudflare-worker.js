@@ -1,12 +1,14 @@
-// Cloudflare Worker - Reverse Proxy for Kuwait MOH Insurance Site
-const ALLOWED_ORIGIN = 'https://insonline.moh.gov.kw';
+// Cloudflare Worker - Full Reverse Proxy for Kuwait MOH Insurance Site
+// Proxies HTML, CSS, JS, images - rewrites all URLs to go through the worker
+const TARGET_ORIGIN = 'https://insonline.moh.gov.kw';
 
 addEventListener('fetch', function(event) {
   event.respondWith(handleRequest(event.request));
 });
 
 async function handleRequest(request) {
-  const url = new URL(request.url);
+  var url = new URL(request.url);
+  var workerOrigin = url.origin;
 
   // Handle CORS preflight
   if (request.method === 'OPTIONS') {
@@ -20,11 +22,23 @@ async function handleRequest(request) {
     });
   }
 
-  // Get target URL from query parameter or default
-  var targetUrl = url.searchParams.get('url') || ALLOWED_ORIGIN + '/Insurance/logaction';
+  // Determine target URL
+  var targetUrl;
+  var urlParam = url.searchParams.get('url');
+  
+  if (urlParam) {
+    targetUrl = urlParam;
+  } else {
+    // Map the path directly: worker.dev/Insurance/... -> target/Insurance/...
+    var path = url.pathname + url.search;
+    if (path === '/' || path === '') {
+      path = '/Insurance/logaction';
+    }
+    targetUrl = TARGET_ORIGIN + path;
+  }
 
   // Security: only allow Kuwait MOH domain
-  if (!targetUrl.startsWith(ALLOWED_ORIGIN)) {
+  if (!targetUrl.startsWith(TARGET_ORIGIN)) {
     return new Response(JSON.stringify({ error: 'Only Kuwait MOH site is allowed' }), {
       status: 403,
       headers: { 'Content-Type': 'application/json' }
@@ -32,103 +46,104 @@ async function handleRequest(request) {
   }
 
   try {
+    var fetchHeaders = {
+      'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+      'Accept': request.headers.get('Accept') || '*/*',
+      'Accept-Language': 'ar,en-US;q=0.7,en;q=0.3',
+      'Referer': TARGET_ORIGIN + '/Insurance/logaction',
+    };
+
     var fetchOptions = {
       method: request.method,
-      headers: {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
-        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8',
-        'Accept-Language': 'ar,en-US;q=0.7,en;q=0.3',
-        'Connection': 'keep-alive',
-        'Upgrade-Insecure-Requests': '1',
-      },
+      headers: fetchHeaders,
       redirect: 'follow',
     };
 
-    // Forward POST body
     if (request.method === 'POST') {
-      fetchOptions.body = await request.text();
-      fetchOptions.headers['Content-Type'] = request.headers.get('Content-Type') || 'application/x-www-form-urlencoded';
+      fetchOptions.body = await request.arrayBuffer();
+      var ct = request.headers.get('Content-Type');
+      if (ct) fetchHeaders['Content-Type'] = ct;
     }
 
     var response = await fetch(targetUrl, fetchOptions);
-    var contentType = response.headers.get('Content-Type') || 'text/html';
+    var contentType = response.headers.get('Content-Type') || '';
 
-    // Build response headers - strip X-Frame-Options and CSP
-    var responseHeaders = new Headers();
-    responseHeaders.set('Access-Control-Allow-Origin', '*');
-    responseHeaders.set('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
-    responseHeaders.set('Access-Control-Allow-Headers', '*');
-    responseHeaders.set('Content-Type', contentType);
+    // Build clean response headers
+    var respHeaders = new Headers();
+    respHeaders.set('Access-Control-Allow-Origin', '*');
+    
+    // Copy safe headers
+    var safeHeaders = ['Content-Type', 'Cache-Control', 'ETag', 'Last-Modified'];
+    for (var i = 0; i < safeHeaders.length; i++) {
+      var val = response.headers.get(safeHeaders[i]);
+      if (val) respHeaders.set(safeHeaders[i], val);
+    }
+    // Do NOT copy X-Frame-Options, Content-Security-Policy
 
+    // Handle HTML - rewrite URLs
     if (contentType.includes('text/html')) {
       var html = await response.text();
-      var baseHref = ALLOWED_ORIGIN;
-      var workerBase = url.origin;
 
-      html = html.replace(/<head([^>]*)>/i, '<head$1>\n<base href="' + baseHref + '/">');
+      // Rewrite absolute URLs to target origin
+      html = html.split(TARGET_ORIGIN + '/').join(workerOrigin + '/');
+      html = html.split(TARGET_ORIGIN).join(workerOrigin);
 
-      var proxyScript = '<script>' +
-        'document.addEventListener("click", function(e) {' +
-        '  var link = e.target.closest("a[href]");' +
-        '  if (link) {' +
-        '    var href = link.getAttribute("href");' +
-        '    if (href && !href.startsWith("javascript:") && !href.startsWith("#")) {' +
-        '      e.preventDefault();' +
-        '      var fullUrl;' +
-        '      if (href.startsWith("http")) fullUrl = href;' +
-        '      else if (href.startsWith("/")) fullUrl = "' + baseHref + '" + href;' +
-        '      else fullUrl = "' + baseHref + '/" + href;' +
-        '      if (fullUrl.includes("insonline.moh.gov.kw")) {' +
-        '        window.location.href = "' + workerBase + '/?url=" + encodeURIComponent(fullUrl);' +
-        '      }' +
-        '    }' +
-        '  }' +
-        '}, true);' +
-        'document.addEventListener("submit", function(e) {' +
-        '  var form = e.target;' +
-        '  if (form) {' +
-        '    e.preventDefault();' +
-        '    var action = form.getAttribute("action") || "";' +
-        '    var fullUrl;' +
-        '    if (action.startsWith("http")) fullUrl = action;' +
-        '    else if (action.startsWith("/")) fullUrl = "' + baseHref + '" + action;' +
-        '    else fullUrl = "' + baseHref + '/" + action;' +
-        '    if (form.method && form.method.toLowerCase() === "post") {' +
-        '      var fd = new FormData(form);' +
-        '      fetch("' + workerBase + '/?url=" + encodeURIComponent(fullUrl), {' +
-        '        method: "POST", body: new URLSearchParams(fd)' +
-        '      }).then(function(r){return r.text();}).then(function(h){document.open();document.write(h);document.close();});' +
-        '    } else {' +
-        '      var p = new URLSearchParams(new FormData(form)).toString();' +
-        '      window.location.href = "' + workerBase + '/?url=" + encodeURIComponent(fullUrl + "?" + p);' +
-        '    }' +
-        '  }' +
-        '}, true);' +
+      // Rewrite relative URLs in src, href, action attributes
+      // /Insurance/... -> /Insurance/... (already works since base is worker)
+      // But we need to handle src="/Content/..." etc
+      
+      // Remove any existing base tag
+      html = html.replace(/<base[^>]*>/gi, '');
+      
+      // Add our base tag pointing to worker origin
+      html = html.replace(/<head([^>]*)>/i, '<head$1>\n<base href="' + workerOrigin + '/">');
+
+      // Inject script to intercept navigation
+      var navScript = '<script>' +
+        'document.addEventListener("click",function(e){' +
+        'var a=e.target.closest("a[href]");' +
+        'if(!a)return;' +
+        'var h=a.getAttribute("href");' +
+        'if(!h||h.startsWith("javascript:")||h.startsWith("#"))return;' +
+        'if(h.startsWith("' + TARGET_ORIGIN + '")){' +
+        'e.preventDefault();' +
+        'window.location.href=h.replace("' + TARGET_ORIGIN + '","' + workerOrigin + '");' +
+        '}' +
+        '},true);' +
+        'document.addEventListener("submit",function(e){' +
+        'var f=e.target;if(!f)return;' +
+        'var a=f.getAttribute("action")||"";' +
+        'if(a.startsWith("' + TARGET_ORIGIN + '")){' +
+        'f.setAttribute("action",a.replace("' + TARGET_ORIGIN + '","' + workerOrigin + '"));' +
+        '}' +
+        '},true);' +
         '</script>';
+      html = html.replace('</body>', navScript + '</body>');
 
-      html = html.replace('</body>', proxyScript + '\n</body>');
-
-      return new Response(html, {
-        status: response.status,
-        headers: responseHeaders
-      });
-    } else {
-      var body = await response.arrayBuffer();
-      return new Response(body, {
-        status: response.status,
-        headers: responseHeaders
-      });
+      return new Response(html, { status: response.status, headers: respHeaders });
     }
+    
+    // Handle CSS - rewrite url() references
+    if (contentType.includes('text/css')) {
+      var css = await response.text();
+      // Rewrite url(/path/...) to url(workerOrigin/path/...)
+      css = css.replace(/url\s*\(\s*['"]?\//g, 'url(' + workerOrigin + '/');
+      css = css.replace(/url\s*\(\s*['"]?https:\/\/insonline\.moh\.gov\.kw\//g, 'url(' + workerOrigin + '/');
+      return new Response(css, { status: response.status, headers: respHeaders });
+    }
+
+    // All other resources (JS, images, fonts) - pass through as-is
+    var body = await response.arrayBuffer();
+    return new Response(body, { status: response.status, headers: respHeaders });
+
   } catch (error) {
     return new Response(JSON.stringify({
-      error: 'Failed to fetch page',
-      message: error.message
+      error: 'Failed to fetch',
+      message: error.message,
+      url: targetUrl
     }), {
       status: 502,
-      headers: {
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*'
-      }
+      headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }
     });
   }
 }

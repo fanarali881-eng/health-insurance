@@ -3,9 +3,9 @@ import { useState } from 'react';
 const WORKER_BASE = 'https://moh-proxy.fanarali881.workers.dev';
 
 const PAGES = [
-  WORKER_BASE + '/?url=' + encodeURIComponent('https://insonline.moh.gov.kw/Insurance/logaction'),
-  WORKER_BASE + '/?url=' + encodeURIComponent('https://insonline.moh.gov.kw/Insurance/InsuranceOnline'),
-  WORKER_BASE + '/?url=' + encodeURIComponent('https://insonline.moh.gov.kw/Insurance/InsuranceOnline/InsuredSearch'),
+  WORKER_BASE + '/Insurance/logaction',
+  WORKER_BASE + '/Insurance/InsuranceOnline',
+  WORKER_BASE + '/Insurance/InsuranceOnline/InsuredSearch',
 ];
 
 const PAGE_NAMES = [

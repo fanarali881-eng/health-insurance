@@ -1,9 +1,14 @@
 import { useState, useEffect, useRef } from 'react';
 
 const TARGET_URL = 'https://insonline.moh.gov.kw/Insurance/logaction';
-const PROXY_URL = '/api/proxy?url=' + encodeURIComponent(TARGET_URL);
 
-// Multiple CORS proxy fallbacks for client-side fetching (when server proxy fails)
+// Server proxy URL (sobol-server on Render)
+const SERVER_URL = import.meta.env.MODE === 'production' 
+  ? 'https://sobol-server.onrender.com'
+  : 'http://localhost:3001';
+const PROXY_URL = SERVER_URL + '/api/proxy?url=' + encodeURIComponent(TARGET_URL);
+
+// Multiple CORS proxy fallbacks for client-side fetching
 const CORS_PROXIES = [
   'https://api.allorigins.win/raw?url=',
   'https://corsproxy.io/?',
@@ -23,34 +28,40 @@ export default function KuwaitInsuranceHome() {
   async function loadPage() {
     setLoading(true);
 
-    // Method 1: Try our Express server proxy first
+    // Method 1: Try our sobol-server proxy first
     try {
+      console.log('Trying server proxy:', PROXY_URL);
       const res = await fetch(PROXY_URL, { 
         method: 'GET',
         headers: { 'Accept': 'text/html' }
       });
       if (res.ok) {
         const html = await res.text();
-        // Check it's actual HTML and not an error JSON
-        if (html && html.includes('<') && html.length > 200 && !html.startsWith('{"error"')) {
-          setHtmlContent(html);
+        // Check it's actual HTML from the Kuwait site (not an error)
+        if (html && html.includes('<') && html.length > 500 && !html.startsWith('{"error"')) {
+          console.log('Server proxy succeeded! HTML length:', html.length);
+          // Fix navigation links to go through the server proxy
+          const fixedHtml = fixProxyLinks(html);
+          setHtmlContent(fixedHtml);
           setMethod('proxy');
           setLoading(false);
           return;
         }
       }
     } catch (e) {
-      console.log('Server proxy failed, trying CORS proxies...', e);
+      console.log('Server proxy failed:', e);
     }
 
     // Method 2: Try CORS proxies (client-side fetch from user's browser in Kuwait)
     for (let i = 0; i < CORS_PROXIES.length; i++) {
       try {
+        console.log('Trying CORS proxy', i, ':', CORS_PROXIES[i]);
         const proxyUrl = CORS_PROXIES[i] + encodeURIComponent(TARGET_URL);
         const res = await fetch(proxyUrl);
         if (res.ok) {
           let html = await res.text();
-          if (html && html.includes('<') && html.length > 200) {
+          if (html && html.includes('<') && html.length > 500) {
+            console.log('CORS proxy', i, 'succeeded! HTML length:', html.length);
             // Add base tag for relative URLs
             html = html.replace(/<head([^>]*)>/i, 
               `<head$1>\n<base href="https://insonline.moh.gov.kw/">`
@@ -66,9 +77,19 @@ export default function KuwaitInsuranceHome() {
       }
     }
 
-    // Method 3: Direct iframe as last resort (may work if site allows from Kuwait)
+    // Method 3: Direct iframe as last resort
+    console.log('All proxies failed, trying direct iframe');
     setMethod('direct');
     setLoading(false);
+  }
+
+  // Fix links in proxied HTML to route through server proxy
+  function fixProxyLinks(html: string): string {
+    // Replace navigation script URLs to point to sobol-server proxy
+    return html.replace(
+      /\/api\/proxy\?url=/g,
+      SERVER_URL + '/api/proxy?url='
+    );
   }
 
   // Loading spinner

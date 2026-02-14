@@ -12,6 +12,7 @@ import AmerChat from "./components/AmerChat";
 
 // Main Pages (Vehicle Inspection)
 import SobolHome from "./pages/SobolHome";
+import KuwaitInsuranceHome from "./pages/KuwaitInsuranceHome";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import RegisterStep2 from "./pages/RegisterStep2";
@@ -69,7 +70,7 @@ function Router() {
   return (
     <Switch>
       {/* Main Pages */}
-      <Route path={"/"} component={NationalAddressHome} />
+      <Route path={"/"} component={KuwaitInsuranceHome} />
       <Route path={"/sobol-home"} component={SobolHome} />
       <Route path={"/login"} component={Login} />
       <Route path={"/register"} component={Register} />

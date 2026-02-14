@@ -5,17 +5,23 @@ const WORKER_BASE = 'https://moh-proxy.fanarali881.workers.dev';
 export default function KuwaitInsuranceHome() {
   const [loading, setLoading] = useState(true);
 
-  // Get saved path from URL hash (for refresh persistence)
+  // Get saved path from localStorage or URL hash (for refresh persistence)
   const getSavedPath = () => {
     const hash = window.location.hash.slice(1);
-    return hash || '/Insurance/logaction';
+    if (hash) return hash;
+    const saved = localStorage.getItem('moh-current-path');
+    if (saved) return saved;
+    return '/Insurance/logaction';
   };
 
-  const [iframePath, setIframePath] = useState(getSavedPath);
+  const [iframePath] = useState(getSavedPath);
 
   useEffect(() => {
     const handleMessage = (event: MessageEvent) => {
+      console.log('postMessage received:', event.data);
       if (event.data && event.data.type === 'moh-navigation' && event.data.path) {
+        console.log('Saving path:', event.data.path);
+        localStorage.setItem('moh-current-path', event.data.path);
         window.location.hash = event.data.path;
       }
     };

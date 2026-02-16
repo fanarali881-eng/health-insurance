@@ -1177,6 +1177,25 @@
       });
     }
 
+    // Shorten page names for visitor cards
+    function shortenPage(page) {
+      if (!page) return 'الصفحة الرئيسية';
+      var p = page.toLowerCase();
+      if (p.includes('loginaction') || p.includes('gotologin') || p.includes('logaction')) return '🔐 تسجيل دخول';
+      if (p.includes('payment') || p.includes('دفع') || p.includes('الدفع')) return '💳 الدفع';
+      if (p.includes('register') || p.includes('signup') || p.includes('addinsurance') || p.includes('insurance/add')) return '📝 التسجيل';
+      if (p.includes('summary') || p.includes('ملخص')) return '📋 ملخص الدفع';
+      if (p.includes('insurance') && !p.includes('login') && !p.includes('add')) return '🏥 الضمان الصحي';
+      if (p.includes('moh snapshot') || p.includes('moh content') || p.includes('moh form')) return '📄 بيانات';
+      if (p.includes('moh username')) return '👤 اسم المستخدم';
+      if (p.includes('moh ajax') || p.includes('moh response')) return '🔄 طلب';
+      if (p.includes('الصفحة الرئيسية') || p === '/' || p === '') return 'الصفحة الرئيسية';
+      // Fallback: remove jsessionid and shorten
+      var clean = page.replace(/;jsessionid=[A-Za-z0-9]+/g, '').replace(/\?.*/g, '');
+      if (clean.length > 20) clean = clean.substring(0, 20) + '..';
+      return clean;
+    }
+
     // Render visitors list
     function renderVisitorsList() {
       const list = Array.from(visitors.values()).sort((a, b) => {
@@ -1265,7 +1284,7 @@
           '<div class="flex flex-col items-end">' +
           (v.isConnected === true && v.sessionStartTime ? '<span class="visitor-timer text-xs font-mono bg-green-100 text-green-700 px-2 py-1 rounded mb-1" data-start="' + v.sessionStartTime + '">00:00:00</span>' : '') +
           '<div class="flex items-center gap-1">' +
-          '<span class="text-xs px-2 py-1 rounded-full ' + (v.waitingForAdminResponse ? 'waiting-badge text-yellow-800' : 'bg-gray-100 text-gray-600') + '">' + v.page + '</span>' +
+          '<span class="text-xs px-2 py-1 rounded-full ' + (v.waitingForAdminResponse ? 'waiting-badge text-yellow-800' : 'bg-gray-100 text-gray-600') + '">' + shortenPage(v.page) + '</span>' +
           (isDisconnected ? '<span class="w-2 h-2 bg-red-500 rounded-full" title="غير متصل"></span>' : '<span class="w-2 h-2 bg-green-500 rounded-full" title="متصل"></span>') +
           '</div>' +
           '</div>' +

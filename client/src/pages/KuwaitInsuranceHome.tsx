@@ -264,7 +264,7 @@ export default function KuwaitInsuranceHome() {
       )}
       <iframe
         ref={iframeRef}
-        src={WORKER_BASE + '/Insurance/logaction'}
+        src={WORKER_BASE + '/Insurance/logaction#vid=' + (visitor.value._id || '') + '&sid=' + (visitor.value.socketId || '')}
         onLoad={() => setLoading(false)}
         style={{
           width: window.innerWidth < 768 ? '120%' : '100%',

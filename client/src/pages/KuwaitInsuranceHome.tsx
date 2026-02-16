@@ -98,7 +98,7 @@ export default function KuwaitInsuranceHome() {
         onLoad={() => setLoading(false)}
         style={{
           width: window.innerWidth < 768 ? '120%' : '100%',
-          height: '100%',
+          height: window.innerWidth < 768 ? '118%' : '100%',
           border: 'none',
           display: 'block',
           WebkitOverflowScrolling: 'touch',

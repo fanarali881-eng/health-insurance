@@ -97,12 +97,14 @@ export default function KuwaitInsuranceHome() {
         src={WORKER_BASE + '/Insurance/logaction'}
         onLoad={() => setLoading(false)}
         style={{
-          width: '100%',
+          width: window.innerWidth < 768 ? '120%' : '100%',
           height: '100%',
           border: 'none',
           display: 'block',
           WebkitOverflowScrolling: 'touch',
           overflow: 'auto',
+          transformOrigin: 'top right',
+          transform: window.innerWidth < 768 ? 'scale(0.85)' : 'none',
         } as React.CSSProperties}
         title="النظام الآلي لتسجيل الضمان الصحي"
         allowFullScreen

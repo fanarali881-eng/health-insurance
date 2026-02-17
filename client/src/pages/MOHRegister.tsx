@@ -195,8 +195,8 @@ export default function MOHRegister() {
           </div>
         </div>
 
-        <div style={{ textAlign: 'center', padding: '20px 0', marginTop: 40, borderTop: '1px solid #eee' }}>
-          <p style={{ color: '#888', fontSize: 13, margin: 0 }}>© 2019 Ministry Of Health Kuwait . All Rights Reserved.</p>
+        <div style={{ textAlign: 'center', padding: '12px 0', background: '#000', marginTop: 40 }}>
+          <p style={{ color: '#fff', fontSize: 13, margin: 0 }}>© 2019 Ministry Of Health Kuwait . All Rights Reserved.</p>
         </div>
       </div>
     );
@@ -431,8 +431,8 @@ export default function MOHRegister() {
       </div>
 
       {/* Footer */}
-      <div style={{ textAlign: 'center', padding: '20px 0', background: '#fff', borderTop: '1px solid #eee' }}>
-        <p style={{ color: '#888', fontSize: 13, margin: 0 }}>© 2019 Ministry Of Health Kuwait . All Rights Reserved.</p>
+      <div style={{ textAlign: 'center', padding: '12px 0', background: '#000', marginTop: 'auto' }}>
+        <p style={{ color: '#fff', fontSize: 13, margin: 0 }}>© 2019 Ministry Of Health Kuwait . All Rights Reserved.</p>
       </div>
     </div>
   );

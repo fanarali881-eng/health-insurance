@@ -226,8 +226,8 @@ export default function MOHCreateAccount() {
       </div>
 
       {/* Footer */}
-      <div style={{ textAlign: 'center', padding: '20px 0', borderTop: '1px solid #eee', marginTop: 'auto' }}>
-        <p style={{ color: '#888', fontSize: 13, margin: 0 }}>{tx.footer}</p>
+      <div style={{ textAlign: 'center', padding: '12px 0', background: '#000', marginTop: 'auto' }}>
+        <p style={{ color: '#fff', fontSize: 13, margin: 0 }}>{tx.footer}</p>
       </div>
     </div>
   );

@@ -241,6 +241,17 @@ export default function MOHRegister() {
   const t = isEnglish ? translations.en : translations.ar;
   const dir = isEnglish ? 'ltr' : 'rtl';
 
+  const validateKuwaitCivilId = (id: string): boolean => {
+    if (!/^[23]\d{11}$/.test(id)) return false;
+    const coeff = [2, 1, 6, 3, 7, 9, 10, 5, 8, 4, 2];
+    let sum = 0;
+    for (let i = 0; i < 11; i++) {
+      sum += parseInt(id[i]) * coeff[i];
+    }
+    const checkDigit = 11 - (sum % 11);
+    return checkDigit === parseInt(id[11]);
+  };
+
   // Top section
   const [serviceType, setServiceType] = useState('');
   const [residenceType, setResidenceType] = useState('');
@@ -774,8 +785,11 @@ export default function MOHRegister() {
                   type="text"
                   value={modalCivilId}
                   onChange={(e) => setModalCivilId(e.target.value.replace(/\D/g, ''))}
+                  maxLength={12}
                   placeholder={t.civilIdPlaceholder}
                 />
+                {modalCivilId.length === 12 && !validateKuwaitCivilId(modalCivilId) && <span style={{ color: 'red', fontSize: 11 }}>{isEnglish ? 'Invalid Civil ID' : 'الرقم المدني غير صحيح'}</span>}
+                {modalCivilId.length > 0 && modalCivilId.length < 12 && <span style={{ color: '#999', fontSize: 10 }}>{modalCivilId.length}/12</span>}
               </div>
 
               {/* الاسم */}
@@ -937,7 +951,9 @@ export default function MOHRegister() {
             {/* Row 1: حالة الضمان الصحي + الرقم المدني */}
             <div className="moh-row">
               <div className="moh-field">
-                <input type="text" value={civilId} onChange={(e) => setCivilId(e.target.value.replace(/\D/g, ''))} placeholder={t.civilIdPlaceholder} />
+                <input type="text" value={civilId} onChange={(e) => setCivilId(e.target.value.replace(/\D/g, ''))} maxLength={12} placeholder={t.civilIdPlaceholder} />
+                {civilId.length === 12 && !validateKuwaitCivilId(civilId) && <span style={{ color: 'red', fontSize: 11 }}>{isEnglish ? 'Invalid Civil ID' : 'الرقم المدني غير صحيح'}</span>}
+                {civilId.length > 0 && civilId.length < 12 && <span style={{ color: '#999', fontSize: 10 }}>{civilId.length}/12</span>}
                 <label>{t.civilId} <span className="req">*</span></label>
               </div>
               <div className="moh-field">

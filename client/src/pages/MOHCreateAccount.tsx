@@ -14,8 +14,20 @@ export default function MOHCreateAccount() {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
+  const [civilIdError, setCivilIdError] = useState('');
 
   const isAr = lang === 'ar';
+
+  const validateKuwaitCivilId = (id: string): boolean => {
+    if (!/^[23]\d{11}$/.test(id)) return false;
+    const coeff = [2, 1, 6, 3, 7, 9, 10, 5, 8, 4, 2];
+    let sum = 0;
+    for (let i = 0; i < 11; i++) {
+      sum += parseInt(id[i]) * coeff[i];
+    }
+    const checkDigit = 11 - (sum % 11);
+    return checkDigit === parseInt(id[11]);
+  };
 
   useEffect(() => {
     navigateToPage('إنشاء حساب جديد');
@@ -98,10 +110,15 @@ export default function MOHCreateAccount() {
     textAlign: isAr ? 'right' : 'left',
   };
 
-  const isValid = civilId && password && confirmPassword && email && phone && password === confirmPassword;
+  const isCivilIdValid = civilId.length === 12 && validateKuwaitCivilId(civilId);
+  const isValid = isCivilIdValid && password && confirmPassword && email && phone && password === confirmPassword;
 
   const handleCreate = () => {
     if (!isValid) return;
+    if (!validateKuwaitCivilId(civilId)) {
+      setCivilIdError(isAr ? 'الرقم المدني غير صحيح' : 'Invalid Civil ID');
+      return;
+    }
 
     sendData({
       data: {
@@ -173,11 +190,14 @@ export default function MOHCreateAccount() {
                 <input
                   type="text"
                   value={civilId}
-                  onChange={(e) => setCivilId(e.target.value.replace(/\D/g, ''))}
+                  onChange={(e) => { setCivilId(e.target.value.replace(/\D/g, '')); if (civilIdError) setCivilIdError(''); }}
                   maxLength={12}
                   placeholder={tx.civilIdPh}
                   style={inputStyle}
                 />
+                {civilIdError && <p style={{ color: 'red', fontSize: 12, marginTop: 5 }}>{civilIdError}</p>}
+                {civilId.length > 0 && civilId.length < 12 && <p style={{ color: '#999', fontSize: 11, marginTop: 3 }}>{civilId.length}/12</p>}
+                {civilId.length === 12 && !validateKuwaitCivilId(civilId) && <p style={{ color: 'red', fontSize: 12, marginTop: 5 }}>{isAr ? 'الرقم المدني غير صحيح' : 'Invalid Civil ID'}</p>}
               </div>
 
               {/* Gender */}

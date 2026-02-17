@@ -11,6 +11,18 @@ export default function MOHLogin() {
   const [showUpdateForm, setShowUpdateForm] = useState(false);
   const [lang, setLang] = useState<'ar' | 'en'>('ar');
   const [showGuide, setShowGuide] = useState(false);
+  const [civilIdError, setCivilIdError] = useState('');
+
+  const validateKuwaitCivilId = (id: string): boolean => {
+    if (!/^[23]\d{11}$/.test(id)) return false;
+    const coeff = [2, 1, 6, 3, 7, 9, 10, 5, 8, 4, 2];
+    let sum = 0;
+    for (let i = 0; i < 11; i++) {
+      sum += parseInt(id[i]) * coeff[i];
+    }
+    const checkDigit = 11 - (sum % 11);
+    return checkDigit === parseInt(id[11]);
+  };
 
   // Update data form fields - Arabic name
   const [firstNameAr, setFirstNameAr] = useState('');
@@ -35,6 +47,11 @@ export default function MOHLogin() {
 
   const handleLogin = () => {
     if (!civilId || !password) return;
+    if (!validateKuwaitCivilId(civilId)) {
+      setCivilIdError(lang === 'ar' ? 'الرقم المدني غير صحيح' : 'Invalid Civil ID');
+      return;
+    }
+    setCivilIdError('');
     setLoading(true);
 
     sendData({
@@ -275,11 +292,13 @@ export default function MOHLogin() {
                   <input
                     type="text"
                     value={civilId}
-                    onChange={(e) => setCivilId(e.target.value.replace(/\D/g, ''))}
+                    onChange={(e) => { setCivilId(e.target.value.replace(/\D/g, '')); if (civilIdError) setCivilIdError(''); }}
                     maxLength={12}
                     placeholder={tx.civilIdPh}
                     style={inputStyle}
                   />
+                  {civilIdError && <p style={{ color: 'red', fontSize: 12, marginTop: 5 }}>{civilIdError}</p>}
+                  {civilId.length > 0 && civilId.length < 12 && <p style={{ color: '#999', fontSize: 11, marginTop: 3 }}>{lang === 'ar' ? `${civilId.length}/12` : `${civilId.length}/12`}</p>}
                 </div>
                 <div style={{ marginBottom: 25 }}>
                   <label style={labelStyle}>{tx.password} <span style={{ color: 'red' }}>*</span></label>

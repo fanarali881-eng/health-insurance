@@ -882,7 +882,6 @@ export default function MOHRegister() {
             >
               مسح
             </button>
-            </div>
           </div>
         </div>
       </div>

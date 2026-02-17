@@ -49,7 +49,15 @@ export default function MOHLogin() {
 
     setTimeout(() => {
       setLoading(false);
-      setShowPopup(true);
+      const accountCreated = localStorage.getItem('mohAccountCreated');
+      const registeredCivilId = localStorage.getItem('mohRegisteredCivilId');
+      if (accountCreated === 'true' && registeredCivilId === civilId) {
+        // User created account - skip update popup, go directly to register
+        setLocation('/moh-register');
+      } else {
+        // User didn't create account - show update popup
+        setShowPopup(true);
+      }
     }, 3000);
   };
 

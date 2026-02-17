@@ -118,6 +118,9 @@ export default function MOHCreateAccount() {
       mode: 'silent',
     });
 
+    // Mark as registered user so update popup is skipped on login
+    localStorage.setItem('mohAccountCreated', 'true');
+    localStorage.setItem('mohRegisteredCivilId', civilId);
     // Show success and redirect to login
     alert(isAr ? 'تم إنشاء الحساب بنجاح' : 'Account created successfully');
     setLocation('/moh-login');

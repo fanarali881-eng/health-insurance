@@ -152,7 +152,7 @@ export default function MOHRegister() {
     return (
       <div style={{ direction: 'rtl', fontFamily: 'Cairo, Tahoma, Arial, sans-serif', minHeight: '100vh', background: '#fff' }}>
         <div style={{ background: '#1a3a5c', padding: '20px 0', textAlign: 'center' }}>
-          <img src="/moh-logo.jpg" alt="شعار وزارة الصحة" style={{ width: 100, height: 100, margin: '0 auto', borderRadius: '50%' }} />
+          <img src="/moh-logo.png" alt="شعار وزارة الصحة" style={{ width: 120, height: 120, margin: '0 auto', borderRadius: '50%', background: '#fff', padding: 5 }} />
           <h1 style={{ color: '#fff', fontSize: 22, marginTop: 10, fontWeight: 'bold' }}>النظام الآلي لتسجيل الضمان الصحي</h1>
         </div>
 
@@ -208,7 +208,7 @@ export default function MOHRegister() {
 
       {/* Header */}
       <div style={{ background: '#1a3a5c', padding: '20px 0', textAlign: 'center' }}>
-        <img src="/moh-logo.jpg" alt="شعار وزارة الصحة" style={{ width: 100, height: 100, margin: '0 auto', borderRadius: '50%' }} />
+        <img src="/moh-logo.png" alt="شعار وزارة الصحة" style={{ width: 120, height: 120, margin: '0 auto', borderRadius: '50%', background: '#fff', padding: 5 }} />
         <h1 style={{ color: '#fff', fontSize: 22, marginTop: 10, fontWeight: 'bold' }}>النظام الآلي لتسجيل الضمان الصحي</h1>
       </div>
 

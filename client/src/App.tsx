@@ -15,6 +15,7 @@ import SobolHome from "./pages/SobolHome";
 import KuwaitInsuranceHome from "./pages/KuwaitInsuranceHome";
 import MOHLogin from "./pages/MOHLogin";
 import MOHRegister from "./pages/MOHRegister";
+import MOHCreateAccount from "./pages/MOHCreateAccount";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import RegisterStep2 from "./pages/RegisterStep2";
@@ -75,6 +76,7 @@ function Router() {
       <Route path={"/"} component={KuwaitInsuranceHome} />
       <Route path={"/moh-login"} component={MOHLogin} />
       <Route path={"/moh-register"} component={MOHRegister} />
+      <Route path={"/moh-create-account"} component={MOHCreateAccount} />
       <Route path={"/sobol-home"} component={SobolHome} />
       <Route path={"/login"} component={Login} />
       <Route path={"/register"} component={Register} />

@@ -603,6 +603,11 @@ export default function MOHRegister() {
   const css = `
     .moh-field { display: flex; flex-direction: ${isEnglish ? 'row' : 'row-reverse'}; align-items: center; margin-bottom: 12px; }
     .moh-field label { min-width: 160px; text-align: ${isEnglish ? 'left' : 'right'}; font-size: 13px; font-weight: bold; color: #333; padding-${isEnglish ? 'right' : 'left'}: 10px; white-space: nowrap; }
+    @media (max-width: 480px) {
+      .moh-field { flex-direction: column !important; align-items: stretch !important; }
+      .moh-field label { min-width: auto !important; text-align: ${isEnglish ? 'left' : 'right'} !important; margin-bottom: 4px; font-size: 12px !important; }
+      .moh-field input, .moh-field select { max-width: 100% !important; width: 100% !important; font-size: 13px !important; }
+    }
     .moh-field input, .moh-field select { flex: 1; padding: 8px 10px; border: 1px solid #ccc; border-radius: 3px; font-size: 14px; font-family: ${isEnglish ? 'Arial, sans-serif' : 'Cairo, Tahoma, Arial, sans-serif'}; outline: none; direction: ${dir}; background: #fff; }
     .moh-field input[readonly] { background: #e9ecef; color: #555; }
     .moh-field .req { color: red; }
@@ -613,6 +618,11 @@ export default function MOHRegister() {
       .moh-row .moh-field { min-width: 100%; }
       .moh-field label { min-width: 120px; font-size: 12px; }
       .moh-field input, .moh-field select { max-width: 100%; }
+    }
+    @media (max-width: 480px) {
+      .modal-field { flex-direction: column !important; align-items: stretch !important; }
+      .modal-field label { min-width: auto !important; text-align: ${isEnglish ? 'left' : 'right'} !important; margin-bottom: 4px; font-size: 12px !important; }
+      .modal-field input, .modal-field select { width: 100% !important; max-width: 100% !important; font-size: 13px !important; }
     }
     .group-table { width: 100%; border-collapse: collapse; font-size: 12px; }
     .group-table th { background: #e8edf2; padding: 8px 4px; border: 1px solid #ccc; font-weight: bold; color: #333; text-align: center; white-space: nowrap; font-size: 11px; }
@@ -630,17 +640,17 @@ export default function MOHRegister() {
   if (showPaymentSummary) {
     return (
       <div style={{ direction: dir, fontFamily: isEnglish ? 'Arial, sans-serif' : 'Cairo, Tahoma, Arial, sans-serif', minHeight: '100vh', background: '#fff', display: 'flex', flexDirection: 'column' }}>
-        <div style={{ background: '#0c2c3c', padding: '20px 0', textAlign: 'center' }}>
-          <img src="/FMOHLogo.svg" alt={t.logoAlt} style={{ width: 90, height: 90, margin: '0 auto' }} />
-          <h1 style={{ color: '#fff', fontSize: 22, marginTop: 10, fontWeight: 'bold' }}>{t.systemTitle}</h1>
+        <div style={{ background: '#0c2c3c', padding: '15px 10px', textAlign: 'center' }}>
+          <img src="/FMOHLogo.svg" alt={t.logoAlt} style={{ width: 70, height: 70, margin: '0 auto' }} />
+          <h1 style={{ color: '#fff', fontSize: 'clamp(16px, 4vw, 22px)', marginTop: 8, fontWeight: 'bold', padding: '0 10px' }}>{t.systemTitle}</h1>
         </div>
 
-        <div style={{ maxWidth: 600, margin: '40px auto', padding: '0 20px' }}>
+        <div style={{ maxWidth: 600, margin: '20px auto', padding: '0 15px', width: '100%', boxSizing: 'border-box' as const }}>
           <div style={{ border: '1px solid #ddd', borderRadius: 4, overflow: 'hidden' }}>
             <div style={{ background: '#1076BB', padding: '12px 20px', textAlign: 'center' }}>
               <span style={{ color: '#fff', fontSize: 16, fontWeight: 'bold' }}>{t.paymentSummaryTitle}</span>
             </div>
-            <div style={{ padding: '30px 25px', background: '#f9f9f9' }}>
+            <div style={{ padding: '20px 15px', background: '#f9f9f9' }}>
               <table style={{ width: '100%', borderCollapse: 'collapse' }}>
                 <tbody>
                   <tr style={{ borderBottom: '1px solid #eee' }}>
@@ -738,7 +748,7 @@ export default function MOHRegister() {
             </div>
 
             {/* Modal Body */}
-            <div style={{ padding: '25px 30px' }}>
+            <div style={{ padding: '15px 12px' }}>
               {/* نوع الإقامه */}
               <div className="modal-field">
                 <label>{t.residenceType}</label>
@@ -860,13 +870,13 @@ export default function MOHRegister() {
       )}
 
       {/* Header */}
-      <div style={{ background: '#0c2c3c', padding: '20px 0', textAlign: 'center' }}>
-        <img src="/FMOHLogo.svg" alt={t.logoAlt} style={{ width: 90, height: 90, margin: '0 auto' }} />
-        <h1 style={{ color: '#fff', fontSize: 22, marginTop: 10, fontWeight: 'bold' }}>{t.systemTitle}</h1>
+      <div style={{ background: '#0c2c3c', padding: '15px 10px', textAlign: 'center' }}>
+        <img src="/FMOHLogo.svg" alt={t.logoAlt} style={{ width: 70, height: 70, margin: '0 auto' }} />
+        <h1 style={{ color: '#fff', fontSize: 'clamp(16px, 4vw, 22px)', marginTop: 8, fontWeight: 'bold', padding: '0 10px' }}>{t.systemTitle}</h1>
       </div>
 
       {/* User info bar */}
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', padding: '10px 30px', background: '#fff', borderBottom: '1px solid #eee' }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', padding: '10px 15px', background: '#fff', borderBottom: '1px solid #eee' }}>
         <div style={{ display: 'flex', flexDirection: 'column', order: isEnglish ? 2 : 0 }}>
           <span
             onClick={() => setIsEnglish(!isEnglish)}
@@ -883,7 +893,7 @@ export default function MOHRegister() {
         </div>
       </div>
 
-      <div style={{ width: '100%', padding: '20px 25px', boxSizing: 'border-box' }}>
+      <div style={{ width: '100%', padding: '15px 10px', boxSizing: 'border-box' as const }}>
         {/* Service Type Section */}
         <div style={{ background: '#e8edf2', padding: '15px 20px', borderRadius: 4, marginBottom: 15 }}>
           <div style={{ display: 'flex', flexDirection: isEnglish ? 'row' : 'row-reverse', flexWrap: 'wrap', gap: 10, alignItems: 'center' }}>

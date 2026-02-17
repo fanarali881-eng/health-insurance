@@ -42,13 +42,13 @@ export default function KuwaitInsuranceHome() {
   return (
     <div style={{ direction: isAr ? 'rtl' : 'ltr', fontFamily: 'Cairo, Tahoma, Arial, sans-serif', minHeight: '100vh', background: '#fff', display: 'flex', flexDirection: 'column' }}>
       {/* Header */}
-      <div style={{ background: '#0c2c3c', padding: '20px 0', textAlign: 'center' }}>
-        <img src="/FMOHLogo.svg" alt="شعار وزارة الصحة" style={{ width: 90, height: 90, margin: '0 auto' }} />
-        <h1 style={{ color: '#fff', fontSize: 22, marginTop: 10, fontWeight: 'bold' }}>{tx.title}</h1>
+      <div style={{ background: '#0c2c3c', padding: '15px 10px', textAlign: 'center' }}>
+        <img src="/FMOHLogo.svg" alt="شعار وزارة الصحة" style={{ width: 70, height: 70, margin: '0 auto' }} />
+        <h1 style={{ color: '#fff', fontSize: 'clamp(16px, 4vw, 22px)', marginTop: 8, fontWeight: 'bold', padding: '0 10px' }}>{tx.title}</h1>
       </div>
 
       {/* Language */}
-      <div style={{ textAlign: isAr ? 'left' : 'right', padding: '10px 30px' }}>
+      <div style={{ textAlign: isAr ? 'left' : 'right', padding: '10px 15px' }}>
         <span
           onClick={() => setLang(isAr ? 'en' : 'ar')}
           style={{ color: 'red', fontSize: 14, cursor: 'pointer' }}
@@ -58,7 +58,7 @@ export default function KuwaitInsuranceHome() {
       </div>
 
       {/* Main Content */}
-      <div style={{ maxWidth: 700, margin: '40px auto', padding: '0 20px' }}>
+      <div style={{ maxWidth: 700, margin: '20px auto', padding: '0 15px' }}>
         <div style={{ border: '1px solid #ddd', borderRadius: 4, overflow: 'hidden' }}>
           {/* Blue Header */}
           <div style={{ background: '#1076BB', padding: '12px 20px', textAlign: 'center' }}>
@@ -66,8 +66,8 @@ export default function KuwaitInsuranceHome() {
           </div>
           
           {/* Content */}
-          <div style={{ padding: '30px 25px', background: '#f9f9f9', textAlign: 'center' }}>
-            <p style={{ color: '#555', fontSize: 15, lineHeight: 1.8, marginBottom: 25 }}>
+          <div style={{ padding: '20px 15px', background: '#f9f9f9', textAlign: 'center' }}>
+            <p style={{ color: '#555', fontSize: 'clamp(13px, 3.5vw, 15px)', lineHeight: 1.8, marginBottom: 20 }}>
               {tx.desc}
             </p>
             
@@ -77,12 +77,14 @@ export default function KuwaitInsuranceHome() {
                 background: '#1076BB',
                 color: '#fff',
                 border: 'none',
-                padding: '12px 60px',
-                fontSize: 16,
+                padding: '12px 40px',
+                fontSize: 'clamp(14px, 3.5vw, 16px)',
                 fontWeight: 'bold',
                 borderRadius: 4,
                 cursor: 'pointer',
                 fontFamily: 'Cairo, Tahoma, Arial, sans-serif',
+                width: '100%',
+                maxWidth: 280,
               }}
             >
               {tx.loginBtn}
@@ -92,7 +94,7 @@ export default function KuwaitInsuranceHome() {
       </div>
 
       {/* Service Notice */}
-      <div style={{ textAlign: 'center', marginTop: 30 }}>
+      <div style={{ textAlign: 'center', marginTop: 20, padding: '0 15px' }}>
         <p style={{ color: 'red', fontSize: 14 }}>{tx.notice}</p>
       </div>
 

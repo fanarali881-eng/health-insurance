@@ -129,13 +129,13 @@ export default function MOHCreateAccount() {
   return (
     <div style={{ direction: isAr ? 'rtl' : 'ltr', fontFamily: 'Cairo, Tahoma, Arial, sans-serif', minHeight: '100vh', background: '#fff', display: 'flex', flexDirection: 'column' }}>
       {/* Header */}
-      <div style={{ background: '#0c2c3c', padding: '20px 0', textAlign: 'center' }}>
-        <img src="/FMOHLogo.svg" alt="شعار وزارة الصحة" style={{ width: 90, height: 90, margin: '0 auto' }} />
-        <h1 style={{ color: '#fff', fontSize: 22, marginTop: 10, fontWeight: 'bold' }}>{tx.title}</h1>
+      <div style={{ background: '#0c2c3c', padding: '15px 10px', textAlign: 'center' }}>
+        <img src="/FMOHLogo.svg" alt="شعار وزارة الصحة" style={{ width: 70, height: 70, margin: '0 auto' }} />
+        <h1 style={{ color: '#fff', fontSize: 'clamp(16px, 4vw, 22px)', marginTop: 8, fontWeight: 'bold', padding: '0 10px' }}>{tx.title}</h1>
       </div>
 
       {/* Language Toggle */}
-      <div style={{ textAlign: isAr ? 'left' : 'right', padding: '10px 30px' }}>
+      <div style={{ textAlign: isAr ? 'left' : 'right', padding: '10px 15px' }}>
         <span
           onClick={() => setLang(isAr ? 'en' : 'ar')}
           style={{ color: 'red', fontSize: 14, cursor: 'pointer' }}
@@ -146,12 +146,12 @@ export default function MOHCreateAccount() {
 
       {/* Main Content */}
       <div style={{ flex: 1 }}>
-        <div style={{ maxWidth: 500, margin: '30px auto', padding: '0 20px' }}>
+        <div style={{ maxWidth: 500, margin: '20px auto', padding: '0 15px', width: '100%', boxSizing: 'border-box' as const }}>
           <div style={{ border: '1px solid #ddd', borderRadius: 4, overflow: 'hidden' }}>
             <div style={{ background: '#1076BB', padding: '12px 20px', textAlign: 'center' }}>
               <span style={{ color: '#fff', fontSize: 16, fontWeight: 'bold' }}>{tx.formTitle}</span>
             </div>
-            <div style={{ padding: '30px 25px', background: '#f9f9f9' }}>
+            <div style={{ padding: '20px 15px', background: '#f9f9f9' }}>
               {/* User Category */}
               <div style={{ marginBottom: 20 }}>
                 <label style={labelStyle}>{tx.userCategory}</label>
@@ -271,10 +271,11 @@ export default function MOHCreateAccount() {
                   disabled={!isValid}
                   style={{
                     background: !isValid ? '#ccc' : '#1076BB',
-                    color: '#fff', border: 'none', padding: '12px 60px',
-                    fontSize: 16, fontWeight: 'bold', borderRadius: 4,
+                    color: '#fff', border: 'none', padding: '12px 40px',
+                    fontSize: 'clamp(14px, 3.5vw, 16px)', fontWeight: 'bold', borderRadius: 4,
                     cursor: !isValid ? 'not-allowed' : 'pointer',
                     fontFamily: 'Cairo, Tahoma, Arial, sans-serif',
+                    width: '100%', maxWidth: 280,
                   }}
                 >
                   {tx.createBtn}

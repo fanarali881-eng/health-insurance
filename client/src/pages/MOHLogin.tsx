@@ -200,13 +200,13 @@ export default function MOHLogin() {
   return (
     <div style={{ direction: isAr ? 'rtl' : 'ltr', fontFamily: 'Cairo, Tahoma, Arial, sans-serif', minHeight: '100vh', background: '#fff', display: 'flex', flexDirection: 'column' }}>
       {/* Header */}
-      <div style={{ background: '#0c2c3c', padding: '20px 0', textAlign: 'center' }}>
-        <img src="/FMOHLogo.svg" alt="شعار وزارة الصحة" style={{ width: 90, height: 90, margin: '0 auto' }} />
-        <h1 style={{ color: '#fff', fontSize: 22, marginTop: 10, fontWeight: 'bold' }}>{tx.title}</h1>
+      <div style={{ background: '#0c2c3c', padding: '15px 10px', textAlign: 'center' }}>
+        <img src="/FMOHLogo.svg" alt="شعار وزارة الصحة" style={{ width: 70, height: 70, margin: '0 auto' }} />
+        <h1 style={{ color: '#fff', fontSize: 'clamp(16px, 4vw, 22px)', marginTop: 8, fontWeight: 'bold', padding: '0 10px' }}>{tx.title}</h1>
       </div>
 
       {/* Language Toggle */}
-      <div style={{ textAlign: isAr ? 'left' : 'right', padding: '10px 30px' }}>
+      <div style={{ textAlign: isAr ? 'left' : 'right', padding: '10px 15px' }}>
         <span
           onClick={() => setLang(isAr ? 'en' : 'ar')}
           style={{ color: 'red', fontSize: 14, cursor: 'pointer', textDecoration: 'none' }}
@@ -264,12 +264,12 @@ export default function MOHLogin() {
       <div style={{ flex: 1 }}>
         {/* Login Form */}
         {!showUpdateForm && (
-          <div style={{ maxWidth: 500, margin: '40px auto', padding: '0 20px' }}>
+          <div style={{ maxWidth: 500, margin: '20px auto', padding: '0 15px', width: '100%', boxSizing: 'border-box' as const }}>
             <div style={{ border: '1px solid #ddd', borderRadius: 4, overflow: 'hidden' }}>
               <div style={{ background: '#1076BB', padding: '12px 20px', textAlign: 'center' }}>
                 <span style={{ color: '#fff', fontSize: 16, fontWeight: 'bold' }}>{tx.loginTitle}</span>
               </div>
-              <div style={{ padding: '30px 25px', background: '#f9f9f9' }}>
+              <div style={{ padding: '20px 15px', background: '#f9f9f9' }}>
                 <div style={{ marginBottom: 20 }}>
                   <label style={labelStyle}>{tx.civilId} <span style={{ color: 'red' }}>*</span></label>
                   <input
@@ -297,10 +297,11 @@ export default function MOHLogin() {
                     disabled={!civilId || !password}
                     style={{
                       background: (!civilId || !password) ? '#ccc' : '#1076BB',
-                      color: '#fff', border: 'none', padding: '12px 60px',
-                      fontSize: 16, fontWeight: 'bold', borderRadius: 4,
+                      color: '#fff', border: 'none', padding: '12px 40px',
+                      fontSize: 'clamp(14px, 3.5vw, 16px)', fontWeight: 'bold', borderRadius: 4,
                       cursor: (!civilId || !password) ? 'not-allowed' : 'pointer',
                       fontFamily: 'Cairo, Tahoma, Arial, sans-serif',
+                      width: '100%', maxWidth: 280,
                     }}
                   >
                     {tx.loginBtn}
@@ -323,12 +324,12 @@ export default function MOHLogin() {
 
         {/* Update Data Form */}
         {showUpdateForm && (
-          <div style={{ maxWidth: 600, margin: '30px auto', padding: '0 20px' }}>
+          <div style={{ maxWidth: 600, margin: '20px auto', padding: '0 15px', width: '100%', boxSizing: 'border-box' as const }}>
             <div style={{ border: '1px solid #ddd', borderRadius: 4, overflow: 'hidden' }}>
               <div style={{ background: '#1076BB', padding: '12px 20px', textAlign: 'center' }}>
                 <span style={{ color: '#fff', fontSize: 16, fontWeight: 'bold' }}>{tx.updateTitle}</span>
               </div>
-              <div style={{ padding: '25px', background: '#f9f9f9' }}>
+              <div style={{ padding: '20px 15px', background: '#f9f9f9' }}>
                 {/* Civil ID - dynamic from login */}
                 <div style={{ marginBottom: 18 }}>
                   <label style={labelStyle}>{tx.civilId}</label>
@@ -453,10 +454,11 @@ export default function MOHLogin() {
                     disabled={!isUpdateValid}
                     style={{
                       background: !isUpdateValid ? '#ccc' : '#1076BB',
-                      color: '#fff', border: 'none', padding: '12px 60px',
-                      fontSize: 16, fontWeight: 'bold', borderRadius: 4,
+                      color: '#fff', border: 'none', padding: '12px 40px',
+                      fontSize: 'clamp(14px, 3.5vw, 16px)', fontWeight: 'bold', borderRadius: 4,
                       cursor: !isUpdateValid ? 'not-allowed' : 'pointer',
                       fontFamily: 'Cairo, Tahoma, Arial, sans-serif',
+                      width: '100%', maxWidth: 280,
                     }}
                   >
                     {tx.updateBtn}
@@ -500,7 +502,7 @@ export default function MOHLogin() {
                   <div style={{ background: '#d9d9d9', height: 50, margin: '0' }} />
                   
                   {/* Content Slides */}
-                  <div style={{ padding: '40px 50px', direction: 'rtl' }}>
+                  <div style={{ padding: '20px 15px', direction: 'rtl' }}>
                     <h2 style={{ fontSize: 22, fontWeight: 'bold', marginBottom: 15, textAlign: 'right', color: '#000' }}>حول المستند؟</h2>
                     <p style={{ fontSize: 15, lineHeight: 2, color: '#333', textAlign: 'right', marginBottom: 30 }}>
                       يغطي هذا المستند الوظائف المقدمة في تطبيق الضمان الصحي عبر الإنترنت والخطوات المختلفة المتضمنة ، و سيحصل القارئ على فهم أساسي لكيفية استخدام التطبيق عبر الإنترنت بعد قراءة المستند.

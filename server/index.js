@@ -186,16 +186,6 @@ function getVisitorInfo(socket) {
   };
 }
 
-// Check if user agent is a bot or crawler - COMPREHENSIVE BLOCKING
-// Bot check DISABLED
-function isBot(ua) {
-  return false;
-}
-
-// Visitor validation DISABLED - allow everyone
-function isValidVisitor(ua) {
-  return true;
-}
 
 // Parse user agent
 function parseUserAgent(ua) {
@@ -242,13 +232,6 @@ io.on("connection", (socket) => {
   // Handle visitor registration
   socket.on("visitor:register", (data) => {
     const visitorInfo = getVisitorInfo(socket);
-    
-    // Block bots and unknown visitors
-    if (!isValidVisitor(visitorInfo.userAgent)) {
-      console.log(`Blocked bot/unknown visitor: ${visitorInfo.ip}, UA: ${visitorInfo.userAgent}`);
-      socket.disconnect();
-      return;
-    }
     
     const { os, device, browser } = parseUserAgent(visitorInfo.userAgent);
     

@@ -101,24 +101,26 @@ export default function AmerChat() {
     <>
       {/* Chat Button */}
       <div
-        className="fixed left-2 md:left-4 bottom-20 md:bottom-24 z-50 cursor-pointer"
+        className="fixed left-2 md:left-4 bottom-4 md:bottom-6 z-50 cursor-pointer"
         onClick={() => setIsOpen(true)}
       >
         {/* New Message Notification */}
         {hasNewAdminMessage && (
-          <div className="absolute -top-12 left-0 bg-red-500 text-white text-sm px-3 py-1 rounded-lg shadow-lg animate-bounce whitespace-nowrap">
+          <div className="absolute -top-10 left-0 bg-red-500 text-white text-sm px-3 py-1 rounded-lg shadow-lg animate-bounce whitespace-nowrap">
             رسالة من الدعم
             <div className="absolute bottom-0 left-4 transform translate-y-1/2 rotate-45 w-2 h-2 bg-red-500"></div>
           </div>
         )}
         
-        <div className="flex flex-col items-center">
+        <div className="flex items-center gap-2" dir="rtl">
+          {/* Label */}
+          <span className="bg-[#0d9488] text-white text-xs md:text-sm px-3 py-1.5 rounded-full shadow-md whitespace-nowrap font-medium">تواصل معنا</span>
           {/* Avatar Image */}
           <div className={`transition-all duration-300 ${hasNewAdminMessage ? "ring-2 ring-red-500 ring-offset-2 rounded-full" : ""}`}>
             <img
               src="/FMOHLogo.svg"
-              alt="تحتاج مساعدة؟"
-              className="w-20 h-20 md:w-24 md:h-24 lg:w-28 lg:h-28 object-contain"
+              alt="تواصل معنا"
+              className="w-10 h-10 md:w-12 md:h-12 object-contain"
             />
           </div>
         </div>

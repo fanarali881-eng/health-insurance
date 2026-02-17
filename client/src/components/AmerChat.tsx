@@ -101,7 +101,7 @@ export default function AmerChat() {
     <>
       {/* Chat Button */}
       <div
-        className="fixed right-2 md:right-4 bottom-20 md:bottom-24 z-50 cursor-pointer"
+        className="fixed left-2 md:left-4 bottom-20 md:bottom-24 z-50 cursor-pointer"
         onClick={() => setIsOpen(true)}
       >
         {/* New Message Notification */}
@@ -116,7 +116,7 @@ export default function AmerChat() {
           {/* Avatar Image */}
           <div className={`transition-all duration-300 ${hasNewAdminMessage ? "ring-2 ring-red-500 ring-offset-2 rounded-full" : ""}`}>
             <img
-              src="/amer-chat.png"
+              src="/FMOHLogo.svg"
               alt="تحتاج مساعدة؟"
               className="w-20 h-20 md:w-24 md:h-24 lg:w-28 lg:h-28 object-contain"
             />
@@ -132,13 +132,12 @@ export default function AmerChat() {
             <div className="bg-gradient-to-r from-[#0d9488] to-[#0891b2] text-white p-4 flex items-center justify-between">
               <div className="flex items-center gap-3">
                 <img
-                  src="/amer-chat.png"
-                  alt="آمر"
+                  src="/FMOHLogo.svg"
+                  alt="وزارة الصحة"
                   className="w-10 h-10 object-contain bg-white rounded-full p-1"
                 />
                 <div>
-                  <h3 className="font-bold text-sm">سبل</h3>
-                  <p className="text-xs opacity-80">الدعم الفني</p>
+                  <h3 className="font-bold text-sm">النظام الآلي لخدمة الضمان الصحي</h3>
                 </div>
               </div>
               <button
@@ -156,8 +155,8 @@ export default function AmerChat() {
               {messages.length === 0 ? (
                 <div className="text-center text-gray-500 mt-8">
                   <img
-                    src="/amer-chat.png"
-                    alt="آمر"
+                    src="/FMOHLogo.svg"
+                    alt="وزارة الصحة"
                     className="w-16 h-16 mx-auto mb-4 opacity-50"
                   />
                   <p>مرحباً بك في خدمة الدعم</p>

@@ -306,13 +306,13 @@ export default function MOHRegister() {
   const groupInsuranceCategories = ['--اختار--', 'تأمين خاص'];
 
   const css = `
-    .moh-field { display: flex; align-items: center; margin-bottom: 12px; }
-    .moh-field label { min-width: 160px; text-align: right; font-size: 13px; font-weight: bold; color: #333; padding-left: 10px; white-space: nowrap; }
+    .moh-field { display: flex; flex-direction: row-reverse; align-items: center; margin-bottom: 12px; }
+    .moh-field label { min-width: 160px; text-align: right; font-size: 13px; font-weight: bold; color: #333; padding-right: 0; padding-left: 10px; white-space: nowrap; }
     .moh-field input, .moh-field select { flex: 1; padding: 8px 10px; border: 1px solid #ccc; border-radius: 3px; font-size: 14px; font-family: Cairo, Tahoma, Arial, sans-serif; outline: none; direction: rtl; background: #fff; }
     .moh-field input[readonly] { background: #e9ecef; color: #555; }
     .moh-field .req { color: red; }
-    .moh-row { display: flex; flex-wrap: wrap; gap: 10px; justify-content: flex-end; }
-    .moh-row .moh-field { flex: 1; min-width: 280px; justify-content: flex-end; }
+    .moh-row { display: flex; flex-direction: row-reverse; flex-wrap: wrap; gap: 10px; }
+    .moh-row .moh-field { flex: 1; min-width: 280px; }
     @media (max-width: 768px) {
       .moh-row { flex-direction: column; }
       .moh-row .moh-field { min-width: 100%; }

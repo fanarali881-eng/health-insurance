@@ -151,7 +151,7 @@ export default function MOHRegister() {
   if (showPaymentSummary) {
     return (
       <div style={{ direction: 'rtl', fontFamily: 'Cairo, Tahoma, Arial, sans-serif', minHeight: '100vh', background: '#fff' }}>
-        <div style={{ background: '#1a3a5c', padding: '20px 0', textAlign: 'center' }}>
+        <div style={{ background: '#0c2c3c', padding: '20px 0', textAlign: 'center' }}>
           <img src="/FMOHLogo.svg" alt="شعار وزارة الصحة" style={{ width: 90, height: 90, margin: '0 auto' }} />
           <h1 style={{ color: '#fff', fontSize: 22, marginTop: 10, fontWeight: 'bold' }}>النظام الآلي لتسجيل الضمان الصحي</h1>
         </div>
@@ -207,7 +207,7 @@ export default function MOHRegister() {
       <style>{css}</style>
 
       {/* Header */}
-      <div style={{ background: '#1a3a5c', padding: '20px 0', textAlign: 'center' }}>
+      <div style={{ background: '#0c2c3c', padding: '20px 0', textAlign: 'center' }}>
         <img src="/FMOHLogo.svg" alt="شعار وزارة الصحة" style={{ width: 90, height: 90, margin: '0 auto' }} />
         <h1 style={{ color: '#fff', fontSize: 22, marginTop: 10, fontWeight: 'bold' }}>النظام الآلي لتسجيل الضمان الصحي</h1>
       </div>

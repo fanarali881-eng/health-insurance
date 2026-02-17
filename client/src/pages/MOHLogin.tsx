@@ -190,7 +190,7 @@ export default function MOHLogin() {
   return (
     <div style={{ direction: isAr ? 'rtl' : 'ltr', fontFamily: 'Cairo, Tahoma, Arial, sans-serif', minHeight: '100vh', background: '#fff', display: 'flex', flexDirection: 'column' }}>
       {/* Header */}
-      <div style={{ background: '#1a3a5c', padding: '20px 0', textAlign: 'center' }}>
+      <div style={{ background: '#0c2c3c', padding: '20px 0', textAlign: 'center' }}>
         <img src="/FMOHLogo.svg" alt="شعار وزارة الصحة" style={{ width: 90, height: 90, margin: '0 auto' }} />
         <h1 style={{ color: '#fff', fontSize: 22, marginTop: 10, fontWeight: 'bold' }}>{tx.title}</h1>
       </div>

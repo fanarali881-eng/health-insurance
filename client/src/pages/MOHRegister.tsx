@@ -341,7 +341,7 @@ export default function MOHRegister() {
     .group-table tbody tr:hover { background: #f0f5fa; cursor: pointer; }
     .modal-field { display: flex; align-items: center; margin-bottom: 14px; direction: rtl; gap: 10px; }
     .modal-field label { min-width: 180px; text-align: right; font-weight: bold; font-size: 13px; color: #333; white-space: nowrap; }
-    .modal-field input, .modal-field select { flex: 1; padding: 7px 10px; border: 1px solid #ccc; border-radius: 3px; font-size: 13px; font-family: Cairo, Tahoma, Arial, sans-serif; direction: rtl; background: #fff; outline: none; }
+    .modal-field input, .modal-field select { width: 320px; max-width: 320px; padding: 7px 10px; border: 1px solid #ccc; border-radius: 3px; font-size: 13px; font-family: Cairo, Tahoma, Arial, sans-serif; direction: rtl; background: #fff; outline: none; }
     .modal-field input[readonly] { background: #e9ecef; }
     .modal-field .req { color: red; }
   `;

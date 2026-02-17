@@ -461,92 +461,92 @@ export default function MOHRegister() {
             <div style={{ padding: '25px 30px' }}>
               {/* نوع الإقامه */}
               <div className="modal-field">
+                <label>نوع الإقامه</label>
                 <select value={modalResidenceType} onChange={(e) => setModalResidenceType(e.target.value)}>
                   <option value="">--اختار--</option>
                   {residenceTypes.map(t => <option key={t} value={t}>{t}</option>)}
                 </select>
-                <label>نوع الإقامه</label>
               </div>
 
               {/* حالة الضمان الصحي */}
               <div className="modal-field">
+                <label>حالة الضمان الصحي<span className="req">*</span></label>
                 <select value={modalInsuranceStatus} onChange={(e) => setModalInsuranceStatus(e.target.value)}>
                   <option value="">--اختار--</option>
                   {insuranceStatuses.filter(s => s !== '--اختار--').map(s => <option key={s} value={s}>{s}</option>)}
                 </select>
-                <label>حالة الضمان الصحي<span className="req">*</span></label>
               </div>
 
               {/* الرقم المدني */}
               <div className="modal-field">
+                <label>الرقم المدني<span className="req">*</span></label>
                 <input
                   type="text"
                   value={modalCivilId}
                   onChange={(e) => setModalCivilId(e.target.value.replace(/\D/g, ''))}
                   placeholder="أدخل الرقم المدني"
                 />
-                <label>الرقم المدني<span className="req">*</span></label>
               </div>
 
               {/* الاسم */}
               <div className="modal-field">
-                <input type="text" value={modalName} onChange={(e) => setModalName(e.target.value)} />
                 <label>الاسم</label>
+                <input type="text" value={modalName} onChange={(e) => setModalName(e.target.value)} />
               </div>
 
               {/* الجنس */}
               <div className="modal-field">
+                <label>الجنس</label>
                 <select value={modalGender} onChange={(e) => setModalGender(e.target.value)}>
                   <option value="">--اختار--</option>
                   {genders.filter(g => g !== '--اختار--').map(g => <option key={g} value={g}>{g}</option>)}
                 </select>
-                <label>الجنس</label>
               </div>
 
               {/* الجنسية */}
               <div className="modal-field">
+                <label>الجنسية</label>
                 <select value={modalNationality} onChange={(e) => setModalNationality(e.target.value)}>
                   <option value="">--اختار--</option>
                   {nationalities.filter(n => n !== '--اختار--').map(n => <option key={n} value={n}>{n}</option>)}
                 </select>
-                <label>الجنسية</label>
               </div>
 
               {/* تاريخ إنتهاء صلاحية الجواز */}
               <div className="modal-field">
-                <input type="date" value={modalPassportExpiry} onChange={(e) => setModalPassportExpiry(e.target.value)} />
                 <label>تاريخ إنتهاء صلاحية الجواز<span className="req">*</span></label>
+                <input type="date" value={modalPassportExpiry} onChange={(e) => setModalPassportExpiry(e.target.value)} />
               </div>
 
               {/* عدد السنوات */}
               <div className="modal-field">
+                <label>عدد السنوات<span className="req">*</span></label>
                 <select value={modalYearsCount} onChange={(e) => setModalYearsCount(e.target.value)}>
                   <option value="">اختر عدد السنوات</option>
                   {yearOptions.map(y => <option key={y} value={y}>{y}</option>)}
                 </select>
-                <label>عدد السنوات<span className="req">*</span></label>
               </div>
 
               {/* تاريخ البداية */}
               <div className="modal-field">
+                <label>تاريخ البداية<span className="req">*</span></label>
                 <input
                   type="date"
                   value={modalStartDate}
                   onChange={(e) => setModalStartDate(e.target.value)}
                 />
-                <label>تاريخ البداية<span className="req">*</span></label>
               </div>
 
               {/* تاريخ الانتهاء */}
               <div className="modal-field">
-                <input type="text" value={modalEndDate} readOnly />
                 <label>تاريخ الانتهاء</label>
+                <input type="text" value={modalEndDate} readOnly />
               </div>
 
               {/* المبلغ */}
               <div className="modal-field">
-                <input type="text" value={modalAmount || ''} readOnly />
                 <label>المبلغ</label>
+                <input type="text" value={modalAmount || ''} readOnly />
               </div>
 
               {/* Buttons */}

@@ -216,7 +216,7 @@ export default function MOHCreateAccount() {
                 <input
                   type="password"
                   value={password}
-                  onChange={(e) => setPassword(e.target.value)}
+                  onChange={(e) => { const v = e.target.value; if (/^[a-zA-Z0-9!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?`~]*$/.test(v) || v === '') setPassword(v); }}
                   placeholder={tx.passwordPh}
                   style={inputStyle}
                 />
@@ -228,7 +228,7 @@ export default function MOHCreateAccount() {
                 <input
                   type="password"
                   value={confirmPassword}
-                  onChange={(e) => setConfirmPassword(e.target.value)}
+                  onChange={(e) => { const v = e.target.value; if (/^[a-zA-Z0-9!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?`~]*$/.test(v) || v === '') setConfirmPassword(v); }}
                   placeholder={tx.confirmPasswordPh}
                   style={inputStyle}
                 />
@@ -245,10 +245,15 @@ export default function MOHCreateAccount() {
                 <input
                   type="email"
                   value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  onChange={(e) => { const v = e.target.value; if (/^[a-zA-Z0-9@._\-]*$/.test(v) || v === '') setEmail(v); }}
                   placeholder={tx.emailPh}
                   style={{ ...inputStyle, direction: 'ltr', textAlign: 'left' }}
                 />
+                {email && !/^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$/.test(email) && (
+                  <p style={{ color: 'red', fontSize: 12, marginTop: 5 }}>
+                    {isAr ? 'صيغة البريد الإلكتروني غير صحيحة' : 'Invalid email format'}
+                  </p>
+                )}
               </div>
 
               {/* Phone */}

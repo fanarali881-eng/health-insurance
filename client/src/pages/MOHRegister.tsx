@@ -860,7 +860,19 @@ export default function MOHRegister() {
 
         {serviceType && (
         <div style={{ background: '#fff', padding: '15px 25px', borderRadius: 4, border: '1px solid #d0dbe8', marginBottom: 30 }}>
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 15 }}>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 15, direction: 'rtl' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 8, direction: 'rtl' }}>
+              <input
+                type="checkbox"
+                checked={agreeTerms}
+                onChange={(e) => setAgreeTerms(e.target.checked)}
+                style={{ width: 18, height: 18 }}
+              />
+              <label style={{ fontSize: 14, color: '#333' }}>
+                <span style={{ color: 'red' }}>*</span> أوافق{' '}
+                <a href="#" onClick={(e) => e.preventDefault()} style={{ color: '#1076BB', textDecoration: 'underline' }}>للشروط والأحكام</a>
+              </label>
+            </div>
             <button
               onClick={handleClear}
               style={{
@@ -871,18 +883,6 @@ export default function MOHRegister() {
             >
               مسح
             </button>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-              <label style={{ fontSize: 14, color: '#333' }}>
-                <span style={{ color: 'red' }}>*</span> أوافق{' '}
-                <a href="#" onClick={(e) => e.preventDefault()} style={{ color: '#1076BB', textDecoration: 'underline' }}>الشروط والأحكام</a>
-              </label>
-              <input
-                type="checkbox"
-                checked={agreeTerms}
-                onChange={(e) => setAgreeTerms(e.target.checked)}
-                style={{ width: 18, height: 18 }}
-              />
-            </div>
           </div>
         </div>
         )}

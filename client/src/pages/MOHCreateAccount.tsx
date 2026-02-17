@@ -108,7 +108,7 @@ export default function MOHCreateAccount() {
     <div style={{ direction: isAr ? 'rtl' : 'ltr', fontFamily: 'Cairo, Tahoma, Arial, sans-serif', minHeight: '100vh', background: '#fff', display: 'flex', flexDirection: 'column' }}>
       {/* Header */}
       <div style={{ background: '#1a3a5c', padding: '20px 0', textAlign: 'center' }}>
-        <img src="/moh-logo.png" alt="شعار وزارة الصحة" style={{ width: 120, height: 120, margin: '0 auto', borderRadius: '50%', background: '#fff', padding: 5 }} />
+        <img src="/FMOHLogo.svg" alt="شعار وزارة الصحة" style={{ width: 120, height: 120, margin: '0 auto', borderRadius: '50%', background: '#fff', padding: 5 }} />
         <h1 style={{ color: '#fff', fontSize: 22, marginTop: 10, fontWeight: 'bold' }}>{tx.title}</h1>
       </div>
 

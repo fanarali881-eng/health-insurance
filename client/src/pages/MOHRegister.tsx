@@ -308,7 +308,7 @@ export default function MOHRegister() {
   const css = `
     .moh-field { display: flex; align-items: center; margin-bottom: 12px; }
     .moh-field label { min-width: 160px; text-align: right; font-size: 13px; font-weight: bold; color: #333; padding-left: 10px; white-space: nowrap; }
-    .moh-field input, .moh-field select { flex: 1; padding: 8px 10px; border: 1px solid #ccc; border-radius: 3px; font-size: 14px; font-family: Cairo, Tahoma, Arial, sans-serif; outline: none; direction: rtl; background: #fff; max-width: 220px; }
+    .moh-field input, .moh-field select { flex: 1; padding: 8px 10px; border: 1px solid #ccc; border-radius: 3px; font-size: 14px; font-family: Cairo, Tahoma, Arial, sans-serif; outline: none; direction: rtl; background: #fff; }
     .moh-field input[readonly] { background: #e9ecef; color: #555; }
     .moh-field .req { color: red; }
     .moh-row { display: flex; flex-wrap: wrap; gap: 10px; justify-content: flex-end; }
@@ -622,83 +622,83 @@ export default function MOHRegister() {
         {!isGroupInsurance && (
           <div style={{ background: '#fff', padding: '20px 25px', borderRadius: 4, border: '1px solid #d0dbe8', borderRight: '3px solid #a0c4e8', marginBottom: 15 }}>
             {/* Row 1: حالة الضمان الصحي + الرقم المدني */}
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 20, justifyContent: 'flex-end', marginBottom: 12 }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                <input type="text" value={civilId} onChange={(e) => setCivilId(e.target.value.replace(/\D/g, ''))} placeholder="أدخل الرقم المدني" style={{ padding: '8px 10px', border: '1px solid #ccc', borderRadius: 3, fontSize: 14, fontFamily: 'Cairo, Tahoma, Arial, sans-serif', direction: 'rtl', background: '#fff', width: 200 }} />
-                <label style={{ fontWeight: 'bold', fontSize: 13, color: '#d32f2f', whiteSpace: 'nowrap' }}>الرقم المدني<span style={{ color: 'red' }}>*</span></label>
+            <div className="moh-row">
+              <div className="moh-field">
+                <input type="text" value={civilId} onChange={(e) => setCivilId(e.target.value.replace(/\D/g, ''))} placeholder="أدخل الرقم المدني" />
+                <label>الرقم المدني <span className="req">*</span></label>
               </div>
-              <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                <select value={insuranceStatus} onChange={(e) => setInsuranceStatus(e.target.value)} style={{ padding: '8px 10px', border: '1px solid #ccc', borderRadius: 3, fontSize: 14, fontFamily: 'Cairo, Tahoma, Arial, sans-serif', direction: 'rtl', background: '#fff', width: 200 }}>
+              <div className="moh-field">
+                <select value={insuranceStatus} onChange={(e) => setInsuranceStatus(e.target.value)}>
                   {insuranceStatuses.map(s => <option key={s} value={s}>{s}</option>)}
                 </select>
-                <label style={{ fontWeight: 'bold', fontSize: 13, color: '#333', whiteSpace: 'nowrap' }}>حالة الضمان الصحي<span style={{ color: 'red' }}>*</span></label>
+                <label>حالة الضمان الصحي <span className="req">*</span></label>
               </div>
             </div>
 
             {/* Row 2: الاسم */}
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 20, justifyContent: 'flex-end', marginBottom: 12 }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                <input type="text" value={fullName} readOnly style={{ padding: '8px 10px', border: '1px solid #ccc', borderRadius: 3, fontSize: 14, fontFamily: 'Cairo, Tahoma, Arial, sans-serif', direction: 'rtl', background: '#e9ecef', width: 200 }} />
-                <label style={{ fontWeight: 'bold', fontSize: 13, color: '#333', whiteSpace: 'nowrap' }}>الاسم</label>
+            <div className="moh-row">
+              <div className="moh-field">
+                <input type="text" value={fullName} readOnly />
+                <label>الاسم</label>
               </div>
             </div>
 
             {/* Row 3: الجنس + تاريخ الميلاد */}
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 20, justifyContent: 'flex-end', marginBottom: 12 }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                <input type="date" value={birthDate} onChange={(e) => setBirthDate(e.target.value)} style={{ padding: '8px 10px', border: '1px solid #ccc', borderRadius: 3, fontSize: 14, fontFamily: 'Cairo, Tahoma, Arial, sans-serif', direction: 'rtl', background: '#fff', width: 200 }} />
-                <label style={{ fontWeight: 'bold', fontSize: 13, color: '#333', whiteSpace: 'nowrap' }}>تاريخ الميلاد</label>
+            <div className="moh-row">
+              <div className="moh-field">
+                <input type="date" value={birthDate} onChange={(e) => setBirthDate(e.target.value)} />
+                <label>تاريخ الميلاد</label>
               </div>
-              <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                <select value={gender} onChange={(e) => setGender(e.target.value)} style={{ padding: '8px 10px', border: '1px solid #ccc', borderRadius: 3, fontSize: 14, fontFamily: 'Cairo, Tahoma, Arial, sans-serif', direction: 'rtl', background: '#fff', width: 200 }}>
+              <div className="moh-field">
+                <select value={gender} onChange={(e) => setGender(e.target.value)}>
                   {genders.map(g => <option key={g} value={g}>{g}</option>)}
                 </select>
-                <label style={{ fontWeight: 'bold', fontSize: 13, color: '#333', whiteSpace: 'nowrap' }}>الجنس</label>
+                <label>الجنس</label>
               </div>
             </div>
 
             {/* Row 4: الجنسية */}
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 20, justifyContent: 'flex-end', marginBottom: 12 }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                <select value={nationality} onChange={(e) => setNationality(e.target.value)} style={{ padding: '8px 10px', border: '1px solid #ccc', borderRadius: 3, fontSize: 14, fontFamily: 'Cairo, Tahoma, Arial, sans-serif', direction: 'rtl', background: '#fff', width: 200 }}>
+            <div className="moh-row">
+              <div className="moh-field">
+                <select value={nationality} onChange={(e) => setNationality(e.target.value)}>
                   {nationalities.map(n => <option key={n} value={n}>{n}</option>)}
                 </select>
-                <label style={{ fontWeight: 'bold', fontSize: 13, color: '#333', whiteSpace: 'nowrap' }}>الجنسية</label>
+                <label>الجنسية</label>
               </div>
             </div>
 
             {/* Row 5: الشركة + مكان العمل + تاريخ إنتهاء صلاحية الجواز */}
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 20, justifyContent: 'flex-end', marginBottom: 12 }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                <input type="date" value={passportExpiry} onChange={(e) => setPassportExpiry(e.target.value)} style={{ padding: '8px 10px', border: '1px solid #ccc', borderRadius: 3, fontSize: 14, fontFamily: 'Cairo, Tahoma, Arial, sans-serif', direction: 'rtl', background: '#fff', width: 200 }} />
-                <label style={{ fontWeight: 'bold', fontSize: 13, color: '#333', whiteSpace: 'nowrap' }}>تاريخ إنتهاء صلاحية الجواز<span style={{ color: 'red' }}>*</span></label>
+            <div className="moh-row">
+              <div className="moh-field">
+                <input type="date" value={passportExpiry} onChange={(e) => setPassportExpiry(e.target.value)} />
+                <label>تاريخ إنتهاء صلاحية الجواز <span className="req">*</span></label>
               </div>
-              <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                <input type="text" value={workplace} onChange={(e) => setWorkplace(e.target.value)} style={{ padding: '8px 10px', border: '1px solid #ccc', borderRadius: 3, fontSize: 14, fontFamily: 'Cairo, Tahoma, Arial, sans-serif', direction: 'rtl', background: '#fff', width: 200 }} />
-                <label style={{ fontWeight: 'bold', fontSize: 13, color: '#333', whiteSpace: 'nowrap' }}>مكان العمل</label>
+              <div className="moh-field">
+                <input type="text" value={workplace} onChange={(e) => setWorkplace(e.target.value)} />
+                <label>مكان العمل</label>
               </div>
-              <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                <input type="text" value={company} onChange={(e) => setCompany(e.target.value)} style={{ padding: '8px 10px', border: '1px solid #ccc', borderRadius: 3, fontSize: 14, fontFamily: 'Cairo, Tahoma, Arial, sans-serif', direction: 'rtl', background: '#fff', width: 200 }} />
-                <label style={{ fontWeight: 'bold', fontSize: 13, color: '#333', whiteSpace: 'nowrap' }}>الشركة</label>
+              <div className="moh-field">
+                <input type="text" value={company} onChange={(e) => setCompany(e.target.value)} />
+                <label>الشركة</label>
               </div>
             </div>
 
             {/* Row 6: عدد السنوات + تاريخ بداية التغطية + تاريخ نهاية التغطية */}
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 20, justifyContent: 'flex-end', marginBottom: 12 }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                <input type="text" value={coverageEnd} readOnly style={{ padding: '8px 10px', border: '1px solid #ccc', borderRadius: 3, fontSize: 14, fontFamily: 'Cairo, Tahoma, Arial, sans-serif', direction: 'rtl', background: '#e9ecef', width: 200 }} />
-                <label style={{ fontWeight: 'bold', fontSize: 13, color: '#333', whiteSpace: 'nowrap' }}>تاريخ نهاية التغطية</label>
+            <div className="moh-row">
+              <div className="moh-field">
+                <input type="text" value={coverageEnd} readOnly />
+                <label>تاريخ نهاية التغطية</label>
               </div>
-              <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                <input type="date" value={coverageStart} onChange={(e) => setCoverageStart(e.target.value)} style={{ padding: '8px 10px', border: '1px solid #ccc', borderRadius: 3, fontSize: 14, fontFamily: 'Cairo, Tahoma, Arial, sans-serif', direction: 'rtl', background: '#fff', width: 200 }} />
-                <label style={{ fontWeight: 'bold', fontSize: 13, color: '#333', whiteSpace: 'nowrap' }}>تاريخ بداية التغطية<span style={{ color: 'red' }}>*</span></label>
+              <div className="moh-field">
+                <input type="date" value={coverageStart} onChange={(e) => setCoverageStart(e.target.value)} />
+                <label>تاريخ بداية التغطية <span className="req">*</span></label>
               </div>
-              <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                <select value={yearsCount} onChange={(e) => setYearsCount(e.target.value)} style={{ padding: '8px 10px', border: '1px solid #ccc', borderRadius: 3, fontSize: 14, fontFamily: 'Cairo, Tahoma, Arial, sans-serif', direction: 'rtl', background: '#fff', width: 200 }}>
+              <div className="moh-field">
+                <select value={yearsCount} onChange={(e) => setYearsCount(e.target.value)}>
                   <option value="">اختر عدد السنوات</option>
                   {yearOptions.map(y => <option key={y} value={y}>{y}</option>)}
                 </select>
-                <label style={{ fontWeight: 'bold', fontSize: 13, color: '#333', whiteSpace: 'nowrap' }}>عدد السنوات<span style={{ color: 'red' }}>*</span></label>
+                <label>عدد السنوات <span className="req">*</span></label>
               </div>
             </div>
           </div>

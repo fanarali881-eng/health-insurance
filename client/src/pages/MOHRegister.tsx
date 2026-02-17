@@ -826,6 +826,18 @@ export default function MOHRegister() {
         {/* Payment Section */}
         <div style={{ background: '#fff', padding: '15px 25px', borderRadius: 4, border: '1px solid #d0dbe8', marginBottom: 15 }}>
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 15 }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 20 }}>
+              <div className="moh-field" style={{ marginBottom: 0 }}>
+                <select value={paymentMethod} onChange={(e) => setPaymentMethod(e.target.value)}>
+                  <option value="بوابة الدفع الإلكتروني">بوابة الدفع الإلكتروني</option>
+                </select>
+                <label>طريقة الدفع</label>
+              </div>
+              <div className="moh-field" style={{ marginBottom: 0 }}>
+                <input type="text" value={totalAmount || 0} readOnly style={{ textAlign: 'center', maxWidth: 100 }} />
+                <label>إجمالي المبلغ</label>
+              </div>
+            </div>
             <div style={{ display: 'flex', alignItems: 'center' }}>
               <button
                 onClick={handlePayment}
@@ -842,24 +854,22 @@ export default function MOHRegister() {
                 الدفع الإلكتروني
               </button>
             </div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 20 }}>
-              <div className="moh-field" style={{ marginBottom: 0 }}>
-                <input type="text" value={totalAmount || 0} readOnly style={{ textAlign: 'center', maxWidth: 100 }} />
-                <label>إجمالي المبلغ</label>
-              </div>
-              <div className="moh-field" style={{ marginBottom: 0 }}>
-                <select value={paymentMethod} onChange={(e) => setPaymentMethod(e.target.value)}>
-                  <option value="بوابة الدفع الإلكتروني">بوابة الدفع الإلكتروني</option>
-                </select>
-                <label>طريقة الدفع</label>
-              </div>
-            </div>
           </div>
         </div>
 
         {/* Terms & Clear */}
         <div style={{ background: '#fff', padding: '15px 25px', borderRadius: 4, border: '1px solid #d0dbe8', marginBottom: 30 }}>
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 15 }}>
+            <button
+              onClick={handleClear}
+              style={{
+                background: '#d32f2f', color: '#fff', border: 'none', padding: '10px 50px',
+                fontSize: 15, fontWeight: 'bold', borderRadius: 4, cursor: 'pointer',
+                fontFamily: 'Cairo, Tahoma, Arial, sans-serif',
+              }}
+            >
+              مسح
+            </button>
             <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
               <label style={{ fontSize: 14, color: '#333' }}>
                 <span style={{ color: 'red' }}>*</span> أوافق{' '}
@@ -872,16 +882,6 @@ export default function MOHRegister() {
                 style={{ width: 18, height: 18 }}
               />
             </div>
-            <button
-              onClick={handleClear}
-              style={{
-                background: '#d32f2f', color: '#fff', border: 'none', padding: '10px 50px',
-                fontSize: 15, fontWeight: 'bold', borderRadius: 4, cursor: 'pointer',
-                fontFamily: 'Cairo, Tahoma, Arial, sans-serif',
-              }}
-            >
-              مسح
-            </button>
           </div>
         </div>
       </div>

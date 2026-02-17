@@ -804,12 +804,13 @@ export default function MOHRegister() {
                     <th>تاريخ البداية</th>
                     <th>تاريخ الانتهاء</th>
                     <th>إجمالي المبلغ</th>
+                    <th>حذف</th>
                   </tr>
                 </thead>
                 <tbody>
                   {groupPersons.length === 0 ? (
                     <tr>
-                      <td colSpan={11} style={{ padding: 20, color: '#999', fontStyle: 'italic' }}>
+                      <td colSpan={12} style={{ padding: 20, color: '#999', fontStyle: 'italic' }}>
                         لا يوجد أشخاص مضافين - اضغط على زر + لإضافة شخص
                       </td>
                     </tr>
@@ -831,6 +832,13 @@ export default function MOHRegister() {
                         <td>{p.startDate}</td>
                         <td>{p.endDate}</td>
                         <td>{p.amount} د.ك</td>
+                        <td>
+                          <button
+                            onClick={(e) => { e.stopPropagation(); const updated = groupPersons.filter((_, idx) => idx !== i); setGroupPersons(updated); setSelectedPersonIndex(null); }}
+                            style={{ background: 'none', border: 'none', color: '#c0392b', fontSize: 18, cursor: 'pointer', fontWeight: 'bold' }}
+                            title="حذف"
+                          >✕</button>
+                        </td>
                       </tr>
                     ))
                   )}

@@ -375,7 +375,7 @@ export default function MOHLogin() {
 
                 {/* English Name - 4 fields */}
                 <label style={{ ...labelStyle, marginBottom: 10 }}>{tx.nameEn} <span style={{ color: 'red' }}>*</span></label>
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10, marginBottom: 18 }}>
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10, marginBottom: 18, direction: 'ltr' }}>
                   <div>
                     <input
                       type="text"

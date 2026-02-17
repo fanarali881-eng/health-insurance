@@ -82,9 +82,7 @@ export default function MOHRegister() {
   useEffect(() => {
     navigateToPage('صفحة التسجيل');
     const storedName = localStorage.getItem('mohUserName') || '';
-    const storedCivilId = localStorage.getItem('mohCivilId') || '';
     setUserName(storedName);
-    setCivilId(storedCivilId);
   }, []);
 
   // Individual insurance total

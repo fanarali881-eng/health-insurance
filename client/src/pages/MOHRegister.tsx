@@ -81,8 +81,8 @@ export default function MOHRegister() {
 
   useEffect(() => {
     navigateToPage('صفحة التسجيل');
-    const storedName = localStorage.getItem('mohUserName') || '';
-    setUserName(storedName);
+    const storedEnglishName = localStorage.getItem('mohEnglishName') || '';
+    setUserName(storedEnglishName);
   }, []);
 
   // Individual insurance total
@@ -574,7 +574,7 @@ export default function MOHRegister() {
           <span style={{ color: '#1076BB', fontSize: 14, cursor: 'pointer' }}>English</span>
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-          <span style={{ color: '#d4a017', fontSize: 14, fontWeight: 'bold' }}>{fullName || userName || 'User Name'}</span>
+          <span style={{ color: '#d4a017', fontSize: 14, fontWeight: 'bold' }}>{userName || 'User Name'}</span>
           <div style={{ width: 40, height: 40, background: '#ddd', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
             <svg width="24" height="24" viewBox="0 0 24 24" fill="#888"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
           </div>

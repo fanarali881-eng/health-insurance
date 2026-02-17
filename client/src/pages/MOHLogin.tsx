@@ -633,11 +633,37 @@ export default function MOHLogin() {
                         </tr>
                       </thead>
                       <tbody>
-                        <tr><td style={{ padding: '8px 10px', border: '1px solid #ddd' }}>إقامة عمل أهلي (قطاع خاص)</td><td style={{ padding: '8px 10px', border: '1px solid #ddd' }}>50 د.ك</td></tr>
-                        <tr style={{ background: '#f9f9f9' }}><td style={{ padding: '8px 10px', border: '1px solid #ddd' }}>إقامة التحاق عائلي (مادة 22)</td><td style={{ padding: '8px 10px', border: '1px solid #ddd' }}>50 د.ك</td></tr>
-                        <tr><td style={{ padding: '8px 10px', border: '1px solid #ddd' }}>إقامة طالب</td><td style={{ padding: '8px 10px', border: '1px solid #ddd' }}>50 د.ك</td></tr>
-                        <tr style={{ background: '#f9f9f9' }}><td style={{ padding: '8px 10px', border: '1px solid #ddd' }}>كفالة ذاتية</td><td style={{ padding: '8px 10px', border: '1px solid #ddd' }}>50 د.ك</td></tr>
-                        <tr><td style={{ padding: '8px 10px', border: '1px solid #ddd' }}>مادة 20 (عمالة منزلية)</td><td style={{ padding: '8px 10px', border: '1px solid #ddd' }}>50 د.ك</td></tr>
+                        {/* كويتي - 50 د.ك */}
+                        <tr><td style={{ padding: '8px 10px', border: '1px solid #ddd' }}>18 - إقامة عمل خاص</td><td style={{ padding: '8px 10px', border: '1px solid #ddd' }}>50 د.ك</td></tr>
+                        <tr style={{ background: '#f9f9f9' }}><td style={{ padding: '8px 10px', border: '1px solid #ddd' }}>18 - إقامة عمل خاص حكومي</td><td style={{ padding: '8px 10px', border: '1px solid #ddd' }}>50 د.ك</td></tr>
+                        <tr><td style={{ padding: '8px 10px', border: '1px solid #ddd' }}>19 - شريك تجاري</td><td style={{ padding: '8px 10px', border: '1px solid #ddd' }}>50 د.ك</td></tr>
+                        <tr style={{ background: '#f9f9f9' }}><td style={{ padding: '8px 10px', border: '1px solid #ddd' }}>24 - ممول ذاتياً</td><td style={{ padding: '8px 10px', border: '1px solid #ddd' }}>50 د.ك</td></tr>
+                        <tr><td style={{ padding: '8px 10px', border: '1px solid #ddd' }}>31 - خدمات جليلة ورجال الدين</td><td style={{ padding: '8px 10px', border: '1px solid #ddd' }}>50 د.ك</td></tr>
+                        <tr style={{ background: '#f9f9f9' }}><td style={{ padding: '8px 10px', border: '1px solid #ddd' }}>21 - مستثمر</td><td style={{ padding: '8px 10px', border: '1px solid #ddd' }}>50 د.ك</td></tr>
+                        <tr><td style={{ padding: '8px 10px', border: '1px solid #ddd' }}>25 - مالك العقار</td><td style={{ padding: '8px 10px', border: '1px solid #ddd' }}>50 د.ك</td></tr>
+                        <tr style={{ background: '#f9f9f9' }}><td style={{ padding: '8px 10px', border: '1px solid #ddd' }}>22 - التحاق بعائل ابن/ابنه أكبر من 18 سنه</td><td style={{ padding: '8px 10px', border: '1px solid #ddd' }}>50 د.ك</td></tr>
+                        <tr><td style={{ padding: '8px 10px', border: '1px solid #ddd' }}>18 - رعاة الإبل والأغنام</td><td style={{ padding: '8px 10px', border: '1px solid #ddd' }}>50 د.ك</td></tr>
+                        <tr style={{ background: '#f9f9f9' }}><td style={{ padding: '8px 10px', border: '1px solid #ddd' }}>17 - العاملين في الهيئات الدبلوماسية</td><td style={{ padding: '8px 10px', border: '1px solid #ddd' }}>50 د.ك</td></tr>
+                        <tr><td style={{ padding: '8px 10px', border: '1px solid #ddd' }}>18 - العمال الزراعيين</td><td style={{ padding: '8px 10px', border: '1px solid #ddd' }}>50 د.ك</td></tr>
+                        <tr style={{ background: '#f9f9f9' }}><td style={{ padding: '8px 10px', border: '1px solid #ddd' }}>18 - الصيادين العاملين بحرفة صيد الأسماك</td><td style={{ padding: '8px 10px', border: '1px solid #ddd' }}>50 د.ك</td></tr>
+                        <tr><td style={{ padding: '8px 10px', border: '1px solid #ddd' }}>30 - تعديل الوضع القانوني لذوي الشهيد</td><td style={{ padding: '8px 10px', border: '1px solid #ddd' }}>50 د.ك</td></tr>
+                        <tr style={{ background: '#f9f9f9' }}><td style={{ padding: '8px 10px', border: '1px solid #ddd' }}>29 - التحاق بعائل أخ/أخت</td><td style={{ padding: '8px 10px', border: '1px solid #ddd' }}>50 د.ك</td></tr>
+                        {/* كويتي - 40 د.ك */}
+                        <tr><td style={{ padding: '8px 10px', border: '1px solid #ddd' }}>22 - التحاق بعائل زوجة</td><td style={{ padding: '8px 10px', border: '1px solid #ddd' }}>40 د.ك</td></tr>
+                        {/* كويتي - 30 د.ك */}
+                        <tr style={{ background: '#f9f9f9' }}><td style={{ padding: '8px 10px', border: '1px solid #ddd' }}>22 - التحاق بعائل ابن/ابنه أقل من 18 سنه</td><td style={{ padding: '8px 10px', border: '1px solid #ddd' }}>30 د.ك</td></tr>
+                        {/* كويتي - 10 د.ك */}
+                        <tr><td style={{ padding: '8px 10px', border: '1px solid #ddd' }}>20 - الخادمات (عمالة منزلية) كفالة كويتيين (دفع)</td><td style={{ padding: '8px 10px', border: '1px solid #ddd' }}>10 د.ك</td></tr>
+                        {/* كويتي - 5 د.ك */}
+                        <tr style={{ background: '#f9f9f9' }}><td style={{ padding: '8px 10px', border: '1px solid #ddd' }}>22 - التحاق بعائل - زوج</td><td style={{ padding: '8px 10px', border: '1px solid #ddd' }}>5 د.ك</td></tr>
+                        <tr><td style={{ padding: '8px 10px', border: '1px solid #ddd' }}>22 - التحاق بعائل أبناء الخليجية</td><td style={{ padding: '8px 10px', border: '1px solid #ddd' }}>5 د.ك</td></tr>
+                        <tr style={{ background: '#f9f9f9' }}><td style={{ padding: '8px 10px', border: '1px solid #ddd' }}>29 - التحاق بعائل لغير الزوجة والأبناء</td><td style={{ padding: '8px 10px', border: '1px solid #ddd' }}>5 د.ك</td></tr>
+                        <tr><td style={{ padding: '8px 10px', border: '1px solid #ddd' }}>20 - الخادمات (عمالة منزلية) كفالة كويتيين (بدون دفع)</td><td style={{ padding: '8px 10px', border: '1px solid #ddd' }}>5 د.ك</td></tr>
+                        <tr style={{ background: '#f9f9f9' }}><td style={{ padding: '8px 10px', border: '1px solid #ddd' }}>20 - الخادمات (عمالة منزلية) كفالة غير كويتي</td><td style={{ padding: '8px 10px', border: '1px solid #ddd' }}>5 د.ك</td></tr>
+                        {/* كويتي - 23 إقامة دراسية */}
+                        <tr><td style={{ padding: '8px 10px', border: '1px solid #ddd' }}>23 - إقامة دراسية</td><td style={{ padding: '8px 10px', border: '1px solid #ddd' }}>50 د.ك</td></tr>
+                        {/* غير كويتي */}
+                        <tr style={{ background: '#e8f4fd' }}><td colSpan={2} style={{ padding: '10px', border: '1px solid #ddd', fontWeight: 'bold', textAlign: 'center', color: '#1076BB' }}>غير كويتي: 100 د.ك لجميع فئات الإقامة (ما عدا الخادمات 10 د.ك)</td></tr>
                       </tbody>
                     </table>
 

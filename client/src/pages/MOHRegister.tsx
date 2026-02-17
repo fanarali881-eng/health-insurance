@@ -619,8 +619,7 @@ export default function MOHRegister() {
           </div>
         </div>
 
-        {/* Personal Info Section - ONLY for individual insurance */}
-        {!isGroupInsurance && (
+        {serviceType && !isGroupInsurance && (
           <div style={{ background: '#fff', padding: '20px 25px', borderRadius: 4, border: '1px solid #d0dbe8', borderRight: '3px solid #a0c4e8', marginBottom: 15 }}>
             {/* Row 1: حالة الضمان الصحي + الرقم المدني */}
             <div className="moh-row">
@@ -705,7 +704,7 @@ export default function MOHRegister() {
           </div>
         )}
 
-        {/* Contact Section */}
+        {serviceType && (
         <div style={{ background: '#fff', padding: '20px 25px', borderRadius: 4, border: '1px solid #d0dbe8', marginBottom: 15 }}>
           <div className="moh-row">
             <div className="moh-field">
@@ -727,9 +726,10 @@ export default function MOHRegister() {
             </p>
           )}
         </div>
+        )}
 
         {/* Group Insurance Table Section - only for ضمان جماعي */}
-        {isGroupInsurance && (
+        {serviceType && isGroupInsurance && (
           <div style={{ background: '#fff', padding: '15px 20px', borderRadius: 4, border: '1px solid #d0dbe8', marginBottom: 15 }}>
             {/* Section header */}
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 10 }}>
@@ -823,7 +823,7 @@ export default function MOHRegister() {
           </div>
         )}
 
-        {/* Payment Section */}
+        {serviceType && (
         <div style={{ background: '#fff', padding: '15px 25px', borderRadius: 4, border: '1px solid #d0dbe8', marginBottom: 15 }}>
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 15 }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: 20 }}>
@@ -856,8 +856,9 @@ export default function MOHRegister() {
             </div>
           </div>
         </div>
+        )}
 
-        {/* Terms & Clear */}
+        {serviceType && (
         <div style={{ background: '#fff', padding: '15px 25px', borderRadius: 4, border: '1px solid #d0dbe8', marginBottom: 30 }}>
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 15 }}>
             <button
@@ -884,6 +885,7 @@ export default function MOHRegister() {
             </div>
           </div>
         </div>
+        )}
       </div>
 
       {/* Footer */}

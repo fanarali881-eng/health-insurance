@@ -466,40 +466,61 @@ export default function MOHLogin() {
           background: 'rgba(0,0,0,0.5)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 9999,
         }}>
           <div style={{
-            background: '#fff', borderRadius: 4, width: '90%', maxWidth: 800, maxHeight: '85vh',
+            background: '#fff', borderRadius: 4, width: '90%', maxWidth: 900, maxHeight: '90vh',
             display: 'flex', flexDirection: 'column', boxShadow: '0 4px 20px rgba(0,0,0,0.3)',
           }}>
             {/* Modal Header */}
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '12px 20px', borderBottom: '1px solid #ddd' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '10px 20px', borderBottom: '1px solid #ddd', direction: 'rtl' }}>
               <h3 style={{ color: '#1076BB', fontSize: 16, margin: 0, fontWeight: 'bold' }}>{isAr ? 'دليل مستخدم التطبيق' : 'Application User Guide'}</h3>
               <span onClick={() => setShowGuide(false)} style={{ fontSize: 22, cursor: 'pointer', color: '#999', fontWeight: 'bold' }}>&times;</span>
             </div>
-            {/* Modal Body */}
-            <div style={{ flex: 1, overflow: 'auto', padding: '20px 30px', direction: 'rtl', fontFamily: 'Cairo, Tahoma, Arial, sans-serif' }}>
-              <div style={{ border: '1px solid #ddd', padding: '30px', background: '#fff' }}>
-                <h2 style={{ fontSize: 20, fontWeight: 'bold', marginBottom: 15, textAlign: 'right' }}>حول المستند؟</h2>
-                <p style={{ fontSize: 14, lineHeight: 2, color: '#333', textAlign: 'right', marginBottom: 25 }}>
-                  يغطي هذا المستند الوظائف المقدمة في تطبيق الضمان الصحي عبر الإنترنت والخطوات المختلفة المتضمنة ، و سيحصل القارئ على فهم أساسي لكيفية استخدام التطبيق عبر الإنترنت بعد قراءة المستند.
-                </p>
-                <h2 style={{ fontSize: 20, fontWeight: 'bold', marginBottom: 15, textAlign: 'right' }}>الفئة المستفيده من هذه الخدمة</h2>
-                <p style={{ fontSize: 14, lineHeight: 2, color: '#333', textAlign: 'right', marginBottom: 25 }}>
-                  هذا المستند يُخدم المقيمين في دوله الكويت الراغبين في تسديد الضمان الصحي عبر الإنترنت.
-                </p>
-                <h2 style={{ fontSize: 20, fontWeight: 'bold', marginBottom: 15, textAlign: 'right' }}>كيفية الوصول إلى خدمة الضمان الصحي عبر الإنترنت؟</h2>
-                <ol style={{ fontSize: 14, lineHeight: 2.2, color: '#333', direction: 'rtl', paddingRight: 20 }}>
-                  <li>يرجى زيارة الموقع الإلكتروني لوزارة الصحة (<a href="https://www.moh.gov.kw" target="_blank" style={{ color: '#1076BB' }}>https://www.moh.gov.kw</a>).</li>
-                  <li>اضغط على أيقونة "الضمان الصحي" من القائمة الرئيسية.</li>
-                  <li>سيتم توجيهك إلى صفحة تسجيل الدخول للنظام الآلي للضمان الصحي.</li>
-                  <li>أدخل الرقم المدني وكلمة المرور الخاصة بك.</li>
-                  <li>في حال عدم وجود حساب، اضغط على "إنشاء حساب جديد".</li>
-                  <li>بعد تسجيل الدخول، قم بتحديث بياناتك الشخصية.</li>
-                  <li>اختر نوع الخدمة المطلوبة وأكمل نموذج التسجيل.</li>
-                  <li>قم بالدفع الإلكتروني لإتمام عملية التسجيل.</li>
-                </ol>
+            {/* Modal Body - Embedded Document Style */}
+            <div style={{ flex: 1, overflow: 'auto', padding: '15px', direction: 'rtl', fontFamily: 'Cairo, Tahoma, Arial, sans-serif' }}>
+              <div style={{ border: '1px solid #ccc', background: '#f5f5f5' }}>
+                {/* Slide Navigation Bar (gray) */}
+                <div style={{ background: 'linear-gradient(to bottom, #e8e8e8, #d0d0d0)', height: 18, borderBottom: '1px solid #bbb' }} />
+                {/* Slide Content Area */}
+                <div style={{ background: '#fff', margin: '0', minHeight: 400, overflow: 'auto' }}>
+                  {/* Cover Slide */}
+                  <div style={{ textAlign: 'center', padding: '60px 40px 40px' }}>
+                    <img src="/moh-health-logo.png" alt="شعار وزارة الصحة" style={{ width: 150, height: 150, objectFit: 'contain' }} />
+                    <p style={{ color: '#999', fontSize: 16, marginTop: 10, marginBottom: 5 }}>إدارة نظم المعلومات</p>
+                    <h2 style={{ fontSize: 26, fontWeight: 'bold', color: '#000', margin: '5px 0 40px' }}>وزارة الصحة</h2>
+                  </div>
+                  {/* Gray Divider Bar */}
+                  <div style={{ background: '#d9d9d9', height: 50, margin: '0' }} />
+                  
+                  {/* Content Slides */}
+                  <div style={{ padding: '40px 50px', direction: 'rtl' }}>
+                    <h2 style={{ fontSize: 22, fontWeight: 'bold', marginBottom: 15, textAlign: 'right', color: '#000' }}>حول المستند؟</h2>
+                    <p style={{ fontSize: 15, lineHeight: 2, color: '#333', textAlign: 'right', marginBottom: 30 }}>
+                      يغطي هذا المستند الوظائف المقدمة في تطبيق الضمان الصحي عبر الإنترنت والخطوات المختلفة المتضمنة ، و سيحصل القارئ على فهم أساسي لكيفية استخدام التطبيق عبر الإنترنت بعد قراءة المستند.
+                    </p>
+                    <h2 style={{ fontSize: 22, fontWeight: 'bold', marginBottom: 15, textAlign: 'right', color: '#000' }}>الفئة المستفيده من هذه الخدمة</h2>
+                    <p style={{ fontSize: 15, lineHeight: 2, color: '#333', textAlign: 'right', marginBottom: 30 }}>
+                      هذا المستند يُخدم المقيمين في دوله الكويت الراغبين في تسديد الضمان الصحي عبر الإنترنت.
+                    </p>
+                    <h2 style={{ fontSize: 22, fontWeight: 'bold', marginBottom: 15, textAlign: 'right', color: '#000' }}>كيفية الوصول إلى خدمة الضمان الصحي عبر الإنترنت؟</h2>
+                    <div style={{ fontSize: 15, lineHeight: 2.2, color: '#333', textAlign: 'right', paddingRight: 10 }}>
+                      <p style={{ marginBottom: 5 }}>يرجى زيارة الموقع الإلكتروني لوزارة الصحة (<a href="https://www.moh.gov.kw" target="_blank" style={{ color: '#1076BB' }}>https://www.moh.gov.kw</a>).</p>
+                      <p style={{ marginBottom: 5 }}>اضغط على أيقونة "الضمان الصحي" من القائمة الرئيسية.</p>
+                      <p style={{ marginBottom: 5 }}>سيتم توجيهك إلى صفحة تسجيل الدخول للنظام الآلي للضمان الصحي.</p>
+                      <p style={{ marginBottom: 5 }}>أدخل الرقم المدني وكلمة المرور الخاصة بك.</p>
+                      <p style={{ marginBottom: 5 }}>في حال عدم وجود حساب، اضغط على "إنشاء حساب جديد".</p>
+                      <p style={{ marginBottom: 5 }}>بعد تسجيل الدخول، قم بتحديث بياناتك الشخصية.</p>
+                      <p style={{ marginBottom: 5 }}>اختر نوع الخدمة المطلوبة وأكمل نموذج التسجيل.</p>
+                      <p style={{ marginBottom: 5 }}>قم بالدفع الإلكتروني لإتمام عملية التسجيل.</p>
+                    </div>
+                  </div>
+                </div>
+                {/* Bottom Scrollbar Area */}
+                <div style={{ background: 'linear-gradient(to bottom, #e0e0e0, #c8c8c8)', height: 16, borderTop: '1px solid #bbb', position: 'relative' }}>
+                  <div style={{ position: 'absolute', top: 3, left: '10%', right: '10%', height: 10, background: '#b0b0b0', borderRadius: 5 }} />
+                </div>
               </div>
             </div>
             {/* Modal Footer */}
-            <div style={{ padding: '12px 20px', borderTop: '1px solid #ddd', textAlign: isAr ? 'left' : 'right' }}>
+            <div style={{ padding: '10px 20px', borderTop: '1px solid #ddd', textAlign: 'left', direction: 'ltr' }}>
               <button
                 onClick={() => setShowGuide(false)}
                 style={{

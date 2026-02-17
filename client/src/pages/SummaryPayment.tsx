@@ -304,39 +304,37 @@ export default function SummaryPayment() {
               </Card>
             </div>
 
-            {/* Sidebar - Order Summary - Redesigned to match المجموع الكلي style */}
+            {/* Sidebar - Order Summary */}
             <div className="lg:col-span-1">
-              <div className="sticky top-4 border border-gray-200 rounded-lg overflow-hidden bg-white shadow-sm">
-                {/* Sidebar items with same style as المجموع الكلي row */}
-                <div className="space-y-0">
-                  {/* الخدمة row */}
-                  <div className="flex justify-between items-center py-3 px-4 border-b border-gray-100">
-                    <span className="text-gray-600 text-sm">الخدمة</span>
-                    <span className="font-medium text-xs">{displayServiceName}</span>
-                  </div>
-                  {/* الرسوم row */}
-                  <div className="flex justify-between items-center py-3 px-4 border-b border-gray-100">
-                    <span className="text-gray-600 text-sm">الرسوم</span>
-                    <span className="text-sm">{servicePrice} {currency}</span>
-                  </div>
-                  {/* الضريبة row - only for non-MOH */}
-                  {!isMOH && (
-                    <div className="flex justify-between items-center py-3 px-4 border-b border-gray-100">
-                      <span className="text-gray-600 text-sm">الضريبة</span>
-                      <span className="text-sm">{vatAmount} {currency}</span>
+              <Card className="sticky top-4">
+                <CardHeader className="bg-[#143c3c] text-white rounded-t-lg">
+                  <CardTitle className="text-lg">ملخص الطلب</CardTitle>
+                </CardHeader>
+                <CardContent className="pt-4">
+                  <div className="space-y-3">
+                    <div className="flex justify-between text-sm">
+                      <span className="text-gray-600">الخدمة</span>
+                      <span className="font-medium text-xs">{displayServiceName}</span>
                     </div>
-                  )}
-                  {/* المجموع row - same style as المجموع الكلي (green background) */}
-                  <div className="flex justify-between items-center py-3 px-4 bg-[#143c3c]/10">
-                    <span className="text-[#143c3c] font-bold">المجموع</span>
-                    <span className="text-[#143c3c] font-bold text-lg">{totalAmount} {currency}</span>
+                    <div className="flex justify-between text-sm">
+                      <span className="text-gray-600">الرسوم</span>
+                      <span>{servicePrice} {currency}</span>
+                    </div>
+                    {!isMOH && (
+                      <div className="flex justify-between text-sm">
+                        <span className="text-gray-600">الضريبة</span>
+                        <span>{vatAmount} {currency}</span>
+                      </div>
+                    )}
+                    <hr />
+                    <div className="flex justify-between items-center py-2 bg-[#143c3c]/10 px-3 rounded-lg">
+                      <span className="text-[#143c3c] font-bold">المجموع</span>
+                      <span className="text-[#143c3c] font-bold text-lg">{totalAmount} {currency}</span>
+                    </div>
                   </div>
-                </div>
 
-                {/* Payment button */}
-                <div className="p-4">
                   <Button
-                    className="w-full bg-[#04ccf0] hover:bg-[#03b5d6]"
+                    className="w-full mt-6 bg-[#04ccf0] hover:bg-[#03b5d6]"
                     disabled={!selectedPaymentMethod || selectedPaymentMethod === 'transfer' || isProcessing}
                     onClick={handlePayment}
                   >
@@ -356,8 +354,8 @@ export default function SummaryPayment() {
                   <p className="text-xs text-gray-500 text-center mt-4">
                     بالضغط على متابعة الدفع، أنت توافق على شروط الخدمة وسياسة الخصوصية
                   </p>
-                </div>
-              </div>
+                </CardContent>
+              </Card>
             </div>
           </div>
         </div>

@@ -588,7 +588,7 @@ export default function MOHRegister() {
       {/* User info bar */}
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', padding: '10px 30px', background: '#fff', borderBottom: '1px solid #eee' }}>
         <div style={{ display: 'flex', flexDirection: 'column' }}>
-          <span style={{ color: '#1076BB', fontSize: 14, cursor: 'pointer' }}>English</span>
+          <span onClick={() => { document.documentElement.lang = document.documentElement.lang === 'en' ? 'ar' : 'en'; }} style={{ color: '#c0392b', fontSize: 14, cursor: 'pointer', fontWeight: 'bold', textDecoration: 'underline' }}>English</span>
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
           <span style={{ color: '#d4a017', fontSize: 14, fontWeight: 'bold' }}>{userName || 'User Name'}</span>

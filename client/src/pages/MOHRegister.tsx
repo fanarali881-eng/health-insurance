@@ -581,7 +581,7 @@ export default function MOHRegister() {
         <span style={{ color: 'red', fontSize: 14, cursor: 'pointer' }}>English</span>
       </div>
 
-      <div style={{ maxWidth: 1100, margin: '20px auto', padding: '0 15px' }}>
+      <div style={{ width: '100%', padding: '20px 25px', boxSizing: 'border-box' }}>
         {/* Service Type Section */}
         <div style={{ background: '#e8edf2', padding: '15px 20px', borderRadius: 4, marginBottom: 15 }}>
           <div className="moh-row">

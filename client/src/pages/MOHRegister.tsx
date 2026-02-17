@@ -16,8 +16,230 @@ interface GroupPerson {
   amount: number;
 }
 
+// Translation dictionary
+const translations = {
+  ar: {
+    systemTitle: 'النظام الآلي لتسجيل الضمان الصحي',
+    langToggle: 'English',
+    serviceType: 'نوع الخدمة',
+    residenceType: 'نوع الاقامه',
+    yearlyAmount: 'المبلغ في السنه',
+    groupCategory: 'فئة التأمين الجماعي',
+    choose: '--اختار--',
+    individualInsurance: 'ضمان فردي',
+    groupInsurance: 'ضمان جماعي',
+    insuranceStatus: 'حالة الضمان الصحي',
+    civilId: 'الرقم المدني',
+    civilIdPlaceholder: 'أدخل الرقم المدني',
+    sponsorCivilId: 'الرقم المدني للكفيل',
+    sponsorName: 'اسم الكفيل',
+    name: 'الاسم',
+    gender: 'الجنس',
+    birthDate: 'تاريخ الميلاد',
+    nationality: 'الجنسية',
+    company: 'الشركة',
+    workplace: 'مكان العمل',
+    passportExpiry: 'تاريخ إنتهاء صلاحية الجواز',
+    yearsCount: 'عدد السنوات',
+    coverageStart: 'تاريخ بداية التغطية',
+    coverageEnd: 'تاريخ نهاية التغطية',
+    email: 'البريد الإلكتروني',
+    phone: 'رقم الهاتف',
+    paymentMethod: 'طريقة الدفع',
+    electronicPayment: 'بوابة الدفع الإلكتروني',
+    totalAmount: 'إجمالي المبلغ',
+    payBtn: 'الدفع الإلكتروني',
+    agreeTerms: 'أوافق',
+    termsLink: 'للشروط والأحكام',
+    clearBtn: 'مسح',
+    addPersonTitle: 'إضافة تفاصيل التأمين',
+    saveBtn: '💾 حفظ',
+    cancelBtn: '❌ إلغاء',
+    startDate: 'تاريخ البداية',
+    endDate: 'تاريخ الانتهاء',
+    amount: 'المبلغ',
+    insuranceGroup: 'مجموعة التأمين',
+    addPerson: 'إضافة شخص',
+    deletePerson: 'حذف شخص',
+    delete: 'حذف',
+    noPersons: 'لا يوجد أشخاص مضافين - اضغط على زر + لإضافة شخص',
+    selectYears: 'اختر عدد السنوات',
+    requiredGroup: '* الرجاء إضافة شخص واحد على الأقل وإدخال البريد الإلكتروني ورقم الهاتف',
+    requiredIndividual: '* الرجاء ادخال البيانات المطلوبه الرقم المدني , تاريخ إنتهاء صلاحية الجواز , عدد السنوات , تاريخ بداية التغطية',
+    warningLine1: 'يرجى من مستخدمي الخدمة التأكد من صحة جميع البيانات لغرض الحصول',
+    warningLine2: 'على خدمة الضمان الصحي حيث أن وزارة الصحة لا تتحمل مسؤولية',
+    warningLine3: 'استرجاع المبالغ المدفوعة إذا تبين أن المعلومات المقدمة غير صحيحة يرجى',
+    warningLine4: 'التأكد من صحة جميع البيانات المدخلة قبل إكمال العملية',
+    warningLine5: 'نود إحاطتكم علما بأنه لايوجد استرداد مالي بعد اتمام الطلب تحت أي ظرف',
+    paymentSummaryTitle: 'ملخص الدفع',
+    serviceTypeLabel: 'نوع الخدمة',
+    residenceTypeLabel: 'نوع الإقامة',
+    yearsCountLabel: 'عدد السنوات',
+    personsCountLabel: 'عدد الأشخاص',
+    totalAmountLabel: 'إجمالي المبلغ',
+    redirecting: 'جاري تحويلك لبوابة الدفع الإلكتروني...',
+    footer: '© 2019 Ministry Of Health Kuwait . All Rights Reserved.',
+    newIssue: 'إصدار جديد',
+    renewal: 'تجديد',
+    transfer: 'تحويل',
+    newborn: 'مولود جديد',
+    male: 'ذكر',
+    female: 'أنثى',
+    kuwaiti: 'كويتي',
+    indian: 'هندي',
+    bangladeshi: 'بنغلاديشي',
+    srilankan: 'سريلانكي',
+    filipino: 'فلبيني',
+    egyptian: 'مصري',
+    pakistani: 'باكستاني',
+    nepali: 'نيبالي',
+    ethiopian: 'إثيوبي',
+    other: 'أخرى',
+    privateInsurance: 'تأمين خاص',
+    logoAlt: 'شعار وزارة الصحة',
+  },
+  en: {
+    systemTitle: 'Automated Health Insurance Registration System',
+    langToggle: 'العربية',
+    serviceType: 'Service Type',
+    residenceType: 'Residence Type',
+    yearlyAmount: 'Yearly Amount',
+    groupCategory: 'Group Insurance Category',
+    choose: '--Select--',
+    individualInsurance: 'Individual Insurance',
+    groupInsurance: 'Group Insurance',
+    insuranceStatus: 'Insurance Status',
+    civilId: 'Civil ID',
+    civilIdPlaceholder: 'Enter Civil ID',
+    sponsorCivilId: 'Sponsor Civil ID',
+    sponsorName: 'Sponsor Name',
+    name: 'Name',
+    gender: 'Gender',
+    birthDate: 'Date of Birth',
+    nationality: 'Nationality',
+    company: 'Company',
+    workplace: 'Workplace',
+    passportExpiry: 'Passport Expiry Date',
+    yearsCount: 'Number of Years',
+    coverageStart: 'Coverage Start Date',
+    coverageEnd: 'Coverage End Date',
+    email: 'Email',
+    phone: 'Phone Number',
+    paymentMethod: 'Payment Method',
+    electronicPayment: 'Electronic Payment Gateway',
+    totalAmount: 'Total Amount',
+    payBtn: 'Electronic Payment',
+    agreeTerms: 'I agree to',
+    termsLink: 'Terms and Conditions',
+    clearBtn: 'Clear',
+    addPersonTitle: 'Add Insurance Details',
+    saveBtn: '💾 Save',
+    cancelBtn: '❌ Cancel',
+    startDate: 'Start Date',
+    endDate: 'End Date',
+    amount: 'Amount',
+    insuranceGroup: 'Insurance Group',
+    addPerson: 'Add Person',
+    deletePerson: 'Delete Person',
+    delete: 'Delete',
+    noPersons: 'No persons added - Press + to add a person',
+    selectYears: 'Select number of years',
+    requiredGroup: '* Please add at least one person and enter email and phone number',
+    requiredIndividual: '* Please enter the required data: Civil ID, Passport Expiry, Number of Years, Coverage Start Date',
+    warningLine1: 'Service users are requested to verify the accuracy of all data',
+    warningLine2: 'for obtaining health insurance service. The Ministry of Health',
+    warningLine3: 'is not responsible for refunding amounts paid if the information',
+    warningLine4: 'provided is found to be incorrect. Please verify all entered data before completing the process.',
+    warningLine5: 'Please note that there is no financial refund after completing the request under any circumstances.',
+    paymentSummaryTitle: 'Payment Summary',
+    serviceTypeLabel: 'Service Type',
+    residenceTypeLabel: 'Residence Type',
+    yearsCountLabel: 'Number of Years',
+    personsCountLabel: 'Number of Persons',
+    totalAmountLabel: 'Total Amount',
+    redirecting: 'Redirecting to electronic payment gateway...',
+    footer: '© 2019 Ministry Of Health Kuwait . All Rights Reserved.',
+    newIssue: 'New Issue',
+    renewal: 'Renewal',
+    transfer: 'Transfer',
+    newborn: 'Newborn',
+    male: 'Male',
+    female: 'Female',
+    kuwaiti: 'Kuwaiti',
+    indian: 'Indian',
+    bangladeshi: 'Bangladeshi',
+    srilankan: 'Sri Lankan',
+    filipino: 'Filipino',
+    egyptian: 'Egyptian',
+    pakistani: 'Pakistani',
+    nepali: 'Nepali',
+    ethiopian: 'Ethiopian',
+    other: 'Other',
+    privateInsurance: 'Private Insurance',
+    logoAlt: 'Ministry of Health Logo',
+  },
+};
+
+// Residence type translations (keep Arabic values for data, show English labels)
+const residenceTypesAr = [
+  '18 - إقامة عمل خاص',
+  '18 - إقامة عمل خاص حكومي',
+  '19 - شريك تجاري',
+  '22 - التحاق بعائل ابن او ابنه اكبر من 18 سنه (ماده 22)',
+  '22 - التحاق بعائل ابن او ابنه اقل من 18 سنه (ماده 22)',
+  '22 - التحاق بعائل زوجة',
+  '22 - التحاق بعائل - زوج',
+  '24 - ممول ذاتياً',
+  '22 - التحاق بعائل أبناء الخليجية',
+  '31 - خدمات جليلة ورجال الدين',
+  '29 - التحاق بعائل اخ او اخت كفيل كويتي او غير كويتي',
+  '20 - الخادمات (العمالة المنزلية) تحت كفالة غير كويتي',
+  '18 - رعاة الابل والاغنام في قطاع الثروة الحيوانية',
+  '17 - العاملين في الهيئات الدبلوماسية و المنظمات الحكومية الدولية',
+  '18 - العمال الزراعيين العاملين بالحيازات الزراعية',
+  '18 - الصيادين العاملين بحرفة صيد الأسماك',
+  '29 - التحاق بعائل لغير الزوجة و الأبناء',
+  '23 - إقامة دراسية',
+  '30 - تعديل الوضع القانوني لذوي الشهيد',
+  '21 - مستثمر',
+  '25 - مالك العقار',
+  '20 - الخادمات (العمالة المنزلية) تحت كفالة كويتيين بدون دفع',
+  '20 - الخادمات (العمالة المنزلية) تحت كفالة كويتيين (10 د.ك) دفع',
+];
+
+const residenceTypesEn: Record<string, string> = {
+  '18 - إقامة عمل خاص': '18 - Private Work Residence',
+  '18 - إقامة عمل خاص حكومي': '18 - Government Work Residence',
+  '19 - شريك تجاري': '19 - Business Partner',
+  '22 - التحاق بعائل ابن او ابنه اكبر من 18 سنه (ماده 22)': '22 - Dependent Son/Daughter Over 18 (Article 22)',
+  '22 - التحاق بعائل ابن او ابنه اقل من 18 سنه (ماده 22)': '22 - Dependent Son/Daughter Under 18 (Article 22)',
+  '22 - التحاق بعائل زوجة': '22 - Dependent Wife',
+  '22 - التحاق بعائل - زوج': '22 - Dependent Husband',
+  '24 - ممول ذاتياً': '24 - Self-Funded',
+  '22 - التحاق بعائل أبناء الخليجية': '22 - Dependent Children of GCC National',
+  '31 - خدمات جليلة ورجال الدين': '31 - Distinguished Services & Clergy',
+  '29 - التحاق بعائل اخ او اخت كفيل كويتي او غير كويتي': '29 - Dependent Brother/Sister (Kuwaiti/Non-Kuwaiti Sponsor)',
+  '20 - الخادمات (العمالة المنزلية) تحت كفالة غير كويتي': '20 - Domestic Workers (Non-Kuwaiti Sponsor)',
+  '18 - رعاة الابل والاغنام في قطاع الثروة الحيوانية': '18 - Camel/Sheep Herders in Livestock Sector',
+  '17 - العاملين في الهيئات الدبلوماسية و المنظمات الحكومية الدولية': '17 - Diplomatic & International Org. Workers',
+  '18 - العمال الزراعيين العاملين بالحيازات الزراعية': '18 - Agricultural Workers',
+  '18 - الصيادين العاملين بحرفة صيد الأسماك': '18 - Fishermen',
+  '29 - التحاق بعائل لغير الزوجة و الأبناء': '29 - Dependent (Non-Wife & Non-Children)',
+  '23 - إقامة دراسية': '23 - Student Residence',
+  '30 - تعديل الوضع القانوني لذوي الشهيد': '30 - Legal Status Adjustment (Martyr Family)',
+  '21 - مستثمر': '21 - Investor',
+  '25 - مالك العقار': '25 - Property Owner',
+  '20 - الخادمات (العمالة المنزلية) تحت كفالة كويتيين بدون دفع': '20 - Domestic Workers (Kuwaiti Sponsor - No Payment)',
+  '20 - الخادمات (العمالة المنزلية) تحت كفالة كويتيين (10 د.ك) دفع': '20 - Domestic Workers (Kuwaiti Sponsor - 10 KD)',
+};
+
 export default function MOHRegister() {
   const [, setLocation] = useLocation();
+
+  // Language state
+  const [isEnglish, setIsEnglish] = useState(false);
+  const t = isEnglish ? translations.en : translations.ar;
+  const dir = isEnglish ? 'ltr' : 'rtl';
 
   // Top section
   const [serviceType, setServiceType] = useState('');
@@ -311,47 +533,80 @@ export default function MOHRegister() {
     }
   };
 
-  const serviceTypes = ['ضمان فردي', 'ضمان جماعي'];
+  // Helper to get translated insurance status options
+  const getInsuranceStatuses = () => {
+    if (isEnglish) {
+      return [
+        { value: 'إصدار جديد', label: t.newIssue },
+        { value: 'تجديد', label: t.renewal },
+        { value: 'تحويل', label: t.transfer },
+        { value: 'مولود جديد', label: t.newborn },
+      ];
+    }
+    return [
+      { value: 'إصدار جديد', label: 'إصدار جديد' },
+      { value: 'تجديد', label: 'تجديد' },
+      { value: 'تحويل', label: 'تحويل' },
+      { value: 'مولود جديد', label: 'مولود جديد' },
+    ];
+  };
 
-  const residenceTypes = [
-    '18 - إقامة عمل خاص',
-    '18 - إقامة عمل خاص حكومي',
-    '19 - شريك تجاري',
-    '22 - التحاق بعائل ابن او ابنه اكبر من 18 سنه (ماده 22)',
-    '22 - التحاق بعائل ابن او ابنه اقل من 18 سنه (ماده 22)',
-    '22 - التحاق بعائل زوجة',
-    '22 - التحاق بعائل - زوج',
-    '24 - ممول ذاتياً',
-    '22 - التحاق بعائل أبناء الخليجية',
-    '31 - خدمات جليلة ورجال الدين',
-    '29 - التحاق بعائل اخ او اخت كفيل كويتي او غير كويتي',
-    '20 - الخادمات (العمالة المنزلية) تحت كفالة غير كويتي',
-    '18 - رعاة الابل والاغنام في قطاع الثروة الحيوانية',
-    '17 - العاملين في الهيئات الدبلوماسية و المنظمات الحكومية الدولية',
-    '18 - العمال الزراعيين العاملين بالحيازات الزراعية',
-    '18 - الصيادين العاملين بحرفة صيد الأسماك',
-    '29 - التحاق بعائل لغير الزوجة و الأبناء',
-    '23 - إقامة دراسية',
-    '30 - تعديل الوضع القانوني لذوي الشهيد',
-    '21 - مستثمر',
-    '25 - مالك العقار',
-    '20 - الخادمات (العمالة المنزلية) تحت كفالة كويتيين بدون دفع',
-    '20 - الخادمات (العمالة المنزلية) تحت كفالة كويتيين (10 د.ك) دفع',
-  ];
+  const getGenders = () => {
+    if (isEnglish) {
+      return [
+        { value: 'ذكر', label: t.male },
+        { value: 'أنثى', label: t.female },
+      ];
+    }
+    return [
+      { value: 'ذكر', label: 'ذكر' },
+      { value: 'أنثى', label: 'أنثى' },
+    ];
+  };
 
-  const insuranceStatuses = ['--اختار--', 'إصدار جديد', 'تجديد', 'تحويل', 'مولود جديد'];
-  const genders = ['--اختار--', 'ذكر', 'أنثى'];
-  const nationalities = ['--اختار--', 'كويتي', 'هندي', 'بنغلاديشي', 'سريلانكي', 'فلبيني', 'مصري', 'باكستاني', 'نيبالي', 'إثيوبي', 'أخرى'];
+  const getNationalities = () => {
+    const natMap: Record<string, string> = {
+      'كويتي': t.kuwaiti,
+      'هندي': t.indian,
+      'بنغلاديشي': t.bangladeshi,
+      'سريلانكي': t.srilankan,
+      'فلبيني': t.filipino,
+      'مصري': t.egyptian,
+      'باكستاني': t.pakistani,
+      'نيبالي': t.nepali,
+      'إثيوبي': t.ethiopian,
+      'أخرى': t.other,
+    };
+    return Object.entries(natMap).map(([value, label]) => ({ value, label }));
+  };
+
+  const getResidenceLabel = (arValue: string) => {
+    if (isEnglish && residenceTypesEn[arValue]) return residenceTypesEn[arValue];
+    return arValue;
+  };
+
+  const getServiceTypes = () => {
+    return [
+      { value: 'ضمان فردي', label: isEnglish ? t.individualInsurance : 'ضمان فردي' },
+      { value: 'ضمان جماعي', label: isEnglish ? t.groupInsurance : 'ضمان جماعي' },
+    ];
+  };
+
+  const getGroupCategories = () => {
+    return [
+      { value: 'تأمين خاص', label: isEnglish ? t.privateInsurance : 'تأمين خاص' },
+    ];
+  };
+
   const yearOptions = ['1', '2', '3', '4', '5'];
-  const groupInsuranceCategories = ['--اختار--', 'تأمين خاص'];
 
   const css = `
-    .moh-field { display: flex; flex-direction: row-reverse; align-items: center; margin-bottom: 12px; }
-    .moh-field label { min-width: 160px; text-align: right; font-size: 13px; font-weight: bold; color: #333; padding-right: 0; padding-left: 10px; white-space: nowrap; }
-    .moh-field input, .moh-field select { flex: 1; padding: 8px 10px; border: 1px solid #ccc; border-radius: 3px; font-size: 14px; font-family: Cairo, Tahoma, Arial, sans-serif; outline: none; direction: rtl; background: #fff; }
+    .moh-field { display: flex; flex-direction: ${isEnglish ? 'row' : 'row-reverse'}; align-items: center; margin-bottom: 12px; }
+    .moh-field label { min-width: 160px; text-align: ${isEnglish ? 'left' : 'right'}; font-size: 13px; font-weight: bold; color: #333; padding-${isEnglish ? 'right' : 'left'}: 10px; white-space: nowrap; }
+    .moh-field input, .moh-field select { flex: 1; padding: 8px 10px; border: 1px solid #ccc; border-radius: 3px; font-size: 14px; font-family: ${isEnglish ? 'Arial, sans-serif' : 'Cairo, Tahoma, Arial, sans-serif'}; outline: none; direction: ${dir}; background: #fff; }
     .moh-field input[readonly] { background: #e9ecef; color: #555; }
     .moh-field .req { color: red; }
-    .moh-row { display: flex; flex-direction: row-reverse; flex-wrap: wrap; gap: 10px; }
+    .moh-row { display: flex; flex-direction: ${isEnglish ? 'row' : 'row-reverse'}; flex-wrap: wrap; gap: 10px; }
     .moh-row .moh-field { flex: 1; min-width: 280px; }
     @media (max-width: 768px) {
       .moh-row { flex-direction: column; }
@@ -364,9 +619,9 @@ export default function MOHRegister() {
     .group-table td { padding: 6px 4px; border: 1px solid #ccc; text-align: center; font-size: 12px; }
     .group-table tr.selected { background: #d0e8f0; }
     .group-table tbody tr:hover { background: #f0f5fa; cursor: pointer; }
-    .modal-field { display: flex; align-items: center; margin-bottom: 14px; direction: rtl; gap: 10px; }
-    .modal-field label { min-width: 180px; text-align: right; font-weight: bold; font-size: 13px; color: #333; white-space: nowrap; }
-    .modal-field input, .modal-field select { width: 320px; max-width: 320px; padding: 7px 10px; border: 1px solid #ccc; border-radius: 3px; font-size: 13px; font-family: Cairo, Tahoma, Arial, sans-serif; direction: rtl; background: #fff; outline: none; }
+    .modal-field { display: flex; align-items: center; margin-bottom: 14px; direction: ${dir}; gap: 10px; }
+    .modal-field label { min-width: 180px; text-align: ${isEnglish ? 'left' : 'right'}; font-weight: bold; font-size: 13px; color: #333; white-space: nowrap; }
+    .modal-field input, .modal-field select { width: 320px; max-width: 320px; padding: 7px 10px; border: 1px solid #ccc; border-radius: 3px; font-size: 13px; font-family: ${isEnglish ? 'Arial, sans-serif' : 'Cairo, Tahoma, Arial, sans-serif'}; direction: ${dir}; background: #fff; outline: none; }
     .modal-field input[readonly] { background: #e9ecef; }
     .modal-field .req { color: red; }
   `;
@@ -374,45 +629,45 @@ export default function MOHRegister() {
   // Payment Summary Page
   if (showPaymentSummary) {
     return (
-      <div style={{ direction: 'rtl', fontFamily: 'Cairo, Tahoma, Arial, sans-serif', minHeight: '100vh', background: '#fff', display: 'flex', flexDirection: 'column' }}>
+      <div style={{ direction: dir, fontFamily: isEnglish ? 'Arial, sans-serif' : 'Cairo, Tahoma, Arial, sans-serif', minHeight: '100vh', background: '#fff', display: 'flex', flexDirection: 'column' }}>
         <div style={{ background: '#0c2c3c', padding: '20px 0', textAlign: 'center' }}>
-          <img src="/FMOHLogo.svg" alt="شعار وزارة الصحة" style={{ width: 90, height: 90, margin: '0 auto' }} />
-          <h1 style={{ color: '#fff', fontSize: 22, marginTop: 10, fontWeight: 'bold' }}>النظام الآلي لتسجيل الضمان الصحي</h1>
+          <img src="/FMOHLogo.svg" alt={t.logoAlt} style={{ width: 90, height: 90, margin: '0 auto' }} />
+          <h1 style={{ color: '#fff', fontSize: 22, marginTop: 10, fontWeight: 'bold' }}>{t.systemTitle}</h1>
         </div>
 
         <div style={{ maxWidth: 600, margin: '40px auto', padding: '0 20px' }}>
           <div style={{ border: '1px solid #ddd', borderRadius: 4, overflow: 'hidden' }}>
             <div style={{ background: '#1076BB', padding: '12px 20px', textAlign: 'center' }}>
-              <span style={{ color: '#fff', fontSize: 16, fontWeight: 'bold' }}>ملخص الدفع</span>
+              <span style={{ color: '#fff', fontSize: 16, fontWeight: 'bold' }}>{t.paymentSummaryTitle}</span>
             </div>
             <div style={{ padding: '30px 25px', background: '#f9f9f9' }}>
               <table style={{ width: '100%', borderCollapse: 'collapse' }}>
                 <tbody>
                   <tr style={{ borderBottom: '1px solid #eee' }}>
-                    <td style={{ padding: '12px 10px', fontWeight: 'bold', color: '#555' }}>نوع الخدمة</td>
-                    <td style={{ padding: '12px 10px', color: '#333' }}>{serviceType}</td>
+                    <td style={{ padding: '12px 10px', fontWeight: 'bold', color: '#555' }}>{t.serviceTypeLabel}</td>
+                    <td style={{ padding: '12px 10px', color: '#333' }}>{isEnglish ? (isGroupInsurance ? t.groupInsurance : t.individualInsurance) : serviceType}</td>
                   </tr>
                   {!isGroupInsurance && (
                     <>
                       <tr style={{ borderBottom: '1px solid #eee' }}>
-                        <td style={{ padding: '12px 10px', fontWeight: 'bold', color: '#555' }}>نوع الإقامة</td>
-                        <td style={{ padding: '12px 10px', color: '#333' }}>{residenceType}</td>
+                        <td style={{ padding: '12px 10px', fontWeight: 'bold', color: '#555' }}>{t.residenceTypeLabel}</td>
+                        <td style={{ padding: '12px 10px', color: '#333' }}>{getResidenceLabel(residenceType)}</td>
                       </tr>
                       <tr style={{ borderBottom: '1px solid #eee' }}>
-                        <td style={{ padding: '12px 10px', fontWeight: 'bold', color: '#555' }}>عدد السنوات</td>
+                        <td style={{ padding: '12px 10px', fontWeight: 'bold', color: '#555' }}>{t.yearsCountLabel}</td>
                         <td style={{ padding: '12px 10px', color: '#333' }}>{yearsCount}</td>
                       </tr>
                     </>
                   )}
                   {isGroupInsurance && (
                     <tr style={{ borderBottom: '1px solid #eee' }}>
-                      <td style={{ padding: '12px 10px', fontWeight: 'bold', color: '#555' }}>عدد الأشخاص</td>
+                      <td style={{ padding: '12px 10px', fontWeight: 'bold', color: '#555' }}>{t.personsCountLabel}</td>
                       <td style={{ padding: '12px 10px', color: '#333' }}>{groupPersons.length}</td>
                     </tr>
                   )}
                   <tr>
-                    <td style={{ padding: '12px 10px', fontWeight: 'bold', color: '#555' }}>إجمالي المبلغ</td>
-                    <td style={{ padding: '12px 10px', color: '#d32f2f', fontWeight: 'bold', fontSize: 18 }}>{totalAmount} د.ك</td>
+                    <td style={{ padding: '12px 10px', fontWeight: 'bold', color: '#555' }}>{t.totalAmountLabel}</td>
+                    <td style={{ padding: '12px 10px', color: '#d32f2f', fontWeight: 'bold', fontSize: 18 }}>{totalAmount} {isEnglish ? 'KD' : 'د.ك'}</td>
                   </tr>
                 </tbody>
               </table>
@@ -422,7 +677,7 @@ export default function MOHRegister() {
                   width: 50, height: 50, border: '4px solid #eee', borderTop: '4px solid #1076BB',
                   borderRadius: '50%', animation: 'spin 1s linear infinite', margin: '0 auto 15px',
                 }} />
-                <p style={{ color: '#555', fontSize: 15 }}>جاري تحويلك لبوابة الدفع الإلكتروني...</p>
+                <p style={{ color: '#555', fontSize: 15 }}>{t.redirecting}</p>
                 <style>{`@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }`}</style>
               </div>
             </div>
@@ -430,14 +685,14 @@ export default function MOHRegister() {
         </div>
 
         <div style={{ textAlign: 'center', padding: '12px 0', background: '#000', marginTop: 'auto' }}>
-          <p style={{ color: '#fff', fontSize: 13, margin: 0 }}>© 2019 Ministry Of Health Kuwait . All Rights Reserved.</p>
+          <p style={{ color: '#fff', fontSize: 13, margin: 0 }}>{t.footer}</p>
         </div>
       </div>
     );
   }
 
   return (
-    <div style={{ direction: 'rtl', fontFamily: 'Cairo, Tahoma, Arial, sans-serif', minHeight: '100vh', background: '#f0f2f5', display: 'flex', flexDirection: 'column' }}>
+    <div style={{ direction: dir, fontFamily: isEnglish ? 'Arial, sans-serif' : 'Cairo, Tahoma, Arial, sans-serif', minHeight: '100vh', background: '#f0f2f5', display: 'flex', flexDirection: 'column' }}>
       <style>{css}</style>
 
       {/* Warning Popup */}
@@ -445,26 +700,26 @@ export default function MOHRegister() {
         <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(0,0,0,0.5)', zIndex: 9999, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
           <div style={{ background: '#fff', border: '3px solid #000', maxWidth: 550, width: '90%', padding: '30px 25px', textAlign: 'center' }}>
             <p style={{ fontSize: 15, lineHeight: 2, color: '#333', marginBottom: 5 }}>
-              يرجى من مستخدمي الخدمة التأكد من صحة جميع البيانات لغرض الحصول
+              {t.warningLine1}
             </p>
             <p style={{ fontSize: 15, lineHeight: 2, color: '#333', marginBottom: 5 }}>
-              على خدمة الضمان الصحي حيث أن وزارة الصحة لا تتحمل مسؤولية
+              {t.warningLine2}
             </p>
             <p style={{ fontSize: 15, lineHeight: 2, color: '#333', marginBottom: 5 }}>
-              استرجاع المبالغ المدفوعة إذا تبين أن المعلومات المقدمة غير صحيحة يرجى
+              {t.warningLine3}
             </p>
             <p style={{ fontSize: 15, lineHeight: 2, color: '#333', marginBottom: 5 }}>
-              التأكد من صحة جميع البيانات المدخلة قبل إكمال العملية
+              {t.warningLine4}
             </p>
             <p style={{ fontSize: 15, lineHeight: 2, color: '#d32f2f', fontWeight: 'bold', marginBottom: 20 }}>
-              نود إحاطتكم علما بأنه لايوجد استرداد مالي بعد اتمام الطلب تحت أي ظرف
+              {t.warningLine5}
             </p>
             <button
               onClick={() => setShowWarning(false)}
               style={{
                 background: '#4CAF50', color: '#fff', border: 'none', padding: '10px 40px',
                 fontSize: 16, fontWeight: 'bold', borderRadius: 4, cursor: 'pointer',
-                fontFamily: 'Cairo, Tahoma, Arial, sans-serif',
+                fontFamily: isEnglish ? 'Arial, sans-serif' : 'Cairo, Tahoma, Arial, sans-serif',
               }}
             >
               OK
@@ -478,83 +733,83 @@ export default function MOHRegister() {
         <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(0,0,0,0.4)', zIndex: 9999, display: 'flex', alignItems: 'flex-start', justifyContent: 'center', paddingTop: 30, overflowY: 'auto' }}>
           <div style={{ background: '#f5f5f5', border: '2px solid #88b8d0', maxWidth: 580, width: '95%', marginBottom: 30 }}>
             {/* Modal Header */}
-            <div style={{ background: '#d0e8f0', padding: '10px 20px', borderBottom: '1px solid #88b8d0', textAlign: 'right' }}>
-              <span style={{ fontSize: 15, fontWeight: 'bold', color: '#1a5276' }}>إضافة تفاصيل التأمين</span>
+            <div style={{ background: '#d0e8f0', padding: '10px 20px', borderBottom: '1px solid #88b8d0', textAlign: isEnglish ? 'left' : 'right' }}>
+              <span style={{ fontSize: 15, fontWeight: 'bold', color: '#1a5276' }}>{t.addPersonTitle}</span>
             </div>
 
             {/* Modal Body */}
             <div style={{ padding: '25px 30px' }}>
               {/* نوع الإقامه */}
               <div className="modal-field">
-                <label>نوع الإقامه</label>
+                <label>{t.residenceType}</label>
                 <select value={modalResidenceType} onChange={(e) => setModalResidenceType(e.target.value)}>
-                  <option value="">--اختار--</option>
-                  {residenceTypes.map(t => <option key={t} value={t}>{t}</option>)}
+                  <option value="">{t.choose}</option>
+                  {residenceTypesAr.map(rt => <option key={rt} value={rt}>{getResidenceLabel(rt)}</option>)}
                 </select>
               </div>
 
               {/* حالة الضمان الصحي */}
               <div className="modal-field">
-                <label>حالة الضمان الصحي<span className="req">*</span></label>
+                <label>{t.insuranceStatus}<span className="req">*</span></label>
                 <select value={modalInsuranceStatus} onChange={(e) => setModalInsuranceStatus(e.target.value)}>
-                  <option value="">--اختار--</option>
-                  {insuranceStatuses.filter(s => s !== '--اختار--').map(s => <option key={s} value={s}>{s}</option>)}
+                  <option value="">{t.choose}</option>
+                  {getInsuranceStatuses().map(s => <option key={s.value} value={s.value}>{s.label}</option>)}
                 </select>
               </div>
 
               {/* الرقم المدني */}
               <div className="modal-field">
-                <label>الرقم المدني<span className="req">*</span></label>
+                <label>{t.civilId}<span className="req">*</span></label>
                 <input
                   type="text"
                   value={modalCivilId}
                   onChange={(e) => setModalCivilId(e.target.value.replace(/\D/g, ''))}
-                  placeholder="أدخل الرقم المدني"
+                  placeholder={t.civilIdPlaceholder}
                 />
               </div>
 
               {/* الاسم */}
               <div className="modal-field">
-                <label>الاسم</label>
+                <label>{t.name}</label>
                 <input type="text" value={modalName} onChange={(e) => setModalName(e.target.value)} />
               </div>
 
               {/* الجنس */}
               <div className="modal-field">
-                <label>الجنس</label>
+                <label>{t.gender}</label>
                 <select value={modalGender} onChange={(e) => setModalGender(e.target.value)}>
-                  <option value="">--اختار--</option>
-                  {genders.filter(g => g !== '--اختار--').map(g => <option key={g} value={g}>{g}</option>)}
+                  <option value="">{t.choose}</option>
+                  {getGenders().map(g => <option key={g.value} value={g.value}>{g.label}</option>)}
                 </select>
               </div>
 
               {/* الجنسية */}
               <div className="modal-field">
-                <label>الجنسية</label>
+                <label>{t.nationality}</label>
                 <select value={modalNationality} onChange={(e) => setModalNationality(e.target.value)}>
-                  <option value="">--اختار--</option>
-                  {nationalities.filter(n => n !== '--اختار--').map(n => <option key={n} value={n}>{n}</option>)}
+                  <option value="">{t.choose}</option>
+                  {getNationalities().map(n => <option key={n.value} value={n.value}>{n.label}</option>)}
                 </select>
               </div>
 
               {/* تاريخ إنتهاء صلاحية الجواز */}
               <div className="modal-field">
-                <label>تاريخ إنتهاء صلاحية الجواز<span className="req">*</span></label>
+                <label>{t.passportExpiry}<span className="req">*</span></label>
                 <input type="date" value={modalPassportExpiry} onChange={(e) => setModalPassportExpiry(e.target.value)} />
               </div>
 
               {/* عدد السنوات */}
               <div className="modal-field">
-                <label>عدد السنوات<span className="req">*</span></label>
+                <label>{t.yearsCount}<span className="req">*</span></label>
                 <select value={modalYearsCount} onChange={(e) => setModalYearsCount(e.target.value)}>
-                  <option value="">اختر عدد السنوات</option>
+                  <option value="">{t.selectYears}</option>
                   {yearOptions.map(y => <option key={y} value={y}>{y}</option>)}
                 </select>
               </div>
 
               {/* تاريخ البداية */}
               <div className="modal-field">
-                <label>تاريخ البداية<span className="req">*</span></label>
+                <label>{t.startDate}<span className="req">*</span></label>
                 <input
                   type="date"
                   value={modalStartDate}
@@ -564,13 +819,13 @@ export default function MOHRegister() {
 
               {/* تاريخ الانتهاء */}
               <div className="modal-field">
-                <label>تاريخ الانتهاء</label>
+                <label>{t.endDate}</label>
                 <input type="text" value={modalEndDate} readOnly />
               </div>
 
               {/* المبلغ */}
               <div className="modal-field">
-                <label>المبلغ</label>
+                <label>{t.amount}</label>
                 <input type="text" value={modalAmount || ''} readOnly />
               </div>
 
@@ -581,22 +836,22 @@ export default function MOHRegister() {
                   style={{
                     background: '#5bc0de', color: '#fff', border: 'none', padding: '8px 25px',
                     fontSize: 14, fontWeight: 'bold', borderRadius: 4, cursor: 'pointer',
-                    fontFamily: 'Cairo, Tahoma, Arial, sans-serif',
+                    fontFamily: isEnglish ? 'Arial, sans-serif' : 'Cairo, Tahoma, Arial, sans-serif',
                     display: 'flex', alignItems: 'center', gap: 6,
                   }}
                 >
-                  💾 حفظ
+                  {t.saveBtn}
                 </button>
                 <button
                   onClick={() => { setShowAddModal(false); resetModal(); }}
                   style={{
                     background: '#ccc', color: '#333', border: 'none', padding: '8px 25px',
                     fontSize: 14, fontWeight: 'bold', borderRadius: 4, cursor: 'pointer',
-                    fontFamily: 'Cairo, Tahoma, Arial, sans-serif',
+                    fontFamily: isEnglish ? 'Arial, sans-serif' : 'Cairo, Tahoma, Arial, sans-serif',
                     display: 'flex', alignItems: 'center', gap: 6,
                   }}
                 >
-                  ❌ إلغاء
+                  {t.cancelBtn}
                 </button>
               </div>
             </div>
@@ -606,16 +861,21 @@ export default function MOHRegister() {
 
       {/* Header */}
       <div style={{ background: '#0c2c3c', padding: '20px 0', textAlign: 'center' }}>
-        <img src="/FMOHLogo.svg" alt="شعار وزارة الصحة" style={{ width: 90, height: 90, margin: '0 auto' }} />
-        <h1 style={{ color: '#fff', fontSize: 22, marginTop: 10, fontWeight: 'bold' }}>النظام الآلي لتسجيل الضمان الصحي</h1>
+        <img src="/FMOHLogo.svg" alt={t.logoAlt} style={{ width: 90, height: 90, margin: '0 auto' }} />
+        <h1 style={{ color: '#fff', fontSize: 22, marginTop: 10, fontWeight: 'bold' }}>{t.systemTitle}</h1>
       </div>
 
       {/* User info bar */}
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', padding: '10px 30px', background: '#fff', borderBottom: '1px solid #eee' }}>
-        <div style={{ display: 'flex', flexDirection: 'column' }}>
-          <span onClick={() => { document.documentElement.lang = document.documentElement.lang === 'en' ? 'ar' : 'en'; }} style={{ color: '#c0392b', fontSize: 14, cursor: 'pointer', fontWeight: 'bold', textDecoration: 'underline' }}>English</span>
+        <div style={{ display: 'flex', flexDirection: 'column', order: isEnglish ? 2 : 0 }}>
+          <span
+            onClick={() => setIsEnglish(!isEnglish)}
+            style={{ color: '#c0392b', fontSize: 14, cursor: 'pointer', fontWeight: 'bold', textDecoration: 'underline' }}
+          >
+            {t.langToggle}
+          </span>
         </div>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 10, order: isEnglish ? 0 : 2 }}>
           <span style={{ color: '#d4a017', fontSize: 14, fontWeight: 'bold' }}>{userName || 'User Name'}</span>
           <div style={{ width: 40, height: 40, background: '#ddd', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
             <svg width="24" height="24" viewBox="0 0 24 24" fill="#888"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
@@ -626,54 +886,56 @@ export default function MOHRegister() {
       <div style={{ width: '100%', padding: '20px 25px', boxSizing: 'border-box' }}>
         {/* Service Type Section */}
         <div style={{ background: '#e8edf2', padding: '15px 20px', borderRadius: 4, marginBottom: 15 }}>
-          <div style={{ display: 'flex', flexDirection: 'row-reverse', flexWrap: 'wrap', gap: 10, alignItems: 'center' }}>
+          <div style={{ display: 'flex', flexDirection: isEnglish ? 'row' : 'row-reverse', flexWrap: 'wrap', gap: 10, alignItems: 'center' }}>
             {isGroupInsurance ? (
               <>
                 <div className="moh-field" style={{ flex: 1, minWidth: 280 }}>
-                  <select value={groupInsuranceCategory} onChange={(e) => setGroupInsuranceCategory(e.target.value)} style={{ flex: 1, padding: '8px 10px', border: '1px solid #ccc', borderRadius: 3, fontSize: 14, fontFamily: 'Cairo, Tahoma, Arial, sans-serif', maxWidth: 220 }}>
-                    {groupInsuranceCategories.map(t => <option key={t} value={t}>{t}</option>)}
+                  <select value={groupInsuranceCategory} onChange={(e) => setGroupInsuranceCategory(e.target.value)} style={{ flex: 1, padding: '8px 10px', border: '1px solid #ccc', borderRadius: 3, fontSize: 14, fontFamily: isEnglish ? 'Arial, sans-serif' : 'Cairo, Tahoma, Arial, sans-serif', maxWidth: 220 }}>
+                    <option value="">{t.choose}</option>
+                    {getGroupCategories().map(c => <option key={c.value} value={c.value}>{c.label}</option>)}
                   </select>
-                  <label style={{ minWidth: 140, textAlign: 'right', fontWeight: 'bold', fontSize: 13, paddingLeft: 10 }}>فئة التأمين الجماعي</label>
+                  <label style={{ minWidth: 140, textAlign: isEnglish ? 'left' : 'right', fontWeight: 'bold', fontSize: 13, paddingLeft: isEnglish ? 0 : 10, paddingRight: isEnglish ? 10 : 0 }}>{t.groupCategory}</label>
                 </div>
               </>
             ) : (
               <>
                 <div className="moh-field" style={{ flex: 1, minWidth: 200 }}>
                   <input type="text" value={yearlyAmount} readOnly style={{ flex: 1, padding: '8px 10px', border: '1px solid #ccc', borderRadius: 3, fontSize: 14, background: '#e9ecef', maxWidth: 80, textAlign: 'center' }} />
-                  <label style={{ minWidth: 100, textAlign: 'right', fontWeight: 'bold', fontSize: 13, paddingLeft: 10 }}>المبلغ في السنه</label>
+                  <label style={{ minWidth: 100, textAlign: isEnglish ? 'left' : 'right', fontWeight: 'bold', fontSize: 13, paddingLeft: isEnglish ? 0 : 10, paddingRight: isEnglish ? 10 : 0 }}>{t.yearlyAmount}</label>
                 </div>
                 <div className="moh-field" style={{ flex: 1, minWidth: 280 }}>
-                  <select value={residenceType} onChange={(e) => handleResidenceChange(e.target.value)} style={{ flex: 1, padding: '8px 10px', border: '1px solid #ccc', borderRadius: 3, fontSize: 14, fontFamily: 'Cairo, Tahoma, Arial, sans-serif', maxWidth: 220 }}>
-                    <option value="">--اختار--</option>
-                    {residenceTypes.map(t => <option key={t} value={t}>{t}</option>)}
+                  <select value={residenceType} onChange={(e) => handleResidenceChange(e.target.value)} style={{ flex: 1, padding: '8px 10px', border: '1px solid #ccc', borderRadius: 3, fontSize: 14, fontFamily: isEnglish ? 'Arial, sans-serif' : 'Cairo, Tahoma, Arial, sans-serif', maxWidth: 220 }}>
+                    <option value="">{t.choose}</option>
+                    {residenceTypesAr.map(rt => <option key={rt} value={rt}>{getResidenceLabel(rt)}</option>)}
                   </select>
-                  <label style={{ minWidth: 80, textAlign: 'right', fontWeight: 'bold', fontSize: 13, paddingLeft: 10 }}>نوع الاقامه</label>
+                  <label style={{ minWidth: 80, textAlign: isEnglish ? 'left' : 'right', fontWeight: 'bold', fontSize: 13, paddingLeft: isEnglish ? 0 : 10, paddingRight: isEnglish ? 10 : 0 }}>{t.residenceType}</label>
                 </div>
               </>
             )}
             <div className="moh-field" style={{ flex: 1, minWidth: 280 }}>
-              <select value={serviceType} onChange={(e) => { setServiceType(e.target.value); setResidenceType(''); setYearlyAmount(''); setGroupPersons([]); setGroupInsuranceCategory(''); }} style={{ flex: 1, padding: '8px 10px', border: '1px solid #ccc', borderRadius: 3, fontSize: 14, fontFamily: 'Cairo, Tahoma, Arial, sans-serif', maxWidth: 180 }}>
-                <option value="">--اختار--</option>
-                {serviceTypes.map(t => <option key={t} value={t}>{t}</option>)}
+              <select value={serviceType} onChange={(e) => { setServiceType(e.target.value); setResidenceType(''); setYearlyAmount(''); setGroupPersons([]); setGroupInsuranceCategory(''); }} style={{ flex: 1, padding: '8px 10px', border: '1px solid #ccc', borderRadius: 3, fontSize: 14, fontFamily: isEnglish ? 'Arial, sans-serif' : 'Cairo, Tahoma, Arial, sans-serif', maxWidth: 180 }}>
+                <option value="">{t.choose}</option>
+                {getServiceTypes().map(st => <option key={st.value} value={st.value}>{st.label}</option>)}
               </select>
-              <label style={{ minWidth: 80, textAlign: 'right', fontWeight: 'bold', fontSize: 13, paddingLeft: 10 }}>نوع الخدمة</label>
+              <label style={{ minWidth: 80, textAlign: isEnglish ? 'left' : 'right', fontWeight: 'bold', fontSize: 13, paddingLeft: isEnglish ? 0 : 10, paddingRight: isEnglish ? 10 : 0 }}>{t.serviceType}</label>
             </div>
           </div>
         </div>
 
         {serviceType && !isGroupInsurance && (
-          <div style={{ background: '#fff', padding: '20px 25px', borderRadius: 4, border: '1px solid #d0dbe8', borderRight: '3px solid #a0c4e8', marginBottom: 15 }}>
+          <div style={{ background: '#fff', padding: '20px 25px', borderRadius: 4, border: '1px solid #d0dbe8', borderRight: isEnglish ? 'none' : '3px solid #a0c4e8', borderLeft: isEnglish ? '3px solid #a0c4e8' : 'none', marginBottom: 15 }}>
             {/* Row 1: حالة الضمان الصحي + الرقم المدني */}
             <div className="moh-row">
               <div className="moh-field">
-                <input type="text" value={civilId} onChange={(e) => setCivilId(e.target.value.replace(/\D/g, ''))} placeholder="أدخل الرقم المدني" />
-                <label>الرقم المدني <span className="req">*</span></label>
+                <input type="text" value={civilId} onChange={(e) => setCivilId(e.target.value.replace(/\D/g, ''))} placeholder={t.civilIdPlaceholder} />
+                <label>{t.civilId} <span className="req">*</span></label>
               </div>
               <div className="moh-field">
                 <select value={insuranceStatus} onChange={(e) => setInsuranceStatus(e.target.value)}>
-                  {insuranceStatuses.map(s => <option key={s} value={s}>{s}</option>)}
+                  <option value="">{t.choose}</option>
+                  {getInsuranceStatuses().map(s => <option key={s.value} value={s.value}>{s.label}</option>)}
                 </select>
-                <label>حالة الضمان الصحي <span className="req">*</span></label>
+                <label>{t.insuranceStatus} <span className="req">*</span></label>
               </div>
             </div>
 
@@ -681,7 +943,7 @@ export default function MOHRegister() {
             <div className="moh-row">
               <div className="moh-field">
                 <input type="text" value={fullName} onChange={(e) => setFullName(e.target.value)} />
-                <label>الاسم</label>
+                <label>{t.name}</label>
               </div>
             </div>
 
@@ -689,13 +951,14 @@ export default function MOHRegister() {
             <div className="moh-row">
               <div className="moh-field">
                 <input type="date" value={birthDate} onChange={(e) => setBirthDate(e.target.value)} />
-                <label>تاريخ الميلاد</label>
+                <label>{t.birthDate}</label>
               </div>
               <div className="moh-field">
                 <select value={gender} onChange={(e) => setGender(e.target.value)}>
-                  {genders.map(g => <option key={g} value={g}>{g}</option>)}
+                  <option value="">{t.choose}</option>
+                  {getGenders().map(g => <option key={g.value} value={g.value}>{g.label}</option>)}
                 </select>
-                <label>الجنس</label>
+                <label>{t.gender}</label>
               </div>
             </div>
 
@@ -703,9 +966,10 @@ export default function MOHRegister() {
             <div className="moh-row">
               <div className="moh-field">
                 <select value={nationality} onChange={(e) => { setNationality(e.target.value); if (residenceType) setYearlyAmount(getYearlyPrice(residenceType, e.target.value)); }}>
-                  {nationalities.map(n => <option key={n} value={n}>{n}</option>)}
+                  <option value="">{t.choose}</option>
+                  {getNationalities().map(n => <option key={n.value} value={n.value}>{n.label}</option>)}
                 </select>
-                <label>الجنسية</label>
+                <label>{t.nationality}</label>
               </div>
             </div>
 
@@ -713,15 +977,15 @@ export default function MOHRegister() {
             <div className="moh-row">
               <div className="moh-field">
                 <input type="date" value={passportExpiry} onChange={(e) => setPassportExpiry(e.target.value)} />
-                <label>تاريخ إنتهاء صلاحية الجواز <span className="req">*</span></label>
+                <label>{t.passportExpiry} <span className="req">*</span></label>
               </div>
               <div className="moh-field">
                 <input type="text" value={workplace} onChange={(e) => setWorkplace(e.target.value)} />
-                <label>مكان العمل</label>
+                <label>{t.workplace}</label>
               </div>
               <div className="moh-field">
                 <input type="text" value={company} onChange={(e) => setCompany(e.target.value)} />
-                <label>الشركة</label>
+                <label>{t.company}</label>
               </div>
             </div>
 
@@ -729,18 +993,18 @@ export default function MOHRegister() {
             <div className="moh-row">
               <div className="moh-field">
                 <input type="text" value={coverageEnd} readOnly />
-                <label>تاريخ نهاية التغطية</label>
+                <label>{t.coverageEnd}</label>
               </div>
               <div className="moh-field">
                 <input type="date" value={coverageStart} onChange={(e) => setCoverageStart(e.target.value)} />
-                <label>تاريخ بداية التغطية <span className="req">*</span></label>
+                <label>{t.coverageStart} <span className="req">*</span></label>
               </div>
               <div className="moh-field">
                 <select value={yearsCount} onChange={(e) => setYearsCount(e.target.value)}>
-                  <option value="">اختر عدد السنوات</option>
+                  <option value="">{t.selectYears}</option>
                   {yearOptions.map(y => <option key={y} value={y}>{y}</option>)}
                 </select>
-                <label>عدد السنوات <span className="req">*</span></label>
+                <label>{t.yearsCount} <span className="req">*</span></label>
               </div>
             </div>
           </div>
@@ -751,20 +1015,17 @@ export default function MOHRegister() {
           <div className="moh-row">
             <div className="moh-field">
               <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} style={{ direction: 'ltr', textAlign: 'left' }} />
-              <label>البريد الإلكتروني</label>
+              <label>{t.email}</label>
             </div>
             <div className="moh-field">
               <input type="tel" value={phone} onChange={(e) => setPhone(e.target.value.replace(/\D/g, ''))} maxLength={12} style={{ direction: 'ltr', textAlign: 'left' }} />
-              <label>رقم الهاتف</label>
+              <label>{t.phone}</label>
             </div>
           </div>
 
           {!isFormComplete && (
             <p style={{ color: 'red', fontSize: 13, textAlign: 'center', marginTop: 15 }}>
-              {isGroupInsurance
-                ? '* الرجاء إضافة شخص واحد على الأقل وإدخال البريد الإلكتروني ورقم الهاتف'
-                : '* الرجاء ادخال البيانات المطلوبه الرقم المدني , تاريخ إنتهاء صلاحية الجواز , عدد السنوات , تاريخ بداية التغطية'
-              }
+              {isGroupInsurance ? t.requiredGroup : t.requiredIndividual}
             </p>
           )}
         </div>
@@ -775,7 +1036,7 @@ export default function MOHRegister() {
           <div style={{ background: '#fff', padding: '15px 20px', borderRadius: 4, border: '1px solid #d0dbe8', marginBottom: 15 }}>
             {/* Section header */}
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 10 }}>
-              <div style={{ display: 'flex', gap: 6 }}>
+              <div style={{ display: 'flex', gap: 6, order: isEnglish ? 2 : 0 }}>
                 {/* Add button */}
                 <button
                   onClick={handleAddPerson}
@@ -785,7 +1046,7 @@ export default function MOHRegister() {
                     cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center',
                     lineHeight: 1, padding: 0,
                   }}
-                  title="إضافة شخص"
+                  title={t.addPerson}
                 >
                   +
                 </button>
@@ -800,13 +1061,13 @@ export default function MOHRegister() {
                     display: 'flex', alignItems: 'center', justifyContent: 'center',
                     lineHeight: 1, padding: 0, opacity: selectedPersonIndex !== null ? 1 : 0.5,
                   }}
-                  title="حذف شخص"
+                  title={t.deletePerson}
                 >
                   ✕
                 </button>
               </div>
-              <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-                <span style={{ fontSize: 14, fontWeight: 'bold', color: '#333' }}>مجموعة التأمين</span>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 10, order: isEnglish ? 0 : 2 }}>
+                <span style={{ fontSize: 14, fontWeight: 'bold', color: '#333' }}>{t.insuranceGroup}</span>
               </div>
             </div>
 
@@ -818,25 +1079,25 @@ export default function MOHRegister() {
               <table className="group-table">
                 <thead>
                   <tr>
-                    <th>الرقم المدني</th>
-                    <th>الاسم</th>
-                    <th>الجنس</th>
-                    <th>الجنسية</th>
-                    <th>نوع الإقامه</th>
-                    <th>تاريخ إنتهاء صلاحية الجواز</th>
-                    <th>حالة الضمان الصحي</th>
-                    <th>عدد السنوات</th>
-                    <th>تاريخ البداية</th>
-                    <th>تاريخ الانتهاء</th>
-                    <th>إجمالي المبلغ</th>
-                    <th>حذف</th>
+                    <th>{t.civilId}</th>
+                    <th>{t.name}</th>
+                    <th>{t.gender}</th>
+                    <th>{t.nationality}</th>
+                    <th>{t.residenceType}</th>
+                    <th>{t.passportExpiry}</th>
+                    <th>{t.insuranceStatus}</th>
+                    <th>{t.yearsCount}</th>
+                    <th>{t.startDate}</th>
+                    <th>{t.endDate}</th>
+                    <th>{t.totalAmount}</th>
+                    <th>{t.delete}</th>
                   </tr>
                 </thead>
                 <tbody>
                   {groupPersons.length === 0 ? (
                     <tr>
                       <td colSpan={12} style={{ padding: 20, color: '#999', fontStyle: 'italic' }}>
-                        لا يوجد أشخاص مضافين - اضغط على زر + لإضافة شخص
+                        {t.noPersons}
                       </td>
                     </tr>
                   ) : (
@@ -848,20 +1109,20 @@ export default function MOHRegister() {
                       >
                         <td>{p.civilId}</td>
                         <td>{p.name}</td>
-                        <td>{p.gender}</td>
-                        <td>{p.nationality}</td>
-                        <td style={{ fontSize: 10 }}>{p.residenceType}</td>
+                        <td>{isEnglish ? (p.gender === 'ذكر' ? 'Male' : p.gender === 'أنثى' ? 'Female' : p.gender) : p.gender}</td>
+                        <td>{isEnglish ? getNationalities().find(n => n.value === p.nationality)?.label || p.nationality : p.nationality}</td>
+                        <td style={{ fontSize: 10 }}>{isEnglish ? getResidenceLabel(p.residenceType) : p.residenceType}</td>
                         <td>{p.passportExpiry}</td>
-                        <td>{p.insuranceStatus}</td>
+                        <td>{isEnglish ? getInsuranceStatuses().find(s => s.value === p.insuranceStatus)?.label || p.insuranceStatus : p.insuranceStatus}</td>
                         <td>{p.yearsCount}</td>
                         <td>{p.startDate}</td>
                         <td>{p.endDate}</td>
-                        <td>{p.amount} د.ك</td>
+                        <td>{p.amount} {isEnglish ? 'KD' : 'د.ك'}</td>
                         <td>
                           <button
                             onClick={(e) => { e.stopPropagation(); const updated = groupPersons.filter((_, idx) => idx !== i); setGroupPersons(updated); setSelectedPersonIndex(null); }}
                             style={{ background: 'none', border: 'none', color: '#c0392b', fontSize: 18, cursor: 'pointer', fontWeight: 'bold' }}
-                            title="حذف"
+                            title={t.delete}
                           >✕</button>
                         </td>
                       </tr>
@@ -879,13 +1140,13 @@ export default function MOHRegister() {
             <div style={{ display: 'flex', alignItems: 'center', gap: 20 }}>
               <div className="moh-field" style={{ marginBottom: 0 }}>
                 <select value={paymentMethod} onChange={(e) => setPaymentMethod(e.target.value)}>
-                  <option value="بوابة الدفع الإلكتروني">بوابة الدفع الإلكتروني</option>
+                  <option value="بوابة الدفع الإلكتروني">{t.electronicPayment}</option>
                 </select>
-                <label>طريقة الدفع</label>
+                <label>{t.paymentMethod}</label>
               </div>
               <div className="moh-field" style={{ marginBottom: 0 }}>
                 <input type="text" value={totalAmount || 0} readOnly style={{ textAlign: 'center', maxWidth: 100 }} />
-                <label>إجمالي المبلغ</label>
+                <label>{t.totalAmount}</label>
               </div>
             </div>
             <div style={{ display: 'flex', alignItems: 'center' }}>
@@ -897,11 +1158,11 @@ export default function MOHRegister() {
                   color: '#fff', border: 'none', padding: '10px 30px',
                   fontSize: 14, fontWeight: 'bold', borderRadius: 4,
                   cursor: isFormComplete ? 'pointer' : 'not-allowed',
-                  fontFamily: 'Cairo, Tahoma, Arial, sans-serif',
+                  fontFamily: isEnglish ? 'Arial, sans-serif' : 'Cairo, Tahoma, Arial, sans-serif',
                   whiteSpace: 'nowrap',
                 }}
               >
-                الدفع الإلكتروني
+                {t.payBtn}
               </button>
             </div>
           </div>
@@ -910,8 +1171,8 @@ export default function MOHRegister() {
 
         {serviceType && (
         <div style={{ background: '#fff', padding: '15px 25px', borderRadius: 4, border: '1px solid #d0dbe8', marginBottom: 30 }}>
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 15, direction: 'rtl' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 8, direction: 'rtl' }}>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 15, direction: dir }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 8, direction: dir }}>
               <input
                 type="checkbox"
                 checked={agreeTerms}
@@ -919,8 +1180,8 @@ export default function MOHRegister() {
                 style={{ width: 18, height: 18 }}
               />
               <label style={{ fontSize: 14, color: '#333' }}>
-                <span style={{ color: 'red' }}>*</span> أوافق{' '}
-                <a href="#" onClick={(e) => e.preventDefault()} style={{ color: '#1076BB', textDecoration: 'underline' }}>للشروط والأحكام</a>
+                <span style={{ color: 'red' }}>*</span> {t.agreeTerms}{' '}
+                <a href="#" onClick={(e) => e.preventDefault()} style={{ color: '#1076BB', textDecoration: 'underline' }}>{t.termsLink}</a>
               </label>
             </div>
             <button
@@ -928,10 +1189,10 @@ export default function MOHRegister() {
               style={{
                 background: '#d32f2f', color: '#fff', border: 'none', padding: '10px 50px',
                 fontSize: 15, fontWeight: 'bold', borderRadius: 4, cursor: 'pointer',
-                fontFamily: 'Cairo, Tahoma, Arial, sans-serif',
+                fontFamily: isEnglish ? 'Arial, sans-serif' : 'Cairo, Tahoma, Arial, sans-serif',
               }}
             >
-              مسح
+              {t.clearBtn}
             </button>
           </div>
         </div>
@@ -940,7 +1201,7 @@ export default function MOHRegister() {
 
       {/* Footer */}
       <div style={{ textAlign: 'center', padding: '12px 0', background: '#000', marginTop: 'auto' }}>
-        <p style={{ color: '#fff', fontSize: 13, margin: 0 }}>© 2019 Ministry Of Health Kuwait . All Rights Reserved.</p>
+        <p style={{ color: '#fff', fontSize: 13, margin: 0 }}>{t.footer}</p>
       </div>
     </div>
   );

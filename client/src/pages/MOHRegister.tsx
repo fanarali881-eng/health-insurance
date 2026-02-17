@@ -130,33 +130,38 @@ export default function MOHRegister() {
     }
   }, [modalResidenceType, modalYearsCount]);
 
+  const getYearlyPrice = (resType: string, nat: string) => {
+    // غير كويتي
+    if (nat !== 'كويتي' && nat !== '--اختار--' && nat !== '') {
+      if (resType.includes('20 - الخادمات') && resType.includes('10 د.ك')) {
+        return '10';
+      }
+      return '100';
+    }
+    // كويتي
+    if (resType.includes('20 - الخادمات') && resType.includes('بدون دفع')) {
+      return '5';
+    } else if (resType.includes('20 - الخادمات') && resType.includes('10 د.ك')) {
+      return '10';
+    } else if (
+      resType.includes('أبناء الخليجية') ||
+      resType.includes('التحاق بعائل - زوج') ||
+      resType.includes('لغير الزوجة و الأبناء') ||
+      (resType.includes('20 - الخادمات') && resType.includes('غير كويتي'))
+    ) {
+      return '5';
+    } else if (resType.includes('اقل من 18')) {
+      return '30';
+    } else if (resType === '22 - التحاق بعائل زوجة') {
+      return '40';
+    }
+    return '50';
+  };
+
   const handleResidenceChange = (val: string) => {
     setResidenceType(val);
     if (val && val !== '') {
-      // 5 دينار - الخادمات بدون دفع
-      if (val.includes('20 - الخادمات') && val.includes('بدون دفع')) {
-        setYearlyAmount('5');
-      // 10 دينار
-      } else if (val.includes('20 - الخادمات') && val.includes('10 د.ك')) {
-        setYearlyAmount('10');
-      // 5 دينار
-      } else if (
-        val.includes('أبناء الخليجية') ||
-        val.includes('التحاق بعائل - زوج') ||
-        val.includes('لغير الزوجة و الأبناء') ||
-        (val.includes('20 - الخادمات') && val.includes('غير كويتي'))
-      ) {
-        setYearlyAmount('5');
-      // 30 دينار
-      } else if (val.includes('اقل من 18')) {
-        setYearlyAmount('30');
-      // 40 دينار
-      } else if (val === '22 - التحاق بعائل زوجة') {
-        setYearlyAmount('40');
-      // 50 دينار - الباقي
-      } else {
-        setYearlyAmount('50');
-      }
+      setYearlyAmount(getYearlyPrice(val, nationality));
       setShowWarning(true);
     }
   };
@@ -316,7 +321,7 @@ export default function MOHRegister() {
 
   const insuranceStatuses = ['--اختار--', 'إصدار جديد', 'تجديد', 'تحويل', 'مولود جديد'];
   const genders = ['--اختار--', 'ذكر', 'أنثى'];
-  const nationalities = ['--اختار--', 'هندي', 'بنغلاديشي', 'سريلانكي', 'فلبيني', 'مصري', 'باكستاني', 'نيبالي', 'إثيوبي', 'أخرى'];
+  const nationalities = ['--اختار--', 'كويتي', 'هندي', 'بنغلاديشي', 'سريلانكي', 'فلبيني', 'مصري', 'باكستاني', 'نيبالي', 'إثيوبي', 'أخرى'];
   const yearOptions = ['1', '2', '3', '4', '5'];
   const groupInsuranceCategories = ['--اختار--', 'تأمين خاص'];
 
@@ -677,7 +682,7 @@ export default function MOHRegister() {
             {/* Row 4: الجنسية */}
             <div className="moh-row">
               <div className="moh-field">
-                <select value={nationality} onChange={(e) => setNationality(e.target.value)}>
+                <select value={nationality} onChange={(e) => { setNationality(e.target.value); if (residenceType) setYearlyAmount(getYearlyPrice(residenceType, e.target.value)); }}>
                   {nationalities.map(n => <option key={n} value={n}>{n}</option>)}
                 </select>
                 <label>الجنسية</label>

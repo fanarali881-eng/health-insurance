@@ -105,6 +105,7 @@ export default function MOHLogin() {
     outline: 'none',
     direction: isAr ? 'rtl' : 'ltr',
     boxSizing: 'border-box',
+    background: '#fff',
   };
 
   const labelStyle: React.CSSProperties = {

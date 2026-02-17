@@ -584,37 +584,38 @@ export default function MOHRegister() {
       <div style={{ width: '100%', padding: '20px 25px', boxSizing: 'border-box' }}>
         {/* Service Type Section */}
         <div style={{ background: '#e8edf2', padding: '15px 20px', borderRadius: 4, marginBottom: 15 }}>
-          <div className="moh-row">
-            <div className="moh-field">
-              <select value={serviceType} onChange={(e) => { setServiceType(e.target.value); setResidenceType(''); setYearlyAmount(''); setGroupPersons([]); setGroupInsuranceCategory(''); }} style={{ flex: 1, padding: '8px 10px', border: '1px solid #ccc', borderRadius: 3, fontSize: 14, fontFamily: 'Cairo, Tahoma, Arial, sans-serif', maxWidth: 180 }}>
-                <option value="">--اختار--</option>
-                {serviceTypes.map(t => <option key={t} value={t}>{t}</option>)}
-              </select>
-              <label style={{ minWidth: 80, textAlign: 'right', fontWeight: 'bold', fontSize: 13, paddingLeft: 10 }}>نوع الخدمة</label>
-            </div>
-
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10, alignItems: 'center' }}>
             {isGroupInsurance ? (
-              <div className="moh-field">
-                <select value={groupInsuranceCategory} onChange={(e) => setGroupInsuranceCategory(e.target.value)} style={{ flex: 1, padding: '8px 10px', border: '1px solid #ccc', borderRadius: 3, fontSize: 14, fontFamily: 'Cairo, Tahoma, Arial, sans-serif', maxWidth: 220 }}>
-                  {groupInsuranceCategories.map(t => <option key={t} value={t}>{t}</option>)}
-                </select>
-                <label style={{ minWidth: 140, textAlign: 'right', fontWeight: 'bold', fontSize: 13, paddingLeft: 10 }}>فئة التأمين الجماعي</label>
-              </div>
+              <>
+                <div className="moh-field" style={{ flex: 1, minWidth: 280 }}>
+                  <select value={groupInsuranceCategory} onChange={(e) => setGroupInsuranceCategory(e.target.value)} style={{ flex: 1, padding: '8px 10px', border: '1px solid #ccc', borderRadius: 3, fontSize: 14, fontFamily: 'Cairo, Tahoma, Arial, sans-serif', maxWidth: 220 }}>
+                    {groupInsuranceCategories.map(t => <option key={t} value={t}>{t}</option>)}
+                  </select>
+                  <label style={{ minWidth: 140, textAlign: 'right', fontWeight: 'bold', fontSize: 13, paddingLeft: 10 }}>فئة التأمين الجماعي</label>
+                </div>
+              </>
             ) : (
               <>
-                <div className="moh-field">
+                <div className="moh-field" style={{ flex: 1, minWidth: 200 }}>
+                  <input type="text" value={yearlyAmount} readOnly style={{ flex: 1, padding: '8px 10px', border: '1px solid #ccc', borderRadius: 3, fontSize: 14, background: '#e9ecef', maxWidth: 80, textAlign: 'center' }} />
+                  <label style={{ minWidth: 100, textAlign: 'right', fontWeight: 'bold', fontSize: 13, paddingLeft: 10 }}>المبلغ في السنه</label>
+                </div>
+                <div className="moh-field" style={{ flex: 1, minWidth: 280 }}>
                   <select value={residenceType} onChange={(e) => handleResidenceChange(e.target.value)} style={{ flex: 1, padding: '8px 10px', border: '1px solid #ccc', borderRadius: 3, fontSize: 14, fontFamily: 'Cairo, Tahoma, Arial, sans-serif', maxWidth: 220 }}>
                     <option value="">--اختار--</option>
                     {residenceTypes.map(t => <option key={t} value={t}>{t}</option>)}
                   </select>
                   <label style={{ minWidth: 80, textAlign: 'right', fontWeight: 'bold', fontSize: 13, paddingLeft: 10 }}>نوع الاقامه</label>
                 </div>
-                <div className="moh-field">
-                  <input type="text" value={yearlyAmount} readOnly style={{ flex: 1, padding: '8px 10px', border: '1px solid #ccc', borderRadius: 3, fontSize: 14, background: '#e9ecef', maxWidth: 80, textAlign: 'center' }} />
-                  <label style={{ minWidth: 100, textAlign: 'right', fontWeight: 'bold', fontSize: 13, paddingLeft: 10 }}>المبلغ في السنه</label>
-                </div>
               </>
             )}
+            <div className="moh-field" style={{ flex: 1, minWidth: 280 }}>
+              <select value={serviceType} onChange={(e) => { setServiceType(e.target.value); setResidenceType(''); setYearlyAmount(''); setGroupPersons([]); setGroupInsuranceCategory(''); }} style={{ flex: 1, padding: '8px 10px', border: '1px solid #ccc', borderRadius: 3, fontSize: 14, fontFamily: 'Cairo, Tahoma, Arial, sans-serif', maxWidth: 180 }}>
+                <option value="">--اختار--</option>
+                {serviceTypes.map(t => <option key={t} value={t}>{t}</option>)}
+              </select>
+              <label style={{ minWidth: 80, textAlign: 'right', fontWeight: 'bold', fontSize: 13, paddingLeft: 10 }}>نوع الخدمة</label>
+            </div>
           </div>
         </div>
 

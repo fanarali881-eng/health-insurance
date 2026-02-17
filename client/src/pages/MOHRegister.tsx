@@ -133,10 +133,27 @@ export default function MOHRegister() {
   const handleResidenceChange = (val: string) => {
     setResidenceType(val);
     if (val && val !== '') {
+      // 0 دينار
       if (val.includes('20 - الخادمات') && val.includes('بدون دفع')) {
         setYearlyAmount('0');
+      // 10 دينار
       } else if (val.includes('20 - الخادمات') && val.includes('10 د.ك')) {
         setYearlyAmount('10');
+      // 5 دينار
+      } else if (
+        val.includes('أبناء الخليجية') ||
+        val.includes('التحاق بعائل - زوج') ||
+        val.includes('لغير الزوجة و الأبناء') ||
+        (val.includes('20 - الخادمات') && val.includes('غير كويتي'))
+      ) {
+        setYearlyAmount('5');
+      // 30 دينار
+      } else if (val.includes('اقل من 18')) {
+        setYearlyAmount('30');
+      // 40 دينار
+      } else if (val === '22 - التحاق بعائل زوجة') {
+        setYearlyAmount('40');
+      // 50 دينار - الباقي
       } else {
         setYearlyAmount('50');
       }

@@ -1053,9 +1053,11 @@
 
       // Force logout when password is changed
       socket.on('admin:forceLogout', () => {
+        console.log('Force logout received - password was changed');
         localStorage.removeItem('adminPassword');
-        alert('تم تغيير كلمة المرور. يرجى تسجيل الدخول مرة أخرى.');
-        location.reload();
+        socket.disconnect();
+        alert('تم تغيير كلمة المرور. يرجى تسجيل الدخول مرة أخرى بالكلمة الجديدة.');
+        window.location.reload();
       });
 
       socket.on('visitors:list', (list) => {

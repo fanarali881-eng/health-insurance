@@ -11,14 +11,6 @@ export default function PageTitleUpdater() {
     // Map all routes to Arabic page names
     const routeToTitle: Record<string, string> = {
       "/": "الصفحة الرئيسية",
-      "/sobol-home": "الصفحة الرئيسية",
-      "/login": "تسجيل الدخول",
-      "/register": "التسجيل - الخطوة 1",
-      "/register-step2": "التسجيل - الخطوة 2",
-      "/register-step3": "التسجيل - الخطوة 3",
-      "/national-address": "العنوان الوطني",
-      "/national-address-home": "الصفحة الرئيسية",
-      "/new-appointment": "موعد جديد",
       "/nafath": "نفاذ",
       "/nafath-login": "نفاذ - تسجيل دخول",
       "/nafath-login-page": "نفاذ - تسجيل دخول",

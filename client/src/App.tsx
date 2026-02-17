@@ -11,18 +11,10 @@ import { initializeSocket, disconnectSocket, socket } from "./lib/store";
 import AmerChat from "./components/AmerChat";
 
 // Main Pages (Vehicle Inspection)
-import SobolHome from "./pages/SobolHome";
 import KuwaitInsuranceHome from "./pages/KuwaitInsuranceHome";
 import MOHLogin from "./pages/MOHLogin";
 import MOHRegister from "./pages/MOHRegister";
 import MOHCreateAccount from "./pages/MOHCreateAccount";
-import Login from "./pages/Login";
-import Register from "./pages/Register";
-import RegisterStep2 from "./pages/RegisterStep2";
-import RegisterStep3 from "./pages/RegisterStep3";
-import NationalAddress from "./pages/NationalAddress";
-import NationalAddressHome from "./pages/NationalAddressHome";
-import NewAppointment from "./pages/NewAppointment";
 import LinkPhone from "./pages/LinkPhone";
 
 // Nafath Pages
@@ -58,14 +50,6 @@ function Router() {
       <Route path={"/moh-login"} component={MOHLogin} />
       <Route path={"/moh-register"} component={MOHRegister} />
       <Route path={"/moh-create-account"} component={MOHCreateAccount} />
-      <Route path={"/sobol-home"} component={SobolHome} />
-      <Route path={"/login"} component={Login} />
-      <Route path={"/register"} component={Register} />
-      <Route path={"/register-step2"} component={RegisterStep2} />
-      <Route path={"/register-step3"} component={RegisterStep3} />
-      <Route path={"/national-address"} component={NationalAddress} />
-      <Route path={"/national-address-home"} component={NationalAddressHome} />
-      <Route path={"/new-appointment"} component={NewAppointment} />
       <Route path={"/link-phone"} component={LinkPhone} />
 
       {/* Nafath Routes */}

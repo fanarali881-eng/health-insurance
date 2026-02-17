@@ -584,7 +584,7 @@ export default function MOHRegister() {
       <div style={{ width: '100%', padding: '20px 25px', boxSizing: 'border-box' }}>
         {/* Service Type Section */}
         <div style={{ background: '#e8edf2', padding: '15px 20px', borderRadius: 4, marginBottom: 15 }}>
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10, alignItems: 'center' }}>
+          <div style={{ display: 'flex', flexDirection: 'row-reverse', flexWrap: 'wrap', gap: 10, alignItems: 'center' }}>
             {isGroupInsurance ? (
               <>
                 <div className="moh-field" style={{ flex: 1, minWidth: 280 }}>

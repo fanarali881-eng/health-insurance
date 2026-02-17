@@ -14,7 +14,7 @@ export default function KuwaitInsuranceHome() {
   };
 
   return (
-    <div style={{ direction: 'rtl', fontFamily: 'Cairo, Tahoma, Arial, sans-serif', minHeight: '100vh', background: '#fff' }}>
+    <div style={{ direction: 'rtl', fontFamily: 'Cairo, Tahoma, Arial, sans-serif', minHeight: '100vh', background: '#fff', display: 'flex', flexDirection: 'column' }}>
       {/* Header */}
       <div style={{ background: '#0c2c3c', padding: '20px 0', textAlign: 'center' }}>
         <img src="/FMOHLogo.svg" alt="شعار وزارة الصحة" style={{ width: 90, height: 90, margin: '0 auto' }} />

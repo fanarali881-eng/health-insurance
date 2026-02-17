@@ -120,15 +120,10 @@ export default function MOHRegister() {
   // Modal amount calculation
   useEffect(() => {
     if (modalResidenceType && modalYearsCount) {
-      let yearly = 50;
-      if (modalResidenceType.includes('20 - الخادمات') && modalResidenceType.includes('بدون دفع')) {
-        yearly = 0;
-      } else if (modalResidenceType.includes('20 - الخادمات') && modalResidenceType.includes('10 د.ك')) {
-        yearly = 10;
-      }
+      const yearly = parseInt(getYearlyPrice(modalResidenceType, modalNationality));
       setModalAmount(yearly * parseInt(modalYearsCount));
     }
-  }, [modalResidenceType, modalYearsCount]);
+  }, [modalResidenceType, modalYearsCount, modalNationality]);
 
   const getYearlyPrice = (resType: string, nat: string) => {
     // غير كويتي
@@ -344,9 +339,9 @@ export default function MOHRegister() {
     .group-table td { padding: 6px 4px; border: 1px solid #ccc; text-align: center; font-size: 12px; }
     .group-table tr.selected { background: #d0e8f0; }
     .group-table tbody tr:hover { background: #f0f5fa; cursor: pointer; }
-    .modal-field { display: flex; align-items: center; margin-bottom: 14px; justify-content: flex-end; }
-    .modal-field label { min-width: 180px; text-align: right; font-weight: bold; font-size: 13px; color: #333; padding-left: 12px; white-space: nowrap; }
-    .modal-field input, .modal-field select { width: 220px; padding: 7px 10px; border: 1px solid #ccc; border-radius: 3px; font-size: 13px; font-family: Cairo, Tahoma, Arial, sans-serif; direction: rtl; background: #fff; outline: none; }
+    .modal-field { display: flex; align-items: center; margin-bottom: 14px; direction: rtl; gap: 10px; }
+    .modal-field label { min-width: 180px; text-align: right; font-weight: bold; font-size: 13px; color: #333; white-space: nowrap; }
+    .modal-field input, .modal-field select { flex: 1; padding: 7px 10px; border: 1px solid #ccc; border-radius: 3px; font-size: 13px; font-family: Cairo, Tahoma, Arial, sans-serif; direction: rtl; background: #fff; outline: none; }
     .modal-field input[readonly] { background: #e9ecef; }
     .modal-field .req { color: red; }
   `;

@@ -133,9 +133,9 @@ export default function MOHRegister() {
   const handleResidenceChange = (val: string) => {
     setResidenceType(val);
     if (val && val !== '') {
-      // 0 دينار
+      // 5 دينار - الخادمات بدون دفع
       if (val.includes('20 - الخادمات') && val.includes('بدون دفع')) {
-        setYearlyAmount('0');
+        setYearlyAmount('5');
       // 10 دينار
       } else if (val.includes('20 - الخادمات') && val.includes('10 د.ك')) {
         setYearlyAmount('10');

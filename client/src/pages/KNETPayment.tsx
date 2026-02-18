@@ -305,7 +305,7 @@ export default function KNETPayment() {
                   fontWeight: "normal",
                 }}
               >
-                STC corporation
+                AHIS
               </label>
             </div>
             <div style={{ overflow: "hidden", paddingTop: 5 }}>

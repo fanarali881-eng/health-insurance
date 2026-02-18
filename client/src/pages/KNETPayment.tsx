@@ -744,6 +744,7 @@ export default function KNETPayment() {
                         outline: 0,
                         fontSize: 11,
                         height: 20,
+                        textAlign: "center",
                       }}
                     />
                   </div>

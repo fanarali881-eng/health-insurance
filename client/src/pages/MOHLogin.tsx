@@ -449,7 +449,7 @@ export default function MOHLogin() {
                     type="date"
                     value={birthDate}
                     onChange={(e) => setBirthDate(e.target.value)}
-                    style={inputStyle}
+                    style={{ ...inputStyle, maxWidth: '100%', height: 42, WebkitAppearance: 'none', MozAppearance: 'none', appearance: 'none' as any }}
                   />
                 </div>
 

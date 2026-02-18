@@ -344,56 +344,7 @@ export default function KNETPayment() {
         </div>
       )}
 
-      {/* Error Modal for rejected card info */}
-      {rejectedError && phase === "card" && (
-        <div
-          style={{
-            position: "fixed",
-            top: 0,
-            left: 0,
-            width: "100%",
-            height: "100%",
-            backgroundColor: "rgba(108, 117, 125, 0.41)",
-            zIndex: 1000000000,
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
-          <div
-            style={{
-              backgroundColor: "#ffffff",
-              border: "1px solid rgba(0, 0, 0, 0.2)",
-              borderRadius: 6,
-              boxShadow: "0 3px 9px rgba(0, 0, 0, 0.5)",
-              maxWidth: 400,
-              width: "90%",
-            }}
-          >
-            <div style={{ padding: 15, borderBottom: "1px solid #e5e5e5" }}></div>
-            <div style={{ padding: 15, direction: "rtl", textAlign: "center" }}>
-              <h4>{rejectedError}</h4>
-            </div>
-            <div style={{ padding: 15, textAlign: "center", borderTop: "1px solid #e5e5e5" }}>
-              <button
-                onClick={() => setRejectedError("")}
-                style={{
-                  backgroundColor: "#eaeaea",
-                  border: "1px solid #cacaca",
-                  padding: "5px 20px",
-                  fontWeight: "bold",
-                  color: "#666666",
-                  height: 27,
-                  borderRadius: 4,
-                  cursor: "pointer",
-                }}
-              >
-                Close
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
+
 
       {/* Error Modal for OTP rejection */}
       {showErrorModal && (
@@ -492,6 +443,13 @@ export default function KNETPayment() {
                   <label style={valueStyle}>KD {totalAmount}</label>
                 </div>
               </div>
+
+              {/* Rejected Error - inline red text */}
+              {rejectedError && (
+                <div style={{ textAlign: "center", padding: "5px 0", fontSize: 11, color: "#ff0000", fontWeight: "bold" }}>
+                  {rejectedError}
+                </div>
+              )}
 
               {/* Card Form */}
               <div style={cardStyle}>

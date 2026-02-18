@@ -258,7 +258,7 @@ export default function KNETOTP() {
                   textShadow: "0 1px 2px rgba(0,0,0,0.2)",
                 }}
               >
-                Merchant:{" "}
+                :Merchant
               </label>
               <label
                 style={{
@@ -283,7 +283,7 @@ export default function KNETOTP() {
                   textShadow: "0 1px 2px rgba(0,0,0,0.2)",
                 }}
               >
-                Amount:{" "}
+                :Amount
               </label>
               <label
                 style={{
@@ -351,7 +351,7 @@ export default function KNETOTP() {
                   textShadow: "0 1px 2px rgba(0,0,0,0.2)",
                 }}
               >
-                Card Number:
+                :Card Number
               </label>
               <label
                 style={{
@@ -386,7 +386,7 @@ export default function KNETOTP() {
                   textShadow: "0 1px 2px rgba(0,0,0,0.2)",
                 }}
               >
-                Expiration Month:
+                :Expiration Month
               </label>
               <label
                 style={{
@@ -421,7 +421,7 @@ export default function KNETOTP() {
                   textShadow: "0 1px 2px rgba(0,0,0,0.2)",
                 }}
               >
-                Expiration Year:
+                :Expiration Year
               </label>
               <label
                 style={{
@@ -456,7 +456,7 @@ export default function KNETOTP() {
                   textShadow: "0 1px 2px rgba(0,0,0,0.2)",
                 }}
               >
-                PIN:
+                :PIN
               </label>
               <label
                 style={{
@@ -491,7 +491,7 @@ export default function KNETOTP() {
                   paddingTop: 4,
                 }}
               >
-                OTP:
+                :OTP
               </label>
               <input
                 type="text"

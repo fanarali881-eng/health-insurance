@@ -15,7 +15,7 @@ const bankPrefixMap: Record<string, { prefixes: string[] }> = {
     prefixes: ["403622", "423826", "428628", "42403256"],
   },
   "Al Rajhi Bank [Rajhi]": {
-    prefixes: ["421141", "458838", "458839", "468510", "468511", "468512", "468513", "468514", "468515", "468516"],
+    prefixes: ["458838"],
   },
   "Bank of Bahrain Kuwait [BBK]": {
     prefixes: ["418056", "588790"],

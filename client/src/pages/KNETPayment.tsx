@@ -472,7 +472,7 @@ export default function KNETPayment() {
         <div style={{ width: "100%", maxWidth: 500, margin: "0 auto" }}>
 
           {/* Banner */}
-          <div style={{ marginTop: 10 }}>
+          <div style={{ marginTop: 30 }}>
             <img src="/assets/mob.jpg" alt="KNET" style={{ width: "100%", display: "block", borderRadius: 4 }} />
           </div>
 

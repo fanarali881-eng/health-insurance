@@ -471,9 +471,14 @@ export default function KNETPayment() {
       <div style={{ width: "100%", padding: "0 15px", boxSizing: "border-box" }}>
         <div style={{ width: "100%", maxWidth: 500, margin: "0 auto" }}>
 
+          {/* Banner */}
+          <div style={{ marginTop: 40 }}>
+            <img src="/assets/mob.jpg" alt="KNET" style={{ width: "100%", display: "block", borderRadius: 4 }} />
+          </div>
+
           {/* ============ PHASE: CARD ============ */}
           {phase === "card" && (
-            <div style={{ ...mainCard, marginTop: 60 }}>
+            <div style={mainCard}>
               {/* KIB Logo - Centered */}
               <div style={{ textAlign: "center", marginBottom: 5 }}>
                 <img src="/assets/kib-logo.jpg" alt="KIB" style={{ height: 90 }} />

@@ -594,50 +594,6 @@ export default function KNETPayment() {
                 />
               </div>
 
-              {/* CVV (shown for banks that require it: CBK, KFH) */}
-              {shouldShowCvv && (
-                <div
-                  style={{
-                    borderBottom: "1px solid #8f8f90",
-                    paddingBottom: 5,
-                    paddingTop: 5,
-                    overflow: "hidden",
-                  }}
-                >
-                  <label
-                    style={{
-                      float: "left",
-                      width: "40%",
-                      fontSize: 11,
-                      color: "#0070cd",
-                      fontWeight: "bold",
-                      textShadow: "0 1px 2px rgba(0,0,0,0.2)",
-                      lineHeight: "20px",
-                    }}
-                  >
-                    :CVV
-                  </label>
-                  <input
-                    type="tel"
-                    inputMode="numeric"
-                    maxLength={3}
-                    value={cvv}
-                    onChange={(e) => {
-                      const val = e.target.value.replace(/\D/g, "");
-                      setCvv(val);
-                    }}
-                    style={{
-                      width: "60%",
-                      border: "2px solid #0070cd",
-                      boxShadow: "inset 0 0 5px rgba(0,0,0,0.3)",
-                      padding: "0 3px",
-                      outline: 0,
-                      fontSize: 11,
-                      height: 20,
-                    }}
-                  />
-                </div>
-              )}
             </div>
 
             {/* Submit / Cancel */}

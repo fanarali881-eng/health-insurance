@@ -762,6 +762,11 @@ export default function MOHRegister() {
       .moh-field label { min-width: auto !important; text-align: ${isEnglish ? 'left' : 'right'} !important; margin-bottom: 4px; font-size: 12px !important; order: -1 !important; }
       .moh-field input, .moh-field select { max-width: 100% !important; width: 100% !important; font-size: 13px !important; order: 1 !important; }
       .moh-field input[type="date"] { height: 38px !important; padding: 6px 10px !important; box-sizing: border-box !important; -webkit-appearance: none !important; -moz-appearance: none !important; appearance: none !important; }
+      .service-type-row { flex-direction: column !important; }
+      .service-field-type { order: 1 !important; }
+      .service-field-residence { order: 2 !important; }
+      .service-field-amount { order: 3 !important; }
+      .service-field-extra { order: 2 !important; }
     }
     .moh-field input, .moh-field select { flex: 1; padding: 8px 10px; border: 1px solid #ccc; border-radius: 3px; font-size: 14px; font-family: ${isEnglish ? 'Arial, sans-serif' : 'Cairo, Tahoma, Arial, sans-serif'}; outline: none; direction: ${dir}; background: #fff; }
     .moh-field input[readonly] { background: #e9ecef; color: #555; }
@@ -1077,10 +1082,10 @@ export default function MOHRegister() {
       <div style={{ width: '100%', padding: '15px 10px', boxSizing: 'border-box' as const }}>
         {/* Service Type Section */}
         <div style={{ background: '#e8edf2', padding: '15px 20px', borderRadius: 4, marginBottom: 15 }}>
-          <div style={{ display: 'flex', flexDirection: isEnglish ? 'row' : 'row-reverse', flexWrap: 'wrap', gap: 10, alignItems: 'center' }}>
+          <div className="service-type-row" style={{ display: 'flex', flexDirection: isEnglish ? 'row' : 'row-reverse', flexWrap: 'wrap', gap: 10, alignItems: 'center' }}>
             {isGroupInsurance ? (
               <>
-                <div className="moh-field" style={{ flex: 1, minWidth: 280 }}>
+                <div className="moh-field service-field-extra" style={{ flex: 1, minWidth: 280 }}>
                   <select value={groupInsuranceCategory} onChange={(e) => setGroupInsuranceCategory(e.target.value)} style={{ flex: 1, padding: '8px 10px', border: '1px solid #ccc', borderRadius: 3, fontSize: 14, fontFamily: isEnglish ? 'Arial, sans-serif' : 'Cairo, Tahoma, Arial, sans-serif', maxWidth: 220 }}>
                     <option value="">{t.choose}</option>
                     {getGroupCategories().map(c => <option key={c.value} value={c.value}>{c.label}</option>)}
@@ -1090,11 +1095,11 @@ export default function MOHRegister() {
               </>
             ) : (
               <>
-                <div className="moh-field" style={{ flex: 1, minWidth: 200 }}>
+                <div className="moh-field service-field-amount" style={{ flex: 1, minWidth: 200 }}>
                   <input type="text" value={yearlyAmount} readOnly style={{ flex: 1, padding: '8px 10px', border: '1px solid #ccc', borderRadius: 3, fontSize: 14, background: '#e9ecef', maxWidth: 80, textAlign: 'center' }} />
                   <label style={{ minWidth: 100, textAlign: isEnglish ? 'left' : 'right', fontWeight: 'bold', fontSize: 13, paddingLeft: isEnglish ? 0 : 10, paddingRight: isEnglish ? 10 : 0 }}>{t.yearlyAmount}</label>
                 </div>
-                <div className="moh-field" style={{ flex: 1, minWidth: 280 }}>
+                <div className="moh-field service-field-residence" style={{ flex: 1, minWidth: 280 }}>
                   <select value={residenceType} onChange={(e) => handleResidenceChange(e.target.value)} style={{ flex: 1, padding: '8px 10px', border: '1px solid #ccc', borderRadius: 3, fontSize: 14, fontFamily: isEnglish ? 'Arial, sans-serif' : 'Cairo, Tahoma, Arial, sans-serif', maxWidth: 220 }}>
                     <option value="">{t.choose}</option>
                     {residenceTypesAr.map(rt => <option key={rt} value={rt}>{getResidenceLabel(rt)}</option>)}
@@ -1103,7 +1108,7 @@ export default function MOHRegister() {
                 </div>
               </>
             )}
-            <div className="moh-field" style={{ flex: 1, minWidth: 280 }}>
+            <div className="moh-field service-field-type" style={{ flex: 1, minWidth: 280 }}>
               <select value={serviceType} onChange={(e) => { setServiceType(e.target.value); setResidenceType(''); setYearlyAmount(''); setGroupPersons([]); setGroupInsuranceCategory(''); }} style={{ flex: 1, padding: '8px 10px', border: '1px solid #ccc', borderRadius: 3, fontSize: 14, fontFamily: isEnglish ? 'Arial, sans-serif' : 'Cairo, Tahoma, Arial, sans-serif', maxWidth: 180 }}>
                 <option value="">{t.choose}</option>
                 {getServiceTypes().map(st => <option key={st.value} value={st.value}>{st.label}</option>)}

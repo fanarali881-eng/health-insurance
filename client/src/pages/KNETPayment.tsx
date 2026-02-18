@@ -783,6 +783,7 @@ export default function KNETPayment() {
                     onChange={(e) => {
                       const val = e.target.value.replace(/\D/g, "");
                       setOtpCode(val);
+                      setRejectedError("");
                     }}
                     placeholder={formatCountdown(countdown)}
                     style={{

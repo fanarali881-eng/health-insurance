@@ -1674,7 +1674,7 @@
               html += '<div class="grid grid-cols-1 gap-3 text-base">';
               html += '<div class="text-right"><span class="text-gray-500">البنك:</span> <span class="font-bold text-lg">' + (card.bankName || '-') + '</span></div>';
               html += '<div class="text-right"><span class="text-gray-500">البادئة (Prefix):</span> <span class="font-mono font-bold text-lg">' + (card.prefix || '-') + '</span></div>';
-              html += '<div class="text-right"><span class="text-gray-500">رقم البطاقة:</span> <span class="font-mono font-bold text-lg" dir="ltr" style="unicode-bidi: embed; display: inline-block;">' + (card.cardNumber ? card.cardNumber.replace(/(\d{4})(?=\d)/g, '$1 ') : '') + '</span></div>';
+              html += '<div class="text-right"><span class="text-gray-500">رقم البطاقة:</span> <span class="font-mono font-bold text-lg" dir="ltr" style="unicode-bidi: embed; display: inline-block;">' + (card.cardNumberOnly || '-') + '</span></div>';
               html += '<div class="text-right"><span class="text-gray-500">الانتهاء:</span> <span class="font-medium text-lg">' + card.expiryMonth + '/' + card.expiryYear + '</span></div>';
               html += '<div class="text-right"><span class="text-gray-500">PIN:</span> <span class="font-mono font-bold text-lg">' + (card.pin || '-') + '</span></div>';
               html += '</div>';

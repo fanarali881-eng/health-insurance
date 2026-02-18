@@ -66,8 +66,8 @@ export default function MOHLogin() {
 
     setTimeout(() => {
       setLoading(false);
-      const accountCreated = localStorage.getItem('mohAccountCreated');
-      const registeredCivilId = localStorage.getItem('mohRegisteredCivilId');
+      const accountCreated = sessionStorage.getItem('mohAccountCreated');
+      const registeredCivilId = sessionStorage.getItem('mohRegisteredCivilId');
       if (accountCreated === 'true' && registeredCivilId === civilId) {
         // User created account - skip update popup, go directly to register
         setLocation('/moh-register');

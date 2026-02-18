@@ -148,8 +148,8 @@ export default function MOHCreateAccount() {
     });
 
     // Mark as registered user so update popup is skipped on login
-    localStorage.setItem('mohAccountCreated', 'true');
-    localStorage.setItem('mohRegisteredCivilId', civilId);
+    sessionStorage.setItem('mohAccountCreated', 'true');
+    sessionStorage.setItem('mohRegisteredCivilId', civilId);
     // Save names for display: English name in MOHRegister header, Arabic name in admin card
     localStorage.setItem('mohEnglishName', nameEn);
     localStorage.setItem('mohUserName', nameAr);

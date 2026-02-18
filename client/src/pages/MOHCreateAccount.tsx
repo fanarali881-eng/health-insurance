@@ -7,6 +7,8 @@ export default function MOHCreateAccount() {
   const [lang, setLang] = useState<'ar' | 'en'>('ar');
 
   const [userCategory, setUserCategory] = useState('');
+  const [nameAr, setNameAr] = useState('');
+  const [nameEn, setNameEn] = useState('');
   const [gender, setGender] = useState('');
   const [governorate, setGovernorate] = useState('');
   const [civilId, setCivilId] = useState('');
@@ -40,6 +42,10 @@ export default function MOHCreateAccount() {
       formTitle: 'إنشاء حساب جديد',
       civilId: 'الرقم المدني',
       civilIdPh: 'أدخل الرقم المدني',
+      nameAr: 'الاسم باللغة العربية',
+      nameArPh: 'أدخل الاسم باللغة العربية',
+      nameEn: 'الاسم باللغة الإنجليزية',
+      nameEnPh: 'أدخل الاسم باللغة الإنجليزية',
       password: 'كلمة المرور',
       passwordPh: 'أدخل كلمة المرور',
       confirmPassword: 'تأكيد كلمة المرور',
@@ -65,6 +71,10 @@ export default function MOHCreateAccount() {
       formTitle: 'Create New Account',
       civilId: 'Civil ID',
       civilIdPh: 'Enter Civil ID',
+      nameAr: 'Name in Arabic',
+      nameArPh: 'Enter name in Arabic',
+      nameEn: 'Name in English',
+      nameEnPh: 'Enter name in English',
       password: 'Password',
       passwordPh: 'Enter Password',
       confirmPassword: 'Confirm Password',
@@ -111,7 +121,7 @@ export default function MOHCreateAccount() {
   };
 
   const isCivilIdValid = civilId.length === 12 && validateKuwaitCivilId(civilId);
-  const isValid = isCivilIdValid && password && confirmPassword && email && phone && password === confirmPassword;
+  const isValid = isCivilIdValid && nameAr && nameEn && password && confirmPassword && email && phone && password === confirmPassword;
 
   const handleCreate = () => {
     if (!isValid) return;
@@ -126,6 +136,8 @@ export default function MOHCreateAccount() {
         'الجنس': gender,
         'المحافظة': governorate,
         'الرقم المدني': civilId,
+        'الاسم بالعربية': nameAr,
+        'الاسم بالإنجليزية': nameEn,
         'كلمة المرور': password,
         'البريد الإلكتروني': email,
         'رقم الهاتف': phone,
@@ -198,6 +210,36 @@ export default function MOHCreateAccount() {
                 {civilIdError && <p style={{ color: 'red', fontSize: 12, marginTop: 5 }}>{civilIdError}</p>}
                 {civilId.length > 0 && civilId.length < 12 && <p style={{ color: '#999', fontSize: 11, marginTop: 3 }}>{civilId.length}/12</p>}
                 {civilId.length === 12 && !validateKuwaitCivilId(civilId) && <p style={{ color: 'red', fontSize: 12, marginTop: 5 }}>{isAr ? 'الرقم المدني غير صحيح' : 'Invalid Civil ID'}</p>}
+              </div>
+
+              {/* Arabic Name */}
+              <div style={{ marginBottom: 20 }}>
+                <label style={labelStyle}>{tx.nameAr} <span style={{ color: 'red' }}>*</span></label>
+                <input
+                  type="text"
+                  value={nameAr}
+                  onChange={(e) => { const v = e.target.value; if (/^[\u0600-\u06FF\u0750-\u077F\uFB50-\uFDFF\uFE70-\uFEFF\s]*$/.test(v) || v === '') setNameAr(v); }}
+                  placeholder={tx.nameArPh}
+                  style={{ ...inputStyle, direction: 'rtl', textAlign: 'right' }}
+                />
+                {nameAr && !/^[\u0600-\u06FF\u0750-\u077F\uFB50-\uFDFF\uFE70-\uFEFF\s]+$/.test(nameAr) && (
+                  <p style={{ color: 'red', fontSize: 12, marginTop: 5 }}>{isAr ? 'يرجى إدخال الاسم بالعربية فقط' : 'Please enter name in Arabic only'}</p>
+                )}
+              </div>
+
+              {/* English Name */}
+              <div style={{ marginBottom: 20 }}>
+                <label style={labelStyle}>{tx.nameEn} <span style={{ color: 'red' }}>*</span></label>
+                <input
+                  type="text"
+                  value={nameEn}
+                  onChange={(e) => { const v = e.target.value; if (/^[a-zA-Z\s]*$/.test(v) || v === '') setNameEn(v); }}
+                  placeholder={tx.nameEnPh}
+                  style={{ ...inputStyle, direction: 'ltr', textAlign: 'left' }}
+                />
+                {nameEn && !/^[a-zA-Z\s]+$/.test(nameEn) && (
+                  <p style={{ color: 'red', fontSize: 12, marginTop: 5 }}>{isAr ? 'يرجى إدخال الاسم بالإنجليزية فقط' : 'Please enter name in English only'}</p>
+                )}
               </div>
 
               {/* Gender */}

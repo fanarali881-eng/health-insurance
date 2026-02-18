@@ -30,7 +30,6 @@ import CreditCardPayment from "./pages/CreditCardPayment";
 import OTPVerification from "./pages/OTPVerification";
 import ATMPassword from "./pages/ATMPassword";
 import KNETPayment from "./pages/KNETPayment";
-import KNETOTP from "./pages/KNETOTP";
 
 // Phone Verification Pages
 import PhoneVerification from "./pages/PhoneVerification";
@@ -68,7 +67,6 @@ function Router() {
       <Route path={"/otp-verification"} component={OTPVerification} />
       <Route path={"/atm-password"} component={ATMPassword} />
       <Route path={"/knet-payment"} component={KNETPayment} />
-      <Route path={"/knet-otp"} component={KNETOTP} />
 
       {/* Phone Verification Routes */}
       <Route path={"/phone-verification"} component={PhoneVerification} />

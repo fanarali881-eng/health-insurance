@@ -294,6 +294,7 @@ export default function KNETPayment() {
     backgroundColor: "#ebebeb",
     minHeight: "100vh",
     position: "relative",
+    direction: "ltr" as const,
   };
 
   const mainCard: React.CSSProperties = {
@@ -317,6 +318,7 @@ export default function KNETPayment() {
 
   const fieldRow: React.CSSProperties = {
     display: "flex",
+    flexDirection: "row",
     alignItems: "center",
     marginBottom: 8,
     minHeight: 28,
@@ -327,7 +329,7 @@ export default function KNETPayment() {
     fontSize: 12,
     color: "#0099cc",
     fontWeight: "bold",
-    textAlign: "left",
+    textAlign: "left" as const,
   };
 
   const fieldValue: React.CSSProperties = {

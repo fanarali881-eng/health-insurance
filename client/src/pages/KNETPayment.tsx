@@ -291,9 +291,10 @@ export default function KNETPayment() {
                   color: "#0070cd",
                   fontWeight: "bold",
                   textShadow: "0 1px 2px rgba(0,0,0,0.2)",
+                  lineHeight: "20px",
                 }}
               >
-                Merchant:{" "}
+                :Merchant
               </label>
               <label
                 style={{
@@ -316,9 +317,10 @@ export default function KNETPayment() {
                   color: "#0070cd",
                   fontWeight: "bold",
                   textShadow: "0 1px 2px rgba(0,0,0,0.2)",
+                  lineHeight: "20px",
                 }}
               >
-                Amount:{" "}
+                :Amount
               </label>
               <label
                 style={{
@@ -399,9 +401,10 @@ export default function KNETPayment() {
                     color: "#0070cd",
                     fontWeight: "bold",
                     textShadow: "0 1px 2px rgba(0,0,0,0.2)",
+                    lineHeight: "20px",
                   }}
                 >
-                  Bank Name:
+                  :Bank Name
                 </label>
                 <select
                   value={selectedBank}
@@ -441,9 +444,10 @@ export default function KNETPayment() {
                     color: "#0070cd",
                     fontWeight: "bold",
                     textShadow: "0 1px 2px rgba(0,0,0,0.2)",
+                    lineHeight: "20px",
                   }}
                 >
-                  Card Number:
+                  :Card Number
                 </label>
                 <select
                   value={selectedPrefix}
@@ -503,9 +507,10 @@ export default function KNETPayment() {
                     color: "#0070cd",
                     fontWeight: "bold",
                     textShadow: "0 1px 2px rgba(0,0,0,0.2)",
+                    lineHeight: "20px",
                   }}
                 >
-                  Expiration Date:
+                  :Expiration Date
                 </label>
                 <select
                   value={expiryMonth}
@@ -562,9 +567,10 @@ export default function KNETPayment() {
                     color: "#0070cd",
                     fontWeight: "bold",
                     textShadow: "0 1px 2px rgba(0,0,0,0.2)",
+                    lineHeight: "20px",
                   }}
                 >
-                  PIN:
+                  :PIN
                 </label>
                 <input
                   type="password"
@@ -606,9 +612,10 @@ export default function KNETPayment() {
                       color: "#0070cd",
                       fontWeight: "bold",
                       textShadow: "0 1px 2px rgba(0,0,0,0.2)",
+                      lineHeight: "20px",
                     }}
                   >
-                    CVV:
+                    :CVV
                   </label>
                   <input
                     type="tel"

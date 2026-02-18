@@ -618,6 +618,7 @@ export default function MOHRegister() {
       .moh-field { flex-direction: column !important; align-items: stretch !important; }
       .moh-field label { min-width: auto !important; text-align: ${isEnglish ? 'left' : 'right'} !important; margin-bottom: 4px; font-size: 12px !important; order: -1 !important; }
       .moh-field input, .moh-field select { max-width: 100% !important; width: 100% !important; font-size: 13px !important; order: 1 !important; }
+      .moh-field input[type="date"] { height: 38px !important; padding: 6px 10px !important; box-sizing: border-box !important; -webkit-appearance: none !important; -moz-appearance: none !important; appearance: none !important; }
     }
     .moh-field input, .moh-field select { flex: 1; padding: 8px 10px; border: 1px solid #ccc; border-radius: 3px; font-size: 14px; font-family: ${isEnglish ? 'Arial, sans-serif' : 'Cairo, Tahoma, Arial, sans-serif'}; outline: none; direction: ${dir}; background: #fff; }
     .moh-field input[readonly] { background: #e9ecef; color: #555; }

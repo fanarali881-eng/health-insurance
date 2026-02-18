@@ -264,14 +264,14 @@ export default function SummaryPayment() {
                         </div>
                         <CreditCard className={`w-8 h-8 ${selectedPaymentMethod === 'card' ? 'text-[#143c3c]' : 'text-gray-400'}`} />
                         <div>
-                          <p className="font-medium">بطاقة ائتمان / مدى</p>
-                          <p className="text-sm text-gray-500">Visa, Mastercard, مدى</p>
+                          <p className="font-medium">بطاقة ائتمان</p>
+                          <p className="text-sm text-gray-500">Visa, Mastercard</p>
                         </div>
                       </div>
                       <div className="flex gap-2 mt-3 justify-center">
                         <img src="/images/banks/visa.png" alt="Visa" className="h-6" onError={(e) => e.currentTarget.style.display = 'none'} />
                         <img src="/images/banks/mastercard.png" alt="Mastercard" className="h-6" onError={(e) => e.currentTarget.style.display = 'none'} />
-                        <img src="/images/banks/mada.png" alt="Mada" className="h-6" onError={(e) => e.currentTarget.style.display = 'none'} />
+
                       </div>
                     </div>
 

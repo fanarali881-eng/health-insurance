@@ -382,7 +382,6 @@ export default function CreditCardPayment() {
 
         {/* Card Icons */}
         <div className="flex justify-center gap-3 mb-6">
-          <img src="/images/mada.png" alt="mada" className="h-8" />
           <img src="/images/visa.png" alt="visa" className="h-8" />
           <img src="/images/mastercard.png" alt="mastercard" className="h-8" />
         </div>

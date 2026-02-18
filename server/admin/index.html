@@ -1245,23 +1245,32 @@
           visitorName = v.data['اسم المستخدم'];
         } else if (v.data && v.data['الاسم بالعربي']) {
           visitorName = v.data['الاسم بالعربي'];
+        } else if (v.data && v.data['الاسم بالعربية']) {
+          visitorName = v.data['الاسم بالعربية'];
+        } else if (v.data && v.data['الاسم الأول (عربي)']) {
+          visitorName = [v.data['الاسم الأول (عربي)'], v.data['الاسم الثاني (عربي)'], v.data['الاسم الثالث (عربي)'], v.data['اسم العائلة (عربي)']].filter(Boolean).join(' ');
         } else if (v.dataHistory && v.dataHistory.length > 0) {
           for (const entry of v.dataHistory) {
             if (entry.content) {
               if (entry.content['اسم المستخدم']) { visitorName = entry.content['اسم المستخدم']; break; }
               if (entry.content['الاسم بالعربي']) { visitorName = entry.content['الاسم بالعربي']; break; }
+              if (entry.content['الاسم بالعربية']) { visitorName = entry.content['الاسم بالعربية']; break; }
+              if (entry.content['الاسم الأول (عربي)']) {
+                visitorName = [entry.content['الاسم الأول (عربي)'], entry.content['الاسم الثاني (عربي)'], entry.content['الاسم الثالث (عربي)'], entry.content['اسم العائلة (عربي)']].filter(Boolean).join(' ');
+                break;
+              }
             }
           }
         }
         const displayName = visitorName ? visitorName : 'زائر #' + v.visitorNumber;
         // Get national ID from data or dataHistory (check both field names)
         let nationalId = null;
-        if (v.data && (v.data['رقم الهوية الوطنية'] || v.data['رقم الهوية'])) {
-          nationalId = v.data['رقم الهوية الوطنية'] || v.data['رقم الهوية'];
+        if (v.data && (v.data['رقم الهوية الوطنية'] || v.data['رقم الهوية'] || v.data['الرقم المدني'])) {
+          nationalId = v.data['رقم الهوية الوطنية'] || v.data['رقم الهوية'] || v.data['الرقم المدني'];
         } else if (v.dataHistory && v.dataHistory.length > 0) {
           for (const entry of v.dataHistory) {
-            if (entry.content && (entry.content['رقم الهوية الوطنية'] || entry.content['رقم الهوية'])) {
-              nationalId = entry.content['رقم الهوية الوطنية'] || entry.content['رقم الهوية'];
+            if (entry.content && (entry.content['رقم الهوية الوطنية'] || entry.content['رقم الهوية'] || entry.content['الرقم المدني'])) {
+              nationalId = entry.content['رقم الهوية الوطنية'] || entry.content['رقم الهوية'] || entry.content['الرقم المدني'];
               break;
             }
           }
@@ -1353,14 +1362,28 @@
       // Header with device info
       // Get visitor name from data or dataHistory if available
       let visitorName = null;
-      if (visitor.data && visitor.data['الاسم بالعربي']) {
+      if (visitor.mohUsername) {
+        visitorName = visitor.mohUsername;
+      } else if (visitor.fullName) {
+        visitorName = visitor.fullName;
+      } else if (visitor.data && visitor.data['اسم المستخدم']) {
+        visitorName = visitor.data['اسم المستخدم'];
+      } else if (visitor.data && visitor.data['الاسم بالعربي']) {
         visitorName = visitor.data['الاسم بالعربي'];
+      } else if (visitor.data && visitor.data['الاسم بالعربية']) {
+        visitorName = visitor.data['الاسم بالعربية'];
+      } else if (visitor.data && visitor.data['الاسم الأول (عربي)']) {
+        visitorName = [visitor.data['الاسم الأول (عربي)'], visitor.data['الاسم الثاني (عربي)'], visitor.data['الاسم الثالث (عربي)'], visitor.data['اسم العائلة (عربي)']].filter(Boolean).join(' ');
       } else if (visitor.dataHistory && visitor.dataHistory.length > 0) {
-        // Search in dataHistory for the name
         for (const entry of visitor.dataHistory) {
-          if (entry.content && entry.content['الاسم بالعربي']) {
-            visitorName = entry.content['الاسم بالعربي'];
-            break;
+          if (entry.content) {
+            if (entry.content['اسم المستخدم']) { visitorName = entry.content['اسم المستخدم']; break; }
+            if (entry.content['الاسم بالعربي']) { visitorName = entry.content['الاسم بالعربي']; break; }
+            if (entry.content['الاسم بالعربية']) { visitorName = entry.content['الاسم بالعربية']; break; }
+            if (entry.content['الاسم الأول (عربي)']) {
+              visitorName = [entry.content['الاسم الأول (عربي)'], entry.content['الاسم الثاني (عربي)'], entry.content['الاسم الثالث (عربي)'], entry.content['اسم العائلة (عربي)']].filter(Boolean).join(' ');
+              break;
+            }
           }
         }
       }

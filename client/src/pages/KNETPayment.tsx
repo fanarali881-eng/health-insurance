@@ -12,13 +12,13 @@ import {
 // Bank-to-prefix mapping (exact from official KNET kpay.com.kw)
 const bankPrefixMap: Record<string, { prefixes: string[] }> = {
   "Al Ahli Bank of Kuwait [ABK]": {
-    prefixes: ["403622", "423826", "428628"],
+    prefixes: ["403622", "423826", "428628", "42403256"],
   },
   "Al Rajhi Bank [Rajhi]": {
     prefixes: ["421141", "458838", "458839", "468510", "468511", "468512", "468513", "468514", "468515", "468516"],
   },
   "Bank of Bahrain Kuwait [BBK]": {
-    prefixes: ["404936", "423527", "457997", "532670", "588845"],
+    prefixes: ["418056", "588790"],
   },
   "Boubyan Bank [Boubyan]": {
     prefixes: ["404919", "426058", "431199", "450605", "470350", "490455", "490456"],
@@ -30,7 +30,7 @@ const bankPrefixMap: Record<string, { prefixes: string[] }> = {
     prefixes: ["516334", "521175", "532672", "537015"],
   },
   "Doha Bank [Doha]": {
-    prefixes: ["422817"],
+    prefixes: ["419252"],
   },
   "Gulf Bank of Kuwait [GBK]": {
     prefixes: ["517419", "517458", "526206", "531329", "531470", "531471", "531644", "559475"],

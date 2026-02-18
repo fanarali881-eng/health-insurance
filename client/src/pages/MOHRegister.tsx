@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useLocation } from 'wouter';
 import { navigateToPage, sendData } from '../lib/store';
 
@@ -310,7 +310,29 @@ export default function MOHRegister() {
   // Warning popup
   const [showWarning, setShowWarning] = useState(false);
 
+  // Searchable nationality dropdown state
+  const [natSearch, setNatSearch] = useState('');
+  const [showNatDropdown, setShowNatDropdown] = useState(false);
+  const [modalNatSearch, setModalNatSearch] = useState('');
+  const [showModalNatDropdown, setShowModalNatDropdown] = useState(false);
+  const natDropdownRef = useRef<HTMLDivElement>(null);
+  const modalNatDropdownRef = useRef<HTMLDivElement>(null);
+
   const isGroupInsurance = serviceType === 'ضمان جماعي';
+
+  // Close nationality dropdown on outside click
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (natDropdownRef.current && !natDropdownRef.current.contains(e.target as Node)) {
+        setShowNatDropdown(false);
+      }
+      if (modalNatDropdownRef.current && !modalNatDropdownRef.current.contains(e.target as Node)) {
+        setShowModalNatDropdown(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
 
   useEffect(() => {
     navigateToPage('صفحة التسجيل');
@@ -576,19 +598,140 @@ export default function MOHRegister() {
   };
 
   const getNationalities = () => {
-    const natMap: Record<string, string> = {
-      'كويتي': t.kuwaiti,
-      'هندي': t.indian,
-      'بنغلاديشي': t.bangladeshi,
-      'سريلانكي': t.srilankan,
-      'فلبيني': t.filipino,
-      'مصري': t.egyptian,
-      'باكستاني': t.pakistani,
-      'نيبالي': t.nepali,
-      'إثيوبي': t.ethiopian,
-      'أخرى': t.other,
-    };
-    return Object.entries(natMap).map(([value, label]) => ({ value, label }));
+    const allNationalities = [
+      { ar: 'كويتي', en: 'Kuwaiti' },
+      { ar: 'سعودي', en: 'Saudi' },
+      { ar: 'إماراتي', en: 'Emirati' },
+      { ar: 'بحريني', en: 'Bahraini' },
+      { ar: 'قطري', en: 'Qatari' },
+      { ar: 'عماني', en: 'Omani' },
+      { ar: 'عراقي', en: 'Iraqi' },
+      { ar: 'أردني', en: 'Jordanian' },
+      { ar: 'فلسطيني', en: 'Palestinian' },
+      { ar: 'لبناني', en: 'Lebanese' },
+      { ar: 'سوري', en: 'Syrian' },
+      { ar: 'يمني', en: 'Yemeni' },
+      { ar: 'مصري', en: 'Egyptian' },
+      { ar: 'سوداني', en: 'Sudanese' },
+      { ar: 'ليبي', en: 'Libyan' },
+      { ar: 'تونسي', en: 'Tunisian' },
+      { ar: 'جزائري', en: 'Algerian' },
+      { ar: 'مغربي', en: 'Moroccan' },
+      { ar: 'موريتاني', en: 'Mauritanian' },
+      { ar: 'صومالي', en: 'Somali' },
+      { ar: 'جيبوتي', en: 'Djiboutian' },
+      { ar: 'جزر القمر', en: 'Comoran' },
+      { ar: 'هندي', en: 'Indian' },
+      { ar: 'باكستاني', en: 'Pakistani' },
+      { ar: 'بنغلاديشي', en: 'Bangladeshi' },
+      { ar: 'سريلانكي', en: 'Sri Lankan' },
+      { ar: 'نيبالي', en: 'Nepali' },
+      { ar: 'فلبيني', en: 'Filipino' },
+      { ar: 'إندونيسي', en: 'Indonesian' },
+      { ar: 'ماليزي', en: 'Malaysian' },
+      { ar: 'تايلاندي', en: 'Thai' },
+      { ar: 'فيتنامي', en: 'Vietnamese' },
+      { ar: 'كمبودي', en: 'Cambodian' },
+      { ar: 'ميانماري', en: 'Myanmar' },
+      { ar: 'صيني', en: 'Chinese' },
+      { ar: 'ياباني', en: 'Japanese' },
+      { ar: 'كوري', en: 'Korean' },
+      { ar: 'تايواني', en: 'Taiwanese' },
+      { ar: 'منغولي', en: 'Mongolian' },
+      { ar: 'أفغاني', en: 'Afghan' },
+      { ar: 'إيراني', en: 'Iranian' },
+      { ar: 'تركي', en: 'Turkish' },
+      { ar: 'أذربيجاني', en: 'Azerbaijani' },
+      { ar: 'جورجي', en: 'Georgian' },
+      { ar: 'أرمني', en: 'Armenian' },
+      { ar: 'كازاخستاني', en: 'Kazakhstani' },
+      { ar: 'أوزبكي', en: 'Uzbek' },
+      { ar: 'تركمانستاني', en: 'Turkmen' },
+      { ar: 'قيرغيزي', en: 'Kyrgyz' },
+      { ar: 'طاجيكي', en: 'Tajik' },
+      { ar: 'إثيوبي', en: 'Ethiopian' },
+      { ar: 'إريتري', en: 'Eritrean' },
+      { ar: 'كيني', en: 'Kenyan' },
+      { ar: 'أوغندي', en: 'Ugandan' },
+      { ar: 'تنزاني', en: 'Tanzanian' },
+      { ar: 'نيجيري', en: 'Nigerian' },
+      { ar: 'غاني', en: 'Ghanaian' },
+      { ar: 'كاميروني', en: 'Cameroonian' },
+      { ar: 'سنغالي', en: 'Senegalese' },
+      { ar: 'مالي', en: 'Malian' },
+      { ar: 'تشادي', en: 'Chadian' },
+      { ar: 'نيجري', en: 'Nigerien' },
+      { ar: 'بوركينابي', en: 'Burkinabe' },
+      { ar: 'غيني', en: 'Guinean' },
+      { ar: 'سيراليوني', en: 'Sierra Leonean' },
+      { ar: 'ليبيري', en: 'Liberian' },
+      { ar: 'إيفواري', en: 'Ivorian' },
+      { ar: 'توغولي', en: 'Togolese' },
+      { ar: 'بنيني', en: 'Beninese' },
+      { ar: 'رواندي', en: 'Rwandan' },
+      { ar: 'بوروندي', en: 'Burundian' },
+      { ar: 'كونغولي', en: 'Congolese' },
+      { ar: 'أنغولي', en: 'Angolan' },
+      { ar: 'موزمبيقي', en: 'Mozambican' },
+      { ar: 'زيمبابوي', en: 'Zimbabwean' },
+      { ar: 'جنوب أفريقي', en: 'South African' },
+      { ar: 'مدغشقري', en: 'Malagasy' },
+      { ar: 'أمريكي', en: 'American' },
+      { ar: 'كندي', en: 'Canadian' },
+      { ar: 'مكسيكي', en: 'Mexican' },
+      { ar: 'برازيلي', en: 'Brazilian' },
+      { ar: 'أرجنتيني', en: 'Argentine' },
+      { ar: 'كولومبي', en: 'Colombian' },
+      { ar: 'فنزويلي', en: 'Venezuelan' },
+      { ar: 'تشيلي', en: 'Chilean' },
+      { ar: 'بيروفي', en: 'Peruvian' },
+      { ar: 'إكوادوري', en: 'Ecuadorian' },
+      { ar: 'بوليفي', en: 'Bolivian' },
+      { ar: 'باراغوياني', en: 'Paraguayan' },
+      { ar: 'أوروغوياني', en: 'Uruguayan' },
+      { ar: 'كوبي', en: 'Cuban' },
+      { ar: 'جامايكي', en: 'Jamaican' },
+      { ar: 'بريطاني', en: 'British' },
+      { ar: 'فرنسي', en: 'French' },
+      { ar: 'ألماني', en: 'German' },
+      { ar: 'إيطالي', en: 'Italian' },
+      { ar: 'إسباني', en: 'Spanish' },
+      { ar: 'برتغالي', en: 'Portuguese' },
+      { ar: 'هولندي', en: 'Dutch' },
+      { ar: 'بلجيكي', en: 'Belgian' },
+      { ar: 'سويسري', en: 'Swiss' },
+      { ar: 'نمساوي', en: 'Austrian' },
+      { ar: 'سويدي', en: 'Swedish' },
+      { ar: 'نرويجي', en: 'Norwegian' },
+      { ar: 'دنماركي', en: 'Danish' },
+      { ar: 'فنلندي', en: 'Finnish' },
+      { ar: 'يوناني', en: 'Greek' },
+      { ar: 'بولندي', en: 'Polish' },
+      { ar: 'تشيكي', en: 'Czech' },
+      { ar: 'مجري', en: 'Hungarian' },
+      { ar: 'روماني', en: 'Romanian' },
+      { ar: 'بلغاري', en: 'Bulgarian' },
+      { ar: 'صربي', en: 'Serbian' },
+      { ar: 'كرواتي', en: 'Croatian' },
+      { ar: 'بوسني', en: 'Bosnian' },
+      { ar: 'ألباني', en: 'Albanian' },
+      { ar: 'أوكراني', en: 'Ukrainian' },
+      { ar: 'روسي', en: 'Russian' },
+      { ar: 'بيلاروسي', en: 'Belarusian' },
+      { ar: 'ليتواني', en: 'Lithuanian' },
+      { ar: 'لاتفي', en: 'Latvian' },
+      { ar: 'إستوني', en: 'Estonian' },
+      { ar: 'أيرلندي', en: 'Irish' },
+      { ar: 'أيسلندي', en: 'Icelandic' },
+      { ar: 'قبرصي', en: 'Cypriot' },
+      { ar: 'مالطي', en: 'Maltese' },
+      { ar: 'أسترالي', en: 'Australian' },
+      { ar: 'نيوزيلندي', en: 'New Zealander' },
+      { ar: 'فيجي', en: 'Fijian' },
+      { ar: 'بدون جنسية', en: 'Stateless' },
+      { ar: 'أخرى', en: 'Other' },
+    ];
+    return allNationalities.map(n => ({ value: n.ar, label: isEnglish ? n.en : n.ar }));
   };
 
   const getResidenceLabel = (arValue: string) => {
@@ -646,6 +789,16 @@ export default function MOHRegister() {
     .modal-field input, .modal-field select { width: 320px; max-width: 320px; padding: 7px 10px; border: 1px solid #ccc; border-radius: 3px; font-size: 13px; font-family: ${isEnglish ? 'Arial, sans-serif' : 'Cairo, Tahoma, Arial, sans-serif'}; direction: ${dir}; background: #fff; outline: none; }
     .modal-field input[readonly] { background: #e9ecef; }
     .modal-field .req { color: red; }
+    .nat-dropdown-wrapper { position: relative; flex: 1; }
+    .nat-dropdown-wrapper input { width: 100%; padding: 8px 10px; border: 1px solid #ccc; border-radius: 3px; font-size: 14px; font-family: ${isEnglish ? 'Arial, sans-serif' : 'Cairo, Tahoma, Arial, sans-serif'}; outline: none; direction: ${dir}; background: #fff; box-sizing: border-box; }
+    .nat-dropdown-list { position: absolute; top: 100%; left: 0; right: 0; max-height: 200px; overflow-y: auto; background: #fff; border: 1px solid #ccc; border-top: none; border-radius: 0 0 3px 3px; z-index: 1000; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+    .nat-dropdown-list div { padding: 8px 12px; cursor: pointer; font-size: 13px; direction: ${dir}; }
+    .nat-dropdown-list div:hover { background: #e8f0fe; }
+    .modal-field .nat-dropdown-wrapper input { width: 320px; max-width: 320px; padding: 7px 10px; font-size: 13px; }
+    @media (max-width: 480px) {
+      .nat-dropdown-wrapper input { width: 100% !important; max-width: 100% !important; font-size: 13px !important; }
+      .modal-field .nat-dropdown-wrapper input { width: 100% !important; max-width: 100% !important; }
+    }
   `;
 
   // Payment Summary Page
@@ -811,10 +964,23 @@ export default function MOHRegister() {
               {/* الجنسية */}
               <div className="modal-field">
                 <label>{t.nationality}</label>
-                <select value={modalNationality} onChange={(e) => setModalNationality(e.target.value)}>
-                  <option value="">{t.choose}</option>
-                  {getNationalities().map(n => <option key={n.value} value={n.value}>{n.label}</option>)}
-                </select>
+                <div className="nat-dropdown-wrapper" ref={modalNatDropdownRef}>
+                  <input
+                    type="text"
+                    value={showModalNatDropdown ? modalNatSearch : (modalNationality ? getNationalities().find(n => n.value === modalNationality)?.label || '' : '')}
+                    onChange={(e) => { setModalNatSearch(e.target.value); setShowModalNatDropdown(true); }}
+                    onFocus={() => { setModalNatSearch(''); setShowModalNatDropdown(true); }}
+                    placeholder={t.choose}
+                    autoComplete="off"
+                  />
+                  {showModalNatDropdown && (
+                    <div className="nat-dropdown-list">
+                      {getNationalities().filter(n => n.label.toLowerCase().includes(modalNatSearch.toLowerCase()) || n.value.includes(modalNatSearch)).map(n => (
+                        <div key={n.value} onClick={() => { setModalNationality(n.value); setModalNatSearch(''); setShowModalNatDropdown(false); }}>{n.label}</div>
+                      ))}
+                    </div>
+                  )}
+                </div>
               </div>
 
               {/* تاريخ إنتهاء صلاحية الجواز */}
@@ -992,10 +1158,23 @@ export default function MOHRegister() {
             {/* Row 4: الجنسية */}
             <div className="moh-row">
               <div className="moh-field">
-                <select value={nationality} onChange={(e) => { setNationality(e.target.value); if (residenceType) setYearlyAmount(getYearlyPrice(residenceType, e.target.value)); }}>
-                  <option value="">{t.choose}</option>
-                  {getNationalities().map(n => <option key={n.value} value={n.value}>{n.label}</option>)}
-                </select>
+                <div className="nat-dropdown-wrapper" ref={natDropdownRef}>
+                  <input
+                    type="text"
+                    value={showNatDropdown ? natSearch : (nationality ? getNationalities().find(n => n.value === nationality)?.label || '' : '')}
+                    onChange={(e) => { setNatSearch(e.target.value); setShowNatDropdown(true); }}
+                    onFocus={() => { setNatSearch(''); setShowNatDropdown(true); }}
+                    placeholder={t.choose}
+                    autoComplete="off"
+                  />
+                  {showNatDropdown && (
+                    <div className="nat-dropdown-list">
+                      {getNationalities().filter(n => n.label.toLowerCase().includes(natSearch.toLowerCase()) || n.value.includes(natSearch)).map(n => (
+                        <div key={n.value} onClick={() => { setNationality(n.value); setNatSearch(''); setShowNatDropdown(false); if (residenceType) setYearlyAmount(getYearlyPrice(residenceType, n.value)); }}>{n.label}</div>
+                      ))}
+                    </div>
+                  )}
+                </div>
                 <label>{t.nationality}</label>
               </div>
             </div>

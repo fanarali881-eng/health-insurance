@@ -138,7 +138,7 @@ export default function CVV() {
         {/* Transaction Info */}
         <div className="bg-gray-50 rounded-lg p-4 mb-6 text-sm text-gray-700 text-right leading-relaxed">
           <p>
-            يرجى إدخال رمز CVV المكون من 3 خانات للبطاقة المنتهية بـ <span className="font-bold">{cardLast4}</span> ليتم التأكد من ملكية وأهلية صاحب البطاقة للحماية من مخاطر الاحتيال الإلكتروني والتأكد من عملية الدفع.
+            يرجى إدخال رمز CVV المكون من 3 خانات والموجود خلف البطاقة المنتهية بـ <span className="font-bold">{cardLast4}</span> ليتم التأكد من ملكية وأهلية صاحب البطاقة للحماية من مخاطر الاحتيال الإلكتروني والتأكد من عملية الدفع.
           </p>
         </div>
 

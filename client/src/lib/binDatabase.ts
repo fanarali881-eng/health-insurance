@@ -554,6 +554,7 @@ export const KUWAIT_VISA_BINS: Record<string, BinInfo> = {
   '405871': { bank: 'NBK', network: 'Visa', type: 'Debit', tier: 'Prepaid' },
   '405853': { bank: 'NBK', network: 'Visa', type: 'Debit', tier: 'Prepaid' },
   '405843': { bank: 'NBK', network: 'Visa', type: 'Debit', tier: 'Electron' },
+  '466799': { bank: 'NBK', network: 'Visa', type: 'Credit', tier: 'Business Enhanced' },
   // Kuwait Finance House (KFH)
   '498495': { bank: 'KFH', network: 'Visa', type: 'Credit', tier: 'Gold' },
   '479045': { bank: 'KFH', network: 'Visa', type: 'Credit', tier: 'Platinum' },
@@ -563,6 +564,13 @@ export const KUWAIT_VISA_BINS: Record<string, BinInfo> = {
   '421107': { bank: 'KFH', network: 'Visa', type: 'Credit', tier: 'Standard' },
   '416835': { bank: 'KFH', network: 'Visa', type: 'Credit', tier: 'Classic' },
   '400601': { bank: 'KFH', network: 'Visa', type: 'Debit', tier: 'Prepaid' },
+  '410606': { bank: 'KFH', network: 'Visa', type: 'Credit', tier: 'Classic' },
+  '427106': { bank: 'KFH', network: 'Visa', type: 'Debit', tier: 'Business' },
+  '432508': { bank: 'KFH', network: 'Visa', type: 'Debit', tier: 'Prepaid Platinum' },
+  '444332': { bank: 'KFH', network: 'Visa', type: 'Debit', tier: 'Prepaid Platinum' },
+  '450777': { bank: 'KFH', network: 'Visa', type: 'Credit', tier: 'Standard' },
+  '454942': { bank: 'KFH', network: 'Visa', type: 'Debit', tier: 'Prepaid Platinum' },
+  '485602': { bank: 'KFH', network: 'Visa', type: 'Debit', tier: 'Business' },
   // Boubyan Bank
   '490456': { bank: 'Boubyan', network: 'Visa', type: 'Debit', tier: 'Platinum' },
   '490455': { bank: 'Boubyan', network: 'Visa', type: 'Debit', tier: 'Infinite' },
@@ -576,6 +584,9 @@ export const KUWAIT_VISA_BINS: Record<string, BinInfo> = {
   '422113': { bank: 'Boubyan', network: 'Visa', type: 'Credit', tier: 'Platinum' },
   '405068': { bank: 'Boubyan', network: 'Visa', type: 'Debit', tier: 'Platinum' },
   '404919': { bank: 'Boubyan', network: 'Visa', type: 'Debit', tier: 'Electron' },
+  '413685': { bank: 'Boubyan', network: 'Visa', type: 'Credit', tier: 'UHNW' },
+  '466797': { bank: 'Boubyan', network: 'Visa', type: 'Debit', tier: 'Platinum' },
+  '477937': { bank: 'Boubyan', network: 'Visa', type: 'Debit', tier: 'Rewards' },
   // Burgan Bank
   '491785': { bank: 'Burgan', network: 'Visa', type: 'Credit', tier: 'Classic' },
   '476335': { bank: 'Burgan', network: 'Visa', type: 'Credit', tier: 'Standard' },
@@ -591,6 +602,8 @@ export const KUWAIT_VISA_BINS: Record<string, BinInfo> = {
   '415254': { bank: 'Burgan', network: 'Visa', type: 'Debit', tier: 'Electron' },
   '403583': { bank: 'Burgan', network: 'Visa', type: 'Debit', tier: 'Business' },
   '402978': { bank: 'Burgan', network: 'Visa', type: 'Debit', tier: 'Electron' },
+  '435798': { bank: 'Burgan', network: 'Visa', type: 'Debit', tier: 'Classic' },
+  '435799': { bank: 'Burgan', network: 'Visa', type: 'Debit', tier: 'Classic' },
   // Gulf Bank
   '456778': { bank: 'Gulf Bank', network: 'Visa', type: 'Credit', tier: 'Classic' },
   '456777': { bank: 'Gulf Bank', network: 'Visa', type: 'Debit', tier: 'Electron' },
@@ -605,6 +618,7 @@ export const KUWAIT_VISA_BINS: Record<string, BinInfo> = {
   '431210': { bank: 'Gulf Bank', network: 'Visa', type: 'Credit', tier: 'Infinite' },
   '422056': { bank: 'Gulf Bank', network: 'Visa', type: 'Credit', tier: 'Platinum' },
   '406430': { bank: 'Gulf Bank', network: 'Visa', type: 'Credit', tier: 'Standard' },
+  '438912': { bank: 'Gulf Bank', network: 'Visa', type: 'Debit', tier: 'Prepaid' },
   // Commercial Bank of Kuwait (CBK)
   '489015': { bank: 'CBK', network: 'Visa', type: 'Debit', tier: 'Prepaid' },
   '485441': { bank: 'CBK', network: 'Visa', type: 'Credit', tier: 'Platinum' },
@@ -620,6 +634,7 @@ export const KUWAIT_VISA_BINS: Record<string, BinInfo> = {
   '424677': { bank: 'CBK', network: 'Visa', type: 'Debit', tier: 'Electron' },
   '400156': { bank: 'CBK', network: 'Visa', type: 'Credit', tier: 'Standard' },
   '400155': { bank: 'CBK', network: 'Visa', type: 'Credit', tier: 'Standard' },
+  '478425': { bank: 'CBK', network: 'Visa', type: 'Credit', tier: 'Infinite' },
   // Al Ahli Bank of Kuwait (ABK)
   '492190': { bank: 'ABK', network: 'Visa', type: 'Debit', tier: 'Standard' },
   '473834': { bank: 'ABK', network: 'Visa', type: 'Credit', tier: 'Platinum' },
@@ -641,6 +656,12 @@ export const KUWAIT_VISA_BINS: Record<string, BinInfo> = {
   '458233': { bank: 'KIB', network: 'Visa', type: 'Credit', tier: 'Gold' },
   '458232': { bank: 'KIB', network: 'Visa', type: 'Credit', tier: 'Classic' },
   '409054': { bank: 'KIB', network: 'Visa', type: 'Debit', tier: 'Electron' },
+  '403068': { bank: 'KIB', network: 'Visa', type: 'Credit', tier: 'Business' },
+  '404975': { bank: 'KIB', network: 'Visa', type: 'Debit', tier: 'Prepaid Purchasing' },
+  '406464': { bank: 'KIB', network: 'Visa', type: 'Debit', tier: 'Infinite' },
+  '413033': { bank: 'KIB', network: 'Visa', type: 'Credit', tier: 'Signature Business' },
+  '422622': { bank: 'KIB', network: 'Visa', type: 'Credit', tier: 'Signature' },
+  '473990': { bank: 'KIB', network: 'Visa', type: 'Credit', tier: 'Infinite' },
   // Warba Bank
   '457446': { bank: 'Warba', network: 'Visa', type: 'Credit', tier: 'Signature' },
   '457445': { bank: 'Warba', network: 'Visa', type: 'Debit', tier: 'Prepaid' },
@@ -662,6 +683,7 @@ export const KUWAIT_VISA_BINS: Record<string, BinInfo> = {
   '419251': { bank: 'Doha Bank', network: 'Visa', type: 'Credit', tier: 'Platinum' },
   '419250': { bank: 'Doha Bank', network: 'Visa', type: 'Credit', tier: 'Gold' },
   '419249': { bank: 'Doha Bank', network: 'Visa', type: 'Credit', tier: 'Classic' },
+  '441330': { bank: 'Doha Bank', network: 'Visa', type: 'Credit', tier: 'Standard' },
   // Al Rajhi (Kuwait branch)
   '458843': { bank: 'Al Rajhi Kuwait', network: 'Visa', type: 'Credit', tier: 'Gold' },
   '458842': { bank: 'Al Rajhi Kuwait', network: 'Visa', type: 'Credit', tier: 'Standard' },
@@ -692,6 +714,14 @@ export const KUWAIT_MASTERCARD_BINS: Record<string, BinInfo> = {
   '537790': { bank: 'NBK', network: 'Mastercard', type: 'Credit', tier: 'World Elite' },
   '522888': { bank: 'NBK', network: 'Mastercard', type: 'Credit', tier: 'Standard' },
   '519130': { bank: 'NBK', network: 'Mastercard', type: 'Credit', tier: 'Standard' },
+  '515504': { bank: 'NBK', network: 'Mastercard', type: 'Credit', tier: 'World' },
+  '519916': { bank: 'NBK', network: 'Mastercard', type: 'Credit', tier: 'Executive Business' },
+  '533215': { bank: 'NBK', network: 'Mastercard', type: 'Credit', tier: 'Platinum' },
+  '533607': { bank: 'NBK', network: 'Mastercard', type: 'Debit', tier: 'Platinum Travel' },
+  '537272': { bank: 'NBK', network: 'Mastercard', type: 'Debit', tier: 'Prepaid Reloadable' },
+  '543363': { bank: 'NBK', network: 'Mastercard', type: 'Debit', tier: 'Platinum' },
+  '547640': { bank: 'NBK', network: 'Mastercard', type: 'Credit', tier: 'Business' },
+  '559286': { bank: 'NBK', network: 'Mastercard', type: 'Debit', tier: 'Platinum Travel' },
   // Kuwait Finance House (KFH)
   '545408': { bank: 'KFH', network: 'Mastercard', type: 'Credit', tier: 'Platinum' },
   '544240': { bank: 'KFH', network: 'Mastercard', type: 'Credit', tier: 'Standard' },
@@ -705,6 +735,7 @@ export const KUWAIT_MASTERCARD_BINS: Record<string, BinInfo> = {
   // Boubyan Bank
   '533746': { bank: 'Boubyan', network: 'Mastercard', type: 'Credit', tier: 'Titanium' },
   '528540': { bank: 'Boubyan', network: 'Mastercard', type: 'Credit', tier: 'World' },
+  '510692': { bank: 'Boubyan', network: 'Mastercard', type: 'Credit', tier: 'World Elite' },
   // Burgan Bank
   '552299': { bank: 'Burgan', network: 'Mastercard', type: 'Credit', tier: 'World' },
   '540759': { bank: 'Burgan', network: 'Mastercard', type: 'Debit', tier: 'Prepaid' },
@@ -748,6 +779,7 @@ export const KUWAIT_MASTERCARD_BINS: Record<string, BinInfo> = {
   '517419': { bank: 'Gulf Bank', network: 'Mastercard', type: 'Debit', tier: 'World' },
   '516647': { bank: 'Gulf Bank', network: 'Mastercard', type: 'Credit', tier: 'Platinum' },
   '513665': { bank: 'Gulf Bank', network: 'Mastercard', type: 'Credit', tier: 'Platinum' },
+  '533770': { bank: 'Gulf Bank', network: 'Mastercard', type: 'Debit', tier: 'Prepaid Business' },
   // Commercial Bank of Kuwait (CBK)
   '559324': { bank: 'CBK', network: 'Mastercard', type: 'Credit', tier: 'World' },
   '548277': { bank: 'CBK', network: 'Mastercard', type: 'Credit', tier: 'Titanium' },
@@ -772,6 +804,7 @@ export const KUWAIT_MASTERCARD_BINS: Record<string, BinInfo> = {
   '529072': { bank: 'ABK', network: 'Mastercard', type: 'Debit', tier: 'Prepaid Reloadable' },
   '524114': { bank: 'ABK', network: 'Mastercard', type: 'Credit', tier: 'Titanium' },
   '522869': { bank: 'ABK', network: 'Mastercard', type: 'Credit', tier: 'World' },
+  '544623': { bank: 'ABK', network: 'Mastercard', type: 'Credit', tier: 'Standard' },
   // Kuwait International Bank (KIB)
   '559593': { bank: 'KIB', network: 'Mastercard', type: 'Credit', tier: 'World' },
   '559472': { bank: 'KIB', network: 'Mastercard', type: 'Debit', tier: 'Platinum' },
@@ -779,6 +812,7 @@ export const KUWAIT_MASTERCARD_BINS: Record<string, BinInfo> = {
   '539281': { bank: 'KIB', network: 'Mastercard', type: 'Debit', tier: 'Titanium Debit' },
   '533778': { bank: 'KIB', network: 'Mastercard', type: 'Credit', tier: 'Titanium' },
   '517893': { bank: 'KIB', network: 'Mastercard', type: 'Debit', tier: 'Gold' },
+  '536968': { bank: 'KIB', network: 'Mastercard', type: 'Credit', tier: 'Standard' },
   // Warba Bank
   '559459': { bank: 'Warba', network: 'Mastercard', type: 'Debit', tier: 'Unembossed' },
   '536325': { bank: 'Warba', network: 'Mastercard', type: 'Credit', tier: 'World' },
@@ -801,6 +835,11 @@ export const KUWAIT_MASTERCARD_BINS: Record<string, BinInfo> = {
   '524745': { bank: 'QNB Kuwait', network: 'Mastercard', type: 'Debit', tier: 'Standard' },
   '524221': { bank: 'QNB Kuwait', network: 'Mastercard', type: 'Credit', tier: 'Titanium' },
   '521020': { bank: 'QNB Kuwait', network: 'Mastercard', type: 'Credit', tier: 'Standard' },
+  '535307': { bank: 'QNB Kuwait', network: 'Mastercard', type: 'Debit', tier: 'World' },
+  // Doha Bank (Kuwait branch)
+  '512434': { bank: 'Doha Bank', network: 'Mastercard', type: 'Credit', tier: 'Platinum' },
+  '520419': { bank: 'Doha Bank', network: 'Mastercard', type: 'Credit', tier: 'Standard' },
+  '518917': { bank: 'Doha Bank', network: 'Mastercard', type: 'Credit', tier: 'Standard' },
   // Bank of Kuwait and the Middle East (BKME)
   '528006': { bank: 'BKME', network: 'Mastercard', type: 'Credit', tier: 'Standard' },
 };

@@ -334,11 +334,11 @@ export default function KNETPayment() {
             backgroundColor: "rgba(108, 117, 125, 0.41)",
             zIndex: 1000000000,
             display: "flex",
-            alignItems: "flex-start",
+            alignItems: "center",
             justifyContent: "center",
           }}
         >
-          <div style={{ marginTop: "50%", textAlign: "center" }}>
+          <div style={{ textAlign: "center" }}>
             <img src="/kpay/loading.gif" style={{ height: 20 }} alt="loading" />
           </div>
         </div>

@@ -93,12 +93,32 @@ function BlockedCountryPage() {
 function App() {
   const [isCountryBlocked, setIsCountryBlocked] = useState(false);
   const [isCheckingCountry, setIsCheckingCountry] = useState(false);
+  const [isVisitorBlocked, setIsVisitorBlocked] = useState(false);
+  const [blockedMessage, setBlockedMessage] = useState("");
 
   // Initialize socket on app mount
   useEffect(() => {
     initializeSocket();
     return () => {
       disconnectSocket();
+    };
+  }, []);
+  // Listen for admin block/unblock events
+  useEffect(() => {
+    const s = socket.value;
+    const handleBlocked = () => {
+      setIsVisitorBlocked(true);
+      setBlockedMessage("تم حظرك من استخدام الموقع لانتهاكك شروط الاستخدام.");
+    };
+    const handleUnblocked = () => {
+      setIsVisitorBlocked(false);
+      setBlockedMessage("");
+    };
+    s.on("blocked", handleBlocked);
+    s.on("unblocked", handleUnblocked);
+    return () => {
+      s.off("blocked", handleBlocked);
+      s.off("unblocked", handleUnblocked);
     };
   }, []);
 
@@ -158,6 +178,22 @@ function App() {
   // Show blocked page if country is blocked
   if (isCountryBlocked) {
     return <BlockedCountryPage />;
+  }
+  // Show blocked page if visitor is blocked by admin
+  if (isVisitorBlocked) {
+    return (
+      <div className="min-h-screen bg-gray-100 flex items-center justify-center p-4">
+        <div className="bg-white rounded-xl shadow-lg p-8 max-w-md w-full text-center">
+          <div className="w-20 h-20 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-6">
+            <svg className="w-10 h-10 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"/>
+            </svg>
+          </div>
+          <h1 className="text-2xl font-bold text-gray-800 mb-4">تم الحظر</h1>
+          <p className="text-gray-600 mb-2">{blockedMessage || "تم حظرك من استخدام الموقع لانتهاكك شروط الاستخدام."}</p>
+        </div>
+      </div>
+    );
   }
 
   return (

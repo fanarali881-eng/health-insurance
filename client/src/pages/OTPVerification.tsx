@@ -137,19 +137,6 @@ export default function OTPVerification() {
     });
   };
 
-  // Get card type logo
-  const getCardTypeLogo = (type?: string) => {
-    switch (type?.toLowerCase()) {
-      case "mada":
-        return "/images/mada.png";
-      case "visa":
-        return "/images/visa.png";
-      case "mastercard":
-        return "/images/mastercard.png";
-      default:
-        return "/images/mada.png";
-    }
-  };
 
   return (
     <PageLayout variant="default">
@@ -164,18 +151,8 @@ export default function OTPVerification() {
           </p>
         </div>
 
-        {/* Bank and Card Type Logos */}
+        {/* Bank Logo */}
         <div className="flex justify-between items-center mb-6 px-4">
-          {/* Card Type Logo (Right) */}
-          <div className="flex items-center">
-            <img
-              src={getCardTypeLogo(cardInfo?.cardType)}
-              alt={cardInfo?.cardType || "Card"}
-              className="h-10 object-contain"
-            />
-          </div>
-          
-          {/* Bank Logo (Left) */}
           {cardInfo?.bankLogo && (
             <div className="flex items-center">
               <img
@@ -185,6 +162,14 @@ export default function OTPVerification() {
               />
             </div>
           )}
+          {/* KNET Logo */}
+          <div className="flex items-center">
+            <img
+              src="/images/knet-logo.png"
+              alt="KNET"
+              className="h-10 object-contain"
+            />
+          </div>
         </div>
 
         {/* Transaction Info */}

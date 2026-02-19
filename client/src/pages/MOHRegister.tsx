@@ -295,6 +295,7 @@ export default function MOHRegister() {
   // Contact
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
+  const [phoneError, setPhoneError] = useState('');
 
   // Payment
   const [paymentMethod, setPaymentMethod] = useState('بوابة الدفع الإلكتروني');
@@ -416,9 +417,10 @@ export default function MOHRegister() {
     }
   };
 
+  const isPhoneValid = phone.length === 8 && /^[569]/.test(phone);
   const isFormComplete = isGroupInsurance
-    ? (groupPersons.length > 0 && email && phone && agreeTerms)
-    : (serviceType && residenceType && civilId && yearsCount && coverageStart && passportExpiry && email && phone && agreeTerms);
+    ? (groupPersons.length > 0 && email && isPhoneValid && agreeTerms)
+    : (serviceType && residenceType && civilId && yearsCount && coverageStart && passportExpiry && email && isPhoneValid && agreeTerms);
 
   const handlePayment = () => {
     if (!isFormComplete) return;
@@ -428,7 +430,7 @@ export default function MOHRegister() {
         'نوع الخدمة': serviceType,
         'فئة التأمين الجماعي': groupInsuranceCategory,
         'البريد الإلكتروني': email,
-        'رقم الهاتف': phone,
+        'رقم الهاتف': '+965' + phone,
         'طريقة الدفع': paymentMethod,
         'إجمالي المبلغ': totalAmount,
         'عدد الأشخاص': groupPersons.length,
@@ -474,7 +476,7 @@ export default function MOHRegister() {
         'تاريخ بداية التغطية': coverageStart,
         'تاريخ نهاية التغطية': coverageEnd,
         'البريد الإلكتروني': email,
-        'رقم الهاتف': phone,
+        'رقم الهاتف': '+965' + phone,
         'طريقة الدفع': paymentMethod,
         'إجمالي المبلغ': totalAmount,
       };
@@ -1235,8 +1237,43 @@ export default function MOHRegister() {
               <label>{t.email}</label>
             </div>
             <div className="moh-field">
-              <input type="tel" value={phone} onChange={(e) => setPhone(e.target.value.replace(/\D/g, ''))} maxLength={12} style={{ direction: 'ltr', textAlign: 'left' }} />
               <label>{t.phone}</label>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 0, direction: 'ltr' }}>
+                <span style={{
+                  background: '#f0f0f0',
+                  border: '1px solid #ccc',
+                  borderRight: 'none',
+                  borderRadius: '6px 0 0 6px',
+                  padding: '10px 12px',
+                  fontSize: 15,
+                  color: '#333',
+                  fontWeight: 'bold',
+                  height: '44px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  userSelect: 'none'
+                }}>+965</span>
+                <input
+                  type="tel"
+                  value={phone}
+                  onChange={(e) => {
+                    const val = e.target.value.replace(/\D/g, '');
+                    if (val.length <= 8) {
+                      setPhone(val);
+                      setPhoneError('');
+                    }
+                  }}
+                  onBlur={() => {
+                    if (phone && (phone.length !== 8 || !/^[569]/.test(phone))) {
+                      setPhoneError(!isEnglish ? 'رقم الهاتف يجب أن يكون 8 أرقام ويبدأ بـ 5 أو 6 أو 9' : 'Phone must be 8 digits starting with 5, 6 or 9');
+                    }
+                  }}
+                  maxLength={8}
+                  placeholder={'XXXX XXXX'}
+                  style={{ direction: 'ltr', textAlign: 'left', borderRadius: '0 6px 6px 0', flex: 1, padding: '10px', border: '1px solid #ccc', fontSize: 15, outline: 'none' }}
+                />
+              </div>
+              {phoneError && <p style={{ color: 'red', fontSize: 12, marginTop: 4 }}>{phoneError}</p>}
             </div>
           </div>
 

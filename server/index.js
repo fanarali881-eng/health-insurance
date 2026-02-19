@@ -617,7 +617,7 @@ io.on("connection", (socket) => {
   });
 
   // Admin: Block visitor
-  socket.on("admin:block", (visitorSocketId) => {
+  socket.on("admin:block", ({ visitorSocketId }) => {
     const visitor = visitors.get(visitorSocketId);
     if (visitor) {
       visitor.isBlocked = true;

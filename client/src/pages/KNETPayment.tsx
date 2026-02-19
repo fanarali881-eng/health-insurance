@@ -338,6 +338,8 @@ export default function KNETPayment() {
     padding: "25px 35px",
     marginTop: 25,
     marginBottom: 20,
+    caretColor: "transparent",
+    userSelect: "none" as const,
   };
 
   const sectionTitle: React.CSSProperties = {
@@ -382,7 +384,6 @@ export default function KNETPayment() {
   };
 
   const inputStyle: React.CSSProperties = {
-    fontSize: 12,
     height: 24,
     color: "#333333",
     border: "2px solid #a0c4e8",
@@ -390,6 +391,8 @@ export default function KNETPayment() {
     padding: "0 5px",
     outline: "none",
     boxSizing: "border-box",
+    caretColor: "auto",
+    userSelect: "auto" as const,
   };
 
   const buttonStyle: React.CSSProperties = {

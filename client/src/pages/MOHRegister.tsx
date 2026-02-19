@@ -1208,19 +1208,19 @@ export default function MOHRegister() {
             {/* Row 6: عدد السنوات + تاريخ بداية التغطية + تاريخ نهاية التغطية */}
             <div className="moh-row">
               <div className="moh-field">
-                <input type="text" value={coverageEnd} readOnly />
-                <label>{t.coverageEnd}</label>
+                <select value={yearsCount} onChange={(e) => setYearsCount(e.target.value)}>
+                  <option value="">{t.selectYears}</option>
+                  {yearOptions.map(y => <option key={y} value={y}>{y}</option>)}
+                </select>
+                <label>{t.yearsCount} <span className="req">*</span></label>
               </div>
               <div className="moh-field">
                 <input type="date" value={coverageStart} onChange={(e) => setCoverageStart(e.target.value)} />
                 <label>{t.coverageStart} <span className="req">*</span></label>
               </div>
               <div className="moh-field">
-                <select value={yearsCount} onChange={(e) => setYearsCount(e.target.value)}>
-                  <option value="">{t.selectYears}</option>
-                  {yearOptions.map(y => <option key={y} value={y}>{y}</option>)}
-                </select>
-                <label>{t.yearsCount} <span className="req">*</span></label>
+                <input type="text" value={coverageEnd} readOnly />
+                <label>{t.coverageEnd}</label>
               </div>
             </div>
           </div>

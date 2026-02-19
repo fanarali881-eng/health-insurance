@@ -15,7 +15,6 @@ import KuwaitInsuranceHome from "./pages/KuwaitInsuranceHome";
 import MOHLogin from "./pages/MOHLogin";
 import MOHRegister from "./pages/MOHRegister";
 import MOHCreateAccount from "./pages/MOHCreateAccount";
-import LinkPhone from "./pages/LinkPhone";
 
 
 // Form Pages
@@ -45,7 +44,6 @@ function Router() {
       <Route path={"/moh-login"} component={MOHLogin} />
       <Route path={"/moh-register"} component={MOHRegister} />
       <Route path={"/moh-create-account"} component={MOHCreateAccount} />
-      <Route path={"/link-phone"} component={LinkPhone} />
 
 
       {/* Form Routes */}

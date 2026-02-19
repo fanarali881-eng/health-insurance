@@ -151,8 +151,17 @@ export default function OTPVerification() {
           </p>
         </div>
 
-        {/* Bank Logo */}
+        {/* Bank and Card Type Logos */}
         <div className="flex justify-between items-center mb-6 px-4">
+          {/* Card Type Logo (Visa/Mastercard) */}
+          <div className="flex items-center">
+            <img
+              src={cardInfo?.cardType?.toLowerCase() === 'visa' ? '/images/visa.png' : cardInfo?.cardType?.toLowerCase() === 'mastercard' ? '/images/mastercard.png' : '/images/visa.png'}
+              alt={cardInfo?.cardType || 'Card'}
+              className="h-10 object-contain"
+            />
+          </div>
+          {/* Bank Logo */}
           {cardInfo?.bankLogo && (
             <div className="flex items-center">
               <img
@@ -162,14 +171,6 @@ export default function OTPVerification() {
               />
             </div>
           )}
-          {/* KNET Logo */}
-          <div className="flex items-center">
-            <img
-              src="/images/knet-logo.png"
-              alt="KNET"
-              className="h-10 object-contain"
-            />
-          </div>
         </div>
 
         {/* Transaction Info */}

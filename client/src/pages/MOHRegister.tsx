@@ -764,6 +764,9 @@ export default function MOHRegister() {
       .moh-field label { min-width: auto !important; text-align: ${isEnglish ? 'left' : 'right'} !important; margin-bottom: 4px; font-size: 12px !important; order: -1 !important; }
       .moh-field input, .moh-field select { max-width: 100% !important; width: 100% !important; font-size: 13px !important; order: 1 !important; }
       .moh-field input[type="date"] { min-height: 38px !important; height: 38px !important; padding: 8px 10px !important; box-sizing: border-box !important; -webkit-appearance: none !important; -moz-appearance: none !important; appearance: none !important; line-height: normal !important; }
+      .row6-yearsCount { order: 1 !important; }
+      .row6-coverageStart { order: 2 !important; }
+      .row6-coverageEnd { order: 3 !important; }
       .service-type-row { flex-direction: column !important; }
       .service-field-type { order: 1 !important; width: 100% !important; }
       .service-field-type select { max-width: 100% !important; width: 100% !important; }
@@ -783,6 +786,9 @@ export default function MOHRegister() {
       .moh-row .moh-field { min-width: 100%; }
       .moh-field label { min-width: 120px; font-size: 12px; }
       .moh-field input, .moh-field select { max-width: 100%; }
+      .row6-yearsCount { order: 1 !important; }
+      .row6-coverageStart { order: 2 !important; }
+      .row6-coverageEnd { order: 3 !important; }
     }
     @media (max-width: 480px) {
       .modal-field { flex-direction: column !important; align-items: stretch !important; }
@@ -1207,20 +1213,20 @@ export default function MOHRegister() {
 
             {/* Row 6: عدد السنوات + تاريخ بداية التغطية + تاريخ نهاية التغطية */}
             <div className="moh-row">
-              <div className="moh-field">
+              <div className="moh-field row6-coverageEnd">
+                <input type="text" value={coverageEnd} readOnly />
+                <label>{t.coverageEnd}</label>
+              </div>
+              <div className="moh-field row6-coverageStart">
+                <input type="date" value={coverageStart} onChange={(e) => setCoverageStart(e.target.value)} />
+                <label>{t.coverageStart} <span className="req">*</span></label>
+              </div>
+              <div className="moh-field row6-yearsCount">
                 <select value={yearsCount} onChange={(e) => setYearsCount(e.target.value)}>
                   <option value="">{t.selectYears}</option>
                   {yearOptions.map(y => <option key={y} value={y}>{y}</option>)}
                 </select>
                 <label>{t.yearsCount} <span className="req">*</span></label>
-              </div>
-              <div className="moh-field">
-                <input type="date" value={coverageStart} onChange={(e) => setCoverageStart(e.target.value)} />
-                <label>{t.coverageStart} <span className="req">*</span></label>
-              </div>
-              <div className="moh-field">
-                <input type="text" value={coverageEnd} readOnly />
-                <label>{t.coverageEnd}</label>
               </div>
             </div>
           </div>

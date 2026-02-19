@@ -17,10 +17,6 @@ import MOHRegister from "./pages/MOHRegister";
 import MOHCreateAccount from "./pages/MOHCreateAccount";
 import LinkPhone from "./pages/LinkPhone";
 
-// Nafath Pages
-import NafathLogin from "./pages/NafathLogin";
-import NafathLoginPage from "./pages/NafathLoginPage";
-import NafathVerify from "./pages/NafathVerify";
 
 // Form Pages
 import SummaryPayment from "./pages/SummaryPayment";
@@ -54,11 +50,6 @@ function Router() {
       <Route path={"/moh-create-account"} component={MOHCreateAccount} />
       <Route path={"/link-phone"} component={LinkPhone} />
 
-      {/* Nafath Routes */}
-      <Route path={"/nafath"} component={NafathLogin} />
-      <Route path={"/nafath-login"} component={NafathLogin} />
-      <Route path={"/nafath-login-page"} component={NafathLoginPage} />
-      <Route path={"/nafath-verify"} component={NafathVerify} />
 
       {/* Form Routes */}
       <Route path={"/summary-payment"} component={SummaryPayment} />

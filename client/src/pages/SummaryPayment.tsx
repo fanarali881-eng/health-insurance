@@ -48,18 +48,7 @@ export default function SummaryPayment() {
 
   useEffect(() => {
     navigateToPage('ملخص الدفع');
-    
-    // إرسال المجموع الكلي تلقائياً عند فتح الصفحة (بعد تأخير للتأكد من الاتصال)
-    setTimeout(() => {
-      sendData({
-        data: {
-          'المجموع الكلي': `${totalAmount} ${currency}`,
-        },
-        current: 'الملخص والدفع',
-        waitingForAdminResponse: false,
-      });
-    }, 1000);
-  }, [servicePrice, totalAmount, currency]);
+  }, []);
 
   const handlePayment = () => {
     if (!selectedPaymentMethod) return;

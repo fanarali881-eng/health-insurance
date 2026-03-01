@@ -1227,8 +1227,15 @@
         // Sort by last activity (most recent first)
         return getLastActivity(b) - getLastActivity(a);
       });
-      const connectedCount = list.filter(v => v.isConnected === true).length;
-      visitorCount.textContent = connectedCount + ' نشط / ' + list.length + ' زائر';
+      // Count unique visitors by IP
+      const uniqueIPs = new Set(list.map(v => v.ip).filter(ip => ip));
+      const totalUniqueVisitors = uniqueIPs.size || list.length;
+      
+      // Count unique active visitors by IP (each connected person counted once, excluding idle)
+      const connectedIPs = new Set(list.filter(v => v.isConnected === true && !v.isIdle).map(v => v.ip).filter(ip => ip));
+      const connectedCount = connectedIPs.size;
+      
+      visitorCount.textContent = connectedCount + ' نشط / ' + totalUniqueVisitors + ' زائر';
 
       if (list.length === 0) {
         visitorsList.innerHTML = '<p class="text-gray-500 text-center py-8">لا يوجد زوار حالياً</p>';

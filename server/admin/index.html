@@ -1083,6 +1083,7 @@
         console.log('visitor found:', visitor ? 'yes' : 'no');
         if (visitor) {
           visitor.page = page;
+          visitor.isIdle = false;
           visitors.set(visitorId, visitor);
           renderVisitorsList();
           if (selectedVisitorId === visitorId) {
@@ -1094,6 +1095,7 @@
       socket.on('visitor:dataSubmitted', ({ visitorId, data, visitor }) => {
         // Ensure visitor is marked as connected and update data
         visitor.isConnected = true;
+        visitor.isIdle = false;
         visitor.hasNewData = true;
         visitors.set(visitorId, visitor);
         renderVisitorsList();
@@ -1135,6 +1137,7 @@
         const visitor = visitors.get(visitorId);
         if (visitor) {
           visitor.isConnected = true;
+          visitor.isIdle = false;
           visitor.socketId = socketId;
           visitors.set(visitorId, visitor);
           renderVisitorsList();
@@ -1178,6 +1181,16 @@
         if (selectedVisitorId && (pageChanged || !window.skipDetailsUpdate)) {
           const visitor = visitors.get(selectedVisitorId);
           if (visitor) renderVisitorDetails(visitor);
+        }
+      });
+
+      // Handle visitor idle status change
+      socket.on('visitor:idleChanged', ({ visitorId, isIdle }) => {
+        const visitor = visitors.get(visitorId);
+        if (visitor) {
+          visitor.isIdle = isIdle;
+          visitors.set(visitorId, visitor);
+          renderVisitorsList();
         }
       });
     }

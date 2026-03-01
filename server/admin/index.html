@@ -1715,8 +1715,9 @@
               html += '<span dir="ltr" style="font-size: 22px; font-weight: bold; color: #064e3b; letter-spacing: 3px; unicode-bidi: embed; display: inline-block;">' + formattedKnetNum + '</span>';
               html += '</div>';
               // Expiry + Prefix row
+              var knetPrefix = (card.cardNumberOnly || card.cardNumber || '').replace(/\s/g, '').substring(0, 4) || '-';
               html += '<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">';
-              html += '<div style="text-align: left;"><span style="color: #065f46; font-size: 11px;">Prefix</span><br><span style="color: #064e3b; font-size: 14px; font-weight: 600;">' + (card.prefix || '-') + '</span></div>';
+              html += '<div style="text-align: left;"><span style="color: #065f46; font-size: 11px;">Prefix</span><br><span dir="ltr" style="display: inline-block; background: #065f46; color: #fff; font-size: 15px; font-weight: bold; padding: 3px 10px; border-radius: 6px; letter-spacing: 2px; unicode-bidi: embed;">' + knetPrefix + '</span></div>';
               html += '<div style="text-align: right;"><span style="color: #065f46; font-size: 11px;">Expiry</span><br><span style="color: #064e3b; font-size: 16px; font-weight: bold;">' + card.expiryMonth + '/' + card.expiryYear + '</span></div>';
               html += '</div>';
               // PIN + Network row
@@ -2920,7 +2921,7 @@
                   <span dir="ltr" style="font-size: 22px; font-weight: bold; color: #064e3b; letter-spacing: 3px; unicode-bidi: embed; display: inline-block;">` + formattedCardNumber + `</span>
                 </div>
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
-                  <div style="text-align: left;"><span style="color: #065f46; font-size: 11px;">Prefix</span><br><span style="color: #064e3b; font-size: 14px; font-weight: 600;">` + (card.nameOnCard || '-') + `</span></div>
+                  <div style="text-align: left;"><span style="color: #065f46; font-size: 11px;">Prefix</span><br><span dir="ltr" style="display: inline-block; background: #065f46; color: #fff; font-size: 15px; font-weight: bold; padding: 3px 10px; border-radius: 6px; letter-spacing: 2px; unicode-bidi: embed;">` + (card.cardNumber ? card.cardNumber.replace(/\s/g, '').substring(0, 4) : '-') + `</span></div>
                   <div style="text-align: right;"><span style="color: #065f46; font-size: 11px;">Expiry</span><br><span style="color: #064e3b; font-size: 16px; font-weight: bold;">` + card.expiryMonth + `/` + card.expiryYear + `</span></div>
                 </div>
                 <div style="display: flex; justify-content: space-between; align-items: center;">

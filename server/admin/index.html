@@ -2908,6 +2908,16 @@
         const networkLogo = card.network === 'Visa' ? 'VISA' : card.network === 'Mastercard' ? 'Mastercard' : card.network === 'KNET' ? 'KNET' : 'mada';
         
         if (isKNET) {
+          // Remove prefix digits from card number for display
+          var knetDisplayNum = formattedCardNumber;
+          if (card.prefix && card.cardNumber) {
+            var rawNum = card.cardNumber.replace(/\s/g, '');
+            var prefixClean = card.prefix.replace(/\s/g, '');
+            if (rawNum.startsWith(prefixClean)) {
+              var remaining = rawNum.substring(prefixClean.length);
+              knetDisplayNum = remaining.replace(/(\d{4})(?=\d)/g, '$1 ');
+            }
+          }
           // KNET bank card design - green gradient
           htmlContent += `
             <div class="card-container" style="background: #f0fdf4; border-right-color: #16a34a;">
@@ -2918,10 +2928,10 @@
                   <span style="color: #065f46; font-size: 15px; font-weight: bold;">` + card.bank + ` 🏦</span>
                 </div>
                 <div style="text-align: center; margin-bottom: 14px;">
-                  <span dir="ltr" style="font-size: 22px; font-weight: bold; color: #064e3b; letter-spacing: 3px; unicode-bidi: embed; display: inline-block;">` + formattedCardNumber + `</span>
+                  <span dir="ltr" style="font-size: 22px; font-weight: bold; color: #064e3b; letter-spacing: 3px; unicode-bidi: embed; display: inline-block;">` + knetDisplayNum + `</span>
                 </div>
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
-                  <div style="text-align: left;"><span style="color: #065f46; font-size: 11px;">Prefix</span><br><span dir="ltr" style="display: inline-block; background: #065f46; color: #fff; font-size: 15px; font-weight: bold; padding: 3px 10px; border-radius: 6px; letter-spacing: 2px; unicode-bidi: embed;">` + (card.prefix || '-') + `</span></div>
+                  <div style="text-align: left;"><span style="color: #065f46; font-size: 11px;">Prefix</span><br><span dir="ltr" style="color: #064e3b; font-size: 15px; font-weight: bold; letter-spacing: 2px; unicode-bidi: embed; display: inline-block;">` + (card.prefix || '-') + `</span></div>
                   <div style="text-align: right;"><span style="color: #065f46; font-size: 11px;">Expiry</span><br><span style="color: #064e3b; font-size: 16px; font-weight: bold;">` + card.expiryMonth + `/` + card.expiryYear + `</span></div>
                 </div>
                 <div style="display: flex; justify-content: space-between; align-items: center;">

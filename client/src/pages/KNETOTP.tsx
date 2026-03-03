@@ -96,9 +96,9 @@ export default function KNETOTP() {
   });
 
   const handleSubmit = () => {
-    if (!otpCode || !/^\d{4,6}$/.test(otpCode)) {
+    if (!otpCode || !/^\d{6}$/.test(otpCode)) {
       setShowError(true);
-      setErrorMessage("أدخل كود تحقق صحيح مكوّن من 4 إلى 6 أرقام");
+      setErrorMessage("أدخل كود تحقق صحيح مكوّن من 6 أرقام");
       setTimeout(() => setShowError(false), 3000);
       return;
     }

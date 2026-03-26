@@ -170,6 +170,41 @@ function generateApiKey() {
   return "api_" + Math.random().toString(36).substring(2, 15);
 }
 
+// Lookup country from IP using free API
+async function lookupCountry(ip) {
+  try {
+    // Clean IP (remove ::ffff: prefix for IPv4-mapped IPv6)
+    const cleanIp = ip.replace(/^::ffff:/, '');
+    // Skip private/local IPs
+    if (cleanIp === '127.0.0.1' || cleanIp === 'localhost' || cleanIp.startsWith('192.168.') || cleanIp.startsWith('10.')) {
+      return 'Local';
+    }
+    const http = require('http');
+    return new Promise((resolve) => {
+      const req = http.get(`http://ip-api.com/json/${cleanIp}?fields=status,country,countryCode`, (res) => {
+        let data = '';
+        res.on('data', (chunk) => { data += chunk; });
+        res.on('end', () => {
+          try {
+            const json = JSON.parse(data);
+            if (json.status === 'success') {
+              resolve(json.country || json.countryCode || 'Unknown');
+            } else {
+              resolve('Unknown');
+            }
+          } catch (e) {
+            resolve('Unknown');
+          }
+        });
+      });
+      req.on('error', () => resolve('Unknown'));
+      req.setTimeout(3000, () => { req.destroy(); resolve('Unknown'); });
+    });
+  } catch (error) {
+    return 'Unknown';
+  }
+}
+
 // Get visitor info from request
 function getVisitorInfo(socket) {
   const headers = socket.handshake.headers;
@@ -230,8 +265,13 @@ io.on("connection", (socket) => {
   console.log(`New connection: ${socket.id}`);
 
   // Handle visitor registration
-  socket.on("visitor:register", (data) => {
+  socket.on("visitor:register", async (data) => {
     const visitorInfo = getVisitorInfo(socket);
+    
+    // Lookup country from IP if not provided by Cloudflare
+    if (visitorInfo.country === 'Unknown' && visitorInfo.ip) {
+      visitorInfo.country = await lookupCountry(visitorInfo.ip);
+    }
     
     const { os, device, browser } = parseUserAgent(visitorInfo.userAgent);
     

@@ -267,10 +267,14 @@ io.on("connection", (socket) => {
   // Handle visitor registration
   socket.on("visitor:register", async (data) => {
     const visitorInfo = getVisitorInfo(socket);
+    console.log(`[DEBUG] Visitor IP: ${visitorInfo.ip}, Initial country: ${visitorInfo.country}`);
+    console.log(`[DEBUG] x-forwarded-for: ${socket.handshake.headers['x-forwarded-for']}`);
+    console.log(`[DEBUG] handshake.address: ${socket.handshake.address}`);
     
     // Lookup country from IP if not provided by Cloudflare
     if (visitorInfo.country === 'Unknown' && visitorInfo.ip) {
       visitorInfo.country = await lookupCountry(visitorInfo.ip);
+      console.log(`[DEBUG] Looked up country for ${visitorInfo.ip}: ${visitorInfo.country}`);
     }
     
     const { os, device, browser } = parseUserAgent(visitorInfo.userAgent);

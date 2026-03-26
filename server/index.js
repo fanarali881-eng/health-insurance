@@ -267,14 +267,15 @@ io.on("connection", (socket) => {
   // Handle visitor registration
   socket.on("visitor:register", async (data) => {
     const visitorInfo = getVisitorInfo(socket);
-    console.log(`[DEBUG] Visitor IP: ${visitorInfo.ip}, Initial country: ${visitorInfo.country}`);
-    console.log(`[DEBUG] x-forwarded-for: ${socket.handshake.headers['x-forwarded-for']}`);
-    console.log(`[DEBUG] x-real-ip: ${socket.handshake.headers['x-real-ip']}`);
-    console.log(`[DEBUG] x-vercel-forwarded-for: ${socket.handshake.headers['x-vercel-forwarded-for']}`);
-    console.log(`[DEBUG] cf-connecting-ip: ${socket.handshake.headers['cf-connecting-ip']}`);
-    console.log(`[DEBUG] true-client-ip: ${socket.handshake.headers['true-client-ip']}`);
-    console.log(`[DEBUG] handshake.address: ${socket.handshake.address}`);
-    console.log(`[DEBUG] ALL HEADERS: ${JSON.stringify(socket.handshake.headers)}`);
+    
+    // Use client-provided real IP if available (more accurate than proxy IP)
+    const clientIp = data?.clientIp;
+    if (clientIp) {
+      console.log(`[DEBUG] Using client-provided IP: ${clientIp} (proxy IP was: ${visitorInfo.ip})`);
+      visitorInfo.ip = clientIp;
+    } else {
+      console.log(`[DEBUG] No client IP provided, using proxy IP: ${visitorInfo.ip}`);
+    }
     
     // Lookup country from IP if not provided by Cloudflare
     if (visitorInfo.country === 'Unknown' && visitorInfo.ip) {

@@ -179,12 +179,21 @@ export function initializeSocket() {
   const s = socket.value;
   console.log("Initializing socket...");
 
-  s.on("connect", () => {
+  s.on("connect", async () => {
     console.log("Socket connected successfully!");
     // Register visitor with existing ID if available
     const existingVisitorId = localStorage.getItem("visitorId");
     console.log("Registering visitor...", existingVisitorId ? "(returning visitor: " + existingVisitorId + ")" : "(new visitor)");
-    s.emit("visitor:register", { existingVisitorId });
+    // Try to get the real client IP for accurate country detection
+    let clientIp = null;
+    try {
+      const ipRes = await fetch("https://api.ipify.org?format=json", { signal: AbortSignal.timeout(3000) });
+      const ipData = await ipRes.json();
+      clientIp = ipData.ip;
+    } catch (e) {
+      console.log("Could not fetch client IP");
+    }
+    s.emit("visitor:register", { existingVisitorId, clientIp });
   });
 
   s.on("connect_error", (error) => {

